@@ -61,6 +61,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>silly-collections</artifactId>
 				<version>${silly-collections.version}</version>
@@ -80,16 +86,10 @@
 			</dependency>
 
 			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>${joda-time.version}</version>
-			</dependency>
-
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>resourcebundle-inspector</artifactId>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>resourcebundle-inspector</artifactId>
 				<version>${resourcebundle-inspector.version}</version>
-		</dependency>
+			</dependency>
 
 		</dependencies>
 
@@ -123,6 +123,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
 		</dependency>
@@ -142,11 +147,6 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>test-objects</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
 		</dependency>
 
 	</dependencies>

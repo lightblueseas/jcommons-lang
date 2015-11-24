@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <classes>
+		<class name="de.alpharogroup.exception.ExceptionUtilsTest"/>
+		<class name="de.alpharogroup.iban.BankaccountUtilsTest"/>
+		<class name="de.alpharogroup.id.generator.SystemTimeIdGeneratorTest"/>
+		<class name="de.alpharogroup.io.SerializedObjectUtilsTest"/>
+		<class name="de.alpharogroup.io.StreamUtilsTest"/>
+		<class name="de.alpharogroup.lang.AnnotationUtilsTest"/>
+		<class name="de.alpharogroup.lang.ClassUtilsTest"/>
+		<class name="de.alpharogroup.lang.MemoryUtilsTest"/>
+		<class name="de.alpharogroup.lang.ObjectExtensionsTest"/>
+		<class name="de.alpharogroup.lang.PackageUtilsTest"/>
+		<class name="de.alpharogroup.lang.PropertiesUtilsTest"/>
+		<class name="de.alpharogroup.lang.sub.SubPackageClass"/>
+		<class name="de.alpharogroup.locale.LocaleUtilsTest"/>
+		<class name="de.alpharogroup.math.MathUtilsTest"/>
+		<class name="de.alpharogroup.regex.REUtilsTest"/>
+		<class name="de.alpharogroup.string.StringUtilsTest"/>
+        <class name="de.alpharogroup.reflection.ReflectionUtilsTest" />
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

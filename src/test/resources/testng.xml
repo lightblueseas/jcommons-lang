@@ -9,7 +9,7 @@
 		<class name="de.alpharogroup.io.SerializedObjectUtilsTest"/>
 		<class name="de.alpharogroup.io.StreamUtilsTest"/>
 		<class name="de.alpharogroup.lang.AnnotationUtilsTest"/>
-		<class name="de.alpharogroup.lang.ClassUtilsTest"/>
+		<class name="de.alpharogroup.lang.ClassExtensionsTest"/>
 		<class name="de.alpharogroup.lang.MemoryUtilsTest"/>
 		<class name="de.alpharogroup.lang.ObjectExtensionsTest"/>
 		<class name="de.alpharogroup.lang.PackageUtilsTest"/>

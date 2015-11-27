@@ -226,12 +226,42 @@ public final class ClassExtensions
 			final String classUrlString = classUrl.toString();
 			if ((classUrlString.startsWith("jar:") && (classUrlString.indexOf(path) > 0))
 				|| (classUrlString.startsWith("war:") && (classUrlString.indexOf(path) > 0))
-				|| (classUrlString.startsWith("ear:") && (classUrlString.indexOf(path) > 0)))
+				|| (classUrlString.startsWith("ear:") && (classUrlString.indexOf(path) > 0))
+				|| (classUrlString.startsWith("file:") && (classUrlString.indexOf(path) > 0)))
 			{
 				manifestUrl = classUrlString.replace(path, "/META-INF/MANIFEST.MF");
 			}
 		}
 		return manifestUrl;
+	}
+
+	/**
+	 * If the given class is in a JAR file than the jar path as String will be returned.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return the jar path as String if the given class is in a JAR file.
+	 */
+	public static String getJarPath(final Class<?> clazz)
+	{
+		String jarPath = null;
+		String jarPathPrefix = "jar:";
+		String jarPathFilePrefix = jarPathPrefix + "file:";
+		final String path = ClassExtensions.getPath(clazz);
+		final URL classUrl = ClassExtensions.getResource(path);
+		if (classUrl != null)
+		{
+			final String classUrlString = classUrl.toString();
+			if ((classUrlString.startsWith(jarPathPrefix) && (classUrlString.indexOf(path) > 0)))
+			{
+				jarPath = classUrlString.replace("!"+path, "");
+				if(jarPath.startsWith(jarPathFilePrefix)) {
+					int beginIndex = jarPathFilePrefix.length();
+					jarPath = jarPath.substring(beginIndex, jarPath.length());
+				}
+			}
+		}
+		return jarPath;
 	}
 
 	/**
@@ -325,7 +355,26 @@ public final class ClassExtensions
 	public static URL getResource(final Class<?> clazz, final String path)
 	{
 		URL url = clazz.getResource(path);
-		if (null == url)
+		if (url == null)
+		{
+			url = ClassExtensions.getClassLoader().getResource(path);
+		}
+		return url;
+	}
+	
+	/**
+	 * Gives the url from the path back.
+	 *
+	 * @param clazz
+	 *            The class-object.
+	 * @return 's the url from the path.
+	 */
+	public static URL getResource(final Class<?> clazz)
+	{
+
+		final String path = ClassExtensions.getPath(clazz);
+		URL url = clazz.getResource(path);
+		if (url == null)
 		{
 			url = ClassExtensions.getClassLoader().getResource(path);
 		}

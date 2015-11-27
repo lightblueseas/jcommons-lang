@@ -41,8 +41,9 @@ import org.testng.annotations.Test;
 import de.alpharogroup.classes.inner.OuterClass;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.PremiumMember;
+import net.lingala.zip4j.core.ZipFile;
 
-public class ClassUtilsTest
+public class ClassExtensionsTest
 {
 
 	/** The result. */
@@ -80,7 +81,7 @@ public class ClassUtilsTest
 	@Test(enabled = true)
 	public void testGetClassnameWithSuffix()
 	{
-		final String expected = "ClassUtilsTest.class";
+		final String expected = "ClassExtensionsTest.class";
 		final String classname = ClassExtensions.getClassnameWithSuffix(this);
 		this.result = expected.equals(classname);
 		AssertJUnit.assertTrue("", this.result);
@@ -92,9 +93,29 @@ public class ClassUtilsTest
 		String actual = ClassExtensions.getManifestUrl(Object.class);
 		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
 		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar!/META-INF/MANIFEST.MF"));
-
+		
 		actual = ClassExtensions.getManifestUrl(ClassExtensions.class);
+		AssertJUnit.assertTrue(actual.toString().startsWith("file:"));
+		AssertJUnit.assertTrue(actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
+		// Get manifest file from zip4j-*.jar
+		actual = ClassExtensions.getManifestUrl(ZipFile.class);
+		AssertJUnit.assertNotNull(actual);
+		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
+		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
+	}
+
+	@Test
+	public void testGetJarPath()
+	{
+		String actual = ClassExtensions.getJarPath(Object.class);
+		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar"));
+		
+		actual = ClassExtensions.getJarPath(ClassExtensions.class);
 		AssertJUnit.assertNull(actual);
+		// Get manifest file from zip4j-*.jar
+		actual = ClassExtensions.getJarPath(ZipFile.class);
+		AssertJUnit.assertNotNull(actual);
+		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
 	@Test
@@ -162,7 +183,7 @@ public class ClassUtilsTest
 
 		final String propertiesFilename = "resources.properties";
 
-		final ClassUtilsTest obj = new ClassUtilsTest();
+		final ClassExtensionsTest obj = new ClassExtensionsTest();
 		final URL url = ClassExtensions.getResource(propertiesFilename, obj);
 
 		this.result = url != null;
@@ -174,7 +195,7 @@ public class ClassUtilsTest
 	{
 		final String propertiesFilename = "resources.properties";
 
-		final URL url = ClassExtensions.getResource(ClassUtilsTest.class, propertiesFilename);
+		final URL url = ClassExtensions.getResource(ClassExtensionsTest.class, propertiesFilename);
 
 		this.result = url != null;
 		AssertJUnit.assertTrue("", this.result);
@@ -196,7 +217,7 @@ public class ClassUtilsTest
 		final String pathFromObject = PackageUtils.getPackagePathWithSlash(this);
 		final String path = pathFromObject + propertiesFilename;
 
-		final ClassUtilsTest obj = new ClassUtilsTest();
+		final ClassExtensionsTest obj = new ClassExtensionsTest();
 		final InputStream is = ClassExtensions.getResourceAsStream(obj.getClass(), path);
 		this.result = is != null;
 		AssertJUnit.assertTrue("InputStream should not be null", this.result);
@@ -255,7 +276,7 @@ public class ClassUtilsTest
 			"de.alpharogroup.lang", true);
 		final Set<Class<?>> foundClasses = ClassExtensions.scanClassesFromPackage(directories.get(0),
 			"de.alpharogroup.lang");
-		AssertJUnit.assertTrue("", foundClasses.contains(ClassUtilsTest.class));
+		AssertJUnit.assertTrue("", foundClasses.contains(ClassExtensionsTest.class));
 		Set<Class<?>> list = null;
 		list = ClassExtensions.scanClassNames("de.alpharogroup.lang");
 		for (final Class<?> entry : list)

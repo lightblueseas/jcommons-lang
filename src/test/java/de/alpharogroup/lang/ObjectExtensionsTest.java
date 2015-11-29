@@ -40,7 +40,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.date.CreateDateUtils;
+import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.date.DateDecorator;
 import de.alpharogroup.date.SqlTimestampDecorator;
 import de.alpharogroup.io.ChangedAttributeResult;
@@ -84,7 +84,7 @@ public class ObjectExtensionsTest
 	@Test(enabled = false)
 	public void testClone()
 	{
-		final Date past = CreateDateUtils.newDate(2009, 3, 26, 10, 37, 04);
+		final Date past = CreateDateExtensions.newDate(2009, 3, 26, 10, 37, 04);
 		final Date otherCopy = ObjectExtensions.clone(past);
 
 		boolean result = past.equals(otherCopy);
@@ -112,7 +112,7 @@ public class ObjectExtensionsTest
 	@Test(enabled = true)
 	public void testCloneObject()
 	{
-		final Date past = CreateDateUtils.newDate(2009, 3, 26, 10, 37, 04);
+		final Date past = CreateDateExtensions.newDate(2009, 3, 26, 10, 37, 04);
 		Object otherCopy = past.cloneObjectQuietly();
 
 		boolean result = past.equals(otherCopy);
@@ -204,7 +204,7 @@ public class ObjectExtensionsTest
 	public void testCopy() throws IllegalAccessException, InvocationTargetException
 	{
 		final DateDecorator dateDecorator = new DateDecorator();
-		final Date now = CreateDateUtils.now();
+		final Date now = CreateDateExtensions.now();
 		dateDecorator.setDate(now);
 
 		final SqlTimestampDecorator timestampDecorator = new SqlTimestampDecorator();

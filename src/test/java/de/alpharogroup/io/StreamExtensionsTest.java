@@ -39,7 +39,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.date.CreateDateUtils;
+import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.test.objects.Person;
 
@@ -137,7 +137,7 @@ public class StreamExtensionsTest
 	@Test(enabled = true)
 	public void testGetByteArrayInputStream() throws IOException, ClassNotFoundException
 	{
-		final Date birthdayFromLeonardo = CreateDateUtils.newDate(2012, 4, 19);
+		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
 		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
 		AssertJUnit.assertTrue("", result);
@@ -169,7 +169,7 @@ public class StreamExtensionsTest
 	public void testGetByteArrayInputStreamByteArrayOutputStream() throws IOException,
 		ClassNotFoundException
 	{
-		final Date birthdayFromLeonardo = CreateDateUtils.newDate(2012, 4, 19);
+		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
 		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
 		AssertJUnit.assertTrue("", result);

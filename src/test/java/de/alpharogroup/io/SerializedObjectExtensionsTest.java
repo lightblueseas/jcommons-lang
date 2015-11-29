@@ -32,7 +32,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
-import de.alpharogroup.date.CreateDateUtils;
+import de.alpharogroup.date.CreateDateExtensions;
 
 /**
  * Test class for the class {@link SerializedObjectExtensions}.
@@ -93,7 +93,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	@Test(enabled = true)
 	public void testReadSerializedObjectFromFile() throws IOException, ClassNotFoundException
 	{
-		final Date birthdayFromNiko = CreateDateUtils.newDate(2007, 11, 8);
+		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
 		this.result = SerializedObjectExtensions
 			.writeSerializedObjectToFile(birthdayFromNiko, writeInMe);
@@ -127,7 +127,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	public void testWriteSerializedObjectToFile() throws IOException, ClassNotFoundException
 	{
 
-		final Date birthdayFromNiko = CreateDateUtils.newDate(2007, 11, 8);
+		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
 		this.result = SerializedObjectExtensions
 			.writeSerializedObjectToFile(birthdayFromNiko, writeInMe);

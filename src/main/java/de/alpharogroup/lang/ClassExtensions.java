@@ -245,8 +245,8 @@ public final class ClassExtensions
 	public static String getJarPath(final Class<?> clazz)
 	{
 		String jarPath = null;
-		String jarPathPrefix = "jar:";
-		String jarPathFilePrefix = jarPathPrefix + "file:";
+		final String jarPathPrefix = "jar:";
+		final String jarPathFilePrefix = jarPathPrefix + "file:";
 		final String path = ClassExtensions.getPath(clazz);
 		final URL classUrl = ClassExtensions.getResource(path);
 		if (classUrl != null)
@@ -320,8 +320,14 @@ public final class ClassExtensions
 	 */
 	public static String getPath(final Class<?> clazz)
 	{
-		final String path = "/" + clazz.getName().replaceAll("\\.", "/")
-			+ FileExtension.CLASS.getExtension();
+		final String packagePath = PackageExtensions.getPackagePath(clazz);
+		final String className = ClassExtensions.getSimpleName(clazz);
+		final StringBuilder sb = new StringBuilder()
+		.append("/")
+		.append(packagePath)
+		.append(className)
+		.append(FileExtension.CLASS.getExtension());
+		final String path = sb.toString();
 		return path;
 	}
 

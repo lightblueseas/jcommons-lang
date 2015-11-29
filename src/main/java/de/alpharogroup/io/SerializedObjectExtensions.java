@@ -51,11 +51,11 @@ import de.alpharogroup.file.FileConstants;
  * @version 1.0
  * @author Asterios Raptis
  */
-public final class SerializedObjectUtils
+public final class SerializedObjectExtensions
 {
 
 	/** The LOGGER. */
-	protected static final Logger LOGGER = Logger.getLogger(SerializedObjectUtils.class.getName());
+	protected static final Logger LOGGER = Logger.getLogger(SerializedObjectExtensions.class.getName());
 
 	/**
 	 * Copys the given Object and returns the copy from the object or null if the object can't be
@@ -93,8 +93,8 @@ public final class SerializedObjectUtils
 		}
 		finally
 		{
-			StreamUtils.closeOutputStream(byteArrayOutputStream);
-			StreamUtils.closeOutputStream(objectOutputStream);
+			StreamExtensions.closeOutputStream(byteArrayOutputStream);
+			StreamExtensions.closeOutputStream(objectOutputStream);
 		}
 		return object;
 	}
@@ -204,8 +204,8 @@ public final class SerializedObjectUtils
 		}
 		finally
 		{
-			StreamUtils.closeInputStream(in);
-			StreamUtils.closeInputStream(fis);
+			StreamExtensions.closeInputStream(in);
+			StreamExtensions.closeInputStream(fis);
 		}
 		return object;
 	}
@@ -238,8 +238,8 @@ public final class SerializedObjectUtils
 		}
 		finally
 		{
-			StreamUtils.closeOutputStream(byteArrayOutputStream);
-			StreamUtils.closeOutputStream(objectOutputStream);
+			StreamExtensions.closeOutputStream(byteArrayOutputStream);
+			StreamExtensions.closeOutputStream(objectOutputStream);
 		}
 	}
 
@@ -270,8 +270,8 @@ public final class SerializedObjectUtils
 		}
 		finally
 		{
-			StreamUtils.closeInputStream(byteArrayInputStream);
-			StreamUtils.closeInputStream(objectInputStream);
+			StreamExtensions.closeInputStream(byteArrayInputStream);
+			StreamExtensions.closeInputStream(objectInputStream);
 		}
 		return object;
 	}
@@ -303,8 +303,8 @@ public final class SerializedObjectUtils
 		}
 		finally
 		{
-			StreamUtils.closeOutputStream(oos);
-			StreamUtils.closeOutputStream(fos);
+			StreamExtensions.closeOutputStream(oos);
+			StreamExtensions.closeOutputStream(fos);
 		}
 		return written;
 	}
@@ -312,7 +312,7 @@ public final class SerializedObjectUtils
 	/**
 	 * Private Constructor.
 	 */
-	private SerializedObjectUtils()
+	private SerializedObjectExtensions()
 	{
 	}
 }

@@ -32,12 +32,9 @@ import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.string.StringUtils;
 
 /**
- * Test class for the class REUtils.
- * 
- * @version 1.0
- * @author Asterios Raptis
+ * The class {@link RegExExtensionsTest}.
  */
-public class REUtilsTest extends BaseTestCase
+public class RegExExtensionsTest extends BaseTestCase
 {
 
 	/**
@@ -60,14 +57,14 @@ public class REUtilsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.regex.REUtils#replaceWildcardsWithRE(java.lang.String)}.
+	 * {@link de.alpharogroup.regex.RegExExtensions#replaceWildcardsWithRE(java.lang.String)}.
 	 */
 	@Test
 	public void testReplaceWildcardsWithRE()
 	{
 		final String expected = "Hel.*W[a-zA-Z0-9._-]{1}rld!";
 		final String queryString = "Hel*W?rld!";
-		final String compare = REUtils.replaceWildcardsWithRE(queryString);
+		final String compare = RegExExtensions.replaceWildcardsWithRE(queryString);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -87,7 +84,7 @@ public class REUtilsTest extends BaseTestCase
 			strip = StringUtils.replaceAll(strip, ")", "");
 			strip = StringUtils.replaceAll(strip, " ", "");
 			strip = StringUtils.replaceAll(strip, "-", "");
-			result = strip.matches(REUtils.VALID_PHONE);
+			result = strip.matches(RegExExtensions.VALID_PHONE);
 			AssertJUnit.assertTrue("", result);
 		}
 
@@ -100,20 +97,20 @@ public class REUtilsTest extends BaseTestCase
 			strip = StringUtils.replaceAll(strip, ")", "");
 			strip = StringUtils.replaceAll(strip, " ", "");
 			strip = StringUtils.replaceAll(strip, "-", "");
-			result = strip.matches(REUtils.VALID_PHONE);
+			result = strip.matches(RegExExtensions.VALID_PHONE);
 			AssertJUnit.assertFalse("", result);
 		}
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.regex.REUtils#wildcardCriterionSQL(java.lang.String)}.
+	 * Test method for {@link de.alpharogroup.regex.RegExExtensions#wildcardCriterionSQL(java.lang.String)}.
 	 */
 	@Test
 	public void testWildcardCriterionSQL()
 	{
 		final String expected = "Hel%W_rld!";
 		final String query = "Hel*W?rld!";
-		final String compare = REUtils.wildcardCriterionSQL(query);
+		final String compare = RegExExtensions.wildcardCriterionSQL(query);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}

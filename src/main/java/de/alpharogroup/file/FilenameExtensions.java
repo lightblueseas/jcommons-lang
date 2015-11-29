@@ -26,11 +26,11 @@ package de.alpharogroup.file;
 
 import java.io.File;
 
+
 /**
- *
- * @author astrapi69
+ * The class {@link FilenameExtensions}.
  */
-public class FilenameUtils
+public class FilenameExtensions
 {
 
 	/**

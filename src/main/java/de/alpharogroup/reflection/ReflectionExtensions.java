@@ -36,14 +36,12 @@ import java.util.Map;
 import lombok.experimental.ExtensionMethod;
 import de.alpharogroup.string.StringExtensions;
 
+
 /**
- * The Class ReflectionUtils.
- *
- * @version 1.0
- * @author Asterios Raptis
+ * The class {@link ReflectionExtensions}.
  */
 @ExtensionMethod(StringExtensions.class)
-public final class ReflectionUtils
+public final class ReflectionExtensions
 {
 
 

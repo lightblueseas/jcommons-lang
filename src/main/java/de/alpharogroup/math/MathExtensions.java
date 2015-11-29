@@ -30,7 +30,7 @@ package de.alpharogroup.math;
  * @version 1.0
  * @author Asterios Raptis
  */
-public class MathUtils
+public class MathExtensions
 {
 
 	/**

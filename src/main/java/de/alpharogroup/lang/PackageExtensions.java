@@ -36,15 +36,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import lombok.experimental.ExtensionMethod;
-import de.alpharogroup.file.FilenameUtils;
+import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
 
 /**
- * The Class PackageUtils.
+ * The Class {@link PackageExtensions}.
  */
 @ExtensionMethod(StringExtensions.class)
-public final class PackageUtils
+public final class PackageExtensions
 {
 
 	/**
@@ -246,7 +246,7 @@ public final class PackageUtils
 							entryName.length());
 						if (!relativePath.contains("/") && !relativePath.contains("$"))
 						{
-							final String filenameWithoutExtension = FilenameUtils
+							final String filenameWithoutExtension = FilenameExtensions
 								.getFilenameWithoutExtension(entryName.replace("/", "."));
 							if (qualifiedClassnames)
 							{
@@ -254,7 +254,7 @@ public final class PackageUtils
 							}
 							else
 							{
-								final String className = FilenameUtils
+								final String className = FilenameExtensions
 									.getFilenameWithoutExtension(relativePath);
 								classNames.add(className);
 							}
@@ -284,7 +284,7 @@ public final class PackageUtils
 				{
 					if (!file.isDirectory())
 					{
-						final String filenameWithoutExtension = FilenameUtils
+						final String filenameWithoutExtension = FilenameExtensions
 							.getFilenameWithoutExtension(file);
 
 						if (qualifiedClassnames)
@@ -306,7 +306,7 @@ public final class PackageUtils
 	/**
 	 * Private constructor.
 	 */
-	private PackageUtils()
+	private PackageExtensions()
 	{
 	}
 

@@ -35,12 +35,12 @@ import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.date.CreateDateUtils;
 
 /**
- * Test class for the class SerializedObjectUtils.
+ * Test class for the class {@link SerializedObjectExtensions}.
  *
  * @version 1.0
  * @author Asterios Raptis
  */
-public class SerializedObjectUtilsTest extends BaseTestCase
+public class SerializedObjectExtensionsTest extends BaseTestCase
 {
 
 	/**
@@ -63,7 +63,7 @@ public class SerializedObjectUtilsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectUtils#copySerializedObject(java.io.Serializable)} .
+	 * {@link de.alpharogroup.io.SerializedObjectExtensions#copySerializedObject(java.io.Serializable)} .
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -75,14 +75,14 @@ public class SerializedObjectUtilsTest extends BaseTestCase
 	public void testCopySerializedObject() throws ClassNotFoundException, IOException
 	{
 		final String age = "Im too young!";
-		final String copy = SerializedObjectUtils.copySerializedObject(age);
+		final String copy = SerializedObjectExtensions.copySerializedObject(age);
 		this.result = age.equals(copy);
 		AssertJUnit.assertTrue("", this.result);
 	}
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectUtils#readSerializedObjectFromFile(java.io.File)} .
+	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)} .
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -95,10 +95,10 @@ public class SerializedObjectUtilsTest extends BaseTestCase
 	{
 		final Date birthdayFromNiko = CreateDateUtils.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectUtils
+		this.result = SerializedObjectExtensions
 			.writeSerializedObjectToFile(birthdayFromNiko, writeInMe);
 		AssertJUnit.assertTrue("", this.result);
-		final Object readedObjectFromFile = SerializedObjectUtils
+		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
 		final Date readedObj = (Date)readedObjectFromFile;
 		this.result = birthdayFromNiko.equals(readedObj);
@@ -115,7 +115,7 @@ public class SerializedObjectUtilsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectUtils#writeSerializedObjectToFile(java.lang.Object, java.io.File)}
+	 * {@link de.alpharogroup.io.SerializedObjectExtensions#writeSerializedObjectToFile(java.lang.Object, java.io.File)}
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -129,10 +129,10 @@ public class SerializedObjectUtilsTest extends BaseTestCase
 
 		final Date birthdayFromNiko = CreateDateUtils.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectUtils
+		this.result = SerializedObjectExtensions
 			.writeSerializedObjectToFile(birthdayFromNiko, writeInMe);
 		AssertJUnit.assertTrue("", this.result);
-		final Object readedObjectFromFile = SerializedObjectUtils
+		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
 		final Date readedObj = (Date)readedObjectFromFile;
 		this.result = birthdayFromNiko.equals(readedObj);

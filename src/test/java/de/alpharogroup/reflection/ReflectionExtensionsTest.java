@@ -22,34 +22,38 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.velocity;
+package de.alpharogroup.reflection;
 
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-public class VelocityUtilsTest
+import de.alpharogroup.test.objects.A;
+import de.alpharogroup.test.objects.Person;
+
+
+public class ReflectionExtensionsTest
 {
 
-	@Test
-	public void testMergeVelocityContextString()
+	public void testGetNewInstance()
 	{
-		/* first, we init the runtime engine. Defaults are fine. */
-		Velocity.init();
+	}
 
-		/* lets make a Context and put data into it */
-		final VelocityContext context = new VelocityContext();
+	@Test
+	public void testNewInstanceClassOfT() throws InstantiationException, IllegalAccessException,
+		ClassNotFoundException
+	{
+		final Class<Person> clazz = Person.class;
+		final Person actual = ReflectionExtensions.newInstance(clazz);
+		AssertJUnit.assertNotNull(actual);
+	}
 
-		context.put("name", "Velocity");
-		context.put("project", "Jakarta");
-
-		/* lets make our own string to render */
-		final String s = "We are using $project $name to render this.";
-		final String actual = VelocityUtils.merge(context, s);
-		final String expected = "We are using Jakarta Velocity to render this.";
-		/* check if equal */
-		AssertJUnit.assertEquals(expected, actual);
+	@Test
+	public void testNewInstanceT() throws InstantiationException, IllegalAccessException,
+		ClassNotFoundException
+	{
+		final A a = new A();
+		final A actual = ReflectionExtensions.newInstance(a);
+		AssertJUnit.assertNotNull(actual);
 	}
 
 }

@@ -34,18 +34,18 @@ import org.testng.annotations.Test;
 import de.alpharogroup.io.OtherPage;
 
 /**
- * Test class for the class ImportResourcesUtils.
+ * Test class for the class {@link ImportResourcesExtensions}.
  *
  * @author Asterios Raptis
  * @version 1.0
  */
-public class ImportResourcesUtilsTest
+public class ImportResourcesExtensionsTest
 {
 
 	@Test
 	public void testGetImportResources() throws IOException, ClassNotFoundException
 	{
-		final Map<Class<?>, ImportResource[]> resources = ImportResourcesUtils
+		final Map<Class<?>, ImportResource[]> resources = ImportResourcesExtensions
 			.getImportResources("de.alpharogroup.io");
 		final ImportResource[] somePageResources = resources.get(SomePage.class);
 		AssertJUnit.assertNotNull(somePageResources);

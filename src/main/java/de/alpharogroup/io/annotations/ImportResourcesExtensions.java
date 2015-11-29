@@ -32,12 +32,12 @@ import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import de.alpharogroup.lang.AnnotationUtils;
+import de.alpharogroup.lang.AnnotationExtensions;
 
 /**
- * The Class ImportResourcesUtils contains helper methods for ImportResource objects.
+ * The class {@link ImportResourcesExtensions} contains helper methods for {@link ImportResource} objects.
  */
-public class ImportResourcesUtils
+public class ImportResourcesExtensions
 {
 
 	/**
@@ -61,9 +61,9 @@ public class ImportResourcesUtils
 
 		final Class<ImportResources> importResourcesClass = ImportResources.class;
 		final Class<ImportResource> importResourceClass = ImportResource.class;
-		final Set<Class<?>> importResourcesClasses = AnnotationUtils.getAllAnnotatedClasses(
+		final Set<Class<?>> importResourcesClasses = AnnotationExtensions.getAllAnnotatedClasses(
 			packageName, importResourcesClass);
-		final Set<Class<?>> importResourceClasses = AnnotationUtils.getAllAnnotatedClasses(
+		final Set<Class<?>> importResourceClasses = AnnotationExtensions.getAllAnnotatedClasses(
 			packageName, importResourceClass);
 		importResourcesClasses.addAll(importResourceClasses);
 		for (final Class<?> annotatedClass : importResourcesClasses)

@@ -40,7 +40,7 @@ import lombok.experimental.ExtensionMethod;
  * @author Asterios Raptis
  */
 @ExtensionMethod(StringExtensions.class)
-public class BankaccountUtils
+public class BankaccountExtensions
 {
 
 	/**

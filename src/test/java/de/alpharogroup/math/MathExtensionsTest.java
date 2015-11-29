@@ -30,12 +30,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class MathUtils.
- * 
- * @version 1.0
- * @author Asterios Raptis
+ * The class {@link MathExtensionsTest}.
  */
-public class MathUtilsTest
+public class MathExtensionsTest
 {
 
 	boolean result;
@@ -113,14 +110,14 @@ public class MathUtilsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#getPrimeNumbers(int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#getPrimeNumbers(int)}.
 	 */
 	@Test
 	public void testGetPrimeNumbers()
 	{
 		final int[] expected = { this.two, this.three, this.five, this.seven, this.eleven,
 				this.thirtteen, this.seventeen, this.nineteen };
-		final int[] compare = MathUtils.getPrimeNumbers(8);
+		final int[] compare = MathExtensions.getPrimeNumbers(8);
 		for (int i = 0; i < compare.length; i++)
 		{
 			this.result = expected[i] == compare[i];
@@ -129,7 +126,7 @@ public class MathUtilsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#isBetween(int, int, int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#isBetween(int, int, int)}.
 	 */
 	@Test
 	public void testIsBetween()
@@ -137,20 +134,20 @@ public class MathUtilsTest
 		final int min = -1;
 		final int max = 10;
 		int index = min;
-		boolean isBetween = MathUtils.isBetween(min, max, index);
+		boolean isBetween = MathExtensions.isBetween(min, max, index);
 		AssertJUnit.assertFalse(isBetween);
 		for (index = min + 1; index < max; index++)
 		{
-			isBetween = MathUtils.isBetween(min, max, index);
+			isBetween = MathExtensions.isBetween(min, max, index);
 			AssertJUnit.assertTrue(isBetween);
 		}
 		index = max;
-		isBetween = MathUtils.isBetween(min, max, index);
+		isBetween = MathExtensions.isBetween(min, max, index);
 		AssertJUnit.assertFalse(isBetween);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#isInRange(int, int, int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#isInRange(int, int, int)}.
 	 */
 	@Test
 	public void testIsInRange()
@@ -158,218 +155,218 @@ public class MathUtilsTest
 
 		boolean isInRange;
 
-		isInRange = MathUtils.isInRange(this.thirtteen, this.twentyfour, 12);
+		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 12);
 
 		AssertJUnit.assertFalse("", isInRange);
 
-		isInRange = MathUtils.isInRange(this.thirtteen, this.twentyfour, 13);
+		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 13);
 
 		AssertJUnit.assertFalse("", isInRange);
 
-		isInRange = MathUtils.isInRange(this.thirtteen, this.twentyfour, 14);
+		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 14);
 
 		AssertJUnit.assertTrue("", isInRange);
 
-		isInRange = MathUtils.isInRange(this.thirtteen, this.twentyfour, 23);
+		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 23);
 
 		AssertJUnit.assertTrue("", isInRange);
 
-		isInRange = MathUtils.isInRange(this.thirtteen, this.twentyfour, 24);
+		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 24);
 
 		AssertJUnit.assertFalse("", isInRange);
 
-		isInRange = MathUtils.isInRange(this.thirtteen, this.twentyfour, 25);
+		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 25);
 
 		AssertJUnit.assertFalse("", isInRange);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#isNegative(int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#isNegative(int)}.
 	 */
 	@Test
 	public void testIsNegative()
 	{
 
 		final int negative = -10;
-		this.result = MathUtils.isNegative(negative);
+		this.result = MathExtensions.isNegative(negative);
 		AssertJUnit.assertTrue("", this.result);
 
 		final int ambisious = 0;
-		this.result = MathUtils.isNegative(ambisious);
+		this.result = MathExtensions.isNegative(ambisious);
 		AssertJUnit.assertTrue("", this.result);
 
 		final int positive = this.one;
-		this.result = MathUtils.isNegative(positive);
+		this.result = MathExtensions.isNegative(positive);
 		AssertJUnit.assertFalse("", this.result);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#isPositive(int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#isPositive(int)}.
 	 */
 	@Test
 	public void testIsPositive()
 	{
 		final int negative = -10;
-		this.result = MathUtils.isPositive(negative);
+		this.result = MathExtensions.isPositive(negative);
 		AssertJUnit.assertFalse("", this.result);
 
 		final int ambisious = this.zero;
-		this.result = MathUtils.isPositive(ambisious);
+		this.result = MathExtensions.isPositive(ambisious);
 		AssertJUnit.assertFalse("", this.result);
 
 		final int positive = this.one;
-		this.result = MathUtils.isPositive(positive);
+		this.result = MathExtensions.isPositive(positive);
 		AssertJUnit.assertTrue("", this.result);
 
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#isPrime(int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#isPrime(int)}.
 	 */
 	@Test
 	public void testIsPrime()
 	{
 
-		this.result = MathUtils.isPrime(this.zero);
+		this.result = MathExtensions.isPrime(this.zero);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.one);
+		this.result = MathExtensions.isPrime(this.one);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.two);
+		this.result = MathExtensions.isPrime(this.two);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.three);
+		this.result = MathExtensions.isPrime(this.three);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.four);
+		this.result = MathExtensions.isPrime(this.four);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.five);
+		this.result = MathExtensions.isPrime(this.five);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.six);
+		this.result = MathExtensions.isPrime(this.six);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.seven);
+		this.result = MathExtensions.isPrime(this.seven);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.eight);
+		this.result = MathExtensions.isPrime(this.eight);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.nine);
+		this.result = MathExtensions.isPrime(this.nine);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.ten);
+		this.result = MathExtensions.isPrime(this.ten);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.eleven);
+		this.result = MathExtensions.isPrime(this.eleven);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.twelve);
+		this.result = MathExtensions.isPrime(this.twelve);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.thirtteen);
+		this.result = MathExtensions.isPrime(this.thirtteen);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.fourteen);
+		this.result = MathExtensions.isPrime(this.fourteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.fiveteen);
+		this.result = MathExtensions.isPrime(this.fiveteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.sixteen);
+		this.result = MathExtensions.isPrime(this.sixteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.seventeen);
+		this.result = MathExtensions.isPrime(this.seventeen);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrime(this.eightteen);
+		this.result = MathExtensions.isPrime(this.eightteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrime(this.nineteen);
+		this.result = MathExtensions.isPrime(this.nineteen);
 		AssertJUnit.assertTrue("", this.result);
 
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#isPrimeNumber(int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#isPrimeNumber(int)}.
 	 */
 	@Test
 	public void testIsPrimeNumber()
 	{
 
-		this.result = MathUtils.isPrimeNumber(this.zero);
+		this.result = MathExtensions.isPrimeNumber(this.zero);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.one);
+		this.result = MathExtensions.isPrimeNumber(this.one);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.two);
+		this.result = MathExtensions.isPrimeNumber(this.two);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.three);
+		this.result = MathExtensions.isPrimeNumber(this.three);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.four);
+		this.result = MathExtensions.isPrimeNumber(this.four);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.five);
+		this.result = MathExtensions.isPrimeNumber(this.five);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.six);
+		this.result = MathExtensions.isPrimeNumber(this.six);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.seven);
+		this.result = MathExtensions.isPrimeNumber(this.seven);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.eight);
+		this.result = MathExtensions.isPrimeNumber(this.eight);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.nine);
+		this.result = MathExtensions.isPrimeNumber(this.nine);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.ten);
+		this.result = MathExtensions.isPrimeNumber(this.ten);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.eleven);
+		this.result = MathExtensions.isPrimeNumber(this.eleven);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.twelve);
+		this.result = MathExtensions.isPrimeNumber(this.twelve);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.thirtteen);
+		this.result = MathExtensions.isPrimeNumber(this.thirtteen);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.fourteen);
+		this.result = MathExtensions.isPrimeNumber(this.fourteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.fiveteen);
+		this.result = MathExtensions.isPrimeNumber(this.fiveteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.sixteen);
+		this.result = MathExtensions.isPrimeNumber(this.sixteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.seventeen);
+		this.result = MathExtensions.isPrimeNumber(this.seventeen);
 		AssertJUnit.assertTrue("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.eightteen);
+		this.result = MathExtensions.isPrimeNumber(this.eightteen);
 		AssertJUnit.assertFalse("", this.result);
 
-		this.result = MathUtils.isPrimeNumber(this.nineteen);
+		this.result = MathExtensions.isPrimeNumber(this.nineteen);
 		AssertJUnit.assertTrue("", this.result);
 
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathUtils#printAllPrimeNumbersTill(int)}.
+	 * Test method for {@link de.alpharogroup.math.MathExtensions#printAllPrimeNumbersTill(int)}.
 	 */
 	@Test
 	public void testPrintAllPrimeNumbersTill()
 	{
 		final int[] expected = { this.two, this.three, this.five, this.seven, this.eleven,
 				this.thirtteen, this.seventeen, this.nineteen };
-		final int[] compare = MathUtils.printAllPrimeNumbersTill(8);
+		final int[] compare = MathExtensions.printAllPrimeNumbersTill(8);
 		for (int i = 0; i < compare.length; i++)
 		{
 			this.result = expected[i] == compare[i];

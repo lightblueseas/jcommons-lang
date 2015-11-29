@@ -32,15 +32,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.alpharogroup.file.FilenameUtils;
+import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 
 /**
- * The Class AnnotationUtils.
+ * The Class {@link AnnotationExtensions}.
  *
  * @author Asterios Raptis
  */
-public final class AnnotationUtils
+public final class AnnotationExtensions
 {
 
 	/**
@@ -265,7 +265,7 @@ public final class AnnotationUtils
 			}
 			else
 			{
-				final String filename = FilenameUtils.getFilenameWithoutExtension(file);
+				final String filename = FilenameExtensions.getFilenameWithoutExtension(file);
 				qualifiedClassname = packagePath + '.' + filename;
 				Class<?> foundClass = null;
 				try
@@ -342,7 +342,7 @@ public final class AnnotationUtils
 			}
 			else
 			{
-				final String filename = FilenameUtils.getFilenameWithoutExtension(file);
+				final String filename = FilenameExtensions.getFilenameWithoutExtension(file);
 				qualifiedClassname = packagePath + '.' + filename;
 				Class<?> foundClass = null;
 				try
@@ -401,13 +401,13 @@ public final class AnnotationUtils
 	public static Set<Class<?>> scanForClasses(final File directory, final String packagePath)
 		throws ClassNotFoundException
 	{
-		return AnnotationUtils.scanForAnnotatedClasses(directory, packagePath, null);
+		return AnnotationExtensions.scanForAnnotatedClasses(directory, packagePath, null);
 	}
 
 	/**
 	 * Private constructor.
 	 */
-	private AnnotationUtils()
+	private AnnotationExtensions()
 	{
 		super();
 	}

@@ -39,8 +39,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
 import de.alpharogroup.io.ChangedAttributeResult;
-import de.alpharogroup.io.SerializedObjectUtils;
-import de.alpharogroup.reflection.ReflectionUtils;
+import de.alpharogroup.io.SerializedObjectExtensions;
+import de.alpharogroup.reflection.ReflectionExtensions;
 
 /**
  * The Class ObjectExtensions provides methods to clone, copy and compare objects. It also provides
@@ -99,7 +99,7 @@ public final class ObjectExtensions
 		// Try to clone the object if it implements Serializable.
 		if (object instanceof Serializable)
 		{
-			clone = SerializedObjectUtils.copySerializedObject((Serializable)object);
+			clone = SerializedObjectExtensions.copySerializedObject((Serializable)object);
 			if (clone != null)
 			{
 				return clone;
@@ -142,7 +142,7 @@ public final class ObjectExtensions
 		// the BeanUtils.copyProperties() method.
 		if (clone == null)
 		{
-			clone = ReflectionUtils.getNewInstance(object);
+			clone = ReflectionExtensions.getNewInstance(object);
 			BeanUtils.copyProperties(clone, object);
 		}
 		return clone;

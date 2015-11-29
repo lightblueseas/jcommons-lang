@@ -30,12 +30,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class ExceptionUtils.
+ * Test class for the class {@link ExceptionExtensions}.
  *
  * @version 1.0
  * @author Asterios Raptis
  */
-public class ExceptionUtilsTest
+public class ExceptionExtensionsTest
 {
 
 	/**
@@ -62,7 +62,7 @@ public class ExceptionUtilsTest
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.exception.ExceptionUtils#getStackTrace(java.lang.Throwable)} .
+	 * {@link de.alpharogroup.exception.ExceptionExtensions#getStackTrace(java.lang.Throwable)} .
 	 */
 	@SuppressWarnings("null")
 	@Test
@@ -76,9 +76,31 @@ public class ExceptionUtilsTest
 		}
 		catch (final NullPointerException npe)
 		{
-			stacktrace = ExceptionUtils.getStackTrace(npe);
+			stacktrace = ExceptionExtensions.getStackTrace(npe);
 		}
 		AssertJUnit.assertTrue(stacktrace.startsWith("java.lang.NullPointerException"));
+	}
+
+	/**
+	 * Test method for
+	 * {@link de.alpharogroup.exception.ExceptionExtensions#getStackTraceElements(java.lang.Throwable)} .
+	 */
+	@SuppressWarnings("null")
+	@Test
+	public void testGetStackTraceElements()
+	{
+		String stacktrace = null;
+		try
+		{
+			final Object objNull = null;
+			objNull.getClass();
+		}
+		catch (final NullPointerException npe)
+		{
+			stacktrace = ExceptionExtensions.getStackTraceElements(npe);
+		}
+		System.out.println();
+		AssertJUnit.assertTrue(stacktrace.startsWith("class java.lang.NullPointerException"));
 	}
 
 }

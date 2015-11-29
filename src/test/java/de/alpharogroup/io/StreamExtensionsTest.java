@@ -44,9 +44,9 @@ import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.test.objects.Person;
 
 /**
- * The Class StreamUtilsTest.
+ * The class {@link StreamExtensionsTest}.
  */
-public class StreamUtilsTest
+public class StreamExtensionsTest
 {
 	/** The file. */
 	final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
@@ -67,7 +67,7 @@ public class StreamUtilsTest
 	public void testCloseInputStream()
 	{
 		final InputStream is = ClassExtensions.getResourceAsStream(propertiesFilename);
-		result = StreamUtils.closeInputStream(is);
+		result = StreamExtensions.closeInputStream(is);
 		AssertJUnit.assertTrue("", result);
 	}
 
@@ -84,8 +84,8 @@ public class StreamUtilsTest
 	public void testCloseOutputStream() throws IOException, URISyntaxException
 	{
 		final URL url = ClassExtensions.getResource(propertiesFilename);
-		final OutputStream os = StreamUtils.getOutputStream(new File(url.toURI()));
-		this.result = StreamUtils.closeOutputStream(os);
+		final OutputStream os = StreamExtensions.getOutputStream(new File(url.toURI()));
+		this.result = StreamExtensions.closeOutputStream(os);
 		AssertJUnit.assertTrue("", this.result);
 	}
 
@@ -102,8 +102,8 @@ public class StreamUtilsTest
 	public void testCloseReader() throws IOException, URISyntaxException
 	{
 		final URL url = ClassExtensions.getResource(propertiesFilename);
-		final Reader reader = StreamUtils.getReader(new File(url.toURI()));
-		this.result = StreamUtils.closeReader(reader);
+		final Reader reader = StreamExtensions.getReader(new File(url.toURI()));
+		this.result = StreamExtensions.closeReader(reader);
 		AssertJUnit.assertTrue("", this.result);
 	}
 
@@ -120,8 +120,8 @@ public class StreamUtilsTest
 	public void testCloseWriter() throws IOException, URISyntaxException
 	{
 		final URL url = ClassExtensions.getResource(propertiesFilename);
-		final Writer writer = StreamUtils.getWriter(new File(url.toURI()));
-		this.result = StreamUtils.closeWriter(writer);
+		final Writer writer = StreamExtensions.getWriter(new File(url.toURI()));
+		this.result = StreamExtensions.closeWriter(writer);
 		AssertJUnit.assertTrue("", this.result);
 	}
 
@@ -139,12 +139,12 @@ public class StreamUtilsTest
 	{
 		final Date birthdayFromLeonardo = CreateDateUtils.newDate(2012, 4, 19);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		result = SerializedObjectUtils.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
+		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
 		AssertJUnit.assertTrue("", result);
 		final InputStream is = writeInMe.toURI().toURL().openStream();
-		final byte[] ba = StreamUtils.getByteArray(is);
+		final byte[] ba = StreamExtensions.getByteArray(is);
 		AssertJUnit.assertTrue(ba.length > 0);
-		final Object obj = SerializedObjectUtils.toObject(ba);
+		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;
 		AssertJUnit.assertEquals(birthdayFromLeonardo, readedObj);
 		try
@@ -171,12 +171,12 @@ public class StreamUtilsTest
 	{
 		final Date birthdayFromLeonardo = CreateDateUtils.newDate(2012, 4, 19);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		result = SerializedObjectUtils.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
+		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
 		AssertJUnit.assertTrue("", result);
 		final InputStream is = writeInMe.toURI().toURL().openStream();
-		final byte[] ba = StreamUtils.getByteArray(is, new ByteArrayOutputStream(is.available()));
+		final byte[] ba = StreamExtensions.getByteArray(is, new ByteArrayOutputStream(is.available()));
 		AssertJUnit.assertTrue(ba.length > 0);
-		final Object obj = SerializedObjectUtils.toObject(ba);
+		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;
 		AssertJUnit.assertEquals(birthdayFromLeonardo, readedObj);
 		try
@@ -197,7 +197,7 @@ public class StreamUtilsTest
 	public void testGetSerialVersionUID()
 	{
 		final Class<Person> personClass = (Class<Person>)new Person().getClass();
-		final long serialVersionUID = StreamUtils.getSerialVersionUID(personClass);
+		final long serialVersionUID = StreamExtensions.getSerialVersionUID(personClass);
 		AssertJUnit.assertTrue("serialVersionUID should be 1L.", serialVersionUID == 1L);
 	}
 

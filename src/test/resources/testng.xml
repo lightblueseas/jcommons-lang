@@ -3,23 +3,22 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-		<class name="de.alpharogroup.exception.ExceptionUtilsTest"/>
-		<class name="de.alpharogroup.iban.BankaccountUtilsTest"/>
+		<class name="de.alpharogroup.exception.ExceptionExtensionsTest"/>
+		<class name="de.alpharogroup.iban.BankaccountExtensionsTest"/>
 		<class name="de.alpharogroup.id.generator.SystemTimeIdGeneratorTest"/>
-		<class name="de.alpharogroup.io.SerializedObjectUtilsTest"/>
-		<class name="de.alpharogroup.io.StreamUtilsTest"/>
-		<class name="de.alpharogroup.lang.AnnotationUtilsTest"/>
+		<class name="de.alpharogroup.io.SerializedObjectExtensionsTest"/>
+		<class name="de.alpharogroup.io.StreamExtensionsTest"/>
+		<class name="de.alpharogroup.lang.AnnotationExtensionsTest"/>
 		<class name="de.alpharogroup.lang.ClassExtensionsTest"/>
-		<class name="de.alpharogroup.lang.MemoryUtilsTest"/>
+		<class name="de.alpharogroup.lang.MemoryExtensionsTest"/>
 		<class name="de.alpharogroup.lang.ObjectExtensionsTest"/>
-		<class name="de.alpharogroup.lang.PackageUtilsTest"/>
-		<class name="de.alpharogroup.lang.PropertiesUtilsTest"/>
+		<class name="de.alpharogroup.lang.PackageExtensionsTest"/>
+		<class name="de.alpharogroup.lang.PropertiesExtensionsTest"/>
 		<class name="de.alpharogroup.lang.sub.SubPackageClass"/>
-		<class name="de.alpharogroup.locale.LocaleUtilsTest"/>
-		<class name="de.alpharogroup.math.MathUtilsTest"/>
-		<class name="de.alpharogroup.regex.REUtilsTest"/>
+		<class name="de.alpharogroup.math.MathExtensionsTest"/>
+		<class name="de.alpharogroup.regex.RegExExtensionsTest"/>
 		<class name="de.alpharogroup.string.StringUtilsTest"/>
-        <class name="de.alpharogroup.reflection.ReflectionUtilsTest" />
+        <class name="de.alpharogroup.reflection.ReflectionExtensionsTest" />
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

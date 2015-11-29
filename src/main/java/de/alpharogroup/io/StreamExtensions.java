@@ -48,7 +48,7 @@ import java.io.Writer;
  * @version 1.0
  * @author Asterios Raptis
  */
-public final class StreamUtils implements Serializable
+public final class StreamExtensions implements Serializable
 {
 
 	/**
@@ -675,8 +675,8 @@ public final class StreamUtils implements Serializable
 		{
 			if (closeStream)
 			{
-				StreamUtils.closeInputStream(inputStream);
-				StreamUtils.closeOutputStream(outputStream);
+				StreamExtensions.closeInputStream(inputStream);
+				StreamExtensions.closeOutputStream(outputStream);
 			}
 		}
 	}
@@ -684,7 +684,7 @@ public final class StreamUtils implements Serializable
 	/**
 	 * Private constructor.
 	 */
-	private StreamUtils()
+	private StreamExtensions()
 	{
 	}
 

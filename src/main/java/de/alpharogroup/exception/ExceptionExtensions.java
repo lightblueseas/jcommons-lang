@@ -27,15 +27,15 @@ package de.alpharogroup.exception;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import de.alpharogroup.io.StreamUtils;
+import de.alpharogroup.io.StreamExtensions;
 
 /**
- * The Class ExceptionUtils.
+ * The Class {@link ExceptionExtensions}.
  *
  * @author Asterios Raptis
  * @version 1.0
  */
-public class ExceptionUtils
+public class ExceptionExtensions
 {
 
 	/**
@@ -63,8 +63,8 @@ public class ExceptionUtils
 		}
 		finally
 		{
-			StreamUtils.closeWriter(sw);
-			StreamUtils.closeWriter(pw);
+			StreamExtensions.closeWriter(sw);
+			StreamExtensions.closeWriter(pw);
 		}
 		return stacktrace;
 	}
@@ -108,8 +108,8 @@ public class ExceptionUtils
 			}
 			finally
 			{
-				StreamUtils.closeWriter(sw);
-				StreamUtils.closeWriter(pw);
+				StreamExtensions.closeWriter(sw);
+				StreamExtensions.closeWriter(pw);
 			}
 		}
 

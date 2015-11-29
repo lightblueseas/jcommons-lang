@@ -22,7 +22,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang;
+package de.alpharogroup.iban;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
@@ -30,16 +30,28 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class MemoryUtils.
+ * Test class for the class {@link BankaccountExtensions}.
  * 
  * @version 1.0
  * @author Asterios Raptis
  */
-public class MemoryUtilsTest
+public class BankaccountExtensionsTest
 {
 
-	/** The result. */
-	boolean result = false;
+	/** The valide iban for tests. */
+	private String valideIban;
+
+	/** The wrong iban for tests. */
+	private String invalideIban;
+
+	/** The boolean for the result from the test. */
+	private boolean result;
+
+	/** The locale for Austria. */
+	private String atLocale;
+
+	/** The locale for Germany. */
+	private String deLocale;
 
 	/**
 	 * Sets up method will be invoked before every unit test method in this class.
@@ -50,7 +62,10 @@ public class MemoryUtilsTest
 	@BeforeMethod
 	protected void setUp() throws Exception
 	{
-		this.result = false;
+		this.valideIban = "AT782032017000303657";
+		this.invalideIban = "AT82032017000303657";
+		this.atLocale = "AT";
+		this.deLocale = "DE";
 	}
 
 	/**
@@ -65,39 +80,39 @@ public class MemoryUtilsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.lang.MemoryUtils#getFreeMemoryForAppInKB()}.
+	 * Test method for {@link de.alpharogroup.iban.BankaccountExtensions#isIbanNumber(java.lang.String)}.
+	 * 
+	 * @throws Exception
+	 *             is thrown if an error occurs when checking the given ibanNumber
 	 */
-	@Test(enabled = true)
-	public void testGetFreeMemoryForAppInKB()
+	@Test
+	public void testIsIbanNumber() throws Exception
 	{
-		final long expected = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
-			.freeMemory()) / 1024;
-		final long compare = MemoryUtils.getFreeMemoryForAppInKB();
-		this.result = expected == compare;
+		this.result = BankaccountExtensions.isIbanNumber(this.valideIban);
 		AssertJUnit.assertTrue("", this.result);
+		this.result = BankaccountExtensions.isIbanNumber(this.invalideIban);
+		AssertJUnit.assertFalse("", this.result);
+
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.lang.MemoryUtils#getTotalMemoryInKB()}.
+	 * Test method for
+	 * {@link de.alpharogroup.iban.BankaccountExtensions#replaceCharsWithNumbers(java.lang.String)} .
+	 * 
+	 * @throws Exception
+	 *             is thrown if an error occurs when tryin to replace the char with numbers
 	 */
 	@Test
-	public void testGetFreeMemoryInKB()
+	public void testReplaceCharsWithNumbers() throws Exception
 	{
-		final long expected = Runtime.getRuntime().freeMemory() / 1024;
-		final long compare = MemoryUtils.getFreeMemoryInKB();
-		this.result = expected == compare;
+		String expected = "1029";
+		String compare = BankaccountExtensions.replaceCharsWithNumbers(this.atLocale);
+		this.result = expected.equals(compare);
 		AssertJUnit.assertTrue("", this.result);
-	}
-
-	/**
-	 * Test method for {@link de.alpharogroup.lang.MemoryUtils#getTotalMemoryInKB()}.
-	 */
-	@Test
-	public void testGetTotalMemoryInKB()
-	{
-		final long expected = Runtime.getRuntime().totalMemory() / 1024;
-		final long compare = MemoryUtils.getTotalMemoryInKB();
-		this.result = expected == compare;
+		// -------------------
+		expected = "1314";
+		compare = BankaccountExtensions.replaceCharsWithNumbers(this.deLocale);
+		this.result = expected.equals(compare);
 		AssertJUnit.assertTrue("", this.result);
 
 	}

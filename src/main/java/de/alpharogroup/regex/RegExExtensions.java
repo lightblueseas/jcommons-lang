@@ -32,7 +32,7 @@ import de.alpharogroup.string.StringUtils;
  * @version 1.0
  * @author Asterios Raptis
  */
-public class REUtils
+public class RegExExtensions
 {
 
 	/**

@@ -214,7 +214,7 @@ public class ClassExtensionsTest
 	public void testGetRessourceAsStream() throws IOException
 	{
 		final String propertiesFilename = "resources.properties";
-		final String pathFromObject = PackageUtils.getPackagePathWithSlash(this);
+		final String pathFromObject = PackageExtensions.getPackagePathWithSlash(this);
 		final String path = pathFromObject + propertiesFilename;
 
 		final ClassExtensionsTest obj = new ClassExtensionsTest();

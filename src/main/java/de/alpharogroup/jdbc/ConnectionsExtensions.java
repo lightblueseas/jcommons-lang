@@ -38,16 +38,16 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
- * The Class ConnectionsUtils have convenience methods to create and connect to mysql or postgresql
+ * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql or postgresql
  * databases.
  * 
  * @author Asterios Raptis
  */
-public final class ConnectionsUtils
+public final class ConnectionsExtensions
 {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ConnectionsUtils.class.getName());
+	private static final Logger logger = Logger.getLogger(ConnectionsExtensions.class.getName());
 
 	/** MySQL-database constants. */
 	/** Constant for the drivername from MySQL-database. */
@@ -94,7 +94,7 @@ public final class ConnectionsUtils
 			Statement stmt = null;
 			try
 			{
-				connection = ConnectionsUtils.getPostgreSQLConnection(hostname, "", dbuser,
+				connection = ConnectionsExtensions.getPostgreSQLConnection(hostname, "", dbuser,
 					dbpasswort);
 				stmt = connection.createStatement();
 
@@ -245,7 +245,7 @@ public final class ConnectionsUtils
 		final String dbuser, final String dbpasswort) throws SQLException, ClassNotFoundException
 	{
 		final List<String> existingDatabases = new ArrayList<>();
-		final Connection connection = ConnectionsUtils.getMySQLConnection(hostname, "", dbuser,
+		final Connection connection = ConnectionsExtensions.getMySQLConnection(hostname, "", dbuser,
 			dbpasswort);
 		final DatabaseMetaData meta = connection.getMetaData();
 		final ResultSet rs = meta.getCatalogs();
@@ -290,7 +290,7 @@ public final class ConnectionsUtils
 		Connection connection = null;
 		try
 		{
-			connection = ConnectionsUtils.getPostgreSQLConnection(hostname, databaseName, dbuser,
+			connection = ConnectionsExtensions.getPostgreSQLConnection(hostname, databaseName, dbuser,
 				dbpasswort);
 		}
 		catch (final Exception e)
@@ -465,7 +465,7 @@ public final class ConnectionsUtils
 	{
 		if (!existsMySqlDatabase(hostname, databaseName, dbuser, dbpasswort))
 		{
-			final Connection connection = ConnectionsUtils.getMySQLConnection(hostname, "", dbuser,
+			final Connection connection = ConnectionsExtensions.getMySQLConnection(hostname, "", dbuser,
 				dbpasswort);
 			final Statement stmt = connection.createStatement();
 
@@ -503,7 +503,7 @@ public final class ConnectionsUtils
 	{
 		if (!existsPostgreSQLDatabase(hostname, databaseName, dbuser, dbpasswort))
 		{
-			final Connection connection = ConnectionsUtils.getPostgreSQLConnection(hostname, "",
+			final Connection connection = ConnectionsExtensions.getPostgreSQLConnection(hostname, "",
 				dbuser, dbpasswort);
 			final Statement stmt = connection.createStatement();
 
@@ -529,7 +529,7 @@ public final class ConnectionsUtils
 	/**
 	 * Instantiates a new jdbc connections utils.
 	 */
-	private ConnectionsUtils()
+	private ConnectionsExtensions()
 	{
 		super();
 	}

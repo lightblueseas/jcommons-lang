@@ -48,100 +48,6 @@ public final class StringUtils
 			'9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
 	/**
-	 * Converts all characters from the given String to unicodes characters encoded like &#92;uxxxx.
-	 * Note: empty characters and symbols are not converted. See test for examples.
-	 *
-	 * @param s
-	 *            The String to convert.
-	 * @param toLowerCase
-	 *            If true the letters from the unicode characters are lower case.
-	 * @return The converted String.
-	 * @deprecated use instead {@link StringExtensions#toUnicodeChars(String, boolean)}
-	 */
-	@Deprecated
-	public static String convertCharsToUnicodeChars(final String s, final boolean toLowerCase)
-	{
-		if (s == null || s.length() == 0)
-		{
-			return s;
-		}
-		final int length = s.length();
-		final int sbLength = length * 2;
-		final StringBuilder sb = new StringBuilder(sbLength);
-		for (int i = 0; i < length; i++)
-		{
-			final char c = s.charAt(i);
-			if (c > 61 && c < 127)
-			{
-				if (c == '\\')
-				{
-					sb.append('\\');
-					sb.append('\\');
-					continue;
-				}
-				sb.append(c);
-				continue;
-			}
-			switch (c)
-			{
-				case '\f' :
-					sb.append('\\');
-					sb.append('f');
-					break;
-				case '\n' :
-					sb.append('\\');
-					sb.append('n');
-					break;
-				case '\r' :
-					sb.append('\\');
-					sb.append('r');
-					break;
-				case '\t' :
-					sb.append('\\');
-					sb.append('t');
-					break;
-				case ' ' :
-					if (i == 0)
-					{
-						sb.append('\\');
-					}
-					sb.append(' ');
-					break;
-				case ':' :
-				case '#' :
-				case '=' :
-				case '!' :
-					sb.append('\\');
-					sb.append(c);
-					break;
-				default :
-					if (c < 0x0020 || c > 0x007e)
-					{
-						sb.append('\\');
-						sb.append('u');
-						sb.append(toHex(c >> 12 & 0xF));
-						sb.append(toHex(c >> 8 & 0xF));
-						sb.append(toHex(c >> 4 & 0xF));
-						sb.append(toHex(c & 0xF));
-					}
-					else
-					{
-						sb.append(c);
-					}
-			}
-		}
-		final String returnString = sb.toString();
-		if (toLowerCase)
-		{
-			return returnString.toLowerCase();
-		}
-		else
-		{
-			return returnString;
-		}
-	}
-
-	/**
 	 * Converts the given chararray to a bytearray.
 	 *
 	 * @param source
@@ -353,24 +259,6 @@ public final class StringUtils
 	}
 
 	/**
-	 * Gets the last character of the given String object.
-	 *
-	 * @param str
-	 *            the str
-	 * @return the last character
-	 * @deprecated use instead {@link StringExtensions#lastCharacter(String)}
-	 */
-	@Deprecated
-	public static String getLastCharacter(final String str)
-	{
-		if (str == null || str.length() == 0)
-		{
-			return "";
-		}
-		return str.substring(str.length() - 1);
-	}
-
-	/**
 	 * The Method getStringAfterUnderscore(String) gets the substring after the first underscore.
 	 * For example:Assume that element=foobar_value then the result string is "value".
 	 *
@@ -421,59 +309,6 @@ public final class StringUtils
 			value = defaultValue;
 		}
 		return value;
-	}
-
-	/**
-	 * The method isEmpty(String) checks if the given String is empty or null.
-	 *
-	 * @param str
-	 *            The String to check.
-	 * @return true if the given String is empty or null otherwise false.
-	 * @deprecated use instead {@link StringExtensions#isNullOrEmpty(String)}
-	 */
-	@Deprecated
-	public static final boolean isNullOrEmpty(final String str)
-	{
-		return str == null || str.length() == 0;
-	}
-
-	/**
-	 * Checks if the given String is an Number.
-	 *
-	 * @param testString
-	 *            The String to check.
-	 * @return true if the given String is a number otherwise false.
-	 * @deprecated use instead {@link StringExtensions#isNumber(String)}
-	 */
-	@Deprecated
-	public static final boolean isNumber(final String testString)
-	{
-		if (null == testString)
-		{
-			return false;
-		}
-		for (int i = 0; i < testString.length(); i++)
-		{
-			if (Character.isDigit(testString.charAt(i)) == false)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Puts to the given String at the start and end quotes.
-	 *
-	 * @param s
-	 *            The String to handle.
-	 * @return The String with quotes.
-	 * @deprecated use instead {@link StringExtensions#addDoubleQuotationMarks(String)}
-	 */
-	@Deprecated
-	public static final String putQuotesToString(final String s)
-	{
-		return "\"" + s + "\"";
 	}
 
 	/**
@@ -543,22 +378,6 @@ public final class StringUtils
 		}
 		return subject;
 	}
-
-	/**
-	 * Removes from the given String the first and the last character.
-	 *
-	 * @param s
-	 *            The String to handle.
-	 * @return The String with the without the first and the last character.
-	 * @deprecated use instead {@link StringExtensions#addDoubleQuotationMarks(String)}
-	 */
-	@Deprecated
-	public static final String removeQuotationMarks(final String s)
-	{
-		return s.substring(1, s.length() - 1);
-
-	}
-
 
 	/**
 	 * Replaces all occurrences of a String within another String.
@@ -637,50 +456,6 @@ public final class StringUtils
 		final Matcher matcher = pattern.matcher(input);
 		return matcher.replaceAll(replace);
 	}
-
-	/**
-	 * Sets the first character from the given string to lower case and returns it. Example:<br>
-	 * Given fieldName: UserName <br>
-	 * Result: userName
-	 *
-	 * @param fieldName
-	 *            The String to modify.
-	 * @return The modified string.
-	 * @deprecated use instead {@link StringExtensions#firstCharacterToLowerCase(String)}
-	 */
-	@Deprecated
-	public static final String setFirstCharacterToLowerCase(final String fieldName)
-	{
-		String firstCharacter = fieldName.substring(0, 1);
-		firstCharacter = firstCharacter.toLowerCase();
-		final char[] fc = firstCharacter.toCharArray();
-		final char[] fn = fieldName.toCharArray();
-		fn[0] = fc[0];
-		return new String(fn);
-	}
-
-
-	/**
-	 * Sets the first character from the given string to upper case and returns it. Example:<br>
-	 * Given fieldName: userName <br>
-	 * Result: UserName
-	 *
-	 * @param fieldName
-	 *            The String to modify.
-	 * @return The modified string.
-	 * @deprecated use instead {@link StringExtensions#firstCharacterToUpperCase(String)}
-	 */
-	@Deprecated
-	public static final String setFirstCharacterToUpperCase(final String fieldName)
-	{
-		String firstCharacter = fieldName.substring(0, 1);
-		firstCharacter = firstCharacter.toUpperCase();
-		final char[] fc = firstCharacter.toCharArray();
-		final char[] fn = fieldName.toCharArray();
-		fn[0] = fc[0];
-		return new String(fn);
-	}
-
 
 	/**
 	 * To hex.

@@ -22,38 +22,14 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.reflection;
+package de.alpharogroup.jdbc;
 
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 
-import de.alpharogroup.test.objects.A;
-import de.alpharogroup.test.objects.Person;
-
-
-public class ReflectionUtilsTest
+public class ConnectionsExtensionsTest
 {
-
-	public void testGetNewInstance()
+	@BeforeMethod
+	public void beforeMethod()
 	{
 	}
-
-	@Test
-	public void testNewInstanceClassOfT() throws InstantiationException, IllegalAccessException,
-		ClassNotFoundException
-	{
-		final Class<Person> clazz = Person.class;
-		final Person actual = ReflectionUtils.newInstance(clazz);
-		AssertJUnit.assertNotNull(actual);
-	}
-
-	@Test
-	public void testNewInstanceT() throws InstantiationException, IllegalAccessException,
-		ClassNotFoundException
-	{
-		final A a = new A();
-		final A actual = ReflectionUtils.newInstance(a);
-		AssertJUnit.assertNotNull(actual);
-	}
-
 }

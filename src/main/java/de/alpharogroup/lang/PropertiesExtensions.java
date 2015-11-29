@@ -51,10 +51,10 @@ import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.resourcebundle.file.namefilter.PropertiesResourceBundleFilenameFilter;
 
 /**
- * The Class PropertiesUtils provides methods loading properties and other related operations for
+ * The Class {@link PropertiesExtensions} provides methods loading properties and other related operations for
  * properties like find redundant values or getting all available languages from a bundle.
  */
-public final class PropertiesUtils
+public final class PropertiesExtensions
 {
 
 	/**
@@ -67,7 +67,7 @@ public final class PropertiesUtils
 	public static final String[] PROPERTIES_DELIMITERS = { "=", ":", " " };
 
 	/** The LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(PropertiesUtils.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(PropertiesExtensions.class.getName());
 
 	/**
 	 * Finds redundant values from the given Properties object and saves it to a Map.
@@ -129,11 +129,11 @@ public final class PropertiesUtils
 		Properties properties = null;
 		if (componentClass != null)
 		{
-			properties = PropertiesUtils.loadPropertiesFromClassObject(componentClass, locale);
+			properties = PropertiesExtensions.loadPropertiesFromClassObject(componentClass, locale);
 		}
 		else
 		{
-			properties = PropertiesUtils.loadPropertiesFromClassObject(defaultClass, locale);
+			properties = PropertiesExtensions.loadPropertiesFromClassObject(defaultClass, locale);
 		}
 		return properties;
 	}
@@ -385,7 +385,7 @@ public final class PropertiesUtils
 		String pathAndFilename = null;
 		File propertiesFile = null;
 		String absoluteFilename = null;
-		final String packagePath = PackageUtils.getPackagePathWithSlash(clazz);
+		final String packagePath = PackageExtensions.getPackagePathWithSlash(clazz);
 		final List<String> missedFiles = new ArrayList<>();
 		if (null != locale)
 		{
@@ -422,7 +422,7 @@ public final class PropertiesUtils
 
 			if ((null != propertiesFile) && propertiesFile.exists())
 			{
-				properties = PropertiesUtils.loadProperties(pathAndFilename);
+				properties = PropertiesExtensions.loadProperties(pathAndFilename);
 			}
 			else
 			{
@@ -454,7 +454,7 @@ public final class PropertiesUtils
 					}
 					if ((null != propertiesFile) && propertiesFile.exists())
 					{
-						properties = PropertiesUtils.loadProperties(pathAndFilename);
+						properties = PropertiesExtensions.loadProperties(pathAndFilename);
 					}
 				}
 			}
@@ -475,7 +475,7 @@ public final class PropertiesUtils
 			}
 			else
 			{
-				properties = PropertiesUtils.loadProperties(pathAndFilename);
+				properties = PropertiesExtensions.loadProperties(pathAndFilename);
 				missedFiles.add("File with filename '" + filename + "' does not exists.");
 			}
 
@@ -485,7 +485,7 @@ public final class PropertiesUtils
 			}
 			if ((null != propertiesFile) && propertiesFile.exists())
 			{
-				properties = PropertiesUtils.loadProperties(pathAndFilename);
+				properties = PropertiesExtensions.loadProperties(pathAndFilename);
 			}
 		}
 		if (properties == null)
@@ -622,7 +622,7 @@ public final class PropertiesUtils
 	/**
 	 * Private constructor.
 	 */
-	private PropertiesUtils()
+	private PropertiesExtensions()
 	{
 	}
 

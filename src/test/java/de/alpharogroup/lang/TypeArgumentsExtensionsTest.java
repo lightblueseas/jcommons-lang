@@ -33,8 +33,13 @@ import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.generics.GenericDao;
 import de.alpharogroup.test.objects.generics.PersonDao;
 
-
-public class TypeArgumentsUtilsTest
+/**
+ * Test class for the class {@link de.alpharogroup.lang.TypeArgumentsExtensions}.
+ * 
+ * @version 1.0
+ * @author Asterios Raptis
+ */
+public class TypeArgumentsExtensionsTest
 {
 
 	@Test(enabled = true)
@@ -43,7 +48,7 @@ public class TypeArgumentsUtilsTest
 		final Class<Person> expectedClass = Person.class;
 
 		@SuppressWarnings("unchecked")
-		final Class<Person> personClass = (Class<Person>)TypeArgumentsUtils.getFirstTypeArgument(
+		final Class<Person> personClass = (Class<Person>)TypeArgumentsExtensions.getFirstTypeArgument(
 			GenericDao.class, PersonDao.class);
 		AssertJUnit.assertEquals(expectedClass, personClass);
 	}
@@ -53,7 +58,7 @@ public class TypeArgumentsUtilsTest
 	{
 		final Class<Integer> expectedClass = Integer.class;
 		@SuppressWarnings("unchecked")
-		final Class<Integer> integerClass = (Class<Integer>)TypeArgumentsUtils.getTypeArgument(
+		final Class<Integer> integerClass = (Class<Integer>)TypeArgumentsExtensions.getTypeArgument(
 			GenericDao.class, PersonDao.class, 1);
 		AssertJUnit.assertEquals(expectedClass, integerClass);
 	}
@@ -61,7 +66,7 @@ public class TypeArgumentsUtilsTest
 	@Test(enabled = true)
 	public void testGetTypeArguments()
 	{
-		final List<Class<?>> typeArguments = TypeArgumentsUtils.getTypeArguments(GenericDao.class,
+		final List<Class<?>> typeArguments = TypeArgumentsExtensions.getTypeArguments(GenericDao.class,
 			new PersonDao().getClass());
 		AssertJUnit.assertNotNull(typeArguments);
 		AssertJUnit.assertEquals(2, typeArguments.size());

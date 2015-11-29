@@ -45,7 +45,13 @@ import de.alpharogroup.lang.model.ClassModel;
 import de.alpharogroup.lang.model.MethodModel;
 import de.alpharogroup.resourcebundle.locale.LocaleResolver;
 
-public class PropertiesUtilsTest
+/**
+ * Test class for the class {@link de.alpharogroup.lang.PropertiesExtensions}.
+ * 
+ * @version 1.0
+ * @author Asterios Raptis
+ */
+public class PropertiesExtensionsTest
 {
 
 	private void getClassModels(final Map<String, List<String>> matchedPrefixes,
@@ -79,7 +85,7 @@ public class PropertiesUtilsTest
 						method.getMethodAnnotations().add(annotation);
 						annotation.setName(localeAnnotationName);
 						annotation.setValue(propertyValue);
-						method.setParameters(PropertiesUtils.getPropertyParameters(propertyValue));
+						method.setParameters(PropertiesExtensions.getPropertyParameters(propertyValue));
 					}
 				}
 				else
@@ -102,7 +108,7 @@ public class PropertiesUtilsTest
 						method.getMethodAnnotations().add(annotation);
 						annotation.setName(localeAnnotationName);
 						annotation.setValue(propertyValue);
-						method.setParameters(PropertiesUtils.getPropertyParameters(propertyValue));
+						method.setParameters(PropertiesExtensions.getPropertyParameters(propertyValue));
 					}
 					interfaces.put(interfaceName, classModel);
 				}
@@ -124,7 +130,7 @@ public class PropertiesUtilsTest
 						method.getMethodAnnotations().add(annotation);
 						annotation.setName(localeAnnotationName);
 						annotation.setValue(propertyValue);
-						method.setParameters(PropertiesUtils.getPropertyParameters(propertyValue));
+						method.setParameters(PropertiesExtensions.getPropertyParameters(propertyValue));
 					}
 				}
 				else
@@ -146,7 +152,7 @@ public class PropertiesUtilsTest
 						method.getMethodAnnotations().add(annotation);
 						annotation.setName(localeAnnotationName);
 						annotation.setValue(propertyValue);
-						method.setParameters(PropertiesUtils.getPropertyParameters(propertyValue));
+						method.setParameters(PropertiesExtensions.getPropertyParameters(propertyValue));
 					}
 					interfaces.put(interfaceName, classModel);
 				}
@@ -165,7 +171,7 @@ public class PropertiesUtilsTest
 		enProperties.put("com.example.gui.window.buttons.ok", "OK");
 		enProperties.put("com.example.gui.window.buttons.cancel", "Cancel");
 
-		Map<String, List<String>> matchedPrefixes = PropertiesUtils
+		Map<String, List<String>> matchedPrefixes = PropertiesExtensions
 			.getMatchedPrefixLists(enProperties);
 		String localeAnnotationName = "En";
 		final Map<String, ClassModel> interfaces = new LinkedHashMap<>();
@@ -180,7 +186,7 @@ public class PropertiesUtilsTest
 		ruProperties.put("com.example.gui.window.buttons.ok", "Да");
 		ruProperties.put("com.example.gui.window.buttons.cancel", "Отмена");
 
-		matchedPrefixes = PropertiesUtils.getMatchedPrefixLists(ruProperties);
+		matchedPrefixes = PropertiesExtensions.getMatchedPrefixLists(ruProperties);
 		localeAnnotationName = "Ru";
 
 		getClassModels(matchedPrefixes, localeAnnotationName, interfaces, ruProperties);
@@ -200,7 +206,7 @@ public class PropertiesUtilsTest
 		properties.put("foo.bar", "OK");
 		properties.put("com.example.gui.window.buttons.cancel", "Cancel");
 
-		final Map<String, List<String>> redundantValues = PropertiesUtils
+		final Map<String, List<String>> redundantValues = PropertiesExtensions
 			.findRedundantValues(properties);
 		AssertJUnit.assertEquals(redundantValues.get("Hello, {0} {1} {2}!"),
 			new ArrayList<String>()
@@ -265,10 +271,10 @@ public class PropertiesUtilsTest
 	public void testLoadProperties() throws IOException
 	{
 		final String propertiesFilename = "resources.properties";
-		final String pathFromObject = PackageUtils.getPackagePathWithSlash(this);
+		final String pathFromObject = PackageExtensions.getPackagePathWithSlash(this);
 		final String path = pathFromObject + propertiesFilename;
 
-		final Properties prop = PropertiesUtils.loadProperties(path);
+		final Properties prop = PropertiesExtensions.loadProperties(path);
 		final boolean result = null != prop;
 		AssertJUnit.assertTrue("", result);
 	}
@@ -278,13 +284,13 @@ public class PropertiesUtilsTest
 	{
 		String packagePath = "de/alpharogroup/lang/";
 		String propertiesFilename = "resources.properties";
-		Properties prop = PropertiesUtils.loadProperties(packagePath, propertiesFilename);
+		Properties prop = PropertiesExtensions.loadProperties(packagePath, propertiesFilename);
 		boolean result = null != prop;
 		AssertJUnit.assertTrue("", result);
 
 		packagePath = "/de/alpharogroup/lang//";
 		propertiesFilename = "//resources.properties";
-		prop = PropertiesUtils.loadProperties(packagePath, propertiesFilename);
+		prop = PropertiesExtensions.loadProperties(packagePath, propertiesFilename);
 		result = null != prop;
 		AssertJUnit.assertTrue("", result);
 
@@ -295,7 +301,7 @@ public class PropertiesUtilsTest
 	public void testLoadProperties3() throws IOException
 	{
 		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
-		final Properties prop = PropertiesUtils.loadProperties(propertiesFilename);
+		final Properties prop = PropertiesExtensions.loadProperties(propertiesFilename);
 		final boolean result = null != prop;
 		AssertJUnit.assertTrue("", result);
 	}
@@ -305,9 +311,9 @@ public class PropertiesUtilsTest
 	public void testLoadPropertiesFromClassObject() throws IOException
 	{
 		final Locale en = Locale.ENGLISH;
-		Properties properties = PropertiesUtils.loadPropertiesFromClassObject(this.getClass(), en);
+		Properties properties = PropertiesExtensions.loadPropertiesFromClassObject(this.getClass(), en);
 		AssertJUnit.assertTrue("", properties.get("test").equals("foo"));
-		properties = PropertiesUtils.loadPropertiesFromClassObject(this.getClass(), null);
+		properties = PropertiesExtensions.loadPropertiesFromClassObject(this.getClass(), null);
 		AssertJUnit.assertTrue("", properties.get("test").equals("bar"));
 	}
 
@@ -330,7 +336,7 @@ public class PropertiesUtilsTest
 		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 		final File propertiesFile = ClassExtensions.getResourceAsFile(propertiesFilename);
 		final File xmlFile = new File(propertiesFile.getParent(), "resources.properties.xml");
-		PropertiesUtils.toXml(propertiesFile, xmlFile, "", "UTF-8");
+		PropertiesExtensions.toXml(propertiesFile, xmlFile, "", "UTF-8");
 	}
 
 	@Test(enabled = false)

@@ -39,9 +39,9 @@ import org.apache.velocity.runtime.parser.node.SimpleNode;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
- * The Class VelocityUtils.
+ * The class {@link VelocityExtensions}.
  */
-public class VelocityUtils
+public class VelocityExtensions
 {
 
 	/** The Constant VELOCITY_TEMPLATE_FILE_EXTENSION. */

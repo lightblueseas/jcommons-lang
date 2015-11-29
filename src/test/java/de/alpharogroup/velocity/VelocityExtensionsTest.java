@@ -22,14 +22,34 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.jdbc;
+package de.alpharogroup.velocity;
 
-import org.testng.annotations.BeforeMethod;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
 
-public class ConnectionsUtilsTest
+public class VelocityExtensionsTest
 {
-	@BeforeMethod
-	public void beforeMethod()
+
+	@Test
+	public void testMergeVelocityContextString()
 	{
+		/* first, we init the runtime engine. Defaults are fine. */
+		Velocity.init();
+
+		/* lets make a Context and put data into it */
+		final VelocityContext context = new VelocityContext();
+
+		context.put("name", "Velocity");
+		context.put("project", "Jakarta");
+
+		/* lets make our own string to render */
+		final String s = "We are using $project $name to render this.";
+		final String actual = VelocityExtensions.merge(context, s);
+		final String expected = "We are using Jakarta Velocity to render this.";
+		/* check if equal */
+		AssertJUnit.assertEquals(expected, actual);
 	}
+
 }

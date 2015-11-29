@@ -48,17 +48,33 @@ import de.alpharogroup.test.objects.annotations.foobar.AnotherAnnotatedClass;
 import de.alpharogroup.test.objects.annotations.foobar.OtherAnnotatedClass;
 import de.alpharogroup.test.objects.annotations.foobar.SomeClass;
 
-
-public class AnnotationUtilsTest
+/**
+ * Test class for the class {@link de.alpharogroup.lang.AnnotationExtensions}.
+ *
+ * @author Asterios Raptis
+ * @version 1.0
+ */
+public class AnnotationExtensionsTest
 {
 
-	protected static final Logger LOGGER = Logger.getLogger(AnnotationUtilsTest.class);
+	/** The Constant LOGGER. */
+	protected static final Logger LOGGER = Logger.getLogger(AnnotationExtensionsTest.class);
 
+	/**
+	 * Sets the up method.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeMethod
 	public void setUp() throws Exception
 	{
 	}
 
+	/**
+	 * Tear down method.
+	 *
+	 * @throws Exception the exception
+	 */
 	@AfterMethod
 	public void tearDown() throws Exception
 	{
@@ -75,7 +91,7 @@ public class AnnotationUtilsTest
 	@Test(enabled = false)
 	public void testGetAllAnnotatedClasses() throws ClassNotFoundException, IOException
 	{
-		final Set<Class<?>> classes = AnnotationUtils.getAllAnnotatedClasses(
+		final Set<Class<?>> classes = AnnotationExtensions.getAllAnnotatedClasses(
 			"de.alpharogroup.test.objects", TestAnnotation.class);
 		LOGGER.info(classes);
 		AssertJUnit.assertTrue("Size should be 3 but is " + classes.size() + ".",
@@ -104,7 +120,7 @@ public class AnnotationUtilsTest
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
 		allAnotations.add(TestAnnotation.class);
 		allAnotations.add(AnotherTestAnnotation.class);
-		final Set<Class<?>> classes = AnnotationUtils.getAllAnnotatedClassesFromSet(
+		final Set<Class<?>> classes = AnnotationExtensions.getAllAnnotatedClassesFromSet(
 			"de.alpharogroup.test.objects", allAnotations);
 
 		AssertJUnit.assertTrue("Size should be 4  but is " + classes.size() + ".",
@@ -138,7 +154,7 @@ public class AnnotationUtilsTest
 		allAnotations.add(TestAnnotation.class);
 		allAnotations.add(AnotherTestAnnotation.class);
 
-		final Set<Class<?>> classes = AnnotationUtils.getAllClasses("de.alpharogroup.test.objects",
+		final Set<Class<?>> classes = AnnotationExtensions.getAllClasses("de.alpharogroup.test.objects",
 			allAnotations);
 		AssertJUnit.assertTrue("Size should be 4  but is " + classes.size() + ".",
 			classes.size() == 4);
@@ -154,14 +170,17 @@ public class AnnotationUtilsTest
 			classes.contains(SomeClass.class));
 	}
 
+	/**
+	 * Test is annotation present in super classes.
+	 */
 	@Test(enabled = true)
 	public void testIsAnnotationPresentInSuperClasses()
 	{
-		boolean result = AnnotationUtils.isAnnotationPresentInSuperClasses(SubAnnotatedClass.class,
+		boolean result = AnnotationExtensions.isAnnotationPresentInSuperClasses(SubAnnotatedClass.class,
 			TestAnnotation.class);
 		AssertJUnit.assertTrue(
 			"If an Annotation is present in the super class then it should return true!", result);
-		result = AnnotationUtils.isAnnotationPresentInSuperClassesOrInterfaces(
+		result = AnnotationExtensions.isAnnotationPresentInSuperClassesOrInterfaces(
 			ClassExtendsAnnotatedInterface.class, TestAnnotation.class);
 		AssertJUnit.assertTrue(
 			"If an Annotation is present in the super class then it should return true!", result);
@@ -183,7 +202,7 @@ public class AnnotationUtilsTest
 	{
 		File directory = ClassExtensions.getResourceAsFile("AnnotatedClass.class", new AnnotatedClass());
 		directory = directory.getParentFile();
-		final Set<Class<?>> classes = AnnotationUtils.scanForAnnotatedClasses(directory,
+		final Set<Class<?>> classes = AnnotationExtensions.scanForAnnotatedClasses(directory,
 			"de.alpharogroup.test.objects.annotations", TestAnnotation.class);
 		AssertJUnit.assertTrue("Size should be 3  but is " + classes.size() + ".",
 			classes.size() == 3);
@@ -217,7 +236,7 @@ public class AnnotationUtilsTest
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
 		allAnotations.add(TestAnnotation.class);
 		allAnotations.add(AnotherTestAnnotation.class);
-		final Set<Class<?>> classes = AnnotationUtils.scanForAnnotatedClassesFromSet(directory,
+		final Set<Class<?>> classes = AnnotationExtensions.scanForAnnotatedClassesFromSet(directory,
 			"de.alpharogroup.test.objects.annotations", allAnotations);
 
 		AssertJUnit.assertTrue("Size should be 4  but is " + classes.size() + ".",

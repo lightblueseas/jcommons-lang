@@ -30,7 +30,7 @@ package de.alpharogroup.lang;
  * @version 1.0
  * @author Asterios Raptis
  */
-public final class MemoryUtils
+public final class MemoryExtensions
 {
 	/**
 	 * Freeing memory that is available for the application by running the garbage collector.
@@ -73,7 +73,7 @@ public final class MemoryUtils
 	/**
 	 * Private constructor.
 	 */
-	private MemoryUtils()
+	private MemoryExtensions()
 	{
 		super();
 	}

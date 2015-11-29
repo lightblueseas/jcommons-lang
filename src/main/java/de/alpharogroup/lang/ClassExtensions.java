@@ -19,7 +19,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import de.alpharogroup.file.FileExtension;
-import de.alpharogroup.file.FilenameUtils;
+import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
 
@@ -371,7 +371,6 @@ public final class ClassExtensions
 	 */
 	public static URL getResource(final Class<?> clazz)
 	{
-
 		final String path = ClassExtensions.getPath(clazz);
 		URL url = clazz.getResource(path);
 		if (url == null)
@@ -706,7 +705,7 @@ public final class ClassExtensions
 			{
 				if (!file.isDirectory())
 				{
-					final String filename = FilenameUtils.getFilenameWithoutExtension(file);
+					final String filename = FilenameExtensions.getFilenameWithoutExtension(file);
 					qualifiedClassname = packagePath + '.' + filename;
 					foundClasses.add(forName(qualifiedClassname));
 				}
@@ -749,7 +748,7 @@ public final class ClassExtensions
 		throws IOException, ClassNotFoundException
 	{
 		final Set<Class<?>> foundClasses = new LinkedHashSet<>();
-		final Set<String> qualifiedClassnames = PackageUtils.scanClassNames(packageName, recursive,
+		final Set<String> qualifiedClassnames = PackageExtensions.scanClassNames(packageName, recursive,
 			true);
 		for (final String qualifiedClassname : qualifiedClassnames)
 		{

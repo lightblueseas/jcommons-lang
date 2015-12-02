@@ -27,7 +27,7 @@ package de.alpharogroup.io;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import de.alpharogroup.string.StringUtils;
+import de.alpharogroup.string.StringExtensions;
 
 /**
  * The Class StringOutputStream.
@@ -77,7 +77,7 @@ public class StringOutputStream extends OutputStream implements Serializable
 	@Override
 	public void write(final byte[] b)
 	{
-		stringBuilder.append(StringUtils.convertToCharArray(b));
+		stringBuilder.append(StringExtensions.convertToCharArray(b));
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class StringOutputStream extends OutputStream implements Serializable
 			bytes[i] = b[off];
 			off++;
 		}
-		stringBuilder.append(StringUtils.convertToCharArray(bytes));
+		stringBuilder.append(StringExtensions.convertToCharArray(bytes));
 	}
 
 	/**

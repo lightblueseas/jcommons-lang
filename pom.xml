@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.7.0</version>
+	<version>4.8.0</version>
 	
 	<name>${project.artifactId}</name>
 
@@ -38,10 +38,9 @@
 	
 
 	<properties>
-		<silly-collections.version>4.7.0</silly-collections.version>
-		<vintage-time.version>4.7.0</vintage-time.version>
-		<test-objects.version>4.7.0</test-objects.version>
-		<resourcebundle-inspector.version>2.4.0</resourcebundle-inspector.version>
+		<silly-collections.version>4.8.0</silly-collections.version>
+		<vintage-time.version>4.8.0</vintage-time.version>
+		<test-objects.version>4.8.0</test-objects.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
 		<commons-collections4.version>4.0</commons-collections4.version>
@@ -99,12 +98,6 @@
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>resourcebundle-inspector</artifactId>
-				<version>${resourcebundle-inspector.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>de.alpharogroup</groupId>
 				<artifactId>vintage-time</artifactId>
 				<version>${vintage-time.version}</version>
 			</dependency>
@@ -154,11 +147,6 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>resourcebundle-inspector</artifactId>
 		</dependency>
 
 		<dependency>

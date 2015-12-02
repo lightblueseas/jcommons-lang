@@ -41,7 +41,6 @@ import org.testng.annotations.Test;
 import de.alpharogroup.classes.inner.OuterClass;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.PremiumMember;
-import net.lingala.zip4j.core.ZipFile;
 
 public class ClassExtensionsTest
 {
@@ -98,10 +97,10 @@ public class ClassExtensionsTest
 		AssertJUnit.assertTrue(actual.toString().startsWith("file:"));
 		AssertJUnit.assertTrue(actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
 		// Get manifest file from zip4j-*.jar
-		actual = ClassExtensions.getManifestUrl(ZipFile.class);
-		AssertJUnit.assertNotNull(actual);
-		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
-		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
+//		actual = ClassExtensions.getManifestUrl(ZipFile.class);
+//		AssertJUnit.assertNotNull(actual);
+//		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
+//		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
 	}
 
 	@Test
@@ -113,9 +112,9 @@ public class ClassExtensionsTest
 		actual = ClassExtensions.getJarPath(ClassExtensions.class);
 		AssertJUnit.assertNull(actual);
 		// Get manifest file from zip4j-*.jar
-		actual = ClassExtensions.getJarPath(ZipFile.class);
-		AssertJUnit.assertNotNull(actual);
-		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
+//		actual = ClassExtensions.getJarPath(ZipFile.class);
+//		AssertJUnit.assertNotNull(actual);
+//		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
 	@Test

@@ -29,7 +29,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
-import de.alpharogroup.string.StringUtils;
+import de.alpharogroup.string.StringExtensions;
 
 /**
  * The class {@link RegExExtensionsTest}.
@@ -79,11 +79,11 @@ public class RegExExtensionsTest extends BaseTestCase
 		for (final String element : valideInput)
 		{
 			String strip = element;
-			strip = StringUtils.replaceAll(strip, " ", "");
-			strip = StringUtils.replaceAll(strip, "(", "");
-			strip = StringUtils.replaceAll(strip, ")", "");
-			strip = StringUtils.replaceAll(strip, " ", "");
-			strip = StringUtils.replaceAll(strip, "-", "");
+			strip = StringExtensions.replaceAll(strip, " ", "");
+			strip = StringExtensions.replaceAll(strip, "(", "");
+			strip = StringExtensions.replaceAll(strip, ")", "");
+			strip = StringExtensions.replaceAll(strip, " ", "");
+			strip = StringExtensions.replaceAll(strip, "-", "");
 			result = strip.matches(RegExExtensions.VALID_PHONE);
 			AssertJUnit.assertTrue("", result);
 		}
@@ -92,11 +92,11 @@ public class RegExExtensionsTest extends BaseTestCase
 		for (final String element : invalideInput)
 		{
 			String strip = element;
-			strip = StringUtils.replaceAll(strip, " ", "");
-			strip = StringUtils.replaceAll(strip, "(", "");
-			strip = StringUtils.replaceAll(strip, ")", "");
-			strip = StringUtils.replaceAll(strip, " ", "");
-			strip = StringUtils.replaceAll(strip, "-", "");
+			strip = StringExtensions.replaceAll(strip, " ", "");
+			strip = StringExtensions.replaceAll(strip, "(", "");
+			strip = StringExtensions.replaceAll(strip, ")", "");
+			strip = StringExtensions.replaceAll(strip, " ", "");
+			strip = StringExtensions.replaceAll(strip, "-", "");
 			result = strip.matches(RegExExtensions.VALID_PHONE);
 			AssertJUnit.assertFalse("", result);
 		}

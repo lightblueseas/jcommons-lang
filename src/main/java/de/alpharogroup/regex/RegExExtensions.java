@@ -24,7 +24,7 @@
  */
 package de.alpharogroup.regex;
 
-import de.alpharogroup.string.StringUtils;
+import de.alpharogroup.string.StringExtensions;
 
 /**
  * Utility class for the use with regular expressions.
@@ -78,9 +78,9 @@ public class RegExExtensions
 	 */
 	public static String replaceWildcardsWithRE(final String queryString)
 	{
-		final String stern = StringUtils.replaceAll(queryString, WILDCARD_ASTERISK,
+		final String stern = StringExtensions.replaceAll(queryString, WILDCARD_ASTERISK,
 			WILDCARD_MANYCHARS_RE);
-		final String regexp = StringUtils.replaceAll(stern, WILDCARD_QUESTION_MARK,
+		final String regexp = StringExtensions.replaceAll(stern, WILDCARD_QUESTION_MARK,
 			WILDCARD_ONECHAR_RE);
 		return regexp;
 	}

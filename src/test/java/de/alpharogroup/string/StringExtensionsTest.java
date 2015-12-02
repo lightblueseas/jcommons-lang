@@ -32,13 +32,13 @@ import org.testng.annotations.Test;
 import de.alpharogroup.BaseTestCase;
 
 /**
- * Test class for the class StringUtils.
+ * Test class for the class StringExtensions.
  *
  * @version 1.0
  * @author Asterios Raptis
  */
 @ExtensionMethod(StringExtensions.class)
-public class StringUtilsTest extends BaseTestCase
+public class StringExtensionsTest extends BaseTestCase
 {
 
 	/**
@@ -90,7 +90,7 @@ public class StringUtilsTest extends BaseTestCase
 	{
 		final String expected = "indio";
 		final String testString = "indio[5][1]";
-		final String compare = StringUtils.getAttributName(testString);
+		final String compare = StringExtensions.getAttributName(testString);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -103,7 +103,7 @@ public class StringUtilsTest extends BaseTestCase
 	{
 		final String expected = "5";
 		final String testString = "indio[5][1]";
-		final String compare = StringUtils.getIndex(testString);
+		final String compare = StringExtensions.getIndex(testString);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -116,7 +116,7 @@ public class StringUtilsTest extends BaseTestCase
 	{
 		final String expected = "1";
 		final String testString = "indio[5][1]";
-		final String compare = StringUtils.getItemNumber(testString);
+		final String compare = StringExtensions.getItemNumber(testString);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -130,7 +130,7 @@ public class StringUtilsTest extends BaseTestCase
 	{
 		final String expected = "value";
 		final String element = "foobar_value";
-		final String compare = StringUtils.getStringAfterUnderscore(element);
+		final String compare = StringExtensions.getStringAfterUnderscore(element);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -144,7 +144,7 @@ public class StringUtilsTest extends BaseTestCase
 	{
 		final String expected = "foobar";
 		final String element = "foobar_value";
-		final String compare = StringUtils.getStringBeforeUnderscore(element);
+		final String compare = StringExtensions.getStringBeforeUnderscore(element);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -207,7 +207,7 @@ public class StringUtilsTest extends BaseTestCase
 
 		final String original = "This is a test: Aha :\n and than foo bar:";
 		final String expected = "This is a test: Aha :";
-		final String compare = StringUtils.readLine(original);
+		final String compare = StringExtensions.readLine(original);
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -236,7 +236,7 @@ public class StringUtilsTest extends BaseTestCase
 
 		final String original = "This is a test: Aha : and than foo bar:";
 		final String expected = "This is a test; Aha ; and than foo bar;";
-		final String compare = StringUtils.replaceAll(original, ":", ";");
+		final String compare = StringExtensions.replaceAll(original, ":", ";");
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -253,7 +253,7 @@ public class StringUtilsTest extends BaseTestCase
 		final String original = "(0049) 173/1234-50";
 		final String expected = "0049173123450";
 		final String[] array = { "(", ")", "-", "/", " " };
-		final String compare = StringUtils.replaceAll(original, array, "");
+		final String compare = StringExtensions.replaceAll(original, array, "");
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
 	}
@@ -265,7 +265,7 @@ public class StringUtilsTest extends BaseTestCase
 		final String replace = "\"bla.fasel\"";
 		final String input = "Hickory Dickory Dock \"com.foo.bar\" mouse ran up the clock The \"com.foo.bar\" struck one The \"com.foo.bar\" ran down";
 		final String expected = "Hickory Dickory Dock \"bla.fasel\" mouse ran up the clock The \"bla.fasel\" struck one The \"bla.fasel\" ran down";
-		final String result = StringUtils.replaceEach(input, search, replace);
+		final String result = StringExtensions.replaceEach(input, search, replace);
 		AssertJUnit.assertTrue(expected.equals(result));
 	}
 

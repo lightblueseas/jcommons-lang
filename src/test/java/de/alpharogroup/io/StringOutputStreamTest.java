@@ -30,7 +30,7 @@ public class StringOutputStreamTest
 	public void testToString() throws IOException
 	{
 		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
-		final File writeInMe = new File(".", "testWriteBirthdayToFile.dat");
+		final File writeInMe = new File(".", "testWriteBirthdayToFile.log");
 		FileUtils.writeStringToFile(writeInMe, expected);
 		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
 		final StringOutputStream stringOutput = new StringOutputStream();
@@ -45,6 +45,7 @@ public class StringOutputStreamTest
 		final String actual = stringOutput.toString();
 		stringOutput.close();
 		AssertJUnit.assertTrue("", actual.startsWith(expected));
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 }

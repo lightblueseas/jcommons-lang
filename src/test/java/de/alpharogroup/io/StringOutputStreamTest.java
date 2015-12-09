@@ -45,14 +45,6 @@ public class StringOutputStreamTest
 		final String actual = stringOutput.toString();
 		stringOutput.close();
 		AssertJUnit.assertTrue("", actual.startsWith(expected));
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
 	}
 
 }

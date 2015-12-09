@@ -3,13 +3,10 @@ package de.alpharogroup.io;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
-
-import de.alpharogroup.date.CreateDateExtensions;
 
 /**
  * The class {@link StringOutputStreamTest} is the test class for the class {@link StringOutputStream}.

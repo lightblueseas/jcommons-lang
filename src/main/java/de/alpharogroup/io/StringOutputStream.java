@@ -24,13 +24,16 @@
  */
 package de.alpharogroup.io;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 
-import de.alpharogroup.string.StringExtensions;
+import lombok.Setter;
 
 /**
- * The Class StringOutputStream.
+ * The class {@link StringOutputStream}.
  */
 public class StringOutputStream extends OutputStream implements Serializable
 {
@@ -40,26 +43,21 @@ public class StringOutputStream extends OutputStream implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/** The string builder. */
-	private StringBuilder stringBuilder = null;
+	/** The buffer. */
+	private final ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
 
-	/**
-	 * Instantiates a new string output stream.
-	 */
-	public StringOutputStream()
-	{
-		super();
-		stringBuilder = new StringBuilder();
-	}
+	/** The charset. */
+	@Setter
+	private Charset charset;
+
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void close()
+	public void close() throws IOException
 	{
-		stringBuilder = null;
-
+		byteBuffer.close();
 	}
 
 	/**
@@ -68,35 +66,25 @@ public class StringOutputStream extends OutputStream implements Serializable
 	@Override
 	public String toString()
 	{
-		return stringBuilder.toString();
+		return new String(byteBuffer.toByteArray(), getCharset());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(final byte[] b)
+	public void write(final byte[] b) throws IOException
 	{
-		stringBuilder.append(StringExtensions.convertToCharArray(b));
+		byteBuffer.write(b);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(final byte[] b, int off, final int len)
+	public void write(final byte[] b, final int off, final int len)
 	{
-		if (off < 0 || len < 0 || off + len > b.length)
-		{
-			throw new IndexOutOfBoundsException("StringOutputStream.write: index out of bounds.");
-		}
-		final byte[] bytes = new byte[len];
-		for (int i = 0; i < len; i++)
-		{
-			bytes[i] = b[off];
-			off++;
-		}
-		stringBuilder.append(StringExtensions.convertToCharArray(bytes));
+		byteBuffer.write(b, off, len);
 	}
 
 	/**
@@ -105,6 +93,14 @@ public class StringOutputStream extends OutputStream implements Serializable
 	@Override
 	public void write(final int b)
 	{
-		stringBuilder.append((char)b);
+		byteBuffer.write(b);
+	}
+
+	public Charset getCharset()
+	{
+		if(charset == null) {
+			charset = Charset.forName("UTF-8");
+		}
+		return charset;
 	}
 }

@@ -29,19 +29,19 @@ public class StringOutputStreamTest
 	@Test
 	public void testToString() throws IOException
 	{
-		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
+		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
 		final File writeInMe = new File(".", "testWriteBirthdayToFile.dat");
-		FileUtils.writeStringToFile(writeInMe, birthdayFromLeonardo.toString());
+		FileUtils.writeStringToFile(writeInMe, expected);
 		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
 		final StringOutputStream stringOutput = new StringOutputStream();
 
 		final byte[] buffer = new byte[8192];
-		int readLen;
-		while ((readLen = inputStream.read(buffer, 0, buffer.length)) != -1)
+		int readLength;
+		while ((readLength = inputStream.read(buffer, 0, buffer.length)) != -1)
 		{
-			stringOutput.write(buffer, 0, readLen);
+			stringOutput.write(buffer, 0, readLength);
 		}
-		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
+
 		final String actual = stringOutput.toString();
 		stringOutput.close();
 		AssertJUnit.assertTrue("", actual.startsWith(expected));

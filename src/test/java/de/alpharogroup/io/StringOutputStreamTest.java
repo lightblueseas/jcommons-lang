@@ -17,16 +17,11 @@ import de.alpharogroup.date.CreateDateExtensions;
  * @version 1.0
  * @author Asterios Raptis
  */
-/**
- * The class {@link StringOutputStreamTest}.
- */
 public class StringOutputStreamTest
 {
-	/** The file. */
-	final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 
 	/**
-	 * Instantiates a new {@link testToString}.
+	 * Test method for {@link StringOutputStream#toString()}
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.

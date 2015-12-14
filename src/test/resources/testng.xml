@@ -11,6 +11,9 @@
 		<class name="de.alpharogroup.lang.AnnotationExtensionsTest"/>
 		<class name="de.alpharogroup.lang.ClassExtensionsTest"/>
 		<class name="de.alpharogroup.lang.MemoryExtensionsTest"/>
+		<class name="de.alpharogroup.lang.object.CopyObjectExtensionsTest"/>
+		<class name="de.alpharogroup.lang.object.CompareObjectExtensionsTest"/>
+		<class name="de.alpharogroup.lang.object.CloneObjectExtensionsTest"/>
 		<class name="de.alpharogroup.lang.ObjectExtensionsTest"/>
 		<class name="de.alpharogroup.lang.PackageExtensionsTest"/>
 		<class name="de.alpharogroup.lang.PropertiesExtensionsTest"/>

@@ -27,6 +27,8 @@ package de.alpharogroup.exception;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import de.alpharogroup.io.StreamExtensions;
 
 /**
@@ -114,6 +116,20 @@ public class ExceptionExtensions
 		}
 
 		return stacktrace;
+	}
+
+	/**
+	 * Prints the {@link Object#toString()} and if the given object is null a corresponding information.
+	 *
+	 * @param <T> the generic type
+	 * @param object the object
+	 * @return the string
+	 */
+	public static <T> String toString(final T object) {
+		if(object == null) {
+			return "Given object is null!!!";
+		}
+		return ReflectionToStringBuilder.toString(object);
 	}
 
 }

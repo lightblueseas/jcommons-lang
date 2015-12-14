@@ -10,8 +10,8 @@
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.8.0</version>
-	
+	<version>4.9.0</version>
+
 	<name>${project.artifactId}</name>
 
 	<description>
@@ -35,7 +35,7 @@
 		<system>github</system>
 		<url>https://github.com/lightblueseas/jcommons-lang/issues</url>
 	</issueManagement>
-	
+
 
 	<properties>
 		<silly-collections.version>4.8.0</silly-collections.version>

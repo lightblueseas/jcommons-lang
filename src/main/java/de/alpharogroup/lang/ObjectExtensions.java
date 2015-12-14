@@ -25,22 +25,18 @@
 package de.alpharogroup.lang;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
 
 import de.alpharogroup.io.ChangedAttributeResult;
-import de.alpharogroup.io.SerializedObjectExtensions;
-import de.alpharogroup.reflection.ReflectionExtensions;
+import de.alpharogroup.lang.object.CloneObjectExtensions;
+import de.alpharogroup.lang.object.CompareObjectExtensions;
+import de.alpharogroup.lang.object.CopyObjectExtensions;
 
 /**
  * The Class ObjectExtensions provides methods to clone, copy and compare objects. It also provides
@@ -48,9 +44,6 @@ import de.alpharogroup.reflection.ReflectionExtensions;
  */
 public final class ObjectExtensions
 {
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ObjectExtensions.class.getName());
 
 	/**
 	 * Try to clone the given generic object.
@@ -60,11 +53,13 @@ public final class ObjectExtensions
 	 * @param object
 	 *            the object to clone
 	 * @return The cloned object or null if the clone process failed.
+	 *
+	 * @deprecated use instead {@link CloneObjectExtensions#clone(Object)}
 	 */
-	@SuppressWarnings("unchecked")
+	@Deprecated
 	public static <T> T clone(final T object)
 	{
-		return (T)cloneObjectQuietly(object);
+		return CloneObjectExtensions.clone(object);
 	}
 
 
@@ -90,62 +85,14 @@ public final class ObjectExtensions
 	 *             the instantiation exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @deprecated use instead {@link CloneObjectExtensions#cloneObject(Object)}
 	 */
+	@Deprecated
 	public static Object cloneObject(final Object object) throws NoSuchMethodException,
 		SecurityException, IllegalAccessException, IllegalArgumentException,
 		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
 	{
-		Object clone = null;
-		// Try to clone the object if it implements Serializable.
-		if (object instanceof Serializable)
-		{
-			clone = SerializedObjectExtensions.copySerializedObject((Serializable)object);
-			if (clone != null)
-			{
-				return clone;
-			}
-		}
-		// Try to clone the object if it is Cloneble.
-		if (clone == null && object instanceof Cloneable)
-		{
-
-			if (object.getClass().isArray())
-			{
-				final Class<?> componentType = object.getClass().getComponentType();
-				if (componentType.isPrimitive())
-				{
-					int length = Array.getLength(object);
-					clone = Array.newInstance(componentType, length);
-					while (length-- > 0)
-					{
-						Array.set(clone, length, Array.get(object, length));
-					}
-				}
-				else
-				{
-					clone = ((Object[])object).clone();
-				}
-				if (clone != null)
-				{
-					return clone;
-				}
-			}
-			final Class<?> clazz = object.getClass();
-			final Method cloneMethod = clazz.getMethod("clone", (Class[])null);
-			clone = cloneMethod.invoke(object, (Object[])null);
-			if (clone != null)
-			{
-				return clone;
-			}
-		}
-		// Try to clone the object by copying all his properties with
-		// the BeanUtils.copyProperties() method.
-		if (clone == null)
-		{
-			clone = ReflectionExtensions.getNewInstance(object);
-			BeanUtils.copyProperties(clone, object);
-		}
-		return clone;
+		return CloneObjectExtensions.cloneObject(object);
 	}
 
 	/**
@@ -154,60 +101,12 @@ public final class ObjectExtensions
 	 * @param object
 	 *            The object to clone.
 	 * @return The cloned object or null if the clone process failed.
+	 * @deprecated use instead {@link CloneObjectExtensions#cloneObjectQuietly(Object)}
 	 */
+	@Deprecated
 	public static Object cloneObjectQuietly(final Object object)
 	{
-		Object clone = null;
-		try
-		{
-			clone = cloneObject(object);
-		}
-		catch (final NoSuchMethodException e)
-		{
-			logger.error("Try to clone the object with " + "reflection and call the clone method. "
-				+ "Thrown exception: NoSuchMethodException", e);
-		}
-		catch (final SecurityException e)
-		{
-			logger.error("Try to clone the object with " + "reflection and call the clone method. "
-				+ "Thrown exception: SecurityException", e);
-		}
-		catch (final IllegalAccessException e)
-		{
-			logger.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of IllegalAccessException. Could not found from ReflectionUtils.", e);
-		}
-		catch (final IllegalArgumentException e)
-		{
-			logger.error("Try to clone the object with " + "reflection and call the clone method. "
-				+ "Thrown exception: IllegalArgumentException", e);
-		}
-		catch (final InvocationTargetException e)
-		{
-			logger.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of InvocationTargetException. Could not found from ReflectionUtils.", e);
-		}
-		catch (final ClassNotFoundException e)
-		{
-			logger.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of ClassNotFoundException. Could not found from ReflectionUtils.", e);
-		}
-		catch (final InstantiationException e)
-		{
-			logger.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of InstantiationException. Could not found from ReflectionUtils.", e);
-		}
-		catch (final IOException e)
-		{
-			logger.error("Try to clone the object with "
-				+ "SerializedObjectUtils.copySerializedObject((Serializable)object) "
-				+ "cause of IOException.", e);
-		}
-		return clone;
+		return CloneObjectExtensions.cloneObjectQuietly(object);
 	}
 
 	/**
@@ -224,28 +123,13 @@ public final class ObjectExtensions
 	 *             the invocation target exception
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
+	 * @deprecated use instead {@link CompareObjectExtensions#compare(Object, Object)}
 	 */
-	@SuppressWarnings("rawtypes")
+	@Deprecated
 	public static boolean compare(final Object sourceOjbect, final Object objectToCompare)
 		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
-		if (sourceOjbect == null || objectToCompare == null
-			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
-		{
-			throw new IllegalArgumentException("Object should not be null and be the same type.");
-		}
-		final Map beanDescription = BeanUtils.describe(sourceOjbect);
-		beanDescription.remove("class");
-		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
-		clonedBeanDescription.remove("class");
-		for (final Object key : beanDescription.keySet())
-		{
-			if (compareTo(sourceOjbect, objectToCompare, key.toString()) != 0)
-			{
-				return false;
-			}
-		}
-		return true;
+		return CompareObjectExtensions.compare(sourceOjbect, objectToCompare);
 	}
 
 	/**
@@ -264,31 +148,14 @@ public final class ObjectExtensions
 	 *             the invocation target exception
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
+	 * @deprecated use instead {@link CompareObjectExtensions#compareTo(Object, Object, String)}
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Deprecated
 	public static int compareTo(final Object sourceOjbect, final Object objectToCompare,
 		final String property) throws IllegalAccessException, InvocationTargetException,
 		NoSuchMethodException
 	{
-		final Map<?, ?> beanDescription = BeanUtils.describe(sourceOjbect);
-		beanDescription.remove("class");
-		final Map<?, ?> clonedBeanDescription = BeanUtils.describe(objectToCompare);
-		clonedBeanDescription.remove("class");
-		final Object sourceAttribute = beanDescription.get(property);
-		final Object changedAttribute = clonedBeanDescription.get(property);
-		if (sourceAttribute == null && changedAttribute == null)
-		{
-			return 0;
-		}
-		if (sourceAttribute != null && changedAttribute == null)
-		{
-			return 1;
-		}
-		else if (sourceAttribute == null && changedAttribute != null)
-		{
-			return -1;
-		}
-		return new BeanComparator(property).compare(sourceOjbect, objectToCompare);
+		return CompareObjectExtensions.compareTo(sourceOjbect, objectToCompare, property);
 	}
 
 	/**
@@ -301,48 +168,13 @@ public final class ObjectExtensions
 	 * @param property
 	 *            the property
 	 * @return the int
+	 * @deprecated use instead {@link CompareObjectExtensions#compareToQuietly(Object, Object, String)}
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Deprecated
 	public static int compareToQuietly(final Object sourceOjbect, final Object objectToCompare,
 		final String property)
 	{
-		Map<?, ?> beanDescription = null;
-		try
-		{
-			beanDescription = BeanUtils.describe(sourceOjbect);
-		}
-		catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
-		{
-			logger.error("BeanUtils.describe(sourceOjbect) throws an exception...", e);
-			return 0;
-		}
-		beanDescription.remove("class");
-		Map<?, ?> clonedBeanDescription = null;
-		try
-		{
-			clonedBeanDescription = BeanUtils.describe(objectToCompare);
-		}
-		catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
-		{
-			logger.error("BeanUtils.describe(objectToCompare) throws an exception...", e);
-			return 0;
-		}
-		clonedBeanDescription.remove("class");
-		final Object sourceAttribute = beanDescription.get(property);
-		final Object changedAttribute = clonedBeanDescription.get(property);
-		if (sourceAttribute == null && changedAttribute == null)
-		{
-			return 0;
-		}
-		if (sourceAttribute != null && changedAttribute == null)
-		{
-			return 1;
-		}
-		else if (sourceAttribute == null && changedAttribute != null)
-		{
-			return -1;
-		}
-		return new BeanComparator(property).compare(sourceOjbect, objectToCompare);
+		return CompareObjectExtensions.compareToQuietly(sourceOjbect, objectToCompare, property);
 	}
 
 	/**
@@ -360,11 +192,13 @@ public final class ObjectExtensions
 	 *             the illegal access exception
 	 * @throws InvocationTargetException
 	 *             the invocation target exception
+	 * @deprecated use instead {@link CopyObjectExtensions#copy(Object, Object)}
 	 */
+	@Deprecated
 	public static final <DESTINATION, ORIGINAL> void copy(final DESTINATION destination,
 		final ORIGINAL original) throws IllegalAccessException, InvocationTargetException
 	{
-		BeanUtils.copyProperties(destination, original);
+		CopyObjectExtensions.copy(original, destination);
 	}
 
 	/**
@@ -379,23 +213,13 @@ public final class ObjectExtensions
 	 * @param original
 	 *            the original object.
 	 * @return the destination object.
+	 * @deprecated use instead {@link CopyObjectExtensions#copyQuietly(Object, Object)}
 	 */
+	@Deprecated
 	public static final <DESTINATION, ORIGINAL> DESTINATION copyQuietly(
 		final DESTINATION destination, final ORIGINAL original)
 	{
-		try
-		{
-			copy(destination, original);
-		}
-		catch (final IllegalAccessException e)
-		{
-			return null;
-		}
-		catch (final InvocationTargetException e)
-		{
-			return null;
-		}
-		return destination;
+		return CopyObjectExtensions.copyQuietly(original, destination);
 	}
 
 	/**
@@ -533,11 +357,13 @@ public final class ObjectExtensions
 	 * @param original
 	 *            the original object.
 	 * @return true, if is copyable otherwise false.
+	 * @deprecated use instead {@link CopyObjectExtensions#isCopyable(Object, Object)}
 	 */
+	@Deprecated
 	public static final <DESTINATION, ORIGINAL> boolean isCopyable(final DESTINATION destination,
 		final ORIGINAL original)
 	{
-		return copyQuietly(destination, original) != null;
+		return CopyObjectExtensions.isCopyable(original, destination);
 	}
 
 	/**
@@ -545,7 +371,6 @@ public final class ObjectExtensions
 	 */
 	private ObjectExtensions()
 	{
-		super();
 	}
 
 }

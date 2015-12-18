@@ -45,12 +45,12 @@ public class ImportResourcesExtensions
 	 * given package Name. The search is made recursive. The key from an entry of the map is the
 	 * class where the ImportResource objects found and the value is an Array of the ImportResource
 	 * objects that contains in the class.
-	 * 
+	 *
 	 * @param packageName
 	 *            the package name
 	 * @return the import resources
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */

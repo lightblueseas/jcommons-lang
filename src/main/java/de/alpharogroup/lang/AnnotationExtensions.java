@@ -240,7 +240,7 @@ public final class AnnotationExtensions
 	 *            the annotation class
 	 * @return the list
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	public static Set<Class<?>> scanForAnnotatedClasses(final File directory,
 		final String packagePath, final Class<? extends Annotation> annotationClass)

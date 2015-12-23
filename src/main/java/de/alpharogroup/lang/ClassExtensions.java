@@ -66,7 +66,6 @@ public final class ClassExtensions
 	 */
 	public static Class<?> forName(final String className) throws ClassNotFoundException
 	{
-		final ClassLoader classLoader = getClassLoader();
 		Class<?> clazz = null;
 		try
 		{
@@ -74,7 +73,10 @@ public final class ClassExtensions
 		}
 		catch (final Throwable throwable)
 		{
-			clazz = Class.forName(className, true, classLoader);
+			clazz = Class.forName(className, true, getClassLoader());
+			if(clazz == null) {
+				throw throwable;
+			}
 		}
 		return clazz;
 	}
@@ -256,7 +258,7 @@ public final class ClassExtensions
 			{
 				jarPath = classUrlString.replace("!"+path, "");
 				if(jarPath.startsWith(jarPathFilePrefix)) {
-					int beginIndex = jarPathFilePrefix.length();
+					final int beginIndex = jarPathFilePrefix.length();
 					jarPath = jarPath.substring(beginIndex, jarPath.length());
 				}
 			}
@@ -367,7 +369,7 @@ public final class ClassExtensions
 		}
 		return url;
 	}
-	
+
 	/**
 	 * Gives the url from the path back.
 	 *

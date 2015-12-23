@@ -269,9 +269,8 @@ public final class AnnotationExtensions
 				qualifiedClassname = packagePath + '.' + filename;
 				Class<?> foundClass = null;
 				try
-				{
-					foundClass = Class.forName(qualifiedClassname);
-					if (null != annotationClass)
+				{   foundClass = ClassExtensions.forName(qualifiedClassname);
+					if (annotationClass != null)
 					{
 						if (foundClass.isAnnotationPresent(annotationClass))
 						{
@@ -288,7 +287,7 @@ public final class AnnotationExtensions
 				{
 					foundClass = Class.forName(qualifiedClassname, false,
 						ClassExtensions.getClassLoader());
-					if (null != annotationClass)
+					if (annotationClass != null)
 					{
 						if (foundClass.isAnnotationPresent(annotationClass))
 						{

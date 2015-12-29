@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
 /**
  * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql or postgresql
  * databases.
- * 
+ *
  * @author Asterios Raptis
  */
 public final class ConnectionsExtensions
@@ -71,7 +71,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Drops the given PostgreSQL database with the given databaseName if it does exist.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -81,9 +81,9 @@ public final class ConnectionsExtensions
 	 * @param dbpasswort
 	 *            the dbpasswort
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located
 	 */
 	public static void dropPostgreSQLDatabase(final String hostname, final String databaseName,
 		final String dbuser, final String dbpasswort) throws SQLException, ClassNotFoundException
@@ -122,7 +122,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Execute the sql script in the given BufferedReader from a file.
-	 * 
+	 *
 	 * @param bufferedReader
 	 *            a BufferedReader from a script file.
 	 * @param connection
@@ -130,7 +130,7 @@ public final class ConnectionsExtensions
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static void executeSqlScript(final BufferedReader bufferedReader,
 		final Connection connection) throws IOException, SQLException
@@ -140,7 +140,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Execute the sql script in the given BufferedReader from a file.
-	 * 
+	 *
 	 * @param bufferedReader
 	 *            a BufferedReader from a script file.
 	 * @param connection
@@ -150,7 +150,7 @@ public final class ConnectionsExtensions
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static void executeSqlScript(final BufferedReader bufferedReader,
 		final Connection connection, final boolean log) throws IOException, SQLException
@@ -168,13 +168,13 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Execute the sql script given as String object.
-	 * 
+	 *
 	 * @param sqlScript
 	 *            The sql script as String object.
 	 * @param connection
 	 *            the connection
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static void executeSqlScript(final Connection connection, final String sqlScript)
 		throws SQLException
@@ -184,7 +184,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Execute the sql script given as String object.
-	 * 
+	 *
 	 * @param sqlScript
 	 *            The sql script as String object.
 	 * @param connection
@@ -192,7 +192,7 @@ public final class ConnectionsExtensions
 	 * @param log
 	 *            the flag if it will be logged.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static void executeSqlScript(final Connection connection, final String sqlScript,
 		final boolean log) throws SQLException
@@ -226,7 +226,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Checks if the given database exists in the MySqlDatabase.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -237,9 +237,9 @@ public final class ConnectionsExtensions
 	 *            the dbpasswort
 	 * @return true, if successful
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 */
 	public static boolean existsMySqlDatabase(final String hostname, final String databaseName,
 		final String dbuser, final String dbpasswort) throws SQLException, ClassNotFoundException
@@ -268,7 +268,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Checks if the given database exists in the Postgresql Database.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -279,9 +279,9 @@ public final class ConnectionsExtensions
 	 *            the dbpasswort
 	 * @return true, if successful
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static boolean existsPostgreSQLDatabase(final String hostname,
 		final String databaseName, final String dbuser, final String dbpasswort)
@@ -309,7 +309,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Gets the my sql connection.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param portNumber
@@ -322,9 +322,9 @@ public final class ConnectionsExtensions
 	 *            the dbpasswort
 	 * @return the my sql connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static Connection getMySQLConnection(final String hostname, final int portNumber,
 		final String databaseName, final String dbuser, final String dbpasswort)
@@ -337,7 +337,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Gets the my sql connection.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -348,9 +348,9 @@ public final class ConnectionsExtensions
 	 *            the dbpasswort
 	 * @return the my sql connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static Connection getMySQLConnection(final String hostname, final String databaseName,
 		final String dbuser, final String dbpasswort) throws ClassNotFoundException, SQLException
@@ -360,7 +360,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Gets the postgre sql connection.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -371,9 +371,9 @@ public final class ConnectionsExtensions
 	 *            the dbpasswort
 	 * @return the postgre sql connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static Connection getPostgreSQLConnection(final String hostname,
 		final String databaseName, final String dbuser, final String dbpasswort)
@@ -384,7 +384,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Gets the postgres sql connection from the given parameters.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param portNumber
@@ -397,9 +397,9 @@ public final class ConnectionsExtensions
 	 *            the dbpasswort
 	 * @return the postgres sql connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 */
 	public static Connection getPostgresSQLConnection(final String hostname, final int portNumber,
 		final String databaseName, final String dbuser, final String dbpasswort)
@@ -419,7 +419,7 @@ public final class ConnectionsExtensions
 	/**
 	 * Creates a database with the given databaseName (and sets the characterset to utf8 and the
 	 * collate to utf8_general_ci) if it does not exist.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -429,9 +429,9 @@ public final class ConnectionsExtensions
 	 * @param dbpasswort
 	 *            the dbpasswort
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 */
 	public static void newMySqlDatabase(final String hostname, final String databaseName,
 		final String dbuser, final String dbpasswort) throws SQLException, ClassNotFoundException
@@ -441,7 +441,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Creates the a mySql database with the given databaseName if it does not exist.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -455,9 +455,9 @@ public final class ConnectionsExtensions
 	 * @param collate
 	 *            the collate
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 */
 	public static void newMySqlDatabase(final String hostname, final String databaseName,
 		final String dbuser, final String dbpasswort, final String characterSet,
@@ -479,7 +479,7 @@ public final class ConnectionsExtensions
 
 	/**
 	 * Creates the a PostgreSQL database with the given databaseName if it does not exist.
-	 * 
+	 *
 	 * @param hostname
 	 *            the hostname
 	 * @param databaseName
@@ -493,9 +493,9 @@ public final class ConnectionsExtensions
 	 * @param collate
 	 *            the collate
 	 * @throws SQLException
-	 *             the sQL exception
+	 *             is thrown if a database access error occurs or this method is called on a closed connection
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             is thrown if the Class was not found or could not be located.
 	 */
 	public static void newPostgreSQLDatabase(final String hostname, final String databaseName,
 		final String dbuser, final String dbpasswort, final String characterSet,

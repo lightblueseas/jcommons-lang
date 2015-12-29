@@ -62,7 +62,7 @@ public final class ClassExtensions
 	 *            The class name to load
 	 * @return the class
 	 * @throws ClassNotFoundException
-	 *             if the Class was not found.
+	 *             is thrown if the Class was not found or could not be located.
 	 */
 	public static Class<?> forName(final String className) throws ClassNotFoundException
 	{

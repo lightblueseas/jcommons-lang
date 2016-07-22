@@ -28,8 +28,11 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Proxy;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import de.alpharogroup.file.FilenameExtensions;
@@ -42,6 +45,14 @@ import de.alpharogroup.file.filter.ClassFileFilter;
  */
 public final class AnnotationExtensions
 {
+
+	/**
+	 * Private constructor.
+	 */
+	private AnnotationExtensions()
+	{
+		super();
+	}
 
 	/**
 	 * Gets all annotated classes that belongs from the given package path and the given annotation
@@ -58,10 +69,11 @@ public final class AnnotationExtensions
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public static Set<Class<?>> getAllAnnotatedClasses(final String packagePath,
-		final Class<? extends Annotation> annotationClass) throws ClassNotFoundException,
-		IOException
+		final Class<? extends Annotation> annotationClass)
+		throws ClassNotFoundException, IOException
 	{
-		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath, true);
+		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath,
+			true);
 		final Set<Class<?>> classes = new HashSet<>();
 		for (final File directory : directories)
 		{
@@ -85,10 +97,11 @@ public final class AnnotationExtensions
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public static Set<Class<?>> getAllAnnotatedClassesFromSet(final String packagePath,
-		final Set<Class<? extends Annotation>> annotationClasses) throws ClassNotFoundException,
-		IOException
+		final Set<Class<? extends Annotation>> annotationClasses)
+		throws ClassNotFoundException, IOException
 	{
-		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath, true);
+		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath,
+			true);
 		final Set<Class<?>> classes = new HashSet<>();
 		for (final File directory : directories)
 		{
@@ -131,8 +144,8 @@ public final class AnnotationExtensions
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath,
-		final Set<Class<? extends Annotation>> annotationClasses) throws ClassNotFoundException,
-		IOException
+		final Set<Class<? extends Annotation>> annotationClasses)
+		throws ClassNotFoundException, IOException
 	{
 		return getAllAnnotatedClassesFromSet(packagePath, annotationClasses);
 	}
@@ -260,8 +273,8 @@ public final class AnnotationExtensions
 			if (file.isDirectory())
 			{
 				qualifiedClassname = packagePath + "." + file.getName();
-				foundClasses.addAll(scanForAnnotatedClasses(file, qualifiedClassname,
-					annotationClass));
+				foundClasses
+					.addAll(scanForAnnotatedClasses(file, qualifiedClassname, annotationClass));
 			}
 			else
 			{
@@ -269,7 +282,8 @@ public final class AnnotationExtensions
 				qualifiedClassname = packagePath + '.' + filename;
 				Class<?> foundClass = null;
 				try
-				{   foundClass = ClassExtensions.forName(qualifiedClassname);
+				{
+					foundClass = ClassExtensions.forName(qualifiedClassname);
 					if (annotationClass != null)
 					{
 						if (foundClass.isAnnotationPresent(annotationClass))
@@ -336,8 +350,8 @@ public final class AnnotationExtensions
 			if (file.isDirectory())
 			{
 				qualifiedClassname = packagePath + "." + file.getName();
-				foundClasses.addAll(scanForAnnotatedClassesFromSet(file, qualifiedClassname,
-					annotationClasses));
+				foundClasses.addAll(
+					scanForAnnotatedClassesFromSet(file, qualifiedClassname, annotationClasses));
 			}
 			else
 			{
@@ -404,10 +418,40 @@ public final class AnnotationExtensions
 	}
 
 	/**
-	 * Private constructor.
+	 * Sets the annotation value for the given key of the given annotation to the given new value at
+	 * runtime.
+	 *
+	 * @param annotation
+	 *            the annotation
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value to set
+	 * @return the old value or default value if not set
+	 * @throws NoSuchFieldException
+	 *             the no such field exception
+	 * @throws SecurityException
+	 *             the security exception
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
 	 */
-	private AnnotationExtensions()
+	@SuppressWarnings("unchecked")
+	public static Object setAnnotationValue(final Annotation annotation, final String key,
+		final Object value) throws NoSuchFieldException, SecurityException,
+		IllegalArgumentException, IllegalAccessException
 	{
-		super();
+		final Object invocationHandler = Proxy.getInvocationHandler(annotation);
+		final Field field = invocationHandler.getClass().getDeclaredField("memberValues");
+		field.setAccessible(true);
+		final Map<String, Object> memberValues = (Map<String, Object>)field.get(invocationHandler);
+		final Object oldValue = memberValues.get(key);
+		if (oldValue == null || oldValue.getClass() != value.getClass())
+		{
+			throw new IllegalArgumentException();
+		}
+		memberValues.put(key, value);
+		return oldValue;
 	}
 }

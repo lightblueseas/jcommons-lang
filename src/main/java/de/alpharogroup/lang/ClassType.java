@@ -1,0 +1,16 @@
+
+package de.alpharogroup.lang;
+
+public enum ClassType {
+ANNOTATION,
+ANONYMOUS,
+ARRAY,
+COLLECTION,
+ENUM,
+INTERFACE,
+LOCAL,
+MAP,
+MEMBER,
+PRIMITIVE,
+SYNTHETIC;
+}

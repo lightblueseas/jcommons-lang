@@ -8,9 +8,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import lombok.experimental.ExtensionMethod;
@@ -582,6 +584,18 @@ public final class ClassExtensions
 	{
 		return ClassExtensions.getResource(ClassExtensions.getPath(clazz));
 	}
+	
+	/**
+	 * Checks if the given class is assignable from {@link Collection}.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return true, if the given class is assignable from {@link Collection} otherwise false.
+	 */
+	public static boolean isCollection(Class<?> clazz)
+	{
+		return Collection.class.isAssignableFrom(clazz);
+	}
 
 
 	/**
@@ -617,6 +631,18 @@ public final class ClassExtensions
 			}
 		}
 		return false;
+	}
+		
+	/**
+	 * Checks if the given class is assignable from {@link Map}.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return true, if the given class is assignable from {@link Map} otherwise false.
+	 */
+	public static boolean isMap(Class<?> clazz)
+	{
+		return Map.class.isAssignableFrom(clazz);
 	}
 
 	/**

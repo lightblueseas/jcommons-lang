@@ -117,9 +117,7 @@ public final class CompareObjectExtensions
 		NoSuchMethodException
 	{
 		final Map<?, ?> beanDescription = BeanUtils.describe(sourceOjbect);
-		beanDescription.remove("class");
 		final Map<?, ?> clonedBeanDescription = BeanUtils.describe(objectToCompare);
-		clonedBeanDescription.remove("class");
 		final Object sourceAttribute = beanDescription.get(property);
 		final Object changedAttribute = clonedBeanDescription.get(property);
 		if (sourceAttribute == null && changedAttribute == null)
@@ -162,7 +160,6 @@ public final class CompareObjectExtensions
 			LOG.error("BeanUtils.describe(sourceOjbect) throws an exception...", e);
 			return 0;
 		}
-		beanDescription.remove("class");
 		Map<?, ?> clonedBeanDescription = null;
 		try
 		{
@@ -173,7 +170,6 @@ public final class CompareObjectExtensions
 			LOG.error("BeanUtils.describe(objectToCompare) throws an exception...", e);
 			return 0;
 		}
-		clonedBeanDescription.remove("class");
 		final Object sourceAttribute = beanDescription.get(property);
 		final Object changedAttribute = clonedBeanDescription.get(property);
 		if (sourceAttribute == null && changedAttribute == null)

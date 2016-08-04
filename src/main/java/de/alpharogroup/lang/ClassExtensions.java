@@ -187,6 +187,51 @@ public final class ClassExtensions
 	}
 
 	/**
+	 * Gets the {@link ClassType} from the given class.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return the {@link ClassType} from the given class.
+	 */
+	public static ClassType getClassType(Class<?> clazz)
+	{
+		if(clazz.isAnnotation()) {
+			return ClassType.ANNOTATION;
+		}
+		if(clazz.isAnonymousClass()) {
+			return ClassType.ANONYMOUS;
+		}
+		if(clazz.isArray()) {
+			return ClassType.ARRAY;
+		}
+		if(isCollection(clazz)) {
+			return ClassType.COLLECTION;
+		}
+		if(clazz.isEnum()) {
+			return ClassType.ENUM;
+		}
+		if(clazz.isInterface()) {
+			return ClassType.INTERFACE;
+		}
+		if(clazz.isLocalClass()) {
+			return ClassType.LOCAL;
+		}
+		if(isMap(clazz)) {
+			return ClassType.MAP;
+		}
+		if(clazz.isMemberClass()) {
+			return ClassType.MEMBER;
+		}
+		if(clazz.isPrimitive()) {
+			return ClassType.PRIMITIVE;
+		}
+		if(clazz.isSynthetic()) {
+			return ClassType.SYNTHETIC;
+		}
+		return ClassType.DEFAULT;
+	}
+	
+	/**
 	 * Gets the directories from the given path.
 	 *
 	 * @param path

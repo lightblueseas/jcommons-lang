@@ -14,5 +14,6 @@ public enum ClassType {
   MAP,
   MEMBER,
   PRIMITIVE,
-  SYNTHETIC;
+  SYNTHETIC,
+  DEFAULT;
 }

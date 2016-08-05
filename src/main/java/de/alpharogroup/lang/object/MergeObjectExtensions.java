@@ -24,12 +24,12 @@ public final class MergeObjectExtensions
 	 * Merge the given to object with the given 'with' object.
 	 *
 	 * @param <TO>
-	 *            the generic type
+	 *            the generic type of the object to merge in
 	 * @param <WITH>
-	 *            the generic type
-	 * @param to
+	 *            the generic type of the object to merge with
+	 * @param toObject
 	 *            the object to merge in
-	 * @param with
+	 * @param withObject
 	 *            the object to merge with
 	 * @throws InvocationTargetException
 	 *             if the property accessor method throws an exception
@@ -55,6 +55,10 @@ public final class MergeObjectExtensions
 	/**
 	 * Merge the given property to the given 'to' object with the given 'with' object.
 	 *
+	 * @param <TO>
+	 *            the generic type of the object to merge in
+	 * @param <WITH>
+	 *            the generic type of the object to merge with
 	 * @param toObject
 	 *            the object to merge in
 	 * @param withObject

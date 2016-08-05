@@ -152,8 +152,8 @@ public final class ObjectExtensions
 	 */
 	@Deprecated
 	public static int compareTo(final Object sourceOjbect, final Object objectToCompare,
-		final String property) throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+		final String property)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		return CompareObjectExtensions.compareTo(sourceOjbect, objectToCompare, property);
 	}
@@ -168,7 +168,8 @@ public final class ObjectExtensions
 	 * @param property
 	 *            the property
 	 * @return the int
-	 * @deprecated use instead {@link CompareObjectExtensions#compareToQuietly(Object, Object, String)}
+	 * @deprecated use instead
+	 *             {@link CompareObjectExtensions#compareToQuietly(Object, Object, String)}
 	 */
 	@Deprecated
 	public static int compareToQuietly(final Object sourceOjbect, final Object objectToCompare,
@@ -239,8 +240,8 @@ public final class ObjectExtensions
 	 */
 	@SuppressWarnings("rawtypes")
 	public static List<ChangedAttributeResult> getChangedData(final Object sourceOjbect,
-		final Object objectToCompare) throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		if (sourceOjbect == null || objectToCompare == null
 			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
@@ -251,7 +252,7 @@ public final class ObjectExtensions
 		beanDescription.remove("class");
 		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
 		clonedBeanDescription.remove("class");
-		final List<ChangedAttributeResult> changedData = new ArrayList<ChangedAttributeResult>();
+		final List<ChangedAttributeResult> changedData = new ArrayList<>();
 		for (final Object key : beanDescription.keySet())
 		{
 			if (compareTo(sourceOjbect, objectToCompare, key.toString()) != 0)
@@ -281,8 +282,8 @@ public final class ObjectExtensions
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Map<Object, ChangedAttributeResult> getChangedDataMap(final Object sourceOjbect,
-		final Object objectToCompare) throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		if (sourceOjbect == null || objectToCompare == null
 			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
@@ -293,15 +294,15 @@ public final class ObjectExtensions
 		beanDescription.remove("class");
 		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
 		clonedBeanDescription.remove("class");
-		final Map<Object, ChangedAttributeResult> changedData = new HashMap<Object, ChangedAttributeResult>();
+		final Map<Object, ChangedAttributeResult> changedData = new HashMap<>();
 		for (final Object key : beanDescription.keySet())
 		{
 			final Object sourceAttribute = beanDescription.get(key);
 			final Object changedAttribute = clonedBeanDescription.get(key);
 			if (compareTo(sourceOjbect, objectToCompare, key.toString()) != 0)
 			{
-				changedData.put(key, new ChangedAttributeResult(key, sourceAttribute,
-					changedAttribute));
+				changedData.put(key,
+					new ChangedAttributeResult(key, sourceAttribute, changedAttribute));
 			}
 		}
 		return changedData;
@@ -324,8 +325,8 @@ public final class ObjectExtensions
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Map<String, Integer> getCompareToResult(final Object sourceOjbect,
-		final Object objectToCompare) throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		if (sourceOjbect == null || objectToCompare == null
 			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
@@ -336,7 +337,7 @@ public final class ObjectExtensions
 		beanDescription.remove("class");
 		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
 		clonedBeanDescription.remove("class");
-		final Map<String, Integer> compareResult = new HashMap<String, Integer>();
+		final Map<String, Integer> compareResult = new HashMap<>();
 		for (final Object key : beanDescription.keySet())
 		{
 			compareResult.put(key.toString(),
@@ -364,6 +365,44 @@ public final class ObjectExtensions
 		final ORIGINAL original)
 	{
 		return CopyObjectExtensions.isCopyable(original, destination);
+	}
+
+	/**
+	 * Checks if the given object has the default value.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
+	 * @return true, if is default value
+	 */
+	public static final <T> boolean isDefaultValue(final T object)
+	{
+		if (object == null)
+		{
+			return true;
+		}
+		final Class<?> fooFieldClass = object.getClass();
+		final ClassType classType = ClassExtensions.getClassType(fooFieldClass);
+		if (ClassType.PRIMITIVE.equals(classType))
+		{
+			return DefaultValue.getDefaultValue(fooFieldClass).equals(object);
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the given object has not the default value.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
+	 * @return true, if the given object has not the default value
+	 */
+	public static final <T> boolean isNotDefaultValue(final T object)
+	{
+		return !isDefaultValue(object);
 	}
 
 	/**

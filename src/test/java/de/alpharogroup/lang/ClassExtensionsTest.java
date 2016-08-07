@@ -41,6 +41,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.classes.inner.OuterClass;
+import de.alpharogroup.runtime.compiler.JavaSourceCompiler;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.PremiumMember;
 import de.alpharogroup.test.objects.TestAnnotation;
@@ -100,9 +101,12 @@ public class ClassExtensionsTest
 
 	/**
 	 * Test method for {@link de.alpharogroup.lang.ClassExtensions#getClassType(Class)}.
+	 *
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
 	@Test(enabled = true)
-	public void testGetClassType()
+	public void testGetClassType() throws InstantiationException, IllegalAccessException
 	{
 		ClassType actual = ClassExtensions.getClassType(OuterClass.class);
 		ClassType expected = ClassType.DEFAULT;
@@ -155,6 +159,13 @@ public class ClassExtensionsTest
 		expected = ClassType.PRIMITIVE;
 		AssertJUnit.assertEquals(expected, actual);
 
+		final JavaSourceCompiler<Runnable> runtimeCompiler = new JavaSourceCompiler<>();
+		final String source = "public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar\"); } } ";
+		final Class<Runnable> clazz = runtimeCompiler.compile(null, "FooRunnable", source);
+
+		actual = ClassExtensions.getClassType(clazz);
+		expected = ClassType.DEFAULT;
+		AssertJUnit.assertEquals(expected, actual);
 	}
 
 	/**
@@ -167,8 +178,8 @@ public class ClassExtensionsTest
 	{
 		final String expected = "ClassExtensionsTest.class";
 		final String classname = ClassExtensions.getClassnameWithSuffix(this);
-		result = expected.equals(classname);
-		AssertJUnit.assertTrue("", result);
+		this.result = expected.equals(classname);
+		AssertJUnit.assertTrue("", this.result);
 	}
 
 	@Test
@@ -220,8 +231,8 @@ public class ClassExtensionsTest
 	{
 		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 		final URL url = ClassExtensions.getResource(propertiesFilename);
-		result = url != null;
-		AssertJUnit.assertTrue("", result);
+		this.result = url != null;
+		AssertJUnit.assertTrue("", this.result);
 
 	}
 
@@ -231,8 +242,8 @@ public class ClassExtensionsTest
 		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 
 		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
-		result = file != null;
-		AssertJUnit.assertTrue("File should not be null", result);
+		this.result = file != null;
+		AssertJUnit.assertTrue("File should not be null", this.result);
 		AssertJUnit.assertTrue("File should exist.", file.exists());
 	}
 
@@ -250,11 +261,11 @@ public class ClassExtensionsTest
 		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 
 		final InputStream is = ClassExtensions.getResourceAsStream(propertiesFilename);
-		result = is != null;
-		AssertJUnit.assertTrue("", result);
+		this.result = is != null;
+		AssertJUnit.assertTrue("", this.result);
 		final Properties prop = new Properties();
 		prop.load(is);
-		result = prop.size() == 3;
+		this.result = prop.size() == 3;
 	}
 
 	@Test
@@ -272,8 +283,8 @@ public class ClassExtensionsTest
 		final ClassExtensionsTest obj = new ClassExtensionsTest();
 		final URL url = ClassExtensions.getResource(propertiesFilename, obj);
 
-		result = url != null;
-		AssertJUnit.assertTrue("", result);
+		this.result = url != null;
+		AssertJUnit.assertTrue("", this.result);
 	}
 
 	@Test(enabled = true)
@@ -283,8 +294,8 @@ public class ClassExtensionsTest
 
 		final URL url = ClassExtensions.getResource(ClassExtensionsTest.class, propertiesFilename);
 
-		result = url != null;
-		AssertJUnit.assertTrue("", result);
+		this.result = url != null;
+		AssertJUnit.assertTrue("", this.result);
 	}
 
 
@@ -305,12 +316,12 @@ public class ClassExtensionsTest
 
 		final ClassExtensionsTest obj = new ClassExtensionsTest();
 		final InputStream is = ClassExtensions.getResourceAsStream(obj.getClass(), path);
-		result = is != null;
-		AssertJUnit.assertTrue("InputStream should not be null", result);
+		this.result = is != null;
+		AssertJUnit.assertTrue("InputStream should not be null", this.result);
 		final Properties prop = new Properties();
 		prop.load(is);
-		result = prop.size() == 3;
-		AssertJUnit.assertTrue("Size of prop should be 3.", result);
+		this.result = prop.size() == 3;
+		AssertJUnit.assertTrue("Size of prop should be 3.", this.result);
 	}
 
 

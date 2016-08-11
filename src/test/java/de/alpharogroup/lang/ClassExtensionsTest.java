@@ -160,8 +160,9 @@ public class ClassExtensionsTest
 		AssertJUnit.assertEquals(expected, actual);
 
 		final JavaSourceCompiler<Runnable> runtimeCompiler = new JavaSourceCompiler<>();
-		final String source = "public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar\"); } } ";
-		final Class<Runnable> clazz = runtimeCompiler.compile(null, "FooRunnable", source);
+		final String source = "package de.alpharogroup.lang;public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar\"); } } ";
+		final Class<Runnable> clazz = runtimeCompiler.compile("de.alpharogroup.lang", "FooRunnable",
+			source);
 
 		actual = ClassExtensions.getClassType(clazz);
 		expected = ClassType.DEFAULT;

@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import lombok.experimental.ExtensionMethod;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -24,6 +22,7 @@ import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
+import lombok.experimental.ExtensionMethod;
 
 /**
  * The Class ClassExtensions provides extension methods for the class {@link Class}.
@@ -46,8 +45,8 @@ public final class ClassExtensions
 	 */
 	public static boolean equalsByClassName(final Class<?> oneClass, final Class<?> otherClass)
 	{
-		final String oneNormalizedClassName = ClassExtensions.normalizeQualifiedClassName(oneClass
-			.getName());
+		final String oneNormalizedClassName = ClassExtensions
+			.normalizeQualifiedClassName(oneClass.getName());
 		final String otherNormalizedClassName = ClassExtensions
 			.normalizeQualifiedClassName(otherClass.getName());
 		if (otherNormalizedClassName.equals(oneNormalizedClassName))
@@ -76,7 +75,8 @@ public final class ClassExtensions
 		catch (final Throwable throwable)
 		{
 			clazz = Class.forName(className, true, getClassLoader());
-			if(clazz == null) {
+			if (clazz == null)
+			{
 				throw throwable;
 			}
 		}
@@ -130,8 +130,8 @@ public final class ClassExtensions
 		ClassLoader classLoader = null;
 		if (null != obj)
 		{
-			if (isDerivate(Thread.currentThread().getContextClassLoader(), obj.getClass()
-				.getClassLoader()))
+			if (isDerivate(Thread.currentThread().getContextClassLoader(),
+				obj.getClass().getClassLoader()))
 			{
 				classLoader = obj.getClass().getClassLoader();
 			}
@@ -193,44 +193,55 @@ public final class ClassExtensions
 	 *            The class.
 	 * @return the {@link ClassType} from the given class.
 	 */
-	public static ClassType getClassType(Class<?> clazz)
+	public static ClassType getClassType(final Class<?> clazz)
 	{
-		if(clazz.isAnnotation()) {
-			return ClassType.ANNOTATION;
-		}
-		if(clazz.isAnonymousClass()) {
-			return ClassType.ANONYMOUS;
-		}
-		if(clazz.isArray()) {
+		if (clazz.isArray())
+		{
 			return ClassType.ARRAY;
 		}
-		if(isCollection(clazz)) {
+		if (isCollection(clazz))
+		{
 			return ClassType.COLLECTION;
 		}
-		if(clazz.isEnum()) {
-			return ClassType.ENUM;
-		}
-		if(clazz.isInterface()) {
-			return ClassType.INTERFACE;
-		}
-		if(clazz.isLocalClass()) {
-			return ClassType.LOCAL;
-		}
-		if(isMap(clazz)) {
+		if (isMap(clazz))
+		{
 			return ClassType.MAP;
 		}
-		if(clazz.isMemberClass()) {
+		if (clazz.isLocalClass())
+		{
+			return ClassType.LOCAL;
+		}
+		if (clazz.isMemberClass())
+		{
 			return ClassType.MEMBER;
 		}
-		if(clazz.isPrimitive()) {
+		if (clazz.isPrimitive())
+		{
 			return ClassType.PRIMITIVE;
 		}
-		if(clazz.isSynthetic()) {
+		if (clazz.isAnnotation())
+		{
+			return ClassType.ANNOTATION;
+		}
+		if (clazz.isEnum())
+		{
+			return ClassType.ENUM;
+		}
+		if (clazz.isInterface())
+		{
+			return ClassType.INTERFACE;
+		}
+		if (clazz.isSynthetic())
+		{
 			return ClassType.SYNTHETIC;
+		}
+		if (clazz.isAnonymousClass())
+		{
+			return ClassType.ANONYMOUS;
 		}
 		return ClassType.DEFAULT;
 	}
-	
+
 	/**
 	 * Gets the directories from the given path.
 	 *
@@ -303,8 +314,9 @@ public final class ClassExtensions
 			final String classUrlString = classUrl.toString();
 			if ((classUrlString.startsWith(jarPathPrefix) && (classUrlString.indexOf(path) > 0)))
 			{
-				jarPath = classUrlString.replace("!"+path, "");
-				if(jarPath.startsWith(jarPathFilePrefix)) {
+				jarPath = classUrlString.replace("!" + path, "");
+				if (jarPath.startsWith(jarPathFilePrefix))
+				{
 					final int beginIndex = jarPathFilePrefix.length();
 					jarPath = jarPath.substring(beginIndex, jarPath.length());
 				}
@@ -371,11 +383,8 @@ public final class ClassExtensions
 	{
 		final String packagePath = PackageExtensions.getPackagePath(clazz);
 		final String className = ClassExtensions.getSimpleName(clazz);
-		final StringBuilder sb = new StringBuilder()
-		.append("/")
-		.append(packagePath)
-		.append(className)
-		.append(FileExtension.CLASS.getExtension());
+		final StringBuilder sb = new StringBuilder().append("/").append(packagePath)
+			.append(className).append(FileExtension.CLASS.getExtension());
 		final String path = sb.toString();
 		return path;
 	}
@@ -629,7 +638,7 @@ public final class ClassExtensions
 	{
 		return ClassExtensions.getResource(ClassExtensions.getPath(clazz));
 	}
-	
+
 	/**
 	 * Checks if the given class is assignable from {@link Collection}.
 	 *
@@ -637,7 +646,7 @@ public final class ClassExtensions
 	 *            The class.
 	 * @return true, if the given class is assignable from {@link Collection} otherwise false.
 	 */
-	public static boolean isCollection(Class<?> clazz)
+	public static boolean isCollection(final Class<?> clazz)
 	{
 		return Collection.class.isAssignableFrom(clazz);
 	}
@@ -677,7 +686,7 @@ public final class ClassExtensions
 		}
 		return false;
 	}
-		
+
 	/**
 	 * Checks if the given class is assignable from {@link Map}.
 	 *
@@ -685,7 +694,7 @@ public final class ClassExtensions
 	 *            The class.
 	 * @return true, if the given class is assignable from {@link Map} otherwise false.
 	 */
-	public static boolean isMap(Class<?> clazz)
+	public static boolean isMap(final Class<?> clazz)
 	{
 		return Map.class.isAssignableFrom(clazz);
 	}
@@ -804,8 +813,8 @@ public final class ClassExtensions
 	 * @throws ClassNotFoundException
 	 *             is thrown if a class in the given path cannot be located.
 	 */
-	public static Set<Class<?>> scanClassNames(final String packageName) throws IOException,
-		ClassNotFoundException
+	public static Set<Class<?>> scanClassNames(final String packageName)
+		throws IOException, ClassNotFoundException
 	{
 		return scanClassNames(packageName, false);
 	}
@@ -827,8 +836,8 @@ public final class ClassExtensions
 		throws IOException, ClassNotFoundException
 	{
 		final Set<Class<?>> foundClasses = new LinkedHashSet<>();
-		final Set<String> qualifiedClassnames = PackageExtensions.scanClassNames(packageName, recursive,
-			true);
+		final Set<String> qualifiedClassnames = PackageExtensions.scanClassNames(packageName,
+			recursive, true);
 		for (final String qualifiedClassname : qualifiedClassnames)
 		{
 			foundClasses.add(forName(qualifiedClassname));

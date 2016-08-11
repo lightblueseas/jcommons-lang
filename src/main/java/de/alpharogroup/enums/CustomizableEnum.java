@@ -15,26 +15,38 @@
  */
 package de.alpharogroup.enums;
 
+import de.alpharogroup.check.Check;
 import lombok.Getter;
 
 /**
- * This class is for use if you have an enum but you want that the user can set 
- * a custom value.
+ * The class {@link CustomizableEnum} is for use if you have an enum but you want that the user can
+ * set a custom value.
+ *
  * @author astrapi69
  */
-public class CustomizableEnum<E extends Enum<E>, T> {
-    @Getter
-    E enumtype;
-    @Getter
-    T value;
-    @Getter    
-    boolean custom;
-    
-    public CustomizableEnum(E enumtype, final T value) {
-        this.enumtype = enumtype;
-        if(value!= null) {
-            this.value = value;
-            custom = true;
-        }
-    }
+public class CustomizableEnum<E extends Enum<E>, T>
+{
+
+	/** The enumtype. */
+	@Getter
+	private final E enumtype;
+
+	/** The value. */
+	@Getter
+	private final T value;
+
+	/**
+	 * Instantiates a new {@link CustomizableEnum}.
+	 *
+	 * @param enumtype
+	 *            the type of the enum
+	 * @param value
+	 *            the value
+	 */
+	public CustomizableEnum(final E enumtype, final T value)
+	{
+		Check.get().notNull(value, "value").notNull(enumtype, "enumtype");
+		this.enumtype = enumtype;
+		this.value = value;
+	}
 }

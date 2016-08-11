@@ -51,13 +51,13 @@ Than you can add the dependency to your dependencies:
 
 The source code for jcommons-lang are on GitHub. Please feel free to fork and send pull requests!
 
-Create your own fork of [astrapi69/jcommons-lang/fork](https://github.com/astrapi69/jcommons-lang/fork)
+Create your own fork of [lightblueseas/jcommons-lang/fork](https://github.com/lightblueseas/jcommons-lang/fork)
 
-To share your changes, [submit a pull request](https://github.com/astrapi69/jcommons-lang/pull/new/master).
+To share your changes, [submit a pull request](https://github.com/lightblueseas/jcommons-lang/pull/new/master).
 
 Don't forget to add new units tests on your changes.
 
 ## Contacting the Developers
 
 Do not hesitate to contact the jcommons-lang developers with your questions, concerns, comments, bug reports, or feature requests.
-- Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/astrapi69/jcommons-lang/issues).
+- Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/lightblueseas/jcommons-lang/issues).

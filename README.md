@@ -18,7 +18,7 @@ The jcommons-lang project provides several extension methods for java core class
 
 The source code comes under the liberal MIT License, making jcommons-lang great for all types of applications.
 
-# Build Status and Latest Maven version
+# Build status and latest maven version
 [![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=master)](https://travis-ci.org/lightblueseas/jcommons-lang)
 
 

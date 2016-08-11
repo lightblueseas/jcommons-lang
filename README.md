@@ -17,5 +17,12 @@ The jcommons-lang project provides several extension methods for java core class
 4. Extension methods for java class Class, File for checksum, namefilter and filename filter
 5. Id generators
 6. Annotations for import resources like css, js etc.
+7. 
+
+And many more
+
+## License
+
+The source code comes under the liberal MIT License, making jcommons-lang great for all types of applications.
 
 

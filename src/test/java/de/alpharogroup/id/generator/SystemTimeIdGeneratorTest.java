@@ -28,7 +28,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * The Class SystemTimeIdGeneratorTest.
+ * The class SystemTimeIdGeneratorTest.
  */
 public class SystemTimeIdGeneratorTest
 {

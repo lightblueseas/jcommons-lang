@@ -30,7 +30,7 @@ import java.io.FileFilter;
 import de.alpharogroup.file.FileExtension;
 
 /**
- * The Class TxtFileFilter accepts File-objects that are directories or end with the suffix '.txt'.
+ * The class TxtFileFilter accepts File-objects that are directories or end with the suffix '.txt'.
  * Accepts directories to allow search files recursive in directories.
  *
  * @version 1.0

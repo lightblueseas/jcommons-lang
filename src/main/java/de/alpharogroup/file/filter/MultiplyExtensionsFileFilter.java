@@ -31,7 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The Class MultiplyExtensionsFileFilter accepts File-objects that are directories or end with one
+ * The class MultiplyExtensionsFileFilter accepts File-objects that are directories or end with one
  * of the extension in the collection. Accepts directories to allow search files recursive in
  * directories.
  *

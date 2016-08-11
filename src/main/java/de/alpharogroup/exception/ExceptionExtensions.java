@@ -32,7 +32,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import de.alpharogroup.io.StreamExtensions;
 
 /**
- * The Class {@link ExceptionExtensions}.
+ * The class {@link ExceptionExtensions}.
  *
  * @author Asterios Raptis
  * @version 1.0

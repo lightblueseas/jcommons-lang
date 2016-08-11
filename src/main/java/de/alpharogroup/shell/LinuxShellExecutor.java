@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The Class LinuxShellExecutor.
+ * The class LinuxShellExecutor.
  */
 public class LinuxShellExecutor
 {

@@ -27,7 +27,7 @@ package de.alpharogroup.io;
 import java.io.Serializable;
 
 /**
- * The Class SerializedChangedAttributeResult.
+ * The class SerializedChangedAttributeResult.
  */
 public class SerializedChangedAttributeResult implements Serializable
 {

@@ -39,7 +39,7 @@ import de.alpharogroup.lang.object.CompareObjectExtensions;
 import de.alpharogroup.lang.object.CopyObjectExtensions;
 
 /**
- * The Class ObjectExtensions provides methods to clone, copy and compare objects. It also provides
+ * The class ObjectExtensions provides methods to clone, copy and compare objects. It also provides
  * methods to find changed data between Objects.
  */
 public final class ObjectExtensions

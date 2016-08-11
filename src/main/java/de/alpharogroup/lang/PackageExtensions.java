@@ -41,7 +41,7 @@ import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
 
 /**
- * The Class {@link PackageExtensions}.
+ * The class {@link PackageExtensions}.
  */
 @ExtensionMethod(StringExtensions.class)
 public final class PackageExtensions

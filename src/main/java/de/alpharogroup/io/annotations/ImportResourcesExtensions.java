@@ -35,16 +35,17 @@ import org.apache.commons.lang.ArrayUtils;
 import de.alpharogroup.lang.AnnotationExtensions;
 
 /**
- * The class {@link ImportResourcesExtensions} contains helper methods for {@link ImportResource} objects.
+ * The class {@link ImportResourcesExtensions} contains extension methods for {@link ImportResource}
+ * objects.
  */
 public class ImportResourcesExtensions
 {
 
 	/**
-	 * Gets a map with ImportResource objects and the corresponding to the found class from the
-	 * given package Name. The search is made recursive. The key from an entry of the map is the
-	 * class where the ImportResource objects found and the value is an Array of the ImportResource
-	 * objects that contains in the class.
+	 * Gets a {@link Map} with {@link ImportResource} objects and the corresponding to the found
+	 * class from the given package Name. The search is made recursive. The key from an entry of the
+	 * map is the class where the {@link ImportResource} objects found and the value is an Array of
+	 * the {@link ImportResource} objects that contains in the class.
 	 *
 	 * @param packageName
 	 *            the package name
@@ -61,10 +62,10 @@ public class ImportResourcesExtensions
 
 		final Class<ImportResources> importResourcesClass = ImportResources.class;
 		final Class<ImportResource> importResourceClass = ImportResource.class;
-		final Set<Class<?>> importResourcesClasses = AnnotationExtensions.getAllAnnotatedClasses(
-			packageName, importResourcesClass);
-		final Set<Class<?>> importResourceClasses = AnnotationExtensions.getAllAnnotatedClasses(
-			packageName, importResourceClass);
+		final Set<Class<?>> importResourcesClasses = AnnotationExtensions
+			.getAllAnnotatedClasses(packageName, importResourcesClass);
+		final Set<Class<?>> importResourceClasses = AnnotationExtensions
+			.getAllAnnotatedClasses(packageName, importResourceClass);
 		importResourcesClasses.addAll(importResourceClasses);
 		for (final Class<?> annotatedClass : importResourcesClasses)
 		{

@@ -28,7 +28,8 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * The Class ImportResourceComparator compares two given ImportResource objects based on the index.
+ * The class {@link ImportResourceComparator} compares two given {@link ImportResource} objects
+ * based on the index.
  */
 public class ImportResourceComparator implements Comparator<ImportResource>, Serializable
 {

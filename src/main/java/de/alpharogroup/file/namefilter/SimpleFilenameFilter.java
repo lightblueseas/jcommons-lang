@@ -28,7 +28,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 /**
- * The Class SimpleFilenameFilter.
+ * The class SimpleFilenameFilter.
  *
  * @version 1.0
  * @author Asterios Raptis

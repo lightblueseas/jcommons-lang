@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * The Class BeanExtensions provides methods for populating JavaBeans properties. Uses internally
+ * The class BeanExtensions provides methods for populating JavaBeans properties. Uses internally
  * the commons-beanutils classes.
  */
 @UtilityClass

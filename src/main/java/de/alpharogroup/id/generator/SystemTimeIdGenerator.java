@@ -27,7 +27,7 @@ package de.alpharogroup.id.generator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * The Class SystemTimeIdGenerator.
+ * The class SystemTimeIdGenerator.
  */
 public class SystemTimeIdGenerator implements IdGenerator
 {

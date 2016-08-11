@@ -39,7 +39,7 @@ import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 
 /**
- * The Class {@link AnnotationExtensions}.
+ * The class {@link AnnotationExtensions}.
  *
  * @author Asterios Raptis
  */

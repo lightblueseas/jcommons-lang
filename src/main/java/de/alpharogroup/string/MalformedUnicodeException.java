@@ -25,7 +25,7 @@
 package de.alpharogroup.string;
 
 /**
- * The Class MalformedUnicodeException.
+ * The class MalformedUnicodeException.
  */
 public class MalformedUnicodeException extends RuntimeException
 {

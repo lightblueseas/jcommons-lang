@@ -4,7 +4,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 /**
- * The Class DefaultValueTest.
+ * The class DefaultValueTest.
  */
 public class DefaultValueTest
 {

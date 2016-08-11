@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * The Class MultiplyExtensionsFilenameFilter accepts File-objects that end with one of the
+ * The class MultiplyExtensionsFilenameFilter accepts File-objects that end with one of the
  * extension in the collection.
  *
  * @version 1.0

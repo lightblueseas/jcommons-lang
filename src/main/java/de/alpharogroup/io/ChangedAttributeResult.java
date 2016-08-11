@@ -25,7 +25,7 @@
 package de.alpharogroup.io;
 
 /**
- * The Class ChangedAttributeResult.
+ * The class ChangedAttributeResult.
  */
 public class ChangedAttributeResult
 {

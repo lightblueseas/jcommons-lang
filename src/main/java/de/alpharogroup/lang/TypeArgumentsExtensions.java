@@ -37,7 +37,7 @@ import java.util.Map;
 import de.alpharogroup.check.Check;
 
 /**
- * The Class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a child class has
+ * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a child class has
  * used to extend a generic base class. It is inspired from the article Reflecting generics by Ian
  * Robertson at <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=208860"
  * >http://www.artima.com/weblogs/viewpost.jsp?thread=208860</a>. In the comments someone asked if

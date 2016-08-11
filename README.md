@@ -17,8 +17,9 @@ The jcommons-lang project provides several extension methods for java core class
 4. Extension methods for java class Class, File for checksum, namefilter and filename filter
 5. Id generators
 6. Annotations for import resources like css, js etc.
-
-And many more...
+7. Extension methods for jdbc and db connections
+8. Extension methods for Loggers, reflection, regex, shell and velocity
+9. Extension methods for java class Math and String
 
 ## License
 

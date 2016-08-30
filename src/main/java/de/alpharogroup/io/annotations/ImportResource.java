@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -30,7 +30,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The Annotation ImportResource can be used to import a resource.
+ * The annotation {@link ImportResource} can be used to import a resource.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -45,21 +45,21 @@ public @interface ImportResource {
 
 	/**
 	 * The resource name.
-	 * 
+	 *
 	 * @return the resource name.
 	 */
 	String resourceName();
 
 	/**
 	 * The resource type i.e. javascript, css, png etc.
-	 * 
+	 *
 	 * @return The resource type
 	 */
 	String resourceType();
 
 	/**
 	 * The "skin" style of the resource.
-	 * 
+	 *
 	 * @return The "skin" style of the resource.
 	 */
 	String style() default "";

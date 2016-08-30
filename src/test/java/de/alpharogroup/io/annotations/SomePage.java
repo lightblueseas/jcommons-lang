@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,7 +26,9 @@ package de.alpharogroup.io.annotations;
 
 
 @ImportResource(index = 1, resourceName = "SomePage.css", resourceType = "css")
-@ImportResources(resources = { @ImportResource(index = 2, resourceName = "SomePage.js", resourceType = "js") })
+@ImportResources(resources = {
+		@ImportResource(index = 2, resourceName = "SomePage.js", resourceType = "js"),
+		@ImportResource(index = 2, resourceName = "SomePanel.js", resourceType = "js") })
 public class SomePage
 {
 }

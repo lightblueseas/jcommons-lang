@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.alpharogroup.lang;
 
 import java.io.File;
@@ -8,12 +32,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
-import lombok.experimental.ExtensionMethod;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -22,9 +46,10 @@ import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
+import lombok.experimental.ExtensionMethod;
 
 /**
- * The Class ClassExtensions provides extension methods for the class {@link Class}.
+ * The class ClassExtensions provides extension methods for the class {@link Class}.
  */
 @ExtensionMethod(StringExtensions.class)
 public final class ClassExtensions
@@ -44,8 +69,8 @@ public final class ClassExtensions
 	 */
 	public static boolean equalsByClassName(final Class<?> oneClass, final Class<?> otherClass)
 	{
-		final String oneNormalizedClassName = ClassExtensions.normalizeQualifiedClassName(oneClass
-			.getName());
+		final String oneNormalizedClassName = ClassExtensions
+			.normalizeQualifiedClassName(oneClass.getName());
 		final String otherNormalizedClassName = ClassExtensions
 			.normalizeQualifiedClassName(otherClass.getName());
 		if (otherNormalizedClassName.equals(oneNormalizedClassName))
@@ -74,7 +99,8 @@ public final class ClassExtensions
 		catch (final Throwable throwable)
 		{
 			clazz = Class.forName(className, true, getClassLoader());
-			if(clazz == null) {
+			if (clazz == null)
+			{
 				throw throwable;
 			}
 		}
@@ -128,8 +154,8 @@ public final class ClassExtensions
 		ClassLoader classLoader = null;
 		if (null != obj)
 		{
-			if (isDerivate(Thread.currentThread().getContextClassLoader(), obj.getClass()
-				.getClassLoader()))
+			if (isDerivate(Thread.currentThread().getContextClassLoader(),
+				obj.getClass().getClassLoader()))
 			{
 				classLoader = obj.getClass().getClassLoader();
 			}
@@ -182,6 +208,62 @@ public final class ClassExtensions
 	public static String getClassnameWithSuffix(final Object obj)
 	{
 		return getClassnameWithSuffix(obj.getClass());
+	}
+
+	/**
+	 * Gets the {@link ClassType} from the given class.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return the {@link ClassType} from the given class.
+	 */
+	public static ClassType getClassType(final Class<?> clazz)
+	{
+		if (clazz.isArray())
+		{
+			return ClassType.ARRAY;
+		}
+		if (isCollection(clazz))
+		{
+			return ClassType.COLLECTION;
+		}
+		if (isMap(clazz))
+		{
+			return ClassType.MAP;
+		}
+		if (clazz.isLocalClass())
+		{
+			return ClassType.LOCAL;
+		}
+		if (clazz.isMemberClass())
+		{
+			return ClassType.MEMBER;
+		}
+		if (clazz.isPrimitive())
+		{
+			return ClassType.PRIMITIVE;
+		}
+		if (clazz.isAnnotation())
+		{
+			return ClassType.ANNOTATION;
+		}
+		if (clazz.isEnum())
+		{
+			return ClassType.ENUM;
+		}
+		if (clazz.isInterface())
+		{
+			return ClassType.INTERFACE;
+		}
+		if (clazz.isSynthetic())
+		{
+			return ClassType.SYNTHETIC;
+		}
+		if (clazz.isAnonymousClass())
+		{
+			return ClassType.ANONYMOUS;
+		}
+		return ClassType.DEFAULT;
 	}
 
 	/**
@@ -256,8 +338,9 @@ public final class ClassExtensions
 			final String classUrlString = classUrl.toString();
 			if ((classUrlString.startsWith(jarPathPrefix) && (classUrlString.indexOf(path) > 0)))
 			{
-				jarPath = classUrlString.replace("!"+path, "");
-				if(jarPath.startsWith(jarPathFilePrefix)) {
+				jarPath = classUrlString.replace("!" + path, "");
+				if (jarPath.startsWith(jarPathFilePrefix))
+				{
 					final int beginIndex = jarPathFilePrefix.length();
 					jarPath = jarPath.substring(beginIndex, jarPath.length());
 				}
@@ -324,11 +407,8 @@ public final class ClassExtensions
 	{
 		final String packagePath = PackageExtensions.getPackagePath(clazz);
 		final String className = ClassExtensions.getSimpleName(clazz);
-		final StringBuilder sb = new StringBuilder()
-		.append("/")
-		.append(packagePath)
-		.append(className)
-		.append(FileExtension.CLASS.getExtension());
+		final StringBuilder sb = new StringBuilder().append("/").append(packagePath)
+			.append(className).append(FileExtension.CLASS.getExtension());
 		final String path = sb.toString();
 		return path;
 	}
@@ -583,6 +663,18 @@ public final class ClassExtensions
 		return ClassExtensions.getResource(ClassExtensions.getPath(clazz));
 	}
 
+	/**
+	 * Checks if the given class is assignable from {@link Collection}.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return true, if the given class is assignable from {@link Collection} otherwise false.
+	 */
+	public static boolean isCollection(final Class<?> clazz)
+	{
+		return Collection.class.isAssignableFrom(clazz);
+	}
+
 
 	/**
 	 * Compares the two given ClassLoader objects and returns true if compare is a derivate of
@@ -617,6 +709,18 @@ public final class ClassExtensions
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Checks if the given class is assignable from {@link Map}.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return true, if the given class is assignable from {@link Map} otherwise false.
+	 */
+	public static boolean isMap(final Class<?> clazz)
+	{
+		return Map.class.isAssignableFrom(clazz);
 	}
 
 	/**
@@ -733,8 +837,8 @@ public final class ClassExtensions
 	 * @throws ClassNotFoundException
 	 *             is thrown if a class in the given path cannot be located.
 	 */
-	public static Set<Class<?>> scanClassNames(final String packageName) throws IOException,
-		ClassNotFoundException
+	public static Set<Class<?>> scanClassNames(final String packageName)
+		throws IOException, ClassNotFoundException
 	{
 		return scanClassNames(packageName, false);
 	}
@@ -756,8 +860,8 @@ public final class ClassExtensions
 		throws IOException, ClassNotFoundException
 	{
 		final Set<Class<?>> foundClasses = new LinkedHashSet<>();
-		final Set<String> qualifiedClassnames = PackageExtensions.scanClassNames(packageName, recursive,
-			true);
+		final Set<String> qualifiedClassnames = PackageExtensions.scanClassNames(packageName,
+			recursive, true);
 		for (final String qualifiedClassname : qualifiedClassnames)
 		{
 			foundClasses.add(forName(qualifiedClassname));

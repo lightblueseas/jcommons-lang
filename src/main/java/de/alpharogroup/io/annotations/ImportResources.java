@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -30,16 +30,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The Annotation ImportResources contains an Array of ImportResource objects.
+ * The annotation {@link ImportResources} contains an Array of {@link ImportResource} objects.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ImportResources {
 
 	/**
-	 * Resources.
+	 * The array of {@link ImportResource} objects.
 	 *
-	 * @return the import resource[]
+	 * @return the array of {@link ImportResource} objects.
 	 */
 	ImportResource[] resources();
 }

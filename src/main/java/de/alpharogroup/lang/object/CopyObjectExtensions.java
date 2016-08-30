@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.alpharogroup.lang.object;
 
 import java.lang.reflect.InvocationTargetException;
@@ -6,11 +30,13 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
 import de.alpharogroup.exception.ExceptionExtensions;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link CopyObjectExtensions} provide methods for copy an original object to a given
  * destination object.
  */
+@UtilityClass
 public final class CopyObjectExtensions
 {
 
@@ -40,7 +66,7 @@ public final class CopyObjectExtensions
 	 */
 	public static final <ORIGINAL, DESTINATION> DESTINATION copy(final ORIGINAL original,
 		final DESTINATION destination)
-			throws IllegalAccessException, InvocationTargetException, IllegalArgumentException
+		throws IllegalAccessException, InvocationTargetException, IllegalArgumentException
 	{
 		BeanUtils.copyProperties(destination, original);
 		return destination;
@@ -78,24 +104,20 @@ public final class CopyObjectExtensions
 		}
 		catch (final InvocationTargetException e)
 		{
-			LOG.error(
-				"Error occured by try to copy the original object to destination object."
-					+ "\noriginal object info:" + ExceptionExtensions.toString(original)
-					+ "\ndestination object info:" + ExceptionExtensions.toString(destination)
-					+ "\n Possible reason: if the property accessor method throws an exception",
-				e);
+			LOG.error("Error occured by try to copy the original object to destination object."
+				+ "\noriginal object info:" + ExceptionExtensions.toString(original)
+				+ "\ndestination object info:" + ExceptionExtensions.toString(destination)
+				+ "\n Possible reason: if the property accessor method throws an exception", e);
 			return null;
 		}
 		catch (final IllegalArgumentException e)
 		{
-			LOG.error(
-				"Error occured by try to copy the original object to destination object."
-					+ "\noriginal object info:" + ExceptionExtensions.toString(original)
-					+ "\ndestination object info:" + ExceptionExtensions.toString(destination)
-					+ "\n Possible reason: if the destination or original argument is null or if"
-					+ " the destination property type is different from the source type and the "
-					+ "relevant converter has not been registered.",
-				e);
+			LOG.error("Error occured by try to copy the original object to destination object."
+				+ "\noriginal object info:" + ExceptionExtensions.toString(original)
+				+ "\ndestination object info:" + ExceptionExtensions.toString(destination)
+				+ "\n Possible reason: if the destination or original argument is null or if"
+				+ " the destination property type is different from the source type and the "
+				+ "relevant converter has not been registered.", e);
 			return null;
 		}
 		return destination;
@@ -114,7 +136,8 @@ public final class CopyObjectExtensions
 	 *            the destination object.
 	 * @return true, if is copyable otherwise false.
 	 */
-	public static final <DESTINATION, ORIGINAL> boolean isCopyable(final ORIGINAL original, final DESTINATION destination		)
+	public static final <DESTINATION, ORIGINAL> boolean isCopyable(final ORIGINAL original,
+		final DESTINATION destination)
 	{
 		return copyQuietly(original, destination) != null;
 	}

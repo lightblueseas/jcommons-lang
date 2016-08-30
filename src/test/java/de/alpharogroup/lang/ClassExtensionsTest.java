@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -39,11 +41,37 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.classes.inner.OuterClass;
+import de.alpharogroup.runtime.compiler.JavaSourceCompiler;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.PremiumMember;
+import de.alpharogroup.test.objects.TestAnnotation;
+import de.alpharogroup.test.objects.annotations.AnnotatedInterface;
+import de.alpharogroup.test.objects.enums.Brands;
 
 public class ClassExtensionsTest
 {
+
+	static class StaticNestedClass
+	{
+		public static void staticNestedClassMethod()
+		{
+			final Runnable runnable = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+				};
+			};
+			System.out.println(runnable.getClass().getName());
+			System.out.println("Is anonymous class:" + runnable.getClass().isAnonymousClass());
+			System.out.println("Enclosing class:" + runnable.getClass().getEnclosingClass());
+			System.out.println("Canonical Name:" + runnable.getClass().getCanonicalName());
+			System.out.println("toString:" + runnable.getClass().toString());
+			System.out.println(StaticNestedClass.class.getName());
+			System.out.println("getEnclosingMethod():" + runnable.getClass().getEnclosingMethod());
+			// Object[] objects = { runnable };
+		}
+	}
 
 	/** The result. */
 	private boolean result;
@@ -71,11 +99,80 @@ public class ClassExtensionsTest
 
 	}
 
+	/**
+	 * Test method for {@link de.alpharogroup.lang.ClassExtensions#getClassType(Class)}.
+	 *
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	@Test(enabled = true)
+	public void testGetClassType() throws InstantiationException, IllegalAccessException
+	{
+		ClassType actual = ClassExtensions.getClassType(OuterClass.class);
+		ClassType expected = ClassType.DEFAULT;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(OuterClass.InnerClass.class);
+		expected = ClassType.MEMBER;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(StaticNestedClass.class);
+		expected = ClassType.MEMBER;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+			};
+		}.getClass());
+		expected = ClassType.ANONYMOUS;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(Brands.class);
+		expected = ClassType.ENUM;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(TestAnnotation.class);
+		expected = ClassType.ANNOTATION;
+		AssertJUnit.assertEquals(expected, actual);
+
+		final String[] foo = { "foo" };
+		actual = ClassExtensions.getClassType(foo.getClass());
+		expected = ClassType.ARRAY;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(ArrayList.class);
+		expected = ClassType.COLLECTION;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(HashMap.class);
+		expected = ClassType.MAP;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(AnnotatedInterface.class);
+		expected = ClassType.INTERFACE;
+		AssertJUnit.assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClassType(int.class);
+		expected = ClassType.PRIMITIVE;
+		AssertJUnit.assertEquals(expected, actual);
+
+		final JavaSourceCompiler<Runnable> runtimeCompiler = new JavaSourceCompiler<>();
+		final String source = "package de.alpharogroup.lang;public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar\"); } } ";
+		final Class<Runnable> clazz = runtimeCompiler.compile("de.alpharogroup.lang", "FooRunnable",
+			source);
+
+		actual = ClassExtensions.getClassType(clazz);
+		expected = ClassType.DEFAULT;
+		AssertJUnit.assertEquals(expected, actual);
+	}
 
 	/**
 	 * Test method for.
 	 *
-	 * {@link de.alpharogroup.lang.ClassUtils#getClassnameWithSuffix(java.lang.Object)}.
+	 * {@link de.alpharogroup.lang.ClassExtensions#getClassnameWithSuffix(java.lang.Object)}.
 	 */
 	@Test(enabled = true)
 	public void testGetClassnameWithSuffix()
@@ -92,15 +189,16 @@ public class ClassExtensionsTest
 		String actual = ClassExtensions.getManifestUrl(Object.class);
 		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
 		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar!/META-INF/MANIFEST.MF"));
-		
+
 		actual = ClassExtensions.getManifestUrl(ClassExtensions.class);
 		AssertJUnit.assertTrue(actual.toString().startsWith("file:"));
-		AssertJUnit.assertTrue(actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
+		AssertJUnit.assertTrue(
+			actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
 		// Get manifest file from zip4j-*.jar
-//		actual = ClassExtensions.getManifestUrl(ZipFile.class);
-//		AssertJUnit.assertNotNull(actual);
-//		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
-//		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
+		// actual = ClassExtensions.getManifestUrl(ZipFile.class);
+		// AssertJUnit.assertNotNull(actual);
+		// AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
+		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
 	}
 
 	@Test
@@ -108,13 +206,13 @@ public class ClassExtensionsTest
 	{
 		String actual = ClassExtensions.getJarPath(Object.class);
 		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar"));
-		
+
 		actual = ClassExtensions.getJarPath(ClassExtensions.class);
 		AssertJUnit.assertNull(actual);
 		// Get manifest file from zip4j-*.jar
-//		actual = ClassExtensions.getJarPath(ZipFile.class);
-//		AssertJUnit.assertNotNull(actual);
-//		AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
+		// actual = ClassExtensions.getJarPath(ZipFile.class);
+		// AssertJUnit.assertNotNull(actual);
+		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
 	@Test
@@ -155,7 +253,8 @@ public class ClassExtensionsTest
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 *             {@link de.alpharogroup.lang.ClassUtils#getResourceAsStream(java.lang.String)} .
+	 *             {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.String)}
+	 *             .
 	 */
 	@Test(enabled = true)
 	public void testGetResourceAsStreamString() throws IOException
@@ -203,7 +302,7 @@ public class ClassExtensionsTest
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.lang.ClassUtils#getResourceAsStream(java.lang.Class, java.lang.String)}
+	 * {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.Class, java.lang.String)}
 	 * .
 	 *
 	 * @throws IOException
@@ -271,10 +370,10 @@ public class ClassExtensionsTest
 	@Test(enabled = true)
 	public void testScanClassesFromPackage() throws Exception, IOException
 	{
-		final List<File> directories = ClassExtensions.getDirectoriesFromResources(
-			"de.alpharogroup.lang", true);
-		final Set<Class<?>> foundClasses = ClassExtensions.scanClassesFromPackage(directories.get(0),
-			"de.alpharogroup.lang");
+		final List<File> directories = ClassExtensions
+			.getDirectoriesFromResources("de.alpharogroup.lang", true);
+		final Set<Class<?>> foundClasses = ClassExtensions
+			.scanClassesFromPackage(directories.get(0), "de.alpharogroup.lang");
 		AssertJUnit.assertTrue("", foundClasses.contains(ClassExtensionsTest.class));
 		Set<Class<?>> list = null;
 		list = ClassExtensions.scanClassNames("de.alpharogroup.lang");

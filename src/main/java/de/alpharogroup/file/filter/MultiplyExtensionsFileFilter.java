@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,7 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The Class MultiplyExtensionsFileFilter accepts File-objects that are directories or end with one
+ * The class MultiplyExtensionsFileFilter accepts File-objects that are directories or end with one
  * of the extension in the collection. Accepts directories to allow search files recursive in
  * directories.
  *

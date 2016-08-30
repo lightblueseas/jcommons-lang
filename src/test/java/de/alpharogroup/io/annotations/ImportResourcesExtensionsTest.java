@@ -42,6 +42,9 @@ import de.alpharogroup.io.OtherPage;
 public class ImportResourcesExtensionsTest
 {
 
+	/**
+	 * Test for method {@link ImportResourcesExtensions#getImportResources(String)}
+	 */
 	@Test
 	public void testGetImportResources() throws IOException, ClassNotFoundException
 	{
@@ -49,7 +52,7 @@ public class ImportResourcesExtensionsTest
 			.getImportResources("de.alpharogroup.io");
 		final ImportResource[] somePageResources = resources.get(SomePage.class);
 		AssertJUnit.assertNotNull(somePageResources);
-		AssertJUnit.assertTrue(somePageResources.length == 2);
+		AssertJUnit.assertTrue(somePageResources.length == 3);
 		final ImportResource cssResource = somePageResources[0];
 		AssertJUnit.assertTrue(cssResource.index() == 1);
 		AssertJUnit.assertTrue(cssResource.resourceName().equals("SomePage.css"));
@@ -58,6 +61,10 @@ public class ImportResourcesExtensionsTest
 		AssertJUnit.assertTrue(jsResource.index() == 2);
 		AssertJUnit.assertTrue(jsResource.resourceName().equals("SomePage.js"));
 		AssertJUnit.assertTrue(jsResource.resourceType().equals("js"));
+		final ImportResource jsResource2 = somePageResources[2];
+		AssertJUnit.assertTrue(jsResource2.index() == 2);
+		AssertJUnit.assertTrue(jsResource2.resourceName().equals("SomePanel.js"));
+		AssertJUnit.assertTrue(jsResource2.resourceType().equals("js"));
 		final ImportResource[] otherPageResources = resources.get(OtherPage.class);
 		AssertJUnit.assertNotNull(otherPageResources);
 		AssertJUnit.assertTrue(otherPageResources.length == 1);

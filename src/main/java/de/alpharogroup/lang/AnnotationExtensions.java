@@ -431,7 +431,7 @@ public final class AnnotationExtensions
 	 * @throws NoSuchFieldException
 	 *             the no such field exception
 	 * @throws SecurityException
-	 *             the security exception
+	 *             Thrown if the security manager indicates a security violation.
 	 * @throws IllegalArgumentException
 	 *             the illegal argument exception
 	 * @throws IllegalAccessException

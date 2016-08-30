@@ -11,15 +11,61 @@ import org.apache.log4j.Logger;
 
 import de.alpharogroup.io.SerializedObjectExtensions;
 import de.alpharogroup.reflection.ReflectionExtensions;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link CloneObjectExtensions} provide methods for clone an object.
  */
+@UtilityClass
 public final class CloneObjectExtensions
 {
 
 	/** The logger constant. */
 	private static final Logger LOG = Logger.getLogger(CloneObjectExtensions.class.getName());
+
+	/**
+	 * Try to clone the given generic object.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object to clone
+	 * @return The cloned object or null if the clone process failed.
+	 * @throws NoSuchMethodException
+	 *             Thrown if a matching method is not found or if the name is "&lt;init&gt;"or
+	 *             "&lt;clinit&gt;".
+	 * @throws SecurityException
+	 *             Thrown if the security manager indicates a security violation.
+	 * @throws IllegalAccessException
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
+	 * @throws IllegalArgumentException
+	 *             Thrown if an illegal argument is given
+	 * @throws InvocationTargetException
+	 *             Thrown if the property accessor method throws an exception
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
+	 * @throws InstantiationException
+	 *             Thrown if one of the following reasons: the class object
+	 *             <ul>
+	 *             <li>represents an abstract class</li>
+	 *             <li>represents an interface</li>
+	 *             <li>represents an array class</li>
+	 *             <li>represents a primitive type</li>
+	 *             <li>represents {@code void}</li>
+	 *             <li>has no nullary constructor</li>
+	 *             </ul>
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T clone(final T object)
+		throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException,
+		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
+	{
+		return (T)cloneObject(object);
+	}
+
 	/**
 	 * Try to clone the given generic object.
 	 *
@@ -30,7 +76,7 @@ public final class CloneObjectExtensions
 	 * @return The cloned object or null if the clone process failed.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T clone(final T object)
+	public static <T> T cloneQuietly(final T object)
 	{
 		return (T)cloneObjectQuietly(object);
 	}
@@ -43,24 +89,34 @@ public final class CloneObjectExtensions
 	 *            The object to clone.
 	 * @return The cloned object or null if the clone process failed.
 	 * @throws NoSuchMethodException
-	 *             the no such method exception
+	 *             Thrown if a matching method is not found or if the name is "&lt;init&gt;"or
+	 *             "&lt;clinit&gt;".
 	 * @throws SecurityException
 	 *             Thrown if the security manager indicates a security violation.
 	 * @throws IllegalAccessException
-	 *             the illegal access exception
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
 	 * @throws IllegalArgumentException
-	 *             the illegal argument exception
+	 *             Thrown if an illegal argument is given
 	 * @throws InvocationTargetException
-	 *             the invocation target exception
+	 *             Thrown if the property accessor method throws an exception
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws InstantiationException
-	 *             the instantiation exception
+	 *             Thrown if one of the following reasons: the class object
+	 *             <ul>
+	 *             <li>represents an abstract class</li>
+	 *             <li>represents an interface</li>
+	 *             <li>represents an array class</li>
+	 *             <li>represents a primitive type</li>
+	 *             <li>represents {@code void}</li>
+	 *             <li>has no nullary constructor</li>
+	 *             </ul>
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static Object cloneObject(final Object object) throws NoSuchMethodException,
-		SecurityException, IllegalAccessException, IllegalArgumentException,
+	public static Object cloneObject(final Object object)
+		throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException,
 		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
 	{
 		Object clone = null;
@@ -142,9 +198,10 @@ public final class CloneObjectExtensions
 		}
 		catch (final IllegalAccessException e)
 		{
-			LOG.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of IllegalAccessException. Could not found from ReflectionUtils.", e);
+			LOG.error(
+				"Try to clone the object with " + "org.apache.commons.beanutils.BeanUtils failed "
+					+ "cause of IllegalAccessException. Could not found from ReflectionExtensions.",
+				e);
 		}
 		catch (final IllegalArgumentException e)
 		{
@@ -153,21 +210,24 @@ public final class CloneObjectExtensions
 		}
 		catch (final InvocationTargetException e)
 		{
-			LOG.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of InvocationTargetException. Could not found from ReflectionUtils.", e);
+			LOG.error(
+				"Try to clone the object with " + "org.apache.commons.beanutils.BeanUtils failed "
+					+ "cause of InvocationTargetException. Could not found from ReflectionExtensions.",
+				e);
 		}
 		catch (final ClassNotFoundException e)
 		{
-			LOG.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of ClassNotFoundException. Could not found from ReflectionUtils.", e);
+			LOG.error(
+				"Try to clone the object with " + "org.apache.commons.beanutils.BeanUtils failed "
+					+ "cause of ClassNotFoundException. Could not found from ReflectionExtensions.",
+				e);
 		}
 		catch (final InstantiationException e)
 		{
-			LOG.error("Try to clone the object with "
-				+ "org.apache.commons.beanutils.BeanUtils failed "
-				+ "cause of InstantiationException. Could not found from ReflectionUtils.", e);
+			LOG.error(
+				"Try to clone the object with " + "org.apache.commons.beanutils.BeanUtils failed "
+					+ "cause of InstantiationException. Could not found from ReflectionExtensions.",
+				e);
 		}
 		catch (final IOException e)
 		{

@@ -3,10 +3,17 @@ package de.alpharogroup.lang.object;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import de.alpharogroup.check.Check;
+import de.alpharogroup.comparators.ComparatorExtensions;
+import de.alpharogroup.io.ChangedAttributeResult;
 import de.alpharogroup.lang.ObjectExtensions;
 import lombok.experimental.ExtensionMethod;
 import lombok.experimental.UtilityClass;
@@ -85,6 +92,93 @@ public final class MergeObjectExtensions
 				setter.invoke(toObject, value);
 			}
 		}
+	}
+
+	/**
+	 * Gets the changed data.
+	 *
+	 * @param sourceOjbect
+	 *            the source ojbect
+	 * @param objectToCompare
+	 *            the object to compare
+	 * @return the changed data
+	 * @throws IllegalAccessException
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
+	 * @throws InvocationTargetException
+	 *             Thrown if the property accessor method throws an exception
+	 * @throws NoSuchMethodException
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
+	 */
+	@SuppressWarnings("rawtypes")
+	public static List<ChangedAttributeResult> getChangedData(final Object sourceOjbect,
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	{
+		if (sourceOjbect == null || objectToCompare == null
+			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
+		{
+			throw new IllegalArgumentException("Object should not be null and be the same type.");
+		}
+		final Map beanDescription = BeanUtils.describe(sourceOjbect);
+		beanDescription.remove("class");
+		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
+		clonedBeanDescription.remove("class");
+		final List<ChangedAttributeResult> changedData = new ArrayList<>();
+		for (final Object key : beanDescription.keySet())
+		{
+			if (ComparatorExtensions.compareTo(sourceOjbect, objectToCompare, key.toString()) != 0)
+			{
+				final Object sourceAttribute = beanDescription.get(key);
+				final Object changedAttribute = clonedBeanDescription.get(key);
+				changedData.add(new ChangedAttributeResult(key, sourceAttribute, changedAttribute));
+			}
+		}
+		return changedData;
+	}
+
+	/**
+	 * Compares the given two objects and gets the changed data.
+	 *
+	 * @param sourceOjbect
+	 *            the source ojbect
+	 * @param objectToCompare
+	 *            the object to compare
+	 * @return the changed data
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws InvocationTargetException
+	 *             the invocation target exception
+	 * @throws NoSuchMethodException
+	 *             the no such method exception
+	 */
+	@SuppressWarnings("rawtypes")
+	public static Map<Object, ChangedAttributeResult> getChangedDataMap(final Object sourceOjbect,
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	{
+		if (sourceOjbect == null || objectToCompare == null
+			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
+		{
+			throw new IllegalArgumentException("Object should not be null and be the same type.");
+		}
+		final Map beanDescription = BeanUtils.describe(sourceOjbect);
+		beanDescription.remove("class");
+		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
+		clonedBeanDescription.remove("class");
+		final Map<Object, ChangedAttributeResult> changedData = new HashMap<>();
+		for (final Object key : beanDescription.keySet())
+		{
+			final Object sourceAttribute = beanDescription.get(key);
+			final Object changedAttribute = clonedBeanDescription.get(key);
+			if (ComparatorExtensions.compareTo(sourceOjbect, objectToCompare, key.toString()) != 0)
+			{
+				changedData.put(key,
+					new ChangedAttributeResult(key, sourceAttribute, changedAttribute));
+			}
+		}
+		return changedData;
 	}
 
 }

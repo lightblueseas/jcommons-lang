@@ -54,14 +54,15 @@ public class CompareObjectExtensionsTest
 	 *             the no such method exception
 	 */
 	@Test(enabled = false)
-	public void testCompare() throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+	public void testCompare()
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		final Person sourceOjbect = new Person();
 		sourceOjbect.setGender(Gender.MALE);
 		sourceOjbect.setName("obelix");
 
-		final Person objectToCompare = (Person)CloneObjectExtensions.cloneObjectQuietly(sourceOjbect);
+		final Person objectToCompare = (Person)CloneObjectExtensions
+			.cloneObjectQuietly(sourceOjbect);
 
 		boolean result = CompareObjectExtensions.compare(sourceOjbect, objectToCompare);
 		AssertJUnit.assertTrue("Cloned object should be equal with the source object.", result);
@@ -73,10 +74,11 @@ public class CompareObjectExtensionsTest
 			result);
 	}
 
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Test(enabled = false)
-	public void testCompareTo() throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+	@Test(enabled = true)
+	public void testCompareTo()
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		final List<Person> persons = new ArrayList<>();
 		final Person obelix = new Person();

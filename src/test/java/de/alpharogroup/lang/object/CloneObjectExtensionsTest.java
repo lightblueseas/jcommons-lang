@@ -1,5 +1,7 @@
 package de.alpharogroup.lang.object;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import org.testng.AssertJUnit;
@@ -39,9 +41,20 @@ public class CloneObjectExtensionsTest
 
 	/**
 	 * Test generic clone method.
+	 * 
+	 * @throws IOException
+	 * @throws InstantiationException
+	 * @throws ClassNotFoundException
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
 	 */
 	@Test(enabled = false)
-	public void testClone()
+	public void testClone() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+		IllegalArgumentException, InvocationTargetException, ClassNotFoundException,
+		InstantiationException, IOException
 	{
 		final Date past = CreateDateExtensions.newDate(2009, 3, 26, 10, 37, 04);
 		final Date otherCopy = CloneObjectExtensions.clone(past);

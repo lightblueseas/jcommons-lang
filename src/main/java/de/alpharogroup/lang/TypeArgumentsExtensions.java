@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -37,7 +37,7 @@ import java.util.Map;
 import de.alpharogroup.check.Check;
 
 /**
- * The Class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a child class has
+ * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a child class has
  * used to extend a generic base class. It is inspired from the article Reflecting generics by Ian
  * Robertson at <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=208860"
  * >http://www.artima.com/weblogs/viewpost.jsp?thread=208860</a>. In the comments someone asked if

@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,7 +28,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 /**
- * The Class SimpleFilenameFilter.
+ * The class SimpleFilenameFilter.
  *
  * @version 1.0
  * @author Asterios Raptis

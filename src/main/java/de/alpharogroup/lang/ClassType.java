@@ -22,51 +22,22 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
-
-import lombok.experimental.UtilityClass;
-
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+package de.alpharogroup.lang;
 
 /**
- * Logger extensions for appenders.
+ * The enum {@link ClassType} defines the types a class can have. 
  */
-@UtilityClass
-public class LoggerExtensions
-{
-
-	/**
-	 * Adds the file appender to the given logger.
-	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
-	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
-	{
-		logger.addAppender(fileAppender);
-	}
-
-	/**
-	 * New file appender.
-	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
-	 */
-	public static FileAppender newFileAppender(final String logFilePath)
-	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
-	}
+public enum ClassType {
+  ANNOTATION,
+  ANONYMOUS,
+  ARRAY,
+  COLLECTION,
+  ENUM,
+  INTERFACE,
+  LOCAL,
+  MAP,
+  MEMBER,
+  PRIMITIVE,
+  SYNTHETIC,
+  DEFAULT;
 }

@@ -24,29 +24,23 @@
  */
 package de.alpharogroup.io.annotations;
 
-
 import java.io.IOException;
 import java.util.Map;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.io.OtherPage;
-
 /**
- * Test class for the class {@link ImportResourcesExtensions}.
- *
- * @author Asterios Raptis
- * @version 1.0
+ * Test class for the class {@link ImportResourceComparator}.
  */
-public class ImportResourcesExtensionsTest
+public class ImportResourceComparatorTest
 {
 
 	/**
-	 * Test for method {@link ImportResourcesExtensions#getImportResources(String)}
+	 * Test for method {@link ImportResourceComparator#compare(ImportResource, ImportResource)}
 	 */
 	@Test
-	public void testGetImportResources() throws IOException, ClassNotFoundException
+	public void testCompare() throws ClassNotFoundException, IOException
 	{
 		final Map<Class<?>, ImportResource[]> resources = ImportResourcesExtensions
 			.getImportResources("de.alpharogroup.io");
@@ -55,19 +49,53 @@ public class ImportResourcesExtensionsTest
 		AssertJUnit.assertTrue(somePageResources.length == 3);
 		final ImportResource cssResource = somePageResources[0];
 		AssertJUnit.assertTrue(cssResource.index() == 1);
-		AssertJUnit.assertTrue(cssResource.resourceName().equals("SomePage.css"));
-		AssertJUnit.assertTrue(cssResource.resourceType().equals("css"));
+
 		final ImportResource jsResource = somePageResources[1];
 		AssertJUnit.assertTrue(jsResource.index() == 2);
-		AssertJUnit.assertTrue(jsResource.resourceName().equals("SomePage.js"));
-		AssertJUnit.assertTrue(jsResource.resourceType().equals("js"));
+
 		final ImportResource jsResource2 = somePageResources[2];
 		AssertJUnit.assertTrue(jsResource2.index() == 2);
-		AssertJUnit.assertTrue(jsResource2.resourceName().equals("SomePanel.js"));
-		AssertJUnit.assertTrue(jsResource2.resourceType().equals("js"));
-		final ImportResource[] otherPageResources = resources.get(OtherPage.class);
-		AssertJUnit.assertNotNull(otherPageResources);
-		AssertJUnit.assertTrue(otherPageResources.length == 1);
 
+		final ImportResourceComparator comparator = new ImportResourceComparator();
+		// scenario: bigger index
+		int actual = comparator.compare(jsResource, cssResource);
+		int expected = 1;
+
+		AssertJUnit.assertEquals(expected, actual);
+		// scenario: smaller index
+		actual = comparator.compare(cssResource, jsResource);
+		expected = -1;
+
+		AssertJUnit.assertEquals(expected, actual);
+		// scenario: same index
+		actual = comparator.compare(jsResource, jsResource2);
+		expected = 0;
+
+		AssertJUnit.assertEquals(expected, actual);
+
+		// scenario: null second object
+		actual = comparator.compare(cssResource, null);
+		expected = 1;
+
+		AssertJUnit.assertEquals(expected, actual);
+
+		// scenario: null first object
+		actual = comparator.compare(null, cssResource);
+		expected = -1;
+
+		AssertJUnit.assertEquals(expected, actual);
+
+		// scenario: same object
+		actual = comparator.compare(cssResource, cssResource);
+		expected = 0;
+
+		AssertJUnit.assertEquals(expected, actual);
+
+		// scenario: null objects
+		actual = comparator.compare(null, null);
+		expected = 0;
+
+		AssertJUnit.assertEquals(expected, actual);
 	}
+
 }

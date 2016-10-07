@@ -22,51 +22,53 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
+package de.alpharogroup.lang;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import de.alpharogroup.check.Check;
 import lombok.experimental.UtilityClass;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
 /**
- * Logger extensions for appenders.
+ * The class DefaultValue provide the default values of the primitive types, as defined by the JLS.
  */
 @UtilityClass
-public class LoggerExtensions
+public class DefaultValue
 {
 
-	/**
-	 * Adds the file appender to the given logger.
-	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
-	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
-	{
-		logger.addAppender(fileAppender);
-	}
+	/** The constant map with the default values. */
+	@SuppressWarnings("serial")
+	private static final Map<Class<?>, Object> DEFAULT_VALUE = Collections
+		.unmodifiableMap(new HashMap<Class<?>, Object>()
+		{
+			{
+				put(boolean.class, false);
+				put(char.class, '\0');
+				put(byte.class, (byte)0);
+				put(short.class, (short)0);
+				put(int.class, 0);
+				put(long.class, 0L);
+				put(float.class, 0f);
+				put(double.class, 0d);
+			}
+		});
 
 	/**
-	 * New file appender.
+	 * Gets the default value from the given {@link Class}.
 	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
+	 * @param <T>
+	 *            the generic type
+	 * @param classType
+	 *            the class type
+	 * @return the default value
 	 */
-	public static FileAppender newFileAppender(final String logFilePath)
+	@SuppressWarnings("unchecked")
+	public static <T> T getDefaultValue(final Class<T> classType)
 	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
+		Check.get().notNull(classType, "classType");
+		final T defaultValue = (T)DEFAULT_VALUE.get(classType);
+		return defaultValue;
 	}
 }

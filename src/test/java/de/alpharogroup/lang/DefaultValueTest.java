@@ -22,51 +22,33 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
+package de.alpharogroup.lang;
 
-import lombok.experimental.UtilityClass;
-
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
 
 /**
- * Logger extensions for appenders.
+ * The class DefaultValueTest.
  */
-@UtilityClass
-public class LoggerExtensions
+public class DefaultValueTest
 {
 
 	/**
-	 * Adds the file appender to the given logger.
-	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
+	 * Test for {@link DefaultValue#getDefaultValue(Class)}
 	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
+	@Test
+	public void testGetDefaultValue()
 	{
-		logger.addAppender(fileAppender);
+		AssertJUnit.assertEquals(false, DefaultValue.getDefaultValue(boolean.class).booleanValue());
+		AssertJUnit.assertEquals('\0', DefaultValue.getDefaultValue(char.class).charValue());
+		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(byte.class).byteValue());
+		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(short.class).shortValue());
+		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(int.class).intValue());
+		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(long.class).longValue());
+		AssertJUnit.assertEquals(0.0f, DefaultValue.getDefaultValue(float.class).floatValue());
+		AssertJUnit.assertEquals(0.0d, DefaultValue.getDefaultValue(double.class).doubleValue());
+		AssertJUnit.assertNull("", DefaultValue.getDefaultValue(void.class));
+		AssertJUnit.assertNull("", DefaultValue.getDefaultValue(Object.class));
 	}
 
-	/**
-	 * New file appender.
-	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
-	 */
-	public static FileAppender newFileAppender(final String logFilePath)
-	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
-	}
 }

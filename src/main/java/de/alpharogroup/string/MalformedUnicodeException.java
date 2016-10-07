@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,7 +25,7 @@
 package de.alpharogroup.string;
 
 /**
- * The Class MalformedUnicodeException.
+ * The class MalformedUnicodeException.
  */
 public class MalformedUnicodeException extends RuntimeException
 {

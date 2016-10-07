@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -27,8 +27,11 @@ package de.alpharogroup.io.annotations;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import de.alpharogroup.comparators.ComparatorExtensions;
+
 /**
- * The Class ImportResourceComparator compares two given ImportResource objects based on the index.
+ * The class {@link ImportResourceComparator} compares two given {@link ImportResource} objects
+ * based on the index.
  */
 public class ImportResourceComparator implements Comparator<ImportResource>, Serializable
 {
@@ -44,36 +47,12 @@ public class ImportResourceComparator implements Comparator<ImportResource>, Ser
 	@Override
 	public int compare(final ImportResource object, final ImportResource compareWithObject)
 	{
-		// Check if one of the objects are null
-		if (object != null && compareWithObject == null)
+		final Integer nullCheck = ComparatorExtensions.nullCheck(object, compareWithObject);
+		if (nullCheck != null)
 		{
-			return 1;// compareWithObject is null so its bigger
+			return nullCheck;
 		}
-		else if (object == null && compareWithObject != null)
-		{
-			return -1; // object is null so its smaller
-		}
-		else if (object == compareWithObject)
-		{
-			return 0;// it is the same Object
-		}
-		else
-		{ // compare the two indexes from the objects
-			final int indexOjbect = object.index();
-			final int indexCompareWithObject = compareWithObject.index();
-			if (indexOjbect > indexCompareWithObject)
-			{
-				return 1; // bigger
-			}
-			else if (indexOjbect < indexCompareWithObject)
-			{
-				return -1; // smaller
-			}
-			else
-			{
-				return 0; // same index.
-			}
-		}
+		return ComparatorExtensions.compare(object.index(), compareWithObject.index());
 	}
 
 }

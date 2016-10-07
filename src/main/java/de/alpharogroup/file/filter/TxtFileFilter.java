@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -30,7 +30,7 @@ import java.io.FileFilter;
 import de.alpharogroup.file.FileExtension;
 
 /**
- * The Class TxtFileFilter accepts File-objects that are directories or end with the suffix '.txt'.
+ * The class TxtFileFilter accepts File-objects that are directories or end with the suffix '.txt'.
  * Accepts directories to allow search files recursive in directories.
  *
  * @version 1.0

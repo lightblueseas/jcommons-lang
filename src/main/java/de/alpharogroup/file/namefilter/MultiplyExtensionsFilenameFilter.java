@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2007 Asterios Raptis
+ * Copyright (C) 2015 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * The Class MultiplyExtensionsFilenameFilter accepts File-objects that end with one of the
+ * The class MultiplyExtensionsFilenameFilter accepts File-objects that end with one of the
  * extension in the collection.
  *
  * @version 1.0

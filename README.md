@@ -34,7 +34,7 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 Than you can add the dependency to your dependencies:
 
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.10.0</jcommons-lang.version>
+		<jcommons-lang.version>4.13.0</jcommons-lang.version>
 
 		<dependencies>
 			...

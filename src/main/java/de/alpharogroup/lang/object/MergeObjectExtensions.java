@@ -66,12 +66,13 @@ public final class MergeObjectExtensions
 	 *            the object to merge in
 	 * @param withObject
 	 *            the object to merge with
+	 * @return the merged object.
 	 * @throws InvocationTargetException
 	 *             if the property accessor method throws an exception
 	 * @throws IllegalAccessException
 	 *             if the caller does not have access to the property accessor method
 	 */
-	public static final <MERGE_IN, WITH> void merge(final MERGE_IN mergeInObject, final WITH withObject)
+	public static final <MERGE_IN, WITH> MERGE_IN merge(final MERGE_IN mergeInObject, final WITH withObject)
 		throws InvocationTargetException, IllegalAccessException
 	{
 		Check.get().notNull(mergeInObject, "mergeInObject").notNull(withObject, "withObject");
@@ -85,6 +86,7 @@ public final class MergeObjectExtensions
 		{
 			mergeProperty(mergeInObject, withObject, descriptor);
 		}
+		return mergeInObject;
 	}
 
 	/**
@@ -98,12 +100,13 @@ public final class MergeObjectExtensions
 	 *            the object to merge in
 	 * @param withObject
 	 *            the object to merge with
+	 * @return the merged object or null if the merge process failed.
 	 */
-	public static final <MERGE_IN, WITH> void mergeQuietly(final MERGE_IN mergeInObject, final WITH withObject)
+	public static final <MERGE_IN, WITH> MERGE_IN mergeQuietly(final MERGE_IN mergeInObject, final WITH withObject)
 	{
 		try
 		{
-			merge(mergeInObject, withObject);
+			return merge(mergeInObject, withObject);
 		}
 		catch (final InvocationTargetException e)
 		{
@@ -111,6 +114,7 @@ public final class MergeObjectExtensions
 				+ "\noriginal object info:" + ExceptionExtensions.toString(withObject)
 				+ "\ndestination object info:" + ExceptionExtensions.toString(mergeInObject)
 				+ "\n Possible reason: if the property accessor method throws an exception", e);
+			return null;
 		}
 		catch (final IllegalAccessException e)
 		{
@@ -120,6 +124,7 @@ public final class MergeObjectExtensions
 					+ "\ndestination object info:" + ExceptionExtensions.toString(mergeInObject)
 					+ "\n Possible reason: a caller does not have access to the property accessor method",
 				e);
+			return null;
 		}
 	}
 

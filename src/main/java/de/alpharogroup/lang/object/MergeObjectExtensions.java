@@ -34,8 +34,10 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.log4j.Logger;
 
 import de.alpharogroup.check.Check;
+import de.alpharogroup.exception.ExceptionExtensions;
 import de.alpharogroup.io.ChangedAttributeResult;
 import de.alpharogroup.lang.ObjectExtensions;
 import lombok.experimental.ExtensionMethod;
@@ -50,14 +52,17 @@ import lombok.experimental.UtilityClass;
 public final class MergeObjectExtensions
 {
 
+	/** The logger constant. */
+	private static final Logger LOG = Logger.getLogger(MergeObjectExtensions.class.getName());
+
 	/**
 	 * Merge the given to object with the given 'with' object.
 	 *
-	 * @param <TO>
+	 * @param <MERGE_IN>
 	 *            the generic type of the object to merge in
 	 * @param <WITH>
 	 *            the generic type of the object to merge with
-	 * @param toObject
+	 * @param mergeInObject
 	 *            the object to merge in
 	 * @param withObject
 	 *            the object to merge with
@@ -66,30 +71,66 @@ public final class MergeObjectExtensions
 	 * @throws IllegalAccessException
 	 *             if the caller does not have access to the property accessor method
 	 */
-	public static final <TO, WITH> void merge(final TO toObject, final WITH withObject)
+	public static final <MERGE_IN, WITH> void merge(final MERGE_IN mergeInObject, final WITH withObject)
 		throws InvocationTargetException, IllegalAccessException
 	{
-		Check.get().notNull(toObject, "toObject").notNull(withObject, "toObject");
+		Check.get().notNull(mergeInObject, "mergeInObject").notNull(withObject, "withObject");
 
-		final Class<?> toClass = toObject.getClass();
+		final Class<?> toClass = mergeInObject.getClass();
 
 		final PropertyDescriptor[] propertyDescriptors = PropertyUtils
 			.getPropertyDescriptors(toClass);
 
 		for (final PropertyDescriptor descriptor : propertyDescriptors)
 		{
-			mergeProperty(toObject, withObject, descriptor);
+			mergeProperty(mergeInObject, withObject, descriptor);
+		}
+	}
+
+	/**
+	 * Merge quietly the given merge in object(destination) with the given 'with' object.
+	 *
+	 * @param <MERGE_IN>
+	 *            the generic type of the object to merge in
+	 * @param <WITH>
+	 *            the generic type of the object to merge with
+	 * @param mergeInObject
+	 *            the object to merge in
+	 * @param withObject
+	 *            the object to merge with
+	 */
+	public static final <MERGE_IN, WITH> void mergeQuietly(final MERGE_IN mergeInObject, final WITH withObject)
+	{
+		try
+		{
+			merge(mergeInObject, withObject);
+		}
+		catch (final InvocationTargetException e)
+		{
+			LOG.error("Error occured by try to copy the original object to destination object."
+				+ "\noriginal object info:" + ExceptionExtensions.toString(withObject)
+				+ "\ndestination object info:" + ExceptionExtensions.toString(mergeInObject)
+				+ "\n Possible reason: if the property accessor method throws an exception", e);
+		}
+		catch (final IllegalAccessException e)
+		{
+			LOG.error(
+				"Error occured by try to merge the original object to destination object."
+					+ "\noriginal object info:" + ExceptionExtensions.toString(withObject)
+					+ "\ndestination object info:" + ExceptionExtensions.toString(mergeInObject)
+					+ "\n Possible reason: a caller does not have access to the property accessor method",
+				e);
 		}
 	}
 
 	/**
 	 * Merge the given property to the given 'to' object with the given 'with' object.
 	 *
-	 * @param <TO>
+	 * @param <MERGE_IN>
 	 *            the generic type of the object to merge in
 	 * @param <WITH>
 	 *            the generic type of the object to merge with
-	 * @param toObject
+	 * @param mergeInObject
 	 *            the object to merge in
 	 * @param withObject
 	 *            the object to merge with
@@ -100,19 +141,19 @@ public final class MergeObjectExtensions
 	 * @throws IllegalAccessException
 	 *             if the caller does not have access to the property accessor method
 	 */
-	public static final <TO, WITH> void mergeProperty(final TO toObject, final WITH withObject,
+	public static final <MERGE_IN, WITH> void mergeProperty(final MERGE_IN mergeInObject, final WITH withObject,
 		final PropertyDescriptor propertyDescriptor)
 		throws IllegalAccessException, InvocationTargetException
 	{
-		if (PropertyUtils.isReadable(toObject, propertyDescriptor.getName())
-			&& PropertyUtils.isWriteable(toObject, propertyDescriptor.getName()))
+		if (PropertyUtils.isReadable(mergeInObject, propertyDescriptor.getName())
+			&& PropertyUtils.isWriteable(mergeInObject, propertyDescriptor.getName()))
 		{
 			final Method getter = propertyDescriptor.getReadMethod();
 			final Object value = getter.invoke(withObject);
 			if (!value.isDefaultValue())
 			{
 				final Method setter = propertyDescriptor.getWriteMethod();
-				setter.invoke(toObject, value);
+				setter.invoke(mergeInObject, value);
 			}
 		}
 	}

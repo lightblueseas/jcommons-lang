@@ -61,18 +61,58 @@ public class MergeObjectExtensionsTest
 
 		final Employee with = Employee.builder().person(person).id("23").build();
 
-		Employee to = Employee.builder().build();
-		to.merge(with);
+		Employee mergeInObject = Employee.builder().build();
+		mergeInObject.merge(with);
 
-		AssertJUnit.assertTrue("", to.getId().equals("23"));
-		AssertJUnit.assertTrue("", to.getPerson().equals(person));
+		AssertJUnit.assertTrue("", mergeInObject.getId().equals("23"));
+		AssertJUnit.assertTrue("", mergeInObject.getPerson().equals(person));
 
-		to = Employee.builder().person(Person.builder().build()).build();
-		to.merge(with);
+		mergeInObject = Employee.builder()
+			.id("22")
+			.person(
+				Person.builder()
+				.build())
+			.build();
+		mergeInObject.merge(with);
 
-		AssertJUnit.assertTrue("", to.getId().equals("23"));
-		AssertJUnit.assertTrue("", to.getPerson().equals(person));
+		AssertJUnit.assertTrue("", mergeInObject.getId().equals("23"));
+		AssertJUnit.assertTrue("", mergeInObject.getPerson().equals(person));
 
+
+	}
+	/**
+	 * Test method for {@link MergeObjectExtensions#mergeQuietly(Object, Object)}.
+	 *
+	 * @throws InvocationTargetException
+	 *             the invocation target exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 */
+	@Test
+	public void testMergeQuietly()
+	{
+
+		final Person person = Person.builder().gender(Gender.FEMALE).name("Anna").married(true)
+			.about("About what...").nickname("beast").build();
+
+		final Employee with = Employee.builder().person(person).id("23").build();
+
+		Employee mergeInObject = Employee.builder().build();
+		mergeInObject.mergeQuietly(with);
+
+		AssertJUnit.assertTrue("", mergeInObject.getId().equals("23"));
+		AssertJUnit.assertTrue("", mergeInObject.getPerson().equals(person));
+
+		mergeInObject = Employee.builder()
+			.id("22")
+			.person(
+				Person.builder()
+				.build())
+			.build();
+		mergeInObject.mergeQuietly(with);
+
+		AssertJUnit.assertTrue("", mergeInObject.getId().equals("23"));
+		AssertJUnit.assertTrue("", mergeInObject.getPerson().equals(person));
 
 	}
 

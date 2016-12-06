@@ -24,9 +24,22 @@
  */
 package de.alpharogroup.io;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
- * The class ChangedAttributeResult.
+ * The class {@link ChangedAttributeResult} is a bean class that is used for compare objects and see what changes are made.
  */
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@AllArgsConstructor
+@Builder
 public class ChangedAttributeResult
 {
 
@@ -38,108 +51,5 @@ public class ChangedAttributeResult
 
 	/** The changed attribute. */
 	private Object changedAttribute;
-
-	/**
-	 * Instantiates a new changed attribute result.
-	 */
-	public ChangedAttributeResult()
-	{
-		super();
-	}
-
-	/**
-	 * Instantiates a new changed attribute result.
-	 *
-	 * @param sourceAttribute
-	 *            the source attribute
-	 * @param changedAttribute
-	 *            the changed attribute
-	 */
-	public ChangedAttributeResult(final Object sourceAttribute, final Object changedAttribute)
-	{
-		this();
-		this.sourceAttribute = sourceAttribute;
-		this.changedAttribute = changedAttribute;
-	}
-
-	/**
-	 * Instantiates a new changed attribute result.
-	 *
-	 * @param attributeName
-	 *            the attribute name
-	 * @param sourceAttribute
-	 *            the source attribute
-	 * @param changedAttribute
-	 *            the changed attribute
-	 */
-	public ChangedAttributeResult(final Object attributeName, final Object sourceAttribute,
-		final Object changedAttribute)
-	{
-		this(sourceAttribute, changedAttribute);
-		this.attributeName = attributeName;
-	}
-
-	/**
-	 * Gets the attribute name.
-	 *
-	 * @return the attribute name
-	 */
-	public Object getAttributeName()
-	{
-		return attributeName;
-	}
-
-	/**
-	 * Gets the changed attribute.
-	 *
-	 * @return the changed attribute
-	 */
-	public Object getChangedAttribute()
-	{
-		return changedAttribute;
-	}
-
-	/**
-	 * Gets the source attribute.
-	 *
-	 * @return the source attribute
-	 */
-	public Object getSourceAttribute()
-	{
-		return sourceAttribute;
-	}
-
-	/**
-	 * Sets the attribute name.
-	 *
-	 * @param attributeName
-	 *            the new attribute name
-	 */
-	public void setAttributeName(final Object attributeName)
-	{
-		this.attributeName = attributeName;
-	}
-
-	/**
-	 * Sets the changed attribute.
-	 *
-	 * @param changedAttribute
-	 *            the new changed attribute
-	 */
-	public void setChangedAttribute(final Object changedAttribute)
-	{
-		this.changedAttribute = changedAttribute;
-	}
-
-	/**
-	 * Sets the source attribute.
-	 *
-	 * @param sourceAttribute
-	 *            the new source attribute
-	 */
-	public void setSourceAttribute(final Object sourceAttribute)
-	{
-		this.sourceAttribute = sourceAttribute;
-	}
 
 }

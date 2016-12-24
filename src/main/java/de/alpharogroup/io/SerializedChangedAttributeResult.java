@@ -26,9 +26,20 @@ package de.alpharogroup.io;
 
 import java.io.Serializable;
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
- * The class SerializedChangedAttributeResult.
+ * The class {@link SerializedChangedAttributeResult} is a bean class that is used for compare objects and see what changes are made.
  */
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Builder
 public class SerializedChangedAttributeResult implements Serializable
 {
 
@@ -46,36 +57,6 @@ public class SerializedChangedAttributeResult implements Serializable
 
 	/**
 	 * Instantiates a new changed attribute result.
-	 */
-	public SerializedChangedAttributeResult()
-	{
-		super();
-	}
-
-	/**
-	 * Instantiates a new changed attribute result.
-	 *
-	 * @param sourceAttribute
-	 *            the source attribute
-	 * @param changedAttribute
-	 *            the changed attribute
-	 */
-	public SerializedChangedAttributeResult(final Object sourceAttribute,
-		final Object changedAttribute)
-	{
-		this();
-		if (!(sourceAttribute instanceof Serializable)
-			|| !(changedAttribute instanceof Serializable))
-		{
-			throw new IllegalArgumentException(
-				"Arguments should implement the Serializable interface.");
-		}
-		this.sourceAttribute = sourceAttribute;
-		this.changedAttribute = changedAttribute;
-	}
-
-	/**
-	 * Instantiates a new changed attribute result.
 	 *
 	 * @param attributeName
 	 *            the attribute name
@@ -87,76 +68,16 @@ public class SerializedChangedAttributeResult implements Serializable
 	public SerializedChangedAttributeResult(final Object attributeName,
 		final Object sourceAttribute, final Object changedAttribute)
 	{
-		this(sourceAttribute, changedAttribute);
-		if (!(attributeName instanceof Serializable))
+		if (!(attributeName instanceof Serializable)
+			|| !(sourceAttribute instanceof Serializable)
+			|| !(changedAttribute instanceof Serializable))
 		{
 			throw new IllegalArgumentException(
 				"Arguments should implement the Serializable interface.");
 		}
 		this.attributeName = attributeName;
-	}
-
-	/**
-	 * Gets the attribute name.
-	 *
-	 * @return the attribute name
-	 */
-	public Object getAttributeName()
-	{
-		return attributeName;
-	}
-
-	/**
-	 * Gets the changed attribute.
-	 *
-	 * @return the changed attribute
-	 */
-	public Object getChangedAttribute()
-	{
-		return changedAttribute;
-	}
-
-	/**
-	 * Gets the source attribute.
-	 *
-	 * @return the source attribute
-	 */
-	public Object getSourceAttribute()
-	{
-		return sourceAttribute;
-	}
-
-	/**
-	 * Sets the attribute name.
-	 *
-	 * @param attributeName
-	 *            the new attribute name
-	 */
-	public void setAttributeName(final Object attributeName)
-	{
-		this.attributeName = attributeName;
-	}
-
-	/**
-	 * Sets the changed attribute.
-	 *
-	 * @param changedAttribute
-	 *            the new changed attribute
-	 */
-	public void setChangedAttribute(final Object changedAttribute)
-	{
-		this.changedAttribute = changedAttribute;
-	}
-
-	/**
-	 * Sets the source attribute.
-	 *
-	 * @param sourceAttribute
-	 *            the new source attribute
-	 */
-	public void setSourceAttribute(final Object sourceAttribute)
-	{
 		this.sourceAttribute = sourceAttribute;
+		this.changedAttribute = changedAttribute;
 	}
 
 }

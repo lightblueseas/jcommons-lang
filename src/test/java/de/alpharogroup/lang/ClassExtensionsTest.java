@@ -368,6 +368,17 @@ public class ClassExtensionsTest
 	}
 
 	@Test(enabled = true)
+	public void testForName() throws ClassNotFoundException
+	{
+		final Class<?> expected = this.getClass();
+		final String classname = "de.alpharogroup.lang.ClassExtensionsTest";
+		final Class<?> actual = ClassExtensions.forName(classname);
+
+		AssertJUnit.assertEquals(expected, actual);
+
+	}
+
+	@Test(enabled = true)
 	public void testScanClassesFromPackage() throws Exception, IOException
 	{
 		final List<File> directories = ClassExtensions

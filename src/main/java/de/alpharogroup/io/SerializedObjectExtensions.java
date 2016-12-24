@@ -100,7 +100,7 @@ public final class SerializedObjectExtensions
 	}
 
 	/**
-	 * Gets the changed data.
+	 * Gets only the changed data.
 	 *
 	 * @param sourceOjbect
 	 *            the source ojbect
@@ -131,15 +131,19 @@ public final class SerializedObjectExtensions
 			{
 				final Object sourceAttribute = beanDescription.get(key);
 				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.add(new SerializedChangedAttributeResult(key, sourceAttribute,
-					changedAttribute));
+				changedData.add(
+					SerializedChangedAttributeResult.builder()
+					.attributeName(key)
+					.sourceAttribute(sourceAttribute)
+					.changedAttribute(changedAttribute)
+					.build());
 			}
 		}
 		return changedData;
 	}
 
 	/**
-	 * Compares the given two objects and gets the changed data.
+	 * Compares the given two objects and gets only the changed data.
 	 *
 	 * @param sourceOjbect
 	 *            the source ojbect
@@ -170,8 +174,12 @@ public final class SerializedObjectExtensions
 			{
 				final Object sourceAttribute = beanDescription.get(key);
 				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.put(key, new SerializedChangedAttributeResult(key, sourceAttribute,
-					changedAttribute));
+				changedData.put(key,
+					SerializedChangedAttributeResult.builder()
+					.attributeName(key)
+					.sourceAttribute(sourceAttribute)
+					.changedAttribute(changedAttribute)
+					.build());
 			}
 		}
 		return changedData;

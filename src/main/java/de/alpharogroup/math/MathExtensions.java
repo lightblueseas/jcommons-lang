@@ -26,7 +26,7 @@ package de.alpharogroup.math;
 
 /**
  * Utility class for the use numbers.
- * 
+ *
  * @version 1.0
  * @author Asterios Raptis
  */
@@ -35,7 +35,7 @@ public class MathExtensions
 
 	/**
 	 * Gets the prime numbers for the given quantity.
-	 * 
+	 *
 	 * @param quantity
 	 *            The quantity.
 	 * @return An array from prime numbers.
@@ -64,7 +64,7 @@ public class MathExtensions
 
 	/**
 	 * Checks the given index is between the range from min and max.
-	 * 
+	 *
 	 * @param min
 	 *            The minimum.
 	 * @param max
@@ -87,7 +87,7 @@ public class MathExtensions
 
 	/**
 	 * Checks the given number is in range from min and max.
-	 * 
+	 *
 	 * @param min
 	 *            The minimum.
 	 * @param max
@@ -103,7 +103,7 @@ public class MathExtensions
 
 	/**
 	 * Checks if the number is negative.
-	 * 
+	 *
 	 * @param number
 	 *            The number.
 	 * @return Returns true if the number is negative otherwise false.
@@ -114,8 +114,32 @@ public class MathExtensions
 	}
 
 	/**
+	 * Checks if the number is negative.
+	 *
+	 * @param number
+	 *            The number.
+	 * @return Returns true if the number is negative otherwise false.
+	 */
+	public static boolean isNegative(final long number)
+	{
+		return !isPositive(number);
+	}
+
+	/**
+	 * Checks if the number is negative.
+	 *
+	 * @param number
+	 *            The number.
+	 * @return Returns true if the number is negative otherwise false.
+	 */
+	public static boolean isNegative(final double number)
+	{
+		return !isPositive(number);
+	}
+
+	/**
 	 * Checks if the number is positive.
-	 * 
+	 *
 	 * @param number
 	 *            The number.
 	 * @return Returns true if the number is positive otherwise false.
@@ -131,8 +155,42 @@ public class MathExtensions
 	}
 
 	/**
+	 * Checks if the number is positive.
+	 *
+	 * @param number
+	 *            The number.
+	 * @return Returns true if the number is positive otherwise false.
+	 */
+	public static boolean isPositive(final long number)
+	{
+		boolean positive = false;
+		if (0 < number)
+		{
+			positive = true;
+		}
+		return positive;
+	}
+
+	/**
+	 * Checks if the number is positive.
+	 *
+	 * @param number
+	 *            The number.
+	 * @return Returns true if the number is positive otherwise false.
+	 */
+	public static boolean isPositive(final double number)
+	{
+		boolean positive = false;
+		if (0.0d < number)
+		{
+			positive = true;
+		}
+		return positive;
+	}
+
+	/**
 	 * Checks if the given int is a prime number.
-	 * 
+	 *
 	 * @param n
 	 *            The int to check.
 	 * @return Returns true if the int is a prime number otherwise false.
@@ -149,7 +207,7 @@ public class MathExtensions
 
 	/**
 	 * Checks if the number is a prime number.
-	 * 
+	 *
 	 * @param number
 	 *            The number.
 	 * @return Returns true if the number is a prime number otherwise false.
@@ -166,7 +224,7 @@ public class MathExtensions
 
 	/**
 	 * Prints all prime numbers till the given number.
-	 * 
+	 *
 	 * @param noOfPrimes
 	 *            The limit.
 	 * @return an array of all prime numbers till the given number.

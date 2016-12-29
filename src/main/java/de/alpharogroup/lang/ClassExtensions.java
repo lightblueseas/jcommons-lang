@@ -49,7 +49,7 @@ import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.ExtensionMethod;
 
 /**
- * The class ClassExtensions provides extension methods for the class {@link Class}.
+ * The class {@link ClassExtensions} provides extension methods for the class {@link Class}.
  */
 @ExtensionMethod(StringExtensions.class)
 public final class ClassExtensions

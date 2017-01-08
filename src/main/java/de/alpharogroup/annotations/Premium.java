@@ -22,47 +22,15 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang;
+package de.alpharogroup.annotations;
+
+import java.lang.annotation.Documented;
 
 /**
- * The enum {@link ClassType} defines the types a class can have.
+ * The annotation {@link Premium} can tag a class or field that can be used only with a premium
+ * permission or version.
  */
-public enum ClassType
-{
+@Documented
+public @interface Premium {
 
-	/** The annotation class type. */
-	ANNOTATION,
-
-	/** The anonymous class type. */
-	ANONYMOUS,
-
-	/** The array class type. */
-	ARRAY,
-
-	/** The collection class type. */
-	COLLECTION,
-
-	/** The enum class type. */
-	ENUM,
-
-	/** The interface class type. */
-	INTERFACE,
-
-	/** The local class type. */
-	LOCAL,
-
-	/** The map class type. */
-	MAP,
-
-	/** The member class type. */
-	MEMBER,
-
-	/** The primitive class type. */
-	PRIMITIVE,
-
-	/** The synthetic class type. */
-	SYNTHETIC,
-
-	/** The default class type. */
-	DEFAULT;
 }

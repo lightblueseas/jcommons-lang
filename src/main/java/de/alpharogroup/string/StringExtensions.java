@@ -332,7 +332,7 @@ public class StringExtensions
 			return returnString;
 		}
 	}
-	
+
 
 	/**
 	 * Converts the given chararray to a bytearray.
@@ -635,7 +635,7 @@ public class StringExtensions
 	 */
 	public static String[] removeEmptyString(final String[] words)
 	{
-		final List<String> al = new ArrayList<String>();
+		final List<String> al = new ArrayList<>();
 		for (int i = 0; i < words.length; i++)
 		{
 			if (!words[i].isEmpty())
@@ -743,5 +743,7 @@ public class StringExtensions
 		final Matcher matcher = pattern.matcher(input);
 		return matcher.replaceAll(replace);
 	}
+
+
 
 }

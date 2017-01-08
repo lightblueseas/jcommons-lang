@@ -27,6 +27,7 @@ package de.alpharogroup.io;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 import org.testng.AssertJUnit;
@@ -52,7 +53,7 @@ public class StringOutputStreamTest
 	{
 		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
 		final File writeInMe = new File(".", "testWriteBirthdayToFile.log");
-		FileUtils.writeStringToFile(writeInMe, expected);
+		FileUtils.writeStringToFile(writeInMe, expected, Charset.defaultCharset());
 		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
 		final StringOutputStream stringOutput = new StringOutputStream();
 

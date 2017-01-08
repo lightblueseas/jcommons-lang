@@ -83,14 +83,14 @@ public final class CopyObjectExtensions
 	 *            the original object.
 	 * @param destination
 	 *            the destination object.
-	 * @return the destination object.
+	 * @return the destination object or null if the copy process failed.
 	 */
 	public static final <ORIGINAL, DESTINATION> DESTINATION copyQuietly(final ORIGINAL original,
 		final DESTINATION destination)
 	{
 		try
 		{
-			copy(original, destination);
+			return copy(original, destination);
 		}
 		catch (final IllegalAccessException e)
 		{
@@ -120,7 +120,6 @@ public final class CopyObjectExtensions
 				+ "relevant converter has not been registered.", e);
 			return null;
 		}
-		return destination;
 	}
 
 	/**

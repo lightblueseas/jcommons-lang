@@ -25,7 +25,6 @@
 package de.alpharogroup.lang.object;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -52,11 +51,9 @@ public class CopyObjectExtensionsTest
 	@Test(enabled = true)
 	public void testCopy() throws IllegalAccessException, InvocationTargetException
 	{
-		final DateDecorator dateDecorator = new DateDecorator();
-		final Date now = CreateDateExtensions.now();
-		dateDecorator.setDate(now);
+		final DateDecorator dateDecorator = DateDecorator.builder().date(CreateDateExtensions.now()).build();
 
-		final SqlTimestampDecorator timestampDecorator = new SqlTimestampDecorator();
+		final SqlTimestampDecorator timestampDecorator = SqlTimestampDecorator.builder().build();
 
 		CopyObjectExtensions.copy(dateDecorator, timestampDecorator);
 
@@ -65,12 +62,12 @@ public class CopyObjectExtensionsTest
 
 		final Employee expected = Employee.builder().person(person).id("23").build();
 
-		final Employee actual = new Employee();
-		CopyObjectExtensions.copyQuietly(actual, expected);
-		System.out.println(actual);
+		final Employee actual = Employee.builder().build();
+		CopyObjectExtensions.copyQuietly(expected, actual);
 
-		AssertJUnit.assertEquals(actual.getId(), expected.getId());
-		AssertJUnit.assertEquals(actual.getPerson(), expected.getPerson());
+		AssertJUnit.assertEquals(expected.getId(), actual.getId());
+		AssertJUnit.assertEquals(expected.getPerson(), actual.getPerson());
+		AssertJUnit.assertEquals(expected, actual);
 
 	}
 

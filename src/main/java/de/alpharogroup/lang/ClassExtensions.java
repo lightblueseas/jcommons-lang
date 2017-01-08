@@ -49,7 +49,7 @@ import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.ExtensionMethod;
 
 /**
- * The class ClassExtensions provides extension methods for the class {@link Class}.
+ * The class {@link ClassExtensions} provides extension methods for the class {@link Class}.
  */
 @ExtensionMethod(StringExtensions.class)
 public final class ClassExtensions
@@ -101,7 +101,11 @@ public final class ClassExtensions
 			clazz = Class.forName(className, true, getClassLoader());
 			if (clazz == null)
 			{
-				throw throwable;
+				clazz = Class.forName(className, false, getClassLoader());
+				if (clazz == null)
+				{
+					throw throwable;
+				}
 			}
 		}
 		return clazz;
@@ -195,6 +199,19 @@ public final class ClassExtensions
 		String className = clazz.getName();
 		className = className.substring(className.lastIndexOf('.') + 1)
 			+ FileExtension.CLASS.getExtension();
+		return className;
+	}
+
+	/**
+	 * Gets the classname from the given class.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return The classname.
+	 */
+	public static String getClassname(final Class<?> clazz)
+	{
+		final String className = clazz.getName();
 		return className;
 	}
 

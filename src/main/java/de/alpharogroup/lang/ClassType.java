@@ -25,19 +25,44 @@
 package de.alpharogroup.lang;
 
 /**
- * The enum {@link ClassType} defines the types a class can have. 
+ * The enum {@link ClassType} defines the types a class can have.
  */
-public enum ClassType {
-  ANNOTATION,
-  ANONYMOUS,
-  ARRAY,
-  COLLECTION,
-  ENUM,
-  INTERFACE,
-  LOCAL,
-  MAP,
-  MEMBER,
-  PRIMITIVE,
-  SYNTHETIC,
-  DEFAULT;
+public enum ClassType
+{
+
+	/** The annotation class type. */
+	ANNOTATION,
+
+	/** The anonymous class type. */
+	ANONYMOUS,
+
+	/** The array class type. */
+	ARRAY,
+
+	/** The collection class type. */
+	COLLECTION,
+
+	/** The enum class type. */
+	ENUM,
+
+	/** The interface class type. */
+	INTERFACE,
+
+	/** The local class type. */
+	LOCAL,
+
+	/** The map class type. */
+	MAP,
+
+	/** The member class type. */
+	MEMBER,
+
+	/** The primitive class type. */
+	PRIMITIVE,
+
+	/** The synthetic class type. */
+	SYNTHETIC,
+
+	/** The default class type. */
+	DEFAULT;
 }

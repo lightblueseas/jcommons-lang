@@ -28,7 +28,27 @@ import java.util.List;
 
 import javax.lang.model.element.Modifier;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * The class {@link FieldModel}.
+ */
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class FieldModel
 {
+
+	/** The modifiers. */
 	List<Modifier> modifiers;
 }

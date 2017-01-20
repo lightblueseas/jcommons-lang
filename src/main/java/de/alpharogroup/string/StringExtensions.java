@@ -745,5 +745,27 @@ public class StringExtensions
 	}
 
 
+	/**
+	 * Split the given {@link String} in parts in the given fixed length.
+	 *
+	 * @param input
+	 *            the input
+	 * @param fixedLength
+	 *            the fixed length
+	 * @return the list with the splitted {@link String} objects
+	 */
+	public static List<String> splitByFixedLength(final String input, final int fixedLength)
+	{
+		final List<String> parts = new ArrayList<>();
+		int beginIndex = 0;
+		while (beginIndex < input.length())
+		{
+			final int endIndex = Math.min(beginIndex + fixedLength, input.length());
+			final String part = input.substring(beginIndex, endIndex);
+			parts.add(part);
+			beginIndex += fixedLength;
+		}
+		return parts;
+	}
 
 }

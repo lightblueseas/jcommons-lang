@@ -30,105 +30,52 @@ import java.util.Map;
 
 import javax.lang.model.element.Modifier;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * The class {@link MethodModel}.
+ */
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MethodModel
 {
 
+	/** The method annotations. */
 	private List<AnnotationModel> methodAnnotations;
 
+	/** The modifiers. */
 	List<Modifier> modifiers;
 
+	/** The generic types. */
 	private List<String> genericTypes;
 
+	/** The return type. */
 	private String returnType;
 
+	/** The method name. */
 	private String methodName;
 
+	/** The parameters. */
 	private List<String> parameters;
 
+	/** The parameter annotations. */
 	private Map<String, List<String>> parameterAnnotations;
 
-	private boolean staticFlag = false;
+	/** The static flag. */
+	private boolean staticFlag;
 
-	private boolean synchronizedFlag = false;
-
-	public List<String> getGenericTypes()
-	{
-		return genericTypes;
-	}
-
-	public List<AnnotationModel> getMethodAnnotations()
-	{
-		return methodAnnotations;
-	}
-
-	public String getMethodName()
-	{
-		return methodName;
-	}
-
-	public Map<String, List<String>> getParameterAnnotations()
-	{
-		return parameterAnnotations;
-	}
-
-	public List<String> getParameters()
-	{
-		return parameters;
-	}
-
-	public String getReturnType()
-	{
-		return returnType;
-	}
-
-	public boolean isStaticFlag()
-	{
-		return staticFlag;
-	}
-
-	public boolean isSynchronizedFlag()
-	{
-		return synchronizedFlag;
-	}
-
-	public void setGenericTypes(final List<String> genericTypes)
-	{
-		this.genericTypes = genericTypes;
-	}
-
-	public void setMethodAnnotations(final List<AnnotationModel> methodAnnotations)
-	{
-		this.methodAnnotations = methodAnnotations;
-	}
-
-	public void setMethodName(final String methodName)
-	{
-		this.methodName = methodName;
-	}
-
-	public void setParameterAnnotations(final Map<String, List<String>> parameterAnnotations)
-	{
-		this.parameterAnnotations = parameterAnnotations;
-	}
-
-	public void setParameters(final List<String> parameters)
-	{
-		this.parameters = parameters;
-	}
-
-	public void setReturnType(final String returnType)
-	{
-		this.returnType = returnType;
-	}
-
-	public void setStaticFlag(final boolean staticFlag)
-	{
-		this.staticFlag = staticFlag;
-	}
-
-	public void setSynchronizedFlag(final boolean synchronizedFlag)
-	{
-		this.synchronizedFlag = synchronizedFlag;
-	}
+	/** The synchronized flag. */
+	private boolean synchronizedFlag;
 
 }

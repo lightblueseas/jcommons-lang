@@ -185,4 +185,48 @@ public final class ReflectionExtensions
 		return newInstance((Class<T>)Class.forName(obj.getClass().getCanonicalName()));
 	}
 
+	/**
+	 * Gets the {@link Field} that match to the given field name that exists in
+	 * the given object.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
+	 * @param fieldName
+	 *            the field name
+	 * @return the declared field
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 */
+	public static <T> Field getDeclaredField(final T object, final String fieldName)
+			throws NoSuchFieldException, SecurityException 
+	{
+		Field field = object.getClass().getDeclaredField(fieldName);
+		return field;
+	}
+
+	/**
+	 * Gets the {@link Field} that match to the given field name that exists in
+	 * the given class.
+	 *
+	 * @param cls
+	 *            the cls
+	 * @param fieldName
+	 *            the field name
+	 * @return the declared field
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 */
+	public static Field getDeclaredField(final Class<?> cls, final String fieldName)
+			throws NoSuchFieldException, SecurityException 
+	{
+		Field field = cls.getDeclaredField(fieldName);
+		return field;
+	}
+
 }

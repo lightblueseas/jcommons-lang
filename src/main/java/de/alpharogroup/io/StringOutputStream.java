@@ -96,6 +96,12 @@ public class StringOutputStream extends OutputStream implements Serializable
 		byteBuffer.write(b);
 	}
 
+	/**
+	 * Gets the charset that is used for write in this {@link StringOutputStream} object.
+	 * Note: if not set the default charset of "UTF-8" will be taken.
+	 *
+	 * @return the charset that is used for write in this {@link StringOutputStream} object.
+	 */
 	public Charset getCharset()
 	{
 		if(charset == null) {
@@ -103,4 +109,17 @@ public class StringOutputStream extends OutputStream implements Serializable
 		}
 		return charset;
 	}
+
+	/**
+	 * Write the given {@link String} object to this {@link StringOutputStream} object.
+	 *
+	 * @param string the string to write.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public void write(final String value) throws IOException
+	{
+		write(value.getBytes());
+	}
+
+
 }

@@ -113,7 +113,7 @@ public class StringOutputStream extends OutputStream implements Serializable
 	/**
 	 * Write the given {@link String} object to this {@link StringOutputStream} object.
 	 *
-	 * @param string the string to write.
+	 * @param value the value
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void write(final String value) throws IOException

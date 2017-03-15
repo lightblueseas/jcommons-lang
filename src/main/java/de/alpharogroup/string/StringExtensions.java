@@ -54,6 +54,33 @@ public class StringExtensions
 	}
 
 	/**
+	 * Transforms the given {@link String} that holds successive numbers delimited with a delimiter
+	 * into an integer array. Note: A valid {@link String} object holds only integer values
+	 * delimited with the given delimiter. Example: A valid {@link String} object is "12, 13, 14,
+	 * 16, 17, 18" that results in an integer array of [12, 13, 14, 16, 17, 18]
+	 *
+	 * @param integerArrayAsString
+	 *            the integer array as string
+	 * @param delimiter
+	 *            the delimiter
+	 * @return the created integer array from the given {@link String}
+	 * @throws NumberFormatException
+	 *             is thrown if the given {@link String} is not valid.
+	 */
+	public static int[] toIntegerArray(String integerArrayAsString, String delimiter)
+		throws NumberFormatException
+	{
+		String[] splittedNumbers = integerArrayAsString.replaceAll("\\s", "").split(delimiter);
+		int[] integerArray = new int[splittedNumbers.length];
+		for (int i = 0; i < splittedNumbers.length; i++)
+		{
+			int currentNumber = Integer.parseInt(splittedNumbers[i]);
+			integerArray[i] = currentNumber;
+		}
+		return integerArray;
+	}
+
+	/**
 	 * Puts to the given String at the start and end quotes.
 	 *
 	 * @param s

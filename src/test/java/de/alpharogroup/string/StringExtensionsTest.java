@@ -59,21 +59,21 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		super.tearDown();
 	}
-	
+
 	/**
 	 * Test method for {@link StringExtensions#toIntegerArray(String, String)}.
 	 */
 	@Test
 	public void testToIntegerArray()
 	{
-		String stringArray1 = "11, 12, 13, 14, 15, 16, 17, 18";
-		
-		int[] expectedIntArray = {11, 12, 13, 14, 15, 16, 17, 18};
-		int[] intArray = StringUtil.toIntegerArray(stringArray1, ",");
+		final String stringArray1 = "11, 12, 13, 14, 15, 16, 17, 18";
+
+		final int[] expectedIntArray = {11, 12, 13, 14, 15, 16, 17, 18};
+		final int[] intArray = StringExtensions.toIntegerArray(stringArray1, ",");
 		for (int i = 0; i < intArray.length; i++)
 		{
-			assertTrue(intArray[i] == expectedIntArray[i]);
-		}		
+			AssertJUnit.assertTrue(intArray[i] == expectedIntArray[i]);
+		}
 	}
 
 	@Test(enabled = true)

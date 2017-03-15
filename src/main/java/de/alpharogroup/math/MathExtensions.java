@@ -34,6 +34,42 @@ public class MathExtensions
 {
 
 	/**
+	 * Checks if the given {@link Integer} nextNumber is next to the given {@link Integer} number.
+	 * <br> 
+	 * Example: <br>
+	 * isNext(1, 2); => true;<br>
+	 * isNext(1, 3); => false;<br>
+	 * isNext(4, 3); => false;<br>
+	 * 
+	 * @param number the number
+	 * @param nextNumber the next number
+	 * @return true, if the given {@link Integer} nextNumber is next to the given {@link Integer} number otherwise false.
+	 */
+	public static boolean isNext(Integer number, Integer nextNumber)
+	{
+		int next = number + 1;
+		return next == nextNumber;
+	}
+
+	/**
+	 * Checks if the given {@link Integer} previousNumber is previous to the given {@link Integer} number.
+	 * <br> 
+	 * Example: <br>
+	 * isPrevious(1, 2); => false;<br>
+	 * isPrevious(1, 3); => false;<br>
+	 * isPrevious(4, 3); => true;<br>
+	 * 
+	 * @param number the number
+	 * @param previousNumber the previous number
+	 * @return true, if the given {@link Integer} previousNumber is previous to the given {@link Integer} number otherwise false.
+	 */
+	public static boolean isPrevious(Integer number, Integer previousNumber)
+	{
+		int previous = number - 1;
+		return previous == previousNumber;
+	}
+
+	/**
 	 * Gets the prime numbers for the given quantity.
 	 *
 	 * @param quantity

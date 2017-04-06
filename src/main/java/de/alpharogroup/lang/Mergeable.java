@@ -38,6 +38,7 @@ public interface Mergeable<T>
 	 *
 	 * @param object
 	 *            the object to merge with this one
+	 * @return the merged object
 	 */
-	public void merge(T object);
+	public T merge(T object);
 }

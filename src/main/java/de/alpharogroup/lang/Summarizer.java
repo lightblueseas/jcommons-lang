@@ -24,7 +24,7 @@
  */
 package de.alpharogroup.lang;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * A class implements the {@link Summarizer} interface indicates that it can merge single or a
@@ -37,14 +37,14 @@ public interface Summarizer<T>
 {
 
 	/**
-	 * Merge the given <code>collection</code> with the <code>objects</code> that can be merged and
-	 * return the resulted merged <code>objects</code> in a <code>collection</code>.
+	 * Merge the given <code>list</code> with the <code>objects</code> that can be merged and
+	 * return the resulted merged <code>objects</code> in a <code>list</code>.
 	 *
-	 * @param collection
-	 *            the <code>collection</code> with the <code>objects</code> to merge
-	 * @return the collection
+	 * @param list
+	 *            the <code>list</code> with the <code>objects</code> to merge
+	 * @return the list with the merged objects
 	 */
-	Collection<T> merge(Collection<T> collection);
+	List<T> merge(List<T> list);
 
 	/**
 	 * Merge the given <code>object</code> with <code>other</code> object.

@@ -190,7 +190,7 @@ public final class CloneObjectExtensions
 		// the BeanUtils.copyProperties() method.
 		if (clone == null)
 		{
-			clone = ReflectionExtensions.getNewInstance(object);
+			clone = ReflectionExtensions.newInstance(object);
 			BeanUtils.copyProperties(clone, object);
 		}
 		return clone;

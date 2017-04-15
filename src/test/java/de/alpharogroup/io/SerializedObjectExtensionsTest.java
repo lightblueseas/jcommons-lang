@@ -63,7 +63,8 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#copySerializedObject(java.io.Serializable)} .
+	 * {@link de.alpharogroup.io.SerializedObjectExtensions#copySerializedObject(java.io.Serializable)}
+	 * .
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -82,7 +83,8 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)} .
+	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)}
+	 * .
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -95,8 +97,8 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	{
 		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectExtensions
-			.writeSerializedObjectToFile(birthdayFromNiko, writeInMe);
+		this.result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
+			writeInMe);
 		AssertJUnit.assertTrue("", this.result);
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
@@ -129,8 +131,8 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectExtensions
-			.writeSerializedObjectToFile(birthdayFromNiko, writeInMe);
+		this.result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
+			writeInMe);
 		AssertJUnit.assertTrue("", this.result);
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);

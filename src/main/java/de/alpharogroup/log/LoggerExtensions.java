@@ -24,12 +24,12 @@
  */
 package de.alpharogroup.log;
 
-import lombok.experimental.UtilityClass;
-
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * Logger extensions for appenders.

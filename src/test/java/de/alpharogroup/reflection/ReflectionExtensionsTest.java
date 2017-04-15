@@ -39,8 +39,8 @@ public class ReflectionExtensionsTest
 	}
 
 	@Test
-	public void testNewInstanceClassOfT() throws InstantiationException, IllegalAccessException,
-		ClassNotFoundException
+	public void testNewInstanceClassOfT()
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException
 	{
 		final Class<Person> clazz = Person.class;
 		final Person actual = ReflectionExtensions.newInstance(clazz);
@@ -48,8 +48,8 @@ public class ReflectionExtensionsTest
 	}
 
 	@Test
-	public void testNewInstanceT() throws InstantiationException, IllegalAccessException,
-		ClassNotFoundException
+	public void testNewInstanceT()
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException
 	{
 		final A a = new A();
 		final A actual = ReflectionExtensions.newInstance(a);

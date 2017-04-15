@@ -37,8 +37,8 @@ public interface Summarizer<T>
 {
 
 	/**
-	 * Merge the given <code>list</code> with the <code>objects</code> that can be merged and
-	 * return the resulted merged <code>objects</code> in a <code>list</code>.
+	 * Merge the given <code>list</code> with the <code>objects</code> that can be merged and return
+	 * the resulted merged <code>objects</code> in a <code>list</code>.
 	 *
 	 * @param list
 	 *            the <code>list</code> with the <code>objects</code> to merge

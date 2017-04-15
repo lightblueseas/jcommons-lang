@@ -126,6 +126,8 @@ public final class ReflectionExtensions
 	/**
 	 * Creates a new instance from the same type as the given object.
 	 *
+	 * @param <T>
+	 *            the generic type of the given object
 	 * @param obj
 	 *            the obj
 	 * @return the new instance
@@ -135,7 +137,7 @@ public final class ReflectionExtensions
 	 *             the instantiation exception
 	 * @throws IllegalAccessException
 	 *             the illegal access exception
-	 *             @deprecated use instead {@link ReflectionExtensions#newInstance(Object)}
+	 * @deprecated use instead {@link ReflectionExtensions#newInstance(Object)}
 	 */
 	@Deprecated
 	public static <T> T getNewInstance(final T obj)

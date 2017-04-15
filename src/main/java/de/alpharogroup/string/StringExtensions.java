@@ -54,33 +54,6 @@ public class StringExtensions
 	}
 
 	/**
-	 * Transforms the given {@link String} that holds successive numbers delimited with a delimiter
-	 * into an integer array. Note: A valid {@link String} object holds only integer values
-	 * delimited with the given delimiter. Example: A valid {@link String} object is "12, 13, 14,
-	 * 16, 17, 18" that results in an integer array of [12, 13, 14, 16, 17, 18]
-	 *
-	 * @param integerArrayAsString
-	 *            the integer array as string
-	 * @param delimiter
-	 *            the delimiter
-	 * @return the created integer array from the given {@link String}
-	 * @throws NumberFormatException
-	 *             is thrown if the given {@link String} is not valid.
-	 */
-	public static int[] toIntegerArray(String integerArrayAsString, String delimiter)
-		throws NumberFormatException
-	{
-		String[] splittedNumbers = integerArrayAsString.replaceAll("\\s", "").split(delimiter);
-		int[] integerArray = new int[splittedNumbers.length];
-		for (int i = 0; i < splittedNumbers.length; i++)
-		{
-			int currentNumber = Integer.parseInt(splittedNumbers[i]);
-			integerArray[i] = currentNumber;
-		}
-		return integerArray;
-	}
-
-	/**
 	 * Puts to the given String at the start and end quotes.
 	 *
 	 * @param s
@@ -91,275 +64,6 @@ public class StringExtensions
 	{
 		return "'" + s + "'";
 	}
-
-
-	/**
-	 * Sets the first character from the given string to lower case and returns it. Example:<br>
-	 * Given fieldName: UserName <br>
-	 * Result: userName
-	 *
-	 * @param fieldName
-	 *            The String to modify.
-	 * @return The modified string.
-	 */
-	public static final String firstCharacterToLowerCase(final String fieldName)
-	{
-		String firstCharacter = fieldName.substring(0, 1);
-		firstCharacter = firstCharacter.toLowerCase();
-		final char[] fc = firstCharacter.toCharArray();
-		final char[] fn = fieldName.toCharArray();
-		fn[0] = fc[0];
-		return new String(fn);
-	}
-
-
-	/**
-	 * Sets the first character from the given string to upper case and returns it. Example:<br>
-	 * Given fieldName: userName <br>
-	 * Result: UserName
-	 *
-	 * @param fieldName
-	 *            The String to modify.
-	 * @return The modified string.
-	 */
-	public static final String firstCharacterToUpperCase(final String fieldName)
-	{
-		String firstCharacter = fieldName.substring(0, 1);
-		firstCharacter = firstCharacter.toUpperCase();
-		final char[] fc = firstCharacter.toCharArray();
-		final char[] fn = fieldName.toCharArray();
-		fn[0] = fc[0];
-		return new String(fn);
-	}
-
-
-	/**
-	 * The method isNullOrEmpty(String) checks if the given String is empty or null.
-	 *
-	 * @param str
-	 *            The String to check.
-	 * @return true if the given String is empty or null otherwise false.
-	 */
-	public static final boolean isNullOrEmpty(final String str)
-	{
-		return str == null || str.length() == 0;
-	}
-
-
-	/**
-	 * Checks if the given String is an Number.
-	 *
-	 * @param testString
-	 *            The String to check.
-	 * @return true if the given String is a number otherwise false.
-	 */
-	public static final boolean isNumber(final String testString)
-	{
-		if (null == testString)
-		{
-			return false;
-		}
-		for (int i = 0; i < testString.length(); i++)
-		{
-			if (Character.isDigit(testString.charAt(i)) == false)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-
-	/**
-	 * Gets the last character of the given String object.
-	 *
-	 * @param str
-	 *            the str
-	 * @return the last character
-	 */
-	public static String lastCharacter(final String str)
-	{
-		if (str == null || str.length() == 0)
-		{
-			return "";
-		}
-		return str.substring(str.length() - 1);
-	}
-
-	/**
-	 * Removes from the given String at the start and end quotes.
-	 *
-	 * @param s
-	 *            The String to handle.
-	 * @return The String without quotes.
-	 */
-	public static final String removeQuotationMarks(final String s)
-	{
-		return s.substring(1, s.length() - 1);
-	}
-
-
-	/**
-	 * Replaces the last occurrence of a String within another String.
-	 *
-	 * @param original
-	 *            The String to search.
-	 * @param findString
-	 *            The search pattern.
-	 * @param replacement
-	 *            Replace with that String.
-	 * @return Returns a new String with the replaced Strings.
-	 */
-	public static final String replaceLast(final String original, final String findString,
-		final String replacement)
-	{
-		final int index = original.lastIndexOf(findString);
-		if (index == -1)
-		{
-			return original;
-		}
-		final StringBuffer originalFiltered = new StringBuffer();
-		originalFiltered.append(original.substring(0, index));
-		originalFiltered.append(replacement);
-		originalFiltered.append(original.substring(index + findString.length()));
-		final String result = originalFiltered.toString().trim();
-		return result;
-	}
-
-	/**
-	 * To hex.
-	 *
-	 * @param i
-	 *            the i
-	 * @return the char
-	 */
-	private static char toHex(final int i)
-	{
-		return HEXADECIMAL_DIGITS[i & 0xF];
-	}
-
-	/**
-	 * Converts all characters from the given String to unicodes characters encoded like &#92;uxxxx.
-	 *
-	 * @param toUnicode
-	 *            The String to convert.
-	 * @param toLowerCase
-	 *            If true the letters from the unicode characters are lower case.
-	 * @return The converted String.
-	 */
-	public static String toUnicode(final String toUnicode, final boolean toLowerCase)
-	{
-		final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < toUnicode.length(); i++)
-		{
-			String hex = Integer.toHexString(toUnicode.codePointAt(i));
-			if (toLowerCase)
-			{
-				hex = hex.toLowerCase();
-			}
-			else
-			{
-				hex = hex.toUpperCase();
-			}
-			final String hexWithZeros = "0000" + hex;
-			final String hexCodeWithLeadingZeros = hexWithZeros
-				.substring(hexWithZeros.length() - 4);
-			sb.append("\\u" + hexCodeWithLeadingZeros);
-		}
-		return sb.toString();
-	}
-
-	/**
-	 * Converts all characters from the given String to unicodes characters encoded like &#92;uxxxx.
-	 *
-	 * @param s
-	 *            The String to convert.
-	 * @param toLowerCase
-	 *            If true the letters from the unicode characters are lower case.
-	 * @return The converted String.
-	 */
-	public static String toUnicodeChars(final String s, final boolean toLowerCase)
-	{
-		if (s == null || s.length() == 0)
-		{
-			return s;
-		}
-		final int length = s.length();
-		final int sbLength = length * 2;
-		final StringBuilder sb = new StringBuilder(sbLength);
-		for (int i = 0; i < length; i++)
-		{
-			final char c = s.charAt(i);
-			if (c > 61 && c < 127)
-			{
-				if (c == '\\')
-				{
-					sb.append('\\');
-					sb.append('\\');
-					continue;
-				}
-				sb.append(c);
-				continue;
-			}
-			switch (c)
-			{
-				case '\f' :
-					sb.append('\\');
-					sb.append('f');
-					break;
-				case '\n' :
-					sb.append('\\');
-					sb.append('n');
-					break;
-				case '\r' :
-					sb.append('\\');
-					sb.append('r');
-					break;
-				case '\t' :
-					sb.append('\\');
-					sb.append('t');
-					break;
-				case ' ' :
-					if (i == 0)
-					{
-						sb.append('\\');
-					}
-					sb.append(' ');
-					break;
-				case ':' :
-				case '#' :
-				case '=' :
-				case '!' :
-					sb.append('\\');
-					sb.append(c);
-					break;
-				default :
-					if (c < 0x0020 || c > 0x007e)
-					{
-						sb.append('\\');
-						sb.append('u');
-						sb.append(toHex(c >> 12 & 0xF));
-						sb.append(toHex(c >> 8 & 0xF));
-						sb.append(toHex(c >> 4 & 0xF));
-						sb.append(toHex(c & 0xF));
-					}
-					else
-					{
-						sb.append(c);
-					}
-			}
-		}
-		final String returnString = sb.toString();
-		if (toLowerCase)
-		{
-			return returnString.toLowerCase();
-		}
-		else
-		{
-			return returnString;
-		}
-	}
-
 
 	/**
 	 * Converts the given chararray to a bytearray.
@@ -377,6 +81,7 @@ public class StringExtensions
 		}
 		return result;
 	}
+
 
 	/**
 	 * Convert the given byte array to char array.
@@ -398,6 +103,7 @@ public class StringExtensions
 		}
 		return result;
 	}
+
 
 	/**
 	 * Converts the given unicode String object to character object. <br>
@@ -496,6 +202,7 @@ public class StringExtensions
 		return c;
 	}
 
+
 	/**
 	 * Decode hex.
 	 *
@@ -510,6 +217,7 @@ public class StringExtensions
 		return org.apache.commons.codec.binary.Hex.decodeHex(data);
 	}
 
+
 	/**
 	 * Encode hex.
 	 *
@@ -521,6 +229,46 @@ public class StringExtensions
 	{
 		return org.apache.commons.codec.binary.Hex.encodeHex(data, true);
 	}
+
+
+	/**
+	 * Sets the first character from the given string to lower case and returns it. Example:<br>
+	 * Given fieldName: UserName <br>
+	 * Result: userName
+	 *
+	 * @param fieldName
+	 *            The String to modify.
+	 * @return The modified string.
+	 */
+	public static final String firstCharacterToLowerCase(final String fieldName)
+	{
+		String firstCharacter = fieldName.substring(0, 1);
+		firstCharacter = firstCharacter.toLowerCase();
+		final char[] fc = firstCharacter.toCharArray();
+		final char[] fn = fieldName.toCharArray();
+		fn[0] = fc[0];
+		return new String(fn);
+	}
+
+	/**
+	 * Sets the first character from the given string to upper case and returns it. Example:<br>
+	 * Given fieldName: userName <br>
+	 * Result: UserName
+	 *
+	 * @param fieldName
+	 *            The String to modify.
+	 * @return The modified string.
+	 */
+	public static final String firstCharacterToUpperCase(final String fieldName)
+	{
+		String firstCharacter = fieldName.substring(0, 1);
+		firstCharacter = firstCharacter.toUpperCase();
+		final char[] fc = firstCharacter.toCharArray();
+		final char[] fn = fieldName.toCharArray();
+		fn[0] = fc[0];
+		return new String(fn);
+	}
+
 
 	/**
 	 * Gets the Attribut-name without brackets. For example: If "indio[5][1]" is the given String
@@ -588,6 +336,7 @@ public class StringExtensions
 		return returnString;
 	}
 
+
 	/**
 	 * The Method getStringBeforeUnderscore(String) gets the substring before the first underscore.
 	 * For example:Assume that element=foobar_value then the result string is "foobar".
@@ -623,6 +372,57 @@ public class StringExtensions
 			value = defaultValue;
 		}
 		return value;
+	}
+
+	/**
+	 * The method isNullOrEmpty(String) checks if the given String is empty or null.
+	 *
+	 * @param str
+	 *            The String to check.
+	 * @return true if the given String is empty or null otherwise false.
+	 */
+	public static final boolean isNullOrEmpty(final String str)
+	{
+		return str == null || str.length() == 0;
+	}
+
+	/**
+	 * Checks if the given String is an Number.
+	 *
+	 * @param testString
+	 *            The String to check.
+	 * @return true if the given String is a number otherwise false.
+	 */
+	public static final boolean isNumber(final String testString)
+	{
+		if (null == testString)
+		{
+			return false;
+		}
+		for (int i = 0; i < testString.length(); i++)
+		{
+			if (Character.isDigit(testString.charAt(i)) == false)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Gets the last character of the given String object.
+	 *
+	 * @param str
+	 *            the str
+	 * @return the last character
+	 */
+	public static String lastCharacter(final String str)
+	{
+		if (str == null || str.length() == 0)
+		{
+			return "";
+		}
+		return str.substring(str.length() - 1);
 	}
 
 	/**
@@ -691,6 +491,18 @@ public class StringExtensions
 			subject = subject.replace("\r", "");
 		}
 		return subject;
+	}
+
+	/**
+	 * Removes from the given String at the start and end quotes.
+	 *
+	 * @param s
+	 *            The String to handle.
+	 * @return The String without quotes.
+	 */
+	public static final String removeQuotationMarks(final String s)
+	{
+		return s.substring(1, s.length() - 1);
 	}
 
 	/**
@@ -771,6 +583,32 @@ public class StringExtensions
 		return matcher.replaceAll(replace);
 	}
 
+	/**
+	 * Replaces the last occurrence of a String within another String.
+	 *
+	 * @param original
+	 *            The String to search.
+	 * @param findString
+	 *            The search pattern.
+	 * @param replacement
+	 *            Replace with that String.
+	 * @return Returns a new String with the replaced Strings.
+	 */
+	public static final String replaceLast(final String original, final String findString,
+		final String replacement)
+	{
+		final int index = original.lastIndexOf(findString);
+		if (index == -1)
+		{
+			return original;
+		}
+		final StringBuffer originalFiltered = new StringBuffer();
+		originalFiltered.append(original.substring(0, index));
+		originalFiltered.append(replacement);
+		originalFiltered.append(original.substring(index + findString.length()));
+		final String result = originalFiltered.toString().trim();
+		return result;
+	}
 
 	/**
 	 * Split the given {@link String} in parts in the given fixed length.
@@ -793,6 +631,168 @@ public class StringExtensions
 			beginIndex += fixedLength;
 		}
 		return parts;
+	}
+
+	/**
+	 * To hex.
+	 *
+	 * @param i
+	 *            the i
+	 * @return the char
+	 */
+	private static char toHex(final int i)
+	{
+		return HEXADECIMAL_DIGITS[i & 0xF];
+	}
+
+	/**
+	 * Transforms the given {@link String} that holds successive numbers delimited with a delimiter
+	 * into an integer array. Note: A valid {@link String} object holds only integer values
+	 * delimited with the given delimiter. Example: A valid {@link String} object is "12, 13, 14,
+	 * 16, 17, 18" that results in an integer array of [12, 13, 14, 16, 17, 18]
+	 *
+	 * @param integerArrayAsString
+	 *            the integer array as string
+	 * @param delimiter
+	 *            the delimiter
+	 * @return the created integer array from the given {@link String}
+	 * @throws NumberFormatException
+	 *             is thrown if the given {@link String} is not valid.
+	 */
+	public static int[] toIntegerArray(String integerArrayAsString, String delimiter)
+		throws NumberFormatException
+	{
+		String[] splittedNumbers = integerArrayAsString.replaceAll("\\s", "").split(delimiter);
+		int[] integerArray = new int[splittedNumbers.length];
+		for (int i = 0; i < splittedNumbers.length; i++)
+		{
+			int currentNumber = Integer.parseInt(splittedNumbers[i]);
+			integerArray[i] = currentNumber;
+		}
+		return integerArray;
+	}
+
+	/**
+	 * Converts all characters from the given String to unicodes characters encoded like &#92;uxxxx.
+	 *
+	 * @param toUnicode
+	 *            The String to convert.
+	 * @param toLowerCase
+	 *            If true the letters from the unicode characters are lower case.
+	 * @return The converted String.
+	 */
+	public static String toUnicode(final String toUnicode, final boolean toLowerCase)
+	{
+		final StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < toUnicode.length(); i++)
+		{
+			String hex = Integer.toHexString(toUnicode.codePointAt(i));
+			if (toLowerCase)
+			{
+				hex = hex.toLowerCase();
+			}
+			else
+			{
+				hex = hex.toUpperCase();
+			}
+			final String hexWithZeros = "0000" + hex;
+			final String hexCodeWithLeadingZeros = hexWithZeros
+				.substring(hexWithZeros.length() - 4);
+			sb.append("\\u" + hexCodeWithLeadingZeros);
+		}
+		return sb.toString();
+	}
+
+
+	/**
+	 * Converts all characters from the given String to unicodes characters encoded like &#92;uxxxx.
+	 *
+	 * @param s
+	 *            The String to convert.
+	 * @param toLowerCase
+	 *            If true the letters from the unicode characters are lower case.
+	 * @return The converted String.
+	 */
+	public static String toUnicodeChars(final String s, final boolean toLowerCase)
+	{
+		if (s == null || s.length() == 0)
+		{
+			return s;
+		}
+		final int length = s.length();
+		final int sbLength = length * 2;
+		final StringBuilder sb = new StringBuilder(sbLength);
+		for (int i = 0; i < length; i++)
+		{
+			final char c = s.charAt(i);
+			if (c > 61 && c < 127)
+			{
+				if (c == '\\')
+				{
+					sb.append('\\');
+					sb.append('\\');
+					continue;
+				}
+				sb.append(c);
+				continue;
+			}
+			switch (c)
+			{
+				case '\f' :
+					sb.append('\\');
+					sb.append('f');
+					break;
+				case '\n' :
+					sb.append('\\');
+					sb.append('n');
+					break;
+				case '\r' :
+					sb.append('\\');
+					sb.append('r');
+					break;
+				case '\t' :
+					sb.append('\\');
+					sb.append('t');
+					break;
+				case ' ' :
+					if (i == 0)
+					{
+						sb.append('\\');
+					}
+					sb.append(' ');
+					break;
+				case ':' :
+				case '#' :
+				case '=' :
+				case '!' :
+					sb.append('\\');
+					sb.append(c);
+					break;
+				default :
+					if (c < 0x0020 || c > 0x007e)
+					{
+						sb.append('\\');
+						sb.append('u');
+						sb.append(toHex(c >> 12 & 0xF));
+						sb.append(toHex(c >> 8 & 0xF));
+						sb.append(toHex(c >> 4 & 0xF));
+						sb.append(toHex(c & 0xF));
+					}
+					else
+					{
+						sb.append(c);
+					}
+			}
+		}
+		final String returnString = sb.toString();
+		if (toLowerCase)
+		{
+			return returnString.toLowerCase();
+		}
+		else
+		{
+			return returnString;
+		}
 	}
 
 }

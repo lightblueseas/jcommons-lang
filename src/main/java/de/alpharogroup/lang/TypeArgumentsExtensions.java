@@ -37,9 +37,9 @@ import java.util.Map;
 import de.alpharogroup.check.Check;
 
 /**
- * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a child class has
- * used to extend a generic base class. It is inspired from the article Reflecting generics by Ian
- * Robertson at <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=208860"
+ * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a
+ * child class has used to extend a generic base class. It is inspired from the article Reflecting
+ * generics by Ian Robertson at <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=208860"
  * >http://www.artima.com/weblogs/viewpost.jsp?thread=208860</a>. In the comments someone asked if
  * we are allowed to use the source code from the article. The answer of Ian Robertson is:
  * Absolutely, you may use this code. "Consider it open sourced".

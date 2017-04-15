@@ -49,26 +49,27 @@ public class ExceptionExtensions
 	 */
 	public static String getStackTrace(final Throwable throwable)
 	{
+		StringBuilder stacktrace = new StringBuilder();
 		if (null == throwable)
 		{
-			return null;
+			stacktrace.append("throwable is null...");
+			return stacktrace.toString();
 		}
 		StringWriter sw = null;
 		PrintWriter pw = null;
-		String stacktrace = null;
 		try
 		{
 			sw = new StringWriter();
 			pw = new PrintWriter(sw);
 			throwable.printStackTrace(pw);
-			stacktrace = sw.toString();
+			stacktrace.append(sw.toString());
 		}
 		finally
 		{
 			StreamExtensions.closeWriter(sw);
 			StreamExtensions.closeWriter(pw);
 		}
-		return stacktrace;
+		return stacktrace.toString();
 	}
 
 	/**
@@ -81,52 +82,59 @@ public class ExceptionExtensions
 	 */
 	public static String getStackTraceElements(Throwable throwable)
 	{
+		StringBuilder stacktrace = new StringBuilder();
+		if (null == throwable)
+		{
+			stacktrace.append("throwable is null...");
+			return stacktrace.toString();
+		}
 		StringWriter sw = null;
 		PrintWriter pw = null;
-		String stacktrace = "throwable is null...";
-		if (throwable != null)
+		try
 		{
-			try
+			sw = new StringWriter();
+			pw = new PrintWriter(sw);
+			pw.println(throwable.getClass().toString());
+			while (throwable != null)
 			{
-				sw = new StringWriter();
-				pw = new PrintWriter(sw);
-				pw.println(throwable.getClass().toString());
-				while (throwable != null)
+				pw.println(throwable);
+				final StackTraceElement[] stackTraceElements = throwable.getStackTrace();
+				for (final StackTraceElement stackTraceElement : stackTraceElements)
 				{
-					pw.println(throwable);
-					final StackTraceElement[] stackTraceElements = throwable.getStackTrace();
-					for (final StackTraceElement stackTraceElement : stackTraceElements)
-					{
-						pw.println("\tat " + stackTraceElement);
-					}
-
-					throwable = throwable.getCause();
-					if (throwable != null)
-					{
-						pw.println("Caused by:\r\n");
-					}
+					pw.println("\tat " + stackTraceElement);
 				}
-				stacktrace = sw.toString();
+
+				throwable = throwable.getCause();
+				if (throwable != null)
+				{
+					pw.println("Caused by:\r\n");
+				}
 			}
-			finally
-			{
-				StreamExtensions.closeWriter(sw);
-				StreamExtensions.closeWriter(pw);
-			}
+			stacktrace.append(sw.toString());
+		}
+		finally
+		{
+			StreamExtensions.closeWriter(sw);
+			StreamExtensions.closeWriter(pw);
 		}
 
-		return stacktrace;
+		return stacktrace.toString();
 	}
 
 	/**
-	 * Prints the {@link Object#toString()} and if the given object is null a corresponding information.
+	 * Prints the {@link Object#toString()} and if the given object is null a corresponding
+	 * information.
 	 *
-	 * @param <T> the generic type
-	 * @param object the object
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
 	 * @return the string
 	 */
-	public static <T> String toString(final T object) {
-		if(object == null) {
+	public static <T> String toString(final T object)
+	{
+		if (object == null)
+		{
 			return "Given object is null!!!";
 		}
 		return ReflectionToStringBuilder.toString(object);

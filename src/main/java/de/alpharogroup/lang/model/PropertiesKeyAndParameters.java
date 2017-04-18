@@ -39,7 +39,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder=true)
+@Builder(toBuilder = true)
 public class PropertiesKeyAndParameters implements Serializable
 {
 

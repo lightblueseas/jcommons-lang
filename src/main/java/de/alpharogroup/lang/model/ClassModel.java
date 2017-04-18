@@ -31,118 +31,58 @@ import java.util.Map;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * The class {@link ClassModel}.
+ */
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 public class ClassModel
 {
 
+	/** The kind. */
+	@Builder.Default
 	private ElementKind kind = ElementKind.CLASS;
+
+	/** The package name. */
 	private String packageName;
+
+	/** The imports. */
+	@Builder.Default
 	private List<String> imports = new ArrayList<>();
+
+	/** The class annotations. */
 	private List<ClassModel> classAnnotations;
+
+	/** The modifiers. */
 	private List<Modifier> modifiers;
+
+	/** The generic types. */
 	private List<String> genericTypes;
+
+	/** The class name. */
 	private String className;
+
+	/** The extended class name. */
 	private String extendedClassName;
+
+	/** The interface implementations. */
+	@Builder.Default
 	private List<String> interfaceImplementations = new ArrayList<>();
+
+	/** The methods. */
 	private Map<String, MethodModel> methods;
-
-	public List<ClassModel> getClassAnnotations()
-	{
-		return classAnnotations;
-	}
-
-	public String getClassName()
-	{
-		return className;
-	}
-
-	public String getExtendedClassName()
-	{
-		return extendedClassName;
-	}
-
-	public List<String> getGenericTypes()
-	{
-		return genericTypes;
-	}
-
-	public List<String> getImports()
-	{
-		return imports;
-	}
-
-	public List<String> getInterfaceImplementations()
-	{
-		return interfaceImplementations;
-	}
-
-	public ElementKind getKind()
-	{
-		return kind;
-	}
-
-	public Map<String, MethodModel> getMethods()
-	{
-		return methods;
-	}
-
-	public List<Modifier> getModifiers()
-	{
-		return modifiers;
-	}
-
-	public String getPackageName()
-	{
-		return packageName;
-	}
-
-	public void setClassAnnotations(final List<ClassModel> classAnnotations)
-	{
-		this.classAnnotations = classAnnotations;
-	}
-
-	public void setClassName(final String className)
-	{
-		this.className = className;
-	}
-
-	public void setExtendedClassName(final String extendedClassName)
-	{
-		this.extendedClassName = extendedClassName;
-	}
-
-	public void setGenericTypes(final List<String> genericTypes)
-	{
-		this.genericTypes = genericTypes;
-	}
-
-	public void setImports(final List<String> imports)
-	{
-		this.imports = imports;
-	}
-
-	public void setInterfaceImplementations(final List<String> interfaceImplementations)
-	{
-		this.interfaceImplementations = interfaceImplementations;
-	}
-
-	public void setKind(final ElementKind kind)
-	{
-		this.kind = kind;
-	}
-
-	public void setMethods(final Map<String, MethodModel> methods)
-	{
-		this.methods = methods;
-	}
-
-	public void setModifiers(final List<Modifier> modifiers)
-	{
-		this.modifiers = modifiers;
-	}
-
-	public void setPackageName(final String packageName)
-	{
-		this.packageName = packageName;
-	}
 
 }

@@ -49,7 +49,7 @@ import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.ExtensionMethod;
 
 /**
- * The class ClassExtensions provides extension methods for the class {@link Class}.
+ * The class {@link ClassExtensions} provides extension methods for the class {@link Class}.
  */
 @ExtensionMethod(StringExtensions.class)
 public final class ClassExtensions
@@ -188,6 +188,19 @@ public final class ClassExtensions
 	}
 
 	/**
+	 * Gets the classname from the given class.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return The classname.
+	 */
+	public static String getClassname(final Class<?> clazz)
+	{
+		final String className = clazz.getName();
+		return className;
+	}
+
+	/**
 	 * Gets the classname and concats the suffix ".class" from the class.
 	 *
 	 * @param clazz
@@ -199,19 +212,6 @@ public final class ClassExtensions
 		String className = clazz.getName();
 		className = className.substring(className.lastIndexOf('.') + 1)
 			+ FileExtension.CLASS.getExtension();
-		return className;
-	}
-
-	/**
-	 * Gets the classname from the given class.
-	 *
-	 * @param clazz
-	 *            The class.
-	 * @return The classname.
-	 */
-	public static String getClassname(final Class<?> clazz)
-	{
-		final String className = clazz.getName();
 		return className;
 	}
 
@@ -311,32 +311,6 @@ public final class ClassExtensions
 	}
 
 	/**
-	 * If the given class is in a JAR, WAR or EAR file than the manifest url as String is returned.
-	 *
-	 * @param clazz
-	 *            The class.
-	 * @return the manifest url as String if the given class is in a JAR, WAR or EAR file.
-	 */
-	public static String getManifestUrl(final Class<?> clazz)
-	{
-		String manifestUrl = null;
-		final String path = ClassExtensions.getPath(clazz);
-		final URL classUrl = ClassExtensions.getResource(path);
-		if (classUrl != null)
-		{
-			final String classUrlString = classUrl.toString();
-			if ((classUrlString.startsWith("jar:") && (classUrlString.indexOf(path) > 0))
-				|| (classUrlString.startsWith("war:") && (classUrlString.indexOf(path) > 0))
-				|| (classUrlString.startsWith("ear:") && (classUrlString.indexOf(path) > 0))
-				|| (classUrlString.startsWith("file:") && (classUrlString.indexOf(path) > 0)))
-			{
-				manifestUrl = classUrlString.replace(path, "/META-INF/MANIFEST.MF");
-			}
-		}
-		return manifestUrl;
-	}
-
-	/**
 	 * If the given class is in a JAR file than the jar path as String will be returned.
 	 *
 	 * @param clazz
@@ -364,6 +338,32 @@ public final class ClassExtensions
 			}
 		}
 		return jarPath;
+	}
+
+	/**
+	 * If the given class is in a JAR, WAR or EAR file than the manifest url as String is returned.
+	 *
+	 * @param clazz
+	 *            The class.
+	 * @return the manifest url as String if the given class is in a JAR, WAR or EAR file.
+	 */
+	public static String getManifestUrl(final Class<?> clazz)
+	{
+		String manifestUrl = null;
+		final String path = ClassExtensions.getPath(clazz);
+		final URL classUrl = ClassExtensions.getResource(path);
+		if (classUrl != null)
+		{
+			final String classUrlString = classUrl.toString();
+			if ((classUrlString.startsWith("jar:") && (classUrlString.indexOf(path) > 0))
+				|| (classUrlString.startsWith("war:") && (classUrlString.indexOf(path) > 0))
+				|| (classUrlString.startsWith("ear:") && (classUrlString.indexOf(path) > 0))
+				|| (classUrlString.startsWith("file:") && (classUrlString.indexOf(path) > 0)))
+			{
+				manifestUrl = classUrlString.replace(path, "/META-INF/MANIFEST.MF");
+			}
+		}
+		return manifestUrl;
 	}
 
 	/**
@@ -453,12 +453,11 @@ public final class ClassExtensions
 	 *
 	 * @param clazz
 	 *            The class-object.
-	 * @param path
-	 *            The path.
 	 * @return 's the url from the path.
 	 */
-	public static URL getResource(final Class<?> clazz, final String path)
+	public static URL getResource(final Class<?> clazz)
 	{
+		final String path = ClassExtensions.getPath(clazz);
 		URL url = clazz.getResource(path);
 		if (url == null)
 		{
@@ -472,11 +471,12 @@ public final class ClassExtensions
 	 *
 	 * @param clazz
 	 *            The class-object.
+	 * @param path
+	 *            The path.
 	 * @return 's the url from the path.
 	 */
-	public static URL getResource(final Class<?> clazz)
+	public static URL getResource(final Class<?> clazz, final String path)
 	{
-		final String path = ClassExtensions.getPath(clazz);
 		URL url = clazz.getResource(path);
 		if (url == null)
 		{

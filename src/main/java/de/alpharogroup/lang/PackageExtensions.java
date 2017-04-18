@@ -35,10 +35,10 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import lombok.experimental.ExtensionMethod;
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
+import lombok.experimental.ExtensionMethod;
 
 /**
  * The class {@link PackageExtensions}.
@@ -277,8 +277,8 @@ public final class PackageExtensions
 				if (file.isDirectory() && recursive)
 				{
 					qualifiedClassname = packagePath + "." + file.getName();
-					classNames.addAll(scanClassNames(qualifiedClassname, recursive,
-						qualifiedClassnames));
+					classNames
+						.addAll(scanClassNames(qualifiedClassname, recursive, qualifiedClassnames));
 				}
 				else
 				{

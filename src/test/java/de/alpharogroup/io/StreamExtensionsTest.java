@@ -139,7 +139,8 @@ public class StreamExtensionsTest
 	{
 		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
+		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+			writeInMe);
 		AssertJUnit.assertTrue("", result);
 		final InputStream is = writeInMe.toURI().toURL().openStream();
 		final byte[] ba = StreamExtensions.getByteArray(is);
@@ -166,15 +167,17 @@ public class StreamExtensionsTest
 	 *             Signals that an ClassNotFoundException has occurred. if a class was not found.
 	 */
 	@Test(enabled = true)
-	public void testGetByteArrayInputStreamByteArrayOutputStream() throws IOException,
-		ClassNotFoundException
+	public void testGetByteArrayInputStreamByteArrayOutputStream()
+		throws IOException, ClassNotFoundException
 	{
 		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo, writeInMe);
+		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+			writeInMe);
 		AssertJUnit.assertTrue("", result);
 		final InputStream is = writeInMe.toURI().toURL().openStream();
-		final byte[] ba = StreamExtensions.getByteArray(is, new ByteArrayOutputStream(is.available()));
+		final byte[] ba = StreamExtensions.getByteArray(is,
+			new ByteArrayOutputStream(is.available()));
 		AssertJUnit.assertTrue(ba.length > 0);
 		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;

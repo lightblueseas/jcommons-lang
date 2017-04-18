@@ -24,12 +24,13 @@
  */
 package de.alpharogroup.string;
 
-import lombok.experimental.ExtensionMethod;
+import java.util.List;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
+import lombok.experimental.ExtensionMethod;
 
 /**
  * Test class for the class StringExtensions.
@@ -83,7 +84,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringUtils#getAttributName(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getAttributName(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAttributName()
@@ -96,7 +97,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringUtils#getIndex(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getIndex(java.lang.String)}.
 	 */
 	@Test
 	public void testGetIndex()
@@ -109,7 +110,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringUtils#getItemNumber(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getItemNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testGetItemNumber()
@@ -122,8 +123,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.string.StringUtils#getStringAfterUnderscore(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getStringAfterUnderscore(java.lang.String)}.
 	 */
 	@Test
 	public void testGetStringAfterUnderscore()
@@ -136,8 +136,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.string.StringUtils#getStringBeforeUnderscore(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getStringBeforeUnderscore(java.lang.String)}.
 	 */
 	@Test
 	public void testGetStringBeforeUnderscore()
@@ -150,7 +149,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringUtils#isNullOrEmpty(java.lang.String)}.
+	 * Test method for {@link StringExtensions#isNullOrEmpty(java.lang.String)}.
 	 */
 	@Test
 	public void testIsNullOrEmpty()
@@ -169,7 +168,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringUtils#isNumber(java.lang.String)}.
+	 * Test method for {@link StringExtensions#isNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testIsNumber()
@@ -185,8 +184,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.string.StringUtils#putQuotesToString(java.lang.String)}.
+	 * Test method for {@link StringExtensions#putQuotesToString(java.lang.String)}.
 	 */
 	@Test
 	public void testPutQuotesToString()
@@ -199,7 +197,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringUtils#readLine(java.lang.String)}.
+	 * Test method for {@link StringExtensions#readLine(java.lang.String)}.
 	 */
 	@Test
 	public void testReadLine()
@@ -213,7 +211,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.string.StringExtensions#removeQuotationMarks(String)}.
+	 * Test method for {@link StringExtensions#removeQuotationMarks(String)}.
 	 */
 	@Test
 	public void testRemoveQuotesFromString()
@@ -227,8 +225,7 @@ public class StringExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.string.StringUtils#replaceAll(java.lang.String, java.lang.String, java.lang.String)}
-	 * .
+	 * {@link StringExtensions#replaceAll(java.lang.String, java.lang.String, java.lang.String)} .
 	 */
 	@Test
 	public void testReplaceAll()
@@ -243,8 +240,7 @@ public class StringExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.string.StringUtils#replaceAll(java.lang.String, java.lang.String, java.lang.String)}
-	 * .
+	 * {@link StringExtensions#replaceAll(java.lang.String, java.lang.String, java.lang.String)} .
 	 */
 	@Test
 	public void testReplaceAllStringArray()
@@ -271,8 +267,7 @@ public class StringExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.string.StringExtensions#replaceLast(java.lang.String, java.lang.String, java.lang.String)}
-	 * .
+	 * {@link StringExtensions#replaceLast(java.lang.String, java.lang.String, java.lang.String)} .
 	 */
 	@Test
 	public void testReplaceLast()
@@ -284,8 +279,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.string.StringUtils#setFirstCharacterToUpperCase(java.lang.String)} .
+	 * Test method for {@link StringExtensions#setFirstCharacterToUpperCase(java.lang.String)} .
 	 */
 	@Test
 	public void testSetFirstCharacterToUpperCase()
@@ -297,6 +291,40 @@ public class StringExtensionsTest extends BaseTestCase
 		AssertJUnit.assertTrue("", result);
 	}
 
+	/**
+	 * Test method for {@link StringExtensions#splitByFixedLength(String, int)} .
+	 */
+	@Test
+	public void testSplitByLength()
+	{
+
+		final String input = "HickoryDickoryDockxxxmousexranxupxthexclockxThexcom.foo.barxstruckxonexThexxyxranxdownBlogBarFooEEE";
+		final List<String> output = input.splitByFixedLength(7);
+
+		AssertJUnit.assertTrue(output.size() == 15);
+		AssertJUnit.assertEquals(output.get(1), "Dickory");
+
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#toIntegerArray(String, String)}.
+	 */
+	@Test
+	public void testToIntegerArray()
+	{
+		final String stringArray1 = "11, 12, 13, 14, 15, 16, 17, 18";
+
+		final int[] expectedIntArray = { 11, 12, 13, 14, 15, 16, 17, 18 };
+		final int[] intArray = StringExtensions.toIntegerArray(stringArray1, ",");
+		for (int i = 0; i < intArray.length; i++)
+		{
+			AssertJUnit.assertTrue(intArray[i] == expectedIntArray[i]);
+		}
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#toUnicode(String, boolean)} .
+	 */
 	@Test(enabled = true)
 	public void testToUnicode()
 	{

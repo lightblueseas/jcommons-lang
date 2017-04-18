@@ -26,16 +26,25 @@ package de.alpharogroup.lang.model;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * Container for a properties key and possible parameters.
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 public class PropertiesKeyAndParameters implements Serializable
 {
 
-	/**
-	 * The Constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = -4343658207707540375L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1722891718823672512L;
 
 	/** The key. */
 	private String key;
@@ -67,16 +76,6 @@ public class PropertiesKeyAndParameters implements Serializable
 	}
 
 	/**
-	 * Gets the key.
-	 *
-	 * @return the key
-	 */
-	public String getKey()
-	{
-		return key;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -89,17 +88,6 @@ public class PropertiesKeyAndParameters implements Serializable
 			hashCode = 31 * hashCode + (parameters == null ? 0 : parameters[i0].hashCode());
 		}
 		return hashCode;
-	}
-
-	/**
-	 * Sets the key.
-	 *
-	 * @param key
-	 *            the new key
-	 */
-	public void setKey(final String key)
-	{
-		this.key = key;
 	}
 
 	/**

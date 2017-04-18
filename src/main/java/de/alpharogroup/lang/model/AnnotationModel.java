@@ -24,29 +24,31 @@
  */
 package de.alpharogroup.lang.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * The class {@link AnnotationModel}.
+ */
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 public class AnnotationModel
 {
+
+	/** The name. */
 	String name;
 
+	/** The value. */
 	String value;
 
-	public String getName()
-	{
-		return name;
-	}
-
-	public String getValue()
-	{
-		return value;
-	}
-
-	public void setName(final String name)
-	{
-		this.name = name;
-	}
-
-	public void setValue(final String value)
-	{
-		this.value = value;
-	}
 }

@@ -26,11 +26,11 @@ package de.alpharogroup.lang;
 
 import java.lang.reflect.InvocationTargetException;
 
-import lombok.experimental.UtilityClass;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import lombok.experimental.UtilityClass;
 
 
 /**

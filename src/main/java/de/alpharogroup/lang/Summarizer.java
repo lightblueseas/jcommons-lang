@@ -22,51 +22,38 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
+package de.alpharogroup.lang;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
-import lombok.experimental.UtilityClass;
+import java.util.List;
 
 /**
- * Logger extensions for appenders.
+ * A class implements the {@link Summarizer} interface indicates that it can merge single or a
+ * collection of objects in with each other.
+ *
+ * @param <T>
+ *            the type of objects that may be merged
  */
-@UtilityClass
-public class LoggerExtensions
+public interface Summarizer<T>
 {
 
 	/**
-	 * Adds the file appender to the given logger.
+	 * Merge the given <code>list</code> with the <code>objects</code> that can be merged and return
+	 * the resulted merged <code>objects</code> in a <code>list</code>.
 	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
+	 * @param list
+	 *            the <code>list</code> with the <code>objects</code> to merge
+	 * @return the list with the merged objects
 	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
-	{
-		logger.addAppender(fileAppender);
-	}
+	List<T> merge(List<T> list);
 
 	/**
-	 * New file appender.
+	 * Merge the given <code>object</code> with <code>other</code> object.
 	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
+	 * @param object
+	 *            the object to merge in
+	 * @param other
+	 *            the other object to merge with
+	 * @return the merged object or null if it isn't possible
 	 */
-	public static FileAppender newFileAppender(final String logFilePath)
-	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
-	}
+	T merge(T object, T other);
 }

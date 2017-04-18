@@ -83,7 +83,8 @@ public class ExceptionExtensionsTest
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.exception.ExceptionExtensions#getStackTraceElements(java.lang.Throwable)} .
+	 * {@link de.alpharogroup.exception.ExceptionExtensions#getStackTraceElements(java.lang.Throwable)}
+	 * .
 	 */
 	@SuppressWarnings("null")
 	@Test

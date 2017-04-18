@@ -46,7 +46,8 @@ public class PackageExtensionsTest
 	/**
 	 * Sets the up method.
 	 *
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	@BeforeMethod
 	public void setUp() throws Exception
@@ -56,7 +57,8 @@ public class PackageExtensionsTest
 	/**
 	 * Tear down method.
 	 *
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	@AfterMethod
 	public void tearDown() throws Exception

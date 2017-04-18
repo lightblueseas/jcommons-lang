@@ -55,7 +55,8 @@ public final class SerializedObjectExtensions
 {
 
 	/** The LOGGER. */
-	protected static final Logger LOGGER = Logger.getLogger(SerializedObjectExtensions.class.getName());
+	protected static final Logger LOGGER = Logger
+		.getLogger(SerializedObjectExtensions.class.getName());
 
 	/**
 	 * Copys the given Object and returns the copy from the object or null if the object can't be
@@ -73,8 +74,8 @@ public final class SerializedObjectExtensions
 	 *             class with the specified name could be found.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Serializable> T copySerializedObject(final T orig) throws IOException,
-		ClassNotFoundException
+	public static <T extends Serializable> T copySerializedObject(final T orig)
+		throws IOException, ClassNotFoundException
 	{
 		T object = null;
 		ByteArrayOutputStream byteArrayOutputStream = null;
@@ -116,8 +117,8 @@ public final class SerializedObjectExtensions
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<SerializedChangedAttributeResult> getChangedData(final Object sourceOjbect,
-		final Object objectToCompare) throws IllegalAccessException, InvocationTargetException,
-		NoSuchMethodException
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		final Map beanDescription = BeanUtils.describe(sourceOjbect);
 		beanDescription.remove("class");
@@ -131,12 +132,8 @@ public final class SerializedObjectExtensions
 			{
 				final Object sourceAttribute = beanDescription.get(key);
 				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.add(
-					SerializedChangedAttributeResult.builder()
-					.attributeName(key)
-					.sourceAttribute(sourceAttribute)
-					.changedAttribute(changedAttribute)
-					.build());
+				changedData.add(SerializedChangedAttributeResult.builder().attributeName(key)
+					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
 			}
 		}
 		return changedData;
@@ -159,8 +156,8 @@ public final class SerializedObjectExtensions
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map<Object, SerializedChangedAttributeResult> getChangedDataMap(
-		final Object sourceOjbect, final Object objectToCompare) throws IllegalAccessException,
-		InvocationTargetException, NoSuchMethodException
+		final Object sourceOjbect, final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
 		final Map beanDescription = BeanUtils.describe(sourceOjbect);
 		beanDescription.remove("class");
@@ -174,12 +171,8 @@ public final class SerializedObjectExtensions
 			{
 				final Object sourceAttribute = beanDescription.get(key);
 				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.put(key,
-					SerializedChangedAttributeResult.builder()
-					.attributeName(key)
-					.sourceAttribute(sourceAttribute)
-					.changedAttribute(changedAttribute)
-					.build());
+				changedData.put(key, SerializedChangedAttributeResult.builder().attributeName(key)
+					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
 			}
 		}
 		return changedData;
@@ -197,8 +190,8 @@ public final class SerializedObjectExtensions
 	 *             is thrown when a class is not found in the classloader or no definition for the
 	 *             class with the specified name could be found.
 	 */
-	public static Object readSerializedObjectFromFile(final File file) throws IOException,
-		ClassNotFoundException
+	public static Object readSerializedObjectFromFile(final File file)
+		throws IOException, ClassNotFoundException
 	{
 		Object object = null;
 		FileInputStream fis = null;
@@ -263,8 +256,7 @@ public final class SerializedObjectExtensions
 	 *             is thrown when a class is not found in the classloader or no definition for the
 	 *             class with the specified name could be found.
 	 */
-	public static Object toObject(final byte[] byteArray) throws IOException,
-		ClassNotFoundException
+	public static Object toObject(final byte[] byteArray) throws IOException, ClassNotFoundException
 	{
 		Object object = null;
 		ByteArrayInputStream byteArrayInputStream = null;

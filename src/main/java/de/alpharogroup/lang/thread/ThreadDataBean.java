@@ -42,22 +42,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class ThreadDataBean {
+public class ThreadDataBean
+{
+	public static ThreadDataBean of(final Thread thread)
+	{
+		return ThreadDataBean.builder().priority(thread.getPriority()).alive(thread.isAlive())
+			.daemon(thread.isDaemon()).interrupted(thread.isInterrupted())
+			.threadGroup(thread.getThreadGroup().getName()).name(thread.getName()).build();
+	}
 	private Integer priority;
 	private boolean alive;
 	private boolean daemon;
 	private boolean interrupted;
 	private String threadGroup;
-	private String name;
 
-	public static ThreadDataBean of(final Thread thread) {
-		return ThreadDataBean.builder()
-				.priority(thread.getPriority())
-				.alive(thread.isAlive())
-				.daemon(thread.isDaemon())
-				.interrupted(thread.isInterrupted())
-				.threadGroup(thread.getThreadGroup().getName())
-				.name(thread.getName())
-				.build();
-	}
+	private String name;
 }

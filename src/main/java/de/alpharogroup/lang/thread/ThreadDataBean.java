@@ -50,6 +50,7 @@ public class ThreadDataBean
 			.daemon(thread.isDaemon()).interrupted(thread.isInterrupted())
 			.threadGroup(thread.getThreadGroup().getName()).name(thread.getName()).build();
 	}
+
 	private Integer priority;
 	private boolean alive;
 	private boolean daemon;

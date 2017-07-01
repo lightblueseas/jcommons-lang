@@ -34,7 +34,8 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 /**
- * The class {@link StringOutputStreamTest} is the test class for the class {@link StringOutputStream}.
+ * The class {@link StringOutputStreamTest} is the test class for the class
+ * {@link StringOutputStream}.
  *
  * @version 1.0
  * @author Asterios Raptis

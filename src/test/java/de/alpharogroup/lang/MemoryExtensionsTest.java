@@ -70,8 +70,8 @@ public class MemoryExtensionsTest
 	@Test(enabled = true)
 	public void testGetFreeMemoryForAppInKB()
 	{
-		final long expected = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
-			.freeMemory()) / 1024;
+		final long expected = (Runtime.getRuntime().totalMemory()
+			- Runtime.getRuntime().freeMemory()) / 1024;
 		final long compare = MemoryExtensions.getFreeMemoryForAppInKB();
 		this.result = expected == compare;
 		AssertJUnit.assertTrue("", this.result);

@@ -103,7 +103,8 @@ public class RegExExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.regex.RegExExtensions#wildcardCriterionSQL(java.lang.String)}.
+	 * Test method for
+	 * {@link de.alpharogroup.regex.RegExExtensions#wildcardCriterionSQL(java.lang.String)}.
 	 */
 	@Test
 	public void testWildcardCriterionSQL()

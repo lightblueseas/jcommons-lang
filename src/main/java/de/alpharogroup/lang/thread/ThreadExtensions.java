@@ -22,51 +22,50 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
+package de.alpharogroup.lang.thread;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import lombok.experimental.UtilityClass;
 
 /**
- * Logger extensions for appenders.
+ * The class {@link ThreadExtensions}.
  */
 @UtilityClass
-public class LoggerExtensions
+public class ThreadExtensions
 {
 
-	/**
-	 * Adds the file appender to the given logger.
-	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
-	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
-	{
-		logger.addAppender(fileAppender);
-	}
 
 	/**
-	 * New file appender.
+	 * Finds all threads the are currently running.
 	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
+	 * @return An array with all threads the are currently running.
 	 */
-	public static FileAppender newFileAppender(final String logFilePath)
+	public static Thread[] resolveRunningThreads()
 	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
+		final Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+		final Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
+		return threadArray;
+	}
+
+
+	/**
+	 * Finds all threads the are currently running and converts them to {@link ThreadDataBean} and
+	 * puts them to a {@link List} that is returned.
+	 *
+	 * @return the new {@link List}
+	 */
+	public static List<ThreadDataBean> newThreadData()
+	{
+		final Thread[] thread = resolveRunningThreads();
+		final List<ThreadDataBean> snapshotOfThreadDataBeans = new ArrayList<>(thread.length);
+		for (int i = 0; i < thread.length; i++)
+		{
+			final Thread t = thread[i];
+			snapshotOfThreadDataBeans.add(ThreadDataBean.of(t));
+		}
+		return snapshotOfThreadDataBeans;
 	}
 }

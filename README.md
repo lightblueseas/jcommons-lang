@@ -34,7 +34,7 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 Than you can add the dependency to your dependencies:
 
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.18.0</jcommons-lang.version>
+		<jcommons-lang.version>4.20.0</jcommons-lang.version>
 
 		<dependencies>
 			...
@@ -61,6 +61,10 @@ Don't forget to add new units tests on your changes.
 
 Do not hesitate to contact the jcommons-lang developers with your questions, concerns, comments, bug reports, or feature requests.
 - Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/lightblueseas/jcommons-lang/issues).
+
+## Note
+
+No animals were harmed in the making of this library.
 
 # Donate
 

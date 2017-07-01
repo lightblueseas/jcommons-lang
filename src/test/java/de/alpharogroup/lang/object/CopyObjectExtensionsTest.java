@@ -45,13 +45,16 @@ public class CopyObjectExtensionsTest
 	/**
 	 * Test method for {@link CopyObjectExtensions#copy(Object, Object)}.
 	 *
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws InvocationTargetException the invocation target exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws InvocationTargetException
+	 *             the invocation target exception
 	 */
 	@Test(enabled = true)
 	public void testCopy() throws IllegalAccessException, InvocationTargetException
 	{
-		final DateDecorator dateDecorator = DateDecorator.builder().date(CreateDateExtensions.now()).build();
+		final DateDecorator dateDecorator = DateDecorator.builder().date(CreateDateExtensions.now())
+			.build();
 
 		final SqlTimestampDecorator timestampDecorator = SqlTimestampDecorator.builder().build();
 

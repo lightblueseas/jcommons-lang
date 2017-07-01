@@ -48,8 +48,8 @@ public class TypeArgumentsExtensionsTest
 		final Class<Person> expectedClass = Person.class;
 
 		@SuppressWarnings("unchecked")
-		final Class<Person> personClass = (Class<Person>)TypeArgumentsExtensions.getFirstTypeArgument(
-			GenericDao.class, PersonDao.class);
+		final Class<Person> personClass = (Class<Person>)TypeArgumentsExtensions
+			.getFirstTypeArgument(GenericDao.class, PersonDao.class);
 		AssertJUnit.assertEquals(expectedClass, personClass);
 	}
 
@@ -58,16 +58,16 @@ public class TypeArgumentsExtensionsTest
 	{
 		final Class<Integer> expectedClass = Integer.class;
 		@SuppressWarnings("unchecked")
-		final Class<Integer> integerClass = (Class<Integer>)TypeArgumentsExtensions.getTypeArgument(
-			GenericDao.class, PersonDao.class, 1);
+		final Class<Integer> integerClass = (Class<Integer>)TypeArgumentsExtensions
+			.getTypeArgument(GenericDao.class, PersonDao.class, 1);
 		AssertJUnit.assertEquals(expectedClass, integerClass);
 	}
 
 	@Test(enabled = true)
 	public void testGetTypeArguments()
 	{
-		final List<Class<?>> typeArguments = TypeArgumentsExtensions.getTypeArguments(GenericDao.class,
-			new PersonDao().getClass());
+		final List<Class<?>> typeArguments = TypeArgumentsExtensions
+			.getTypeArguments(GenericDao.class, new PersonDao().getClass());
 		AssertJUnit.assertNotNull(typeArguments);
 		AssertJUnit.assertEquals(2, typeArguments.size());
 		AssertJUnit.assertEquals(Person.class, typeArguments.get(0));

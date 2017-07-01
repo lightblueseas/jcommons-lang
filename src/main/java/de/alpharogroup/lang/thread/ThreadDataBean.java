@@ -22,51 +22,40 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
+package de.alpharogroup.lang.thread;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
-import lombok.experimental.UtilityClass;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
- * Logger extensions for appenders.
+ * The class {@link ThreadDataBean} holds data from a Thread.
  */
-@UtilityClass
-public class LoggerExtensions
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
+public class ThreadDataBean
 {
-
-	/**
-	 * Adds the file appender to the given logger.
-	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
-	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
+	public static ThreadDataBean of(final Thread thread)
 	{
-		logger.addAppender(fileAppender);
+		return ThreadDataBean.builder().priority(thread.getPriority()).alive(thread.isAlive())
+			.daemon(thread.isDaemon()).interrupted(thread.isInterrupted())
+			.threadGroup(thread.getThreadGroup().getName()).name(thread.getName()).build();
 	}
 
-	/**
-	 * New file appender.
-	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
-	 */
-	public static FileAppender newFileAppender(final String logFilePath)
-	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
-	}
+	private Integer priority;
+	private boolean alive;
+	private boolean daemon;
+	private boolean interrupted;
+	private String threadGroup;
+
+	private String name;
 }

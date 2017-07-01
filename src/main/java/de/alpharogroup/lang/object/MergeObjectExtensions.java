@@ -72,11 +72,12 @@ public final class MergeObjectExtensions
 	 * @throws IllegalAccessException
 	 *             if the caller does not have access to the property accessor method
 	 * @throws IllegalArgumentException
-	 *             if the <code>mergeInObject</code> or <code>withObject</code> argument is null or if
-	 *             the <code>mergeInObject</code> property type is different from the source type and
-	 *             the relevant converter has not been registered.
+	 *             if the <code>mergeInObject</code> or <code>withObject</code> argument is null or
+	 *             if the <code>mergeInObject</code> property type is different from the source type
+	 *             and the relevant converter has not been registered.
 	 */
-	public static final <MERGE_IN, WITH> MERGE_IN merge(final MERGE_IN mergeInObject, final WITH withObject)
+	public static final <MERGE_IN, WITH> MERGE_IN merge(final MERGE_IN mergeInObject,
+		final WITH withObject)
 		throws InvocationTargetException, IllegalAccessException, IllegalArgumentException
 	{
 		Check.get().notNull(mergeInObject, "mergeInObject").notNull(withObject, "withObject");
@@ -106,7 +107,8 @@ public final class MergeObjectExtensions
 	 *            the object to merge with
 	 * @return the merged object or null if the merge process failed.
 	 */
-	public static final <MERGE_IN, WITH> MERGE_IN mergeQuietly(final MERGE_IN mergeInObject, final WITH withObject)
+	public static final <MERGE_IN, WITH> MERGE_IN mergeQuietly(final MERGE_IN mergeInObject,
+		final WITH withObject)
 	{
 		try
 		{
@@ -143,7 +145,8 @@ public final class MergeObjectExtensions
 	}
 
 	/**
-	 * Try first to merge quietly the given merge in object(destination) with the given 'with' object, if this fails try to copy.
+	 * Try first to merge quietly the given merge in object(destination) with the given 'with'
+	 * object, if this fails try to copy.
 	 *
 	 * @param <MERGE_IN>
 	 *            the generic type of the object to merge in
@@ -155,7 +158,8 @@ public final class MergeObjectExtensions
 	 *            the object to merge with
 	 * @return the merged object or null if the merge process failed.
 	 */
-	public static final <MERGE_IN, WITH> MERGE_IN mergeOrCopyQuietly(final MERGE_IN mergeInObject, final WITH withObject)
+	public static final <MERGE_IN, WITH> MERGE_IN mergeOrCopyQuietly(final MERGE_IN mergeInObject,
+		final WITH withObject)
 	{
 		MERGE_IN merged = mergeQuietly(mergeInObject, withObject);
 		if (merged == null)
@@ -183,12 +187,12 @@ public final class MergeObjectExtensions
 	 * @throws IllegalAccessException
 	 *             if the caller does not have access to the property accessor method
 	 * @throws IllegalArgumentException
-	 *             if the <code>mergeInObject</code> or <code>withObject</code> argument is null or if
-	 *             the <code>mergeInObject</code> property type is different from the source type and
-	 *             the relevant converter has not been registered.
+	 *             if the <code>mergeInObject</code> or <code>withObject</code> argument is null or
+	 *             if the <code>mergeInObject</code> property type is different from the source type
+	 *             and the relevant converter has not been registered.
 	 */
-	public static final <MERGE_IN, WITH> void mergeProperty(final MERGE_IN mergeInObject, final WITH withObject,
-		final PropertyDescriptor propertyDescriptor)
+	public static final <MERGE_IN, WITH> void mergeProperty(final MERGE_IN mergeInObject,
+		final WITH withObject, final PropertyDescriptor propertyDescriptor)
 		throws IllegalAccessException, InvocationTargetException, IllegalArgumentException
 	{
 		if (PropertyUtils.isReadable(mergeInObject, propertyDescriptor.getName())
@@ -243,11 +247,8 @@ public final class MergeObjectExtensions
 			{
 				final Object sourceAttribute = beanDescription.get(key);
 				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.add(ChangedAttributeResult.builder()
-					.attributeName(key)
-					.sourceAttribute(sourceAttribute)
-					.changedAttribute(changedAttribute)
-					.build());
+				changedData.add(ChangedAttributeResult.builder().attributeName(key)
+					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
 			}
 		}
 		return changedData;
@@ -290,12 +291,8 @@ public final class MergeObjectExtensions
 			if (CompareObjectExtensions.compareTo(sourceOjbect, objectToCompare,
 				key.toString()) != 0)
 			{
-				changedData.put(key,
-					ChangedAttributeResult.builder()
-					.attributeName(key)
-					.sourceAttribute(sourceAttribute)
-					.changedAttribute(changedAttribute)
-					.build());
+				changedData.put(key, ChangedAttributeResult.builder().attributeName(key)
+					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
 			}
 		}
 		return changedData;

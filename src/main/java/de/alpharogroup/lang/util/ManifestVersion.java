@@ -32,14 +32,13 @@ import java.net.URLConnection;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.joda.time.DateTime;
+
+import de.alpharogroup.lang.ClassExtensions;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import org.joda.time.DateTime;
-
-import de.alpharogroup.lang.ClassExtensions;
 
 /**
  * Simple bean to hold information about the version of a Manifest. Can be used for JAR, EAR and WAR
@@ -97,8 +96,8 @@ public class ManifestVersion implements Serializable
 				version.setManifest(new Manifest(urlConnection.getInputStream()));
 				version
 					.setTitle(version.getManifestAttribute(Attributes.Name.IMPLEMENTATION_TITLE));
-				version.setVersion(version
-					.getManifestAttribute(Attributes.Name.IMPLEMENTATION_VERSION));
+				version.setVersion(
+					version.getManifestAttribute(Attributes.Name.IMPLEMENTATION_VERSION));
 			}
 			catch (final IOException e)
 			{

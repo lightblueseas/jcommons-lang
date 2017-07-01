@@ -33,17 +33,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lombok.experimental.ExtensionMethod;
 import de.alpharogroup.string.StringExtensions;
+import lombok.experimental.ExtensionMethod;
+import lombok.experimental.UtilityClass;
 
 
 /**
  * The class {@link ReflectionExtensions}.
  */
 @ExtensionMethod(StringExtensions.class)
+@UtilityClass
 public final class ReflectionExtensions
 {
-
 
 	/**
 	 * Gets all fieldnames from the given class as an String array.
@@ -125,6 +126,8 @@ public final class ReflectionExtensions
 	/**
 	 * Creates a new instance from the same type as the given object.
 	 *
+	 * @param <T>
+	 *            the generic type of the given object
 	 * @param obj
 	 *            the obj
 	 * @return the new instance
@@ -134,33 +137,13 @@ public final class ReflectionExtensions
 	 *             the instantiation exception
 	 * @throws IllegalAccessException
 	 *             the illegal access exception
+	 * @deprecated use instead {@link ReflectionExtensions#newInstance(Object)}
 	 */
-	public static Object getNewInstance(final Object obj) throws ClassNotFoundException,
-		InstantiationException, IllegalAccessException
+	@Deprecated
+	public static <T> T getNewInstance(final T obj)
+		throws ClassNotFoundException, InstantiationException, IllegalAccessException
 	{
 		return newInstance(obj);
-	}
-
-	/**
-	 * Creates a new instance from the same type as the given Class.
-	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param clazz
-	 *            the Class object
-	 * @return the new instance
-	 * @throws ClassNotFoundException
-	 *             the class not found exception
-	 * @throws InstantiationException
-	 *             the instantiation exception
-	 * @throws IllegalAccessException
-	 *             the illegal access exception
-	 */
-
-	public static <T> T newInstance(final Class<T> clazz) throws InstantiationException,
-		IllegalAccessException, ClassNotFoundException
-	{
-		return clazz.newInstance();
 	}
 
 	/**
@@ -179,10 +162,74 @@ public final class ReflectionExtensions
 	 *             the illegal access exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T newInstance(final T obj) throws InstantiationException,
-		IllegalAccessException, ClassNotFoundException
+	public static <T> T newInstance(final T obj)
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException
 	{
 		return newInstance((Class<T>)Class.forName(obj.getClass().getCanonicalName()));
+	}
+
+	/**
+	 * Creates a new instance from the same type as the given Class.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param clazz
+	 *            the Class object
+	 * @return the new instance
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 * @throws InstantiationException
+	 *             the instantiation exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 */
+
+	public static <T> T newInstance(final Class<T> clazz)
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException
+	{
+		return clazz.newInstance();
+	}
+
+	/**
+	 * Gets the {@link Field} that match to the given field name that exists in the given object.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
+	 * @param fieldName
+	 *            the field name
+	 * @return the declared field
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 */
+	public static <T> Field getDeclaredField(final T object, final String fieldName)
+		throws NoSuchFieldException, SecurityException
+	{
+		Field field = object.getClass().getDeclaredField(fieldName);
+		return field;
+	}
+
+	/**
+	 * Gets the {@link Field} that match to the given field name that exists in the given class.
+	 *
+	 * @param cls
+	 *            the cls
+	 * @param fieldName
+	 *            the field name
+	 * @return the declared field
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 */
+	public static Field getDeclaredField(final Class<?> cls, final String fieldName)
+		throws NoSuchFieldException, SecurityException
+	{
+		Field field = cls.getDeclaredField(fieldName);
+		return field;
 	}
 
 }

@@ -32,14 +32,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The class {@link ChangedAttributeResult} is a bean class that is used for compare objects and see what changes are made.
+ * The class {@link ChangedAttributeResult} is a bean class that is used for compare objects and see
+ * what changes are made.
  */
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class ChangedAttributeResult
 {
 

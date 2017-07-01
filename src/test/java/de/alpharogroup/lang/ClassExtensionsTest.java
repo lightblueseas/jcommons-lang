@@ -99,6 +99,31 @@ public class ClassExtensionsTest
 
 	}
 
+	@Test(enabled = true)
+	public void testForName() throws ClassNotFoundException
+	{
+		final Class<?> expected = this.getClass();
+		final String classname = "de.alpharogroup.lang.ClassExtensionsTest";
+		final Class<?> actual = ClassExtensions.forName(classname);
+
+		AssertJUnit.assertEquals(expected, actual);
+
+	}
+
+	/**
+	 * Test method for.
+	 *
+	 * {@link de.alpharogroup.lang.ClassExtensions#getClassnameWithSuffix(java.lang.Object)}.
+	 */
+	@Test(enabled = true)
+	public void testGetClassnameWithSuffix()
+	{
+		final String expected = "ClassExtensionsTest.class";
+		final String classname = ClassExtensions.getClassnameWithSuffix(this);
+		this.result = expected.equals(classname);
+		AssertJUnit.assertTrue("", this.result);
+	}
+
 	/**
 	 * Test method for {@link de.alpharogroup.lang.ClassExtensions#getClassType(Class)}.
 	 *
@@ -169,18 +194,18 @@ public class ClassExtensionsTest
 		AssertJUnit.assertEquals(expected, actual);
 	}
 
-	/**
-	 * Test method for.
-	 *
-	 * {@link de.alpharogroup.lang.ClassExtensions#getClassnameWithSuffix(java.lang.Object)}.
-	 */
-	@Test(enabled = true)
-	public void testGetClassnameWithSuffix()
+	@Test
+	public void testGetJarPath()
 	{
-		final String expected = "ClassExtensionsTest.class";
-		final String classname = ClassExtensions.getClassnameWithSuffix(this);
-		this.result = expected.equals(classname);
-		AssertJUnit.assertTrue("", this.result);
+		String actual = ClassExtensions.getJarPath(Object.class);
+		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar"));
+
+		actual = ClassExtensions.getJarPath(ClassExtensions.class);
+		AssertJUnit.assertNull(actual);
+		// Get manifest file from zip4j-*.jar
+		// actual = ClassExtensions.getJarPath(ZipFile.class);
+		// AssertJUnit.assertNotNull(actual);
+		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
 	@Test
@@ -199,20 +224,6 @@ public class ClassExtensionsTest
 		// AssertJUnit.assertNotNull(actual);
 		// AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
 		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
-	}
-
-	@Test
-	public void testGetJarPath()
-	{
-		String actual = ClassExtensions.getJarPath(Object.class);
-		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar"));
-
-		actual = ClassExtensions.getJarPath(ClassExtensions.class);
-		AssertJUnit.assertNull(actual);
-		// Get manifest file from zip4j-*.jar
-		// actual = ClassExtensions.getJarPath(ZipFile.class);
-		// AssertJUnit.assertNotNull(actual);
-		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
 	@Test
@@ -288,6 +299,7 @@ public class ClassExtensionsTest
 		AssertJUnit.assertTrue("", this.result);
 	}
 
+
 	@Test(enabled = true)
 	public void testGetRessource()
 	{
@@ -324,7 +336,6 @@ public class ClassExtensionsTest
 		this.result = prop.size() == 3;
 		AssertJUnit.assertTrue("Size of prop should be 3.", this.result);
 	}
-
 
 	@Test(enabled = true)
 	public void testGetSuperClass()
@@ -363,17 +374,6 @@ public class ClassExtensionsTest
 		final String expected = "Foo$Component";
 		final String className = "Foo$Component$2.class";
 		final String actual = ClassExtensions.normalizeSimpleClassName(className);
-		AssertJUnit.assertEquals(expected, actual);
-
-	}
-
-	@Test(enabled = true)
-	public void testForName() throws ClassNotFoundException
-	{
-		final Class<?> expected = this.getClass();
-		final String classname = "de.alpharogroup.lang.ClassExtensionsTest";
-		final Class<?> actual = ClassExtensions.forName(classname);
-
 		AssertJUnit.assertEquals(expected, actual);
 
 	}

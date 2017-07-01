@@ -84,7 +84,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringUtils#getAttributName(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getAttributName(java.lang.String)}.
 	 */
 	@Test
 	public void testGetAttributName()
@@ -97,7 +97,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringUtils#getIndex(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getIndex(java.lang.String)}.
 	 */
 	@Test
 	public void testGetIndex()
@@ -110,7 +110,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringUtils#getItemNumber(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getItemNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testGetItemNumber()
@@ -123,8 +123,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringUtils#getStringAfterUnderscore(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getStringAfterUnderscore(java.lang.String)}.
 	 */
 	@Test
 	public void testGetStringAfterUnderscore()
@@ -137,8 +136,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringUtils#getStringBeforeUnderscore(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getStringBeforeUnderscore(java.lang.String)}.
 	 */
 	@Test
 	public void testGetStringBeforeUnderscore()
@@ -151,7 +149,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringUtils#isNullOrEmpty(java.lang.String)}.
+	 * Test method for {@link StringExtensions#isNullOrEmpty(java.lang.String)}.
 	 */
 	@Test
 	public void testIsNullOrEmpty()
@@ -170,7 +168,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringUtils#isNumber(java.lang.String)}.
+	 * Test method for {@link StringExtensions#isNumber(java.lang.String)}.
 	 */
 	@Test
 	public void testIsNumber()
@@ -186,8 +184,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringUtils#putQuotesToString(java.lang.String)}.
+	 * Test method for {@link StringExtensions#putQuotesToString(java.lang.String)}.
 	 */
 	@Test
 	public void testPutQuotesToString()
@@ -200,7 +197,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringUtils#readLine(java.lang.String)}.
+	 * Test method for {@link StringExtensions#readLine(java.lang.String)}.
 	 */
 	@Test
 	public void testReadLine()
@@ -228,8 +225,7 @@ public class StringExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link StringUtils#replaceAll(java.lang.String, java.lang.String, java.lang.String)}
-	 * .
+	 * {@link StringExtensions#replaceAll(java.lang.String, java.lang.String, java.lang.String)} .
 	 */
 	@Test
 	public void testReplaceAll()
@@ -244,8 +240,7 @@ public class StringExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link StringUtils#replaceAll(java.lang.String, java.lang.String, java.lang.String)}
-	 * .
+	 * {@link StringExtensions#replaceAll(java.lang.String, java.lang.String, java.lang.String)} .
 	 */
 	@Test
 	public void testReplaceAllStringArray()
@@ -272,8 +267,7 @@ public class StringExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link StringExtensions#replaceLast(java.lang.String, java.lang.String, java.lang.String)}
-	 * .
+	 * {@link StringExtensions#replaceLast(java.lang.String, java.lang.String, java.lang.String)} .
 	 */
 	@Test
 	public void testReplaceLast()
@@ -285,8 +279,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringExtensions#setFirstCharacterToUpperCase(java.lang.String)} .
+	 * Test method for {@link StringExtensions#setFirstCharacterToUpperCase(java.lang.String)} .
 	 */
 	@Test
 	public void testSetFirstCharacterToUpperCase()
@@ -296,6 +289,37 @@ public class StringExtensionsTest extends BaseTestCase
 		final String compare = fieldName.firstCharacterToUpperCase();
 		result = expected.equals(compare);
 		AssertJUnit.assertTrue("", result);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#splitByFixedLength(String, int)} .
+	 */
+	@Test
+	public void testSplitByLength()
+	{
+
+		final String input = "HickoryDickoryDockxxxmousexranxupxthexclockxThexcom.foo.barxstruckxonexThexxyxranxdownBlogBarFooEEE";
+		final List<String> output = input.splitByFixedLength(7);
+
+		AssertJUnit.assertTrue(output.size() == 15);
+		AssertJUnit.assertEquals(output.get(1), "Dickory");
+
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#toIntegerArray(String, String)}.
+	 */
+	@Test
+	public void testToIntegerArray()
+	{
+		final String stringArray1 = "11, 12, 13, 14, 15, 16, 17, 18";
+
+		final int[] expectedIntArray = { 11, 12, 13, 14, 15, 16, 17, 18 };
+		final int[] intArray = StringExtensions.toIntegerArray(stringArray1, ",");
+		for (int i = 0; i < intArray.length; i++)
+		{
+			AssertJUnit.assertTrue(intArray[i] == expectedIntArray[i]);
+		}
 	}
 
 	/**
@@ -315,20 +339,6 @@ public class StringExtensionsTest extends BaseTestCase
 		expected = "\\u00F6\\u002C\\u0020\\u00DF\\u0020\\u00E4";
 		actual = "ö, ß ä".toUnicode(false);
 		AssertJUnit.assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link StringExtensions#splitByFixedLength(String, int)} .
-	 */
-	@Test
-	public void testSplitByLength(){
-
-		final String input = "HickoryDickoryDockxxxmousexranxupxthexclockxThexcom.foo.barxstruckxonexThexxyxranxdownBlogBarFooEEE";
-		final List<String>  output = input.splitByFixedLength(7);
-
-		AssertJUnit.assertTrue(output.size() == 15);
-		AssertJUnit.assertEquals(output.get(1), "Dickory");
-
 	}
 
 }

@@ -48,17 +48,19 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class ClassModel
 {
 
 	/** The kind. */
+	@Builder.Default
 	private ElementKind kind = ElementKind.CLASS;
 
 	/** The package name. */
 	private String packageName;
 
 	/** The imports. */
+	@Builder.Default
 	private List<String> imports = new ArrayList<>();
 
 	/** The class annotations. */
@@ -77,6 +79,7 @@ public class ClassModel
 	private String extendedClassName;
 
 	/** The interface implementations. */
+	@Builder.Default
 	private List<String> interfaceImplementations = new ArrayList<>();
 
 	/** The methods. */

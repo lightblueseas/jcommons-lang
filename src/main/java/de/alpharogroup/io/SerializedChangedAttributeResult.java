@@ -33,13 +33,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The class {@link SerializedChangedAttributeResult} is a bean class that is used for compare objects and see what changes are made.
+ * The class {@link SerializedChangedAttributeResult} is a bean class that is used for compare
+ * objects and see what changes are made.
  */
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-@Builder
+@Builder(toBuilder = true)
 public class SerializedChangedAttributeResult implements Serializable
 {
 
@@ -68,8 +69,7 @@ public class SerializedChangedAttributeResult implements Serializable
 	public SerializedChangedAttributeResult(final Object attributeName,
 		final Object sourceAttribute, final Object changedAttribute)
 	{
-		if (!(attributeName instanceof Serializable)
-			|| !(sourceAttribute instanceof Serializable)
+		if (!(attributeName instanceof Serializable) || !(sourceAttribute instanceof Serializable)
 			|| !(changedAttribute instanceof Serializable))
 		{
 			throw new IllegalArgumentException(

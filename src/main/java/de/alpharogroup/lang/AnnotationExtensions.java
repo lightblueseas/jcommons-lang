@@ -47,14 +47,6 @@ public final class AnnotationExtensions
 {
 
 	/**
-	 * Private constructor.
-	 */
-	private AnnotationExtensions()
-	{
-		super();
-	}
-
-	/**
 	 * Gets all annotated classes that belongs from the given package path and the given annotation
 	 * class.
 	 *
@@ -453,5 +445,13 @@ public final class AnnotationExtensions
 		}
 		memberValues.put(key, value);
 		return oldValue;
+	}
+
+	/**
+	 * Private constructor.
+	 */
+	private AnnotationExtensions()
+	{
+		super();
 	}
 }

@@ -24,6 +24,10 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,13 +39,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.classes.inner.OuterClass;
 import de.alpharogroup.runtime.compiler.JavaSourceCompiler;
+import de.alpharogroup.test.objects.Member;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.PremiumMember;
 import de.alpharogroup.test.objects.TestAnnotation;
@@ -95,7 +99,7 @@ public class ClassExtensionsTest
 		final OuterClass.InnerClass innerClass2 = outerClass.new InnerClass();
 		final boolean actual = ClassExtensions.equalsByClassName(innerClass1.getClass(),
 			innerClass2.getClass());
-		AssertJUnit.assertTrue(actual);
+		assertTrue(actual);
 
 	}
 
@@ -106,7 +110,7 @@ public class ClassExtensionsTest
 		final String classname = "de.alpharogroup.lang.ClassExtensionsTest";
 		final Class<?> actual = ClassExtensions.forName(classname);
 
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 	}
 
@@ -121,7 +125,7 @@ public class ClassExtensionsTest
 		final String expected = "ClassExtensionsTest.class";
 		final String classname = ClassExtensions.getClassnameWithSuffix(this);
 		this.result = expected.equals(classname);
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", this.result);
 	}
 
 	/**
@@ -135,15 +139,15 @@ public class ClassExtensionsTest
 	{
 		ClassType actual = ClassExtensions.getClassType(OuterClass.class);
 		ClassType expected = ClassType.DEFAULT;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(OuterClass.InnerClass.class);
 		expected = ClassType.MEMBER;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(StaticNestedClass.class);
 		expected = ClassType.MEMBER;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(new Runnable()
 		{
@@ -153,36 +157,36 @@ public class ClassExtensionsTest
 			};
 		}.getClass());
 		expected = ClassType.ANONYMOUS;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(Brands.class);
 		expected = ClassType.ENUM;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(TestAnnotation.class);
 		expected = ClassType.ANNOTATION;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		final String[] foo = { "foo" };
 		actual = ClassExtensions.getClassType(foo.getClass());
 		expected = ClassType.ARRAY;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(ArrayList.class);
 		expected = ClassType.COLLECTION;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(HashMap.class);
 		expected = ClassType.MAP;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(AnnotatedInterface.class);
 		expected = ClassType.INTERFACE;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		actual = ClassExtensions.getClassType(int.class);
 		expected = ClassType.PRIMITIVE;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		final JavaSourceCompiler<Runnable> runtimeCompiler = new JavaSourceCompiler<>();
 		final String source = "package de.alpharogroup.lang;public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar\"); } } ";
@@ -191,39 +195,39 @@ public class ClassExtensionsTest
 
 		actual = ClassExtensions.getClassType(clazz);
 		expected = ClassType.DEFAULT;
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testGetJarPath()
 	{
 		String actual = ClassExtensions.getJarPath(Object.class);
-		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar"));
+		assertTrue(actual.toString().endsWith("/jre/lib/rt.jar"));
 
 		actual = ClassExtensions.getJarPath(ClassExtensions.class);
-		AssertJUnit.assertNull(actual);
+		assertNull(actual);
 		// Get manifest file from zip4j-*.jar
 		// actual = ClassExtensions.getJarPath(ZipFile.class);
-		// AssertJUnit.assertNotNull(actual);
-		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
+		// assertNotNull(actual);
+		// assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
 	@Test
 	public void testGetManifestURL()
 	{
 		String actual = ClassExtensions.getManifestUrl(Object.class);
-		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
-		AssertJUnit.assertTrue(actual.toString().endsWith("/jre/lib/rt.jar!/META-INF/MANIFEST.MF"));
+		assertTrue(actual.toString().startsWith("jar:file:"));
+		assertTrue(actual.toString().endsWith("/jre/lib/rt.jar!/META-INF/MANIFEST.MF"));
 
 		actual = ClassExtensions.getManifestUrl(ClassExtensions.class);
-		AssertJUnit.assertTrue(actual.toString().startsWith("file:"));
-		AssertJUnit.assertTrue(
+		assertTrue(actual.toString().startsWith("file:"));
+		assertTrue(
 			actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
 		// Get manifest file from zip4j-*.jar
 		// actual = ClassExtensions.getManifestUrl(ZipFile.class);
-		// AssertJUnit.assertNotNull(actual);
-		// AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
-		// AssertJUnit.assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
+		// assertNotNull(actual);
+		// assertTrue(actual.toString().startsWith("jar:file:"));
+		// assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
 	}
 
 	@Test
@@ -231,11 +235,11 @@ public class ClassExtensionsTest
 	{
 		String expected = "/java/lang/Object.class";
 		String actual = ClassExtensions.getPath(Object.class);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		expected = "/java/lang/Class.class";
 		actual = ClassExtensions.getPath(Class.class);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test(enabled = true)
@@ -244,7 +248,7 @@ public class ClassExtensionsTest
 		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 		final URL url = ClassExtensions.getResource(propertiesFilename);
 		this.result = url != null;
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", this.result);
 
 	}
 
@@ -255,8 +259,8 @@ public class ClassExtensionsTest
 
 		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
 		this.result = file != null;
-		AssertJUnit.assertTrue("File should not be null", this.result);
-		AssertJUnit.assertTrue("File should exist.", file.exists());
+		assertTrue("File should not be null", this.result);
+		assertTrue("File should exist.", file.exists());
 	}
 
 	/**
@@ -274,7 +278,7 @@ public class ClassExtensionsTest
 
 		final InputStream is = ClassExtensions.getResourceAsStream(propertiesFilename);
 		this.result = is != null;
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", this.result);
 		final Properties prop = new Properties();
 		prop.load(is);
 		this.result = prop.size() == 3;
@@ -296,7 +300,7 @@ public class ClassExtensionsTest
 		final URL url = ClassExtensions.getResource(propertiesFilename, obj);
 
 		this.result = url != null;
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", this.result);
 	}
 
 
@@ -308,7 +312,7 @@ public class ClassExtensionsTest
 		final URL url = ClassExtensions.getResource(ClassExtensionsTest.class, propertiesFilename);
 
 		this.result = url != null;
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", this.result);
 	}
 
 
@@ -330,29 +334,46 @@ public class ClassExtensionsTest
 		final ClassExtensionsTest obj = new ClassExtensionsTest();
 		final InputStream is = ClassExtensions.getResourceAsStream(obj.getClass(), path);
 		this.result = is != null;
-		AssertJUnit.assertTrue("InputStream should not be null", this.result);
+		assertTrue("InputStream should not be null", this.result);
 		final Properties prop = new Properties();
 		prop.load(is);
 		this.result = prop.size() == 3;
-		AssertJUnit.assertTrue("Size of prop should be 3.", this.result);
+		assertTrue("Size of prop should be 3.", this.result);
 	}
 
 	@Test(enabled = true)
-	public void testGetSuperClass()
+	public void testGetBaseClass()
 	{
-		Class<?> actual = ClassExtensions.getBaseClass(PremiumMember.class);
-		AssertJUnit.assertEquals(Person.class, actual);
-		actual = ClassExtensions.getBaseClass(Object.class);
-		AssertJUnit.assertEquals(Object.class, actual);
+		Class<?> expected;
+		Class<?> actual;
 
+		expected = null;
+		actual = ClassExtensions.getBaseClass(null);
+		assertEquals(expected, actual);
+
+		expected = Object.class;
+		actual = ClassExtensions.getBaseClass(Object.class);
+		assertEquals(expected, actual);
+
+		expected = Person.class;
+		actual = ClassExtensions.getBaseClass(PremiumMember.class);
+		assertEquals(expected, actual);
+
+		expected = Person.class;
+		actual = ClassExtensions.getBaseClass(Member.class);
+		assertEquals(expected, actual);
+
+		expected = Person.class;
+		actual = ClassExtensions.getBaseClass(Person.class);
+		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testGetURL()
 	{
 		final URL actual = ClassExtensions.getURL(Object.class);
-		AssertJUnit.assertTrue(actual.toString().startsWith("jar:file:"));
-		AssertJUnit.assertTrue(actual.toString().endsWith("/java/lang/Object.class"));
+		assertTrue(actual.toString().startsWith("jar:file:"));
+		assertTrue(actual.toString().endsWith("/java/lang/Object.class"));
 	}
 
 	@Test(enabled = true)
@@ -361,11 +382,11 @@ public class ClassExtensionsTest
 		String expected = "Foo$Component";
 		final String className = "Foo$Component$2.class";
 		String actual = ClassExtensions.normalizeSimpleClassName(className);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 		final String qualifiedClassname = "x/y/z." + className;
 		expected = "x.y.z." + expected;
 		actual = ClassExtensions.normalizeQualifiedClassName(qualifiedClassname);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test(enabled = true)
@@ -374,7 +395,7 @@ public class ClassExtensionsTest
 		final String expected = "Foo$Component";
 		final String className = "Foo$Component$2.class";
 		final String actual = ClassExtensions.normalizeSimpleClassName(className);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 	}
 
@@ -385,7 +406,7 @@ public class ClassExtensionsTest
 			.getDirectoriesFromResources("de.alpharogroup.lang", true);
 		final Set<Class<?>> foundClasses = ClassExtensions
 			.scanClassesFromPackage(directories.get(0), "de.alpharogroup.lang");
-		AssertJUnit.assertTrue("", foundClasses.contains(ClassExtensionsTest.class));
+		assertTrue("", foundClasses.contains(ClassExtensionsTest.class));
 		Set<Class<?>> list = null;
 		list = ClassExtensions.scanClassNames("de.alpharogroup.lang");
 		for (final Class<?> entry : list)

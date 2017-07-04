@@ -120,18 +120,19 @@ public final class ClassExtensions
 	 */
 	public static Class<?> getBaseClass(final Class<?> childClass)
 	{
-		if (childClass == null)
+		if (childClass == null || childClass.equals(Object.class))
 		{
 			return childClass;
 		}
 		Class<?> superClass = childClass.getSuperclass();
-		while ((superClass != null) && !superClass.getSuperclass().equals(Object.class))
-		{
-			superClass = superClass.getSuperclass();
-		}
-		if (superClass == null)
+		if (superClass != null && superClass.equals(Object.class))
 		{
 			return childClass;
+		}
+		while (!(superClass.getSuperclass() != null
+			&& superClass.getSuperclass().equals(Object.class)))
+		{
+			superClass = superClass.getSuperclass();
 		}
 		return superClass;
 	}

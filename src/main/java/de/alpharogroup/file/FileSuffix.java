@@ -52,10 +52,10 @@ public interface FileSuffix
 	static final String REST = "Rest";
 
 	/** The Constant REST_RESOURCE for the suffix of a rest resource class. */
-	static final String REST_RESOURCE = REST+RESOURCE;
+	static final String REST_RESOURCE = REST + RESOURCE;
 
 	/** The Constant REST_RESOURCE for the suffix of a rest resource class. */
-	static final String REST_CLIENT = REST+"Client";
+	static final String REST_CLIENT = REST + "Client";
 
 	/** The Constant DAO for the suffix of a dao class. */
 	static final String DAO = "Dao";

@@ -114,6 +114,33 @@ public class ClassExtensionsTest
 
 	}
 
+	@Test(enabled = true)
+	public void testGetBaseClass()
+	{
+		Class<?> expected;
+		Class<?> actual;
+
+		expected = null;
+		actual = ClassExtensions.getBaseClass(null);
+		assertEquals(expected, actual);
+
+		expected = Object.class;
+		actual = ClassExtensions.getBaseClass(Object.class);
+		assertEquals(expected, actual);
+
+		expected = Person.class;
+		actual = ClassExtensions.getBaseClass(PremiumMember.class);
+		assertEquals(expected, actual);
+
+		expected = Person.class;
+		actual = ClassExtensions.getBaseClass(Member.class);
+		assertEquals(expected, actual);
+
+		expected = Person.class;
+		actual = ClassExtensions.getBaseClass(Person.class);
+		assertEquals(expected, actual);
+	}
+
 	/**
 	 * Test method for.
 	 *
@@ -290,6 +317,7 @@ public class ClassExtensionsTest
 
 	}
 
+
 	@Test(enabled = true)
 	public void testGetResourceStringObject()
 	{
@@ -315,7 +343,6 @@ public class ClassExtensionsTest
 		assertTrue("", this.result);
 	}
 
-
 	/**
 	 * Test method for
 	 * {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.Class, java.lang.String)}
@@ -339,33 +366,6 @@ public class ClassExtensionsTest
 		prop.load(is);
 		this.result = prop.size() == 3;
 		assertTrue("Size of prop should be 3.", this.result);
-	}
-
-	@Test(enabled = true)
-	public void testGetBaseClass()
-	{
-		Class<?> expected;
-		Class<?> actual;
-
-		expected = null;
-		actual = ClassExtensions.getBaseClass(null);
-		assertEquals(expected, actual);
-
-		expected = Object.class;
-		actual = ClassExtensions.getBaseClass(Object.class);
-		assertEquals(expected, actual);
-
-		expected = Person.class;
-		actual = ClassExtensions.getBaseClass(PremiumMember.class);
-		assertEquals(expected, actual);
-
-		expected = Person.class;
-		actual = ClassExtensions.getBaseClass(Member.class);
-		assertEquals(expected, actual);
-
-		expected = Person.class;
-		actual = ClassExtensions.getBaseClass(Person.class);
-		assertEquals(expected, actual);
 	}
 
 	@Test

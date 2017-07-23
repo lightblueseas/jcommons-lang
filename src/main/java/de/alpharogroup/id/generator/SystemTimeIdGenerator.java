@@ -27,11 +27,10 @@ package de.alpharogroup.id.generator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * The class SystemTimeIdGenerator.
+ * The class {@link SystemTimeIdGenerator}.
  */
 public class SystemTimeIdGenerator implements IdGenerator
 {
-
 
 	/** The instance. */
 	private static final SystemTimeIdGenerator instance = new SystemTimeIdGenerator();
@@ -54,16 +53,11 @@ public class SystemTimeIdGenerator implements IdGenerator
 	 */
 	private SystemTimeIdGenerator()
 	{
-		super();
 		atomicId = new AtomicInteger((int)System.currentTimeMillis());
 	}
 
 	/**
 	 * {@inheritDoc}
-	 *
-	 * @return the next id
-	 *
-	 * @see de.alpharogroup.id.generator.IdGenerator#getNextId()
 	 */
 	@Override
 	public int getNextId()

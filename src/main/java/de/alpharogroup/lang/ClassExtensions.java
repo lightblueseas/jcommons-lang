@@ -229,6 +229,23 @@ public final class ClassExtensions
 	}
 
 	/**
+	 * Gets the {@link Class} of the given object.
+	 *
+	 * @param object
+	 *            the object to resolve the class
+	 * @return the {@link Class} of the given object or null if the object is null.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T> getClass(final T object)
+	{
+		if (object != null)
+		{
+			return (Class<T>)object.getClass();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the {@link ClassType} from the given class.
 	 *
 	 * @param clazz

@@ -40,7 +40,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FilenameExtensions;
@@ -55,10 +54,10 @@ import lombok.experimental.ExtensionMethod;
 public final class ClassExtensions
 {
 
-	/** The Constant LOGGER. */
-	protected static final Logger LOGGER = Logger.getLogger(ClassExtensions.class);
+	/** The Constant CGLIB_TAG contains the tag of a cglib class name. */
+	protected static final String CGLIB_TAG = "$$";
 
-	/**
+    /**
 	 * Equal the given class objects by they qualified class names.
 	 *
 	 * @param oneClass
@@ -135,6 +134,23 @@ public final class ClassExtensions
 			superClass = superClass.getSuperclass();
 		}
 		return superClass;
+	}
+
+	/**
+	 * Gets the {@link Class} of the given object.
+	 *
+	 * @param object
+	 *            the object to resolve the class
+	 * @return the {@link Class} of the given object or null if the object is null.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T> getClass(final T object)
+	{
+		if (object != null)
+		{
+			return (Class<T>)object.getClass();
+		}
+		return null;
 	}
 
 	/**
@@ -226,23 +242,6 @@ public final class ClassExtensions
 	public static String getClassnameWithSuffix(final Object obj)
 	{
 		return getClassnameWithSuffix(obj.getClass());
-	}
-
-	/**
-	 * Gets the {@link Class} of the given object.
-	 *
-	 * @param object
-	 *            the object to resolve the class
-	 * @return the {@link Class} of the given object or null if the object is null.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> Class<T> getClass(final T object)
-	{
-		if (object != null)
-		{
-			return (Class<T>)object.getClass();
-		}
-		return null;
 	}
 
 	/**
@@ -697,6 +696,17 @@ public final class ClassExtensions
 	{
 		return ClassExtensions.getResource(ClassExtensions.getPath(clazz));
 	}
+
+	/**
+     * Checks if the given {@link Class} is cglib proxy class.
+     *
+     * @param <T> the generic type
+     * @param result the result
+     * @return true, if the given {@link Class} is cglib proxy class otherwise false.
+     */
+    public static <T> boolean isCglib(Class<T> result) {
+        return result.getName().contains(CGLIB_TAG);
+    }
 
 	/**
 	 * Checks if the given class is assignable from {@link Collection}.

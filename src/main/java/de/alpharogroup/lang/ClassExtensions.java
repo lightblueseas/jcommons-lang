@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Proxy;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -40,7 +41,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FilenameExtensions;
@@ -55,8 +55,8 @@ import lombok.experimental.ExtensionMethod;
 public final class ClassExtensions
 {
 
-	/** The Constant LOGGER. */
-	protected static final Logger LOGGER = Logger.getLogger(ClassExtensions.class);
+	/** The Constant CGLIB_TAG contains the tag of a cglib class name. */
+	protected static final String CGLIB_TAG = "$$";
 
 	/**
 	 * Equal the given class objects by they qualified class names.
@@ -120,20 +120,59 @@ public final class ClassExtensions
 	 */
 	public static Class<?> getBaseClass(final Class<?> childClass)
 	{
-		if (childClass == null)
+		if (childClass == null || childClass.equals(Object.class))
 		{
 			return childClass;
 		}
 		Class<?> superClass = childClass.getSuperclass();
-		while ((superClass != null) && !superClass.getSuperclass().equals(Object.class))
-		{
-			superClass = superClass.getSuperclass();
-		}
-		if (superClass == null)
+		if (superClass != null && superClass.equals(Object.class))
 		{
 			return childClass;
 		}
+		while (!(superClass.getSuperclass() != null
+			&& superClass.getSuperclass().equals(Object.class)))
+		{
+			superClass = superClass.getSuperclass();
+		}
 		return superClass;
+	}
+
+	/**
+	 * Gets the real class if the given class is decorated with cglib proxy classes.
+	 *
+	 * @param clazz
+	 *            the class
+	 * @return the real class if the given class is decorated with cglib proxy classes and if not
+	 *         the given class will be returned.
+	 */
+	public static Class<?> getCglibProxy(Class<?> clazz)
+	{
+		Class<?> found = clazz;
+		while (isCglib(found))
+		{
+			found = found.getSuperclass();
+		}
+		return found;
+	}
+
+
+	/**
+	 * Gets the {@link Class} of the given object.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object to resolve the class
+	 * @return the {@link Class} of the given object or null if the object is null.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T> getClass(final T object)
+	{
+		if (object != null)
+		{
+			return (Class<T>)object.getClass();
+		}
+		return null;
 	}
 
 	/**
@@ -338,6 +377,23 @@ public final class ClassExtensions
 			}
 		}
 		return jarPath;
+	}
+
+	/**
+	 * Gets the jdk proxy interfaces.
+	 *
+	 * @param clazz
+	 *            the class
+	 * @return the jdk proxy interfaces
+	 */
+	public static Class<?>[] getJdkProxyInterfaces(Class<?> clazz)
+	{
+		Class<?> found = clazz;
+		if (isJdkProxy(found))
+		{
+			return found.getInterfaces();
+		}
+		return new Class<?>[] { found };
 	}
 
 	/**
@@ -669,6 +725,23 @@ public final class ClassExtensions
 	}
 
 	/**
+	 * Gets the unwrapped proxy class.
+	 *
+	 * @param clazz
+	 *            the class
+	 * @return the unwrapped proxy class or null if the given {@link Class} is null.
+	 */
+	public static Class<?> getUnwrappedProxy(Class<?> clazz)
+	{
+		Class<?>[] found = unwrapProxy(clazz);
+		if (found != null && 0 < found.length)
+		{
+			return found[0];
+		}
+		return null;
+	}
+
+	/**
 	 * Returns the URL from the given class.
 	 *
 	 * @param clazz
@@ -678,6 +751,20 @@ public final class ClassExtensions
 	public static URL getURL(final Class<?> clazz)
 	{
 		return ClassExtensions.getResource(ClassExtensions.getPath(clazz));
+	}
+
+	/**
+	 * Checks if the given {@link Class} is cglib proxy class.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param clazz
+	 *            the class to check
+	 * @return true, if the given {@link Class} is cglib proxy class otherwise false.
+	 */
+	public static <T> boolean isCglib(Class<T> clazz)
+	{
+		return clazz != null && clazz.getName().contains(CGLIB_TAG);
 	}
 
 	/**
@@ -691,7 +778,6 @@ public final class ClassExtensions
 	{
 		return Collection.class.isAssignableFrom(clazz);
 	}
-
 
 	/**
 	 * Compares the two given ClassLoader objects and returns true if compare is a derivate of
@@ -729,6 +815,20 @@ public final class ClassExtensions
 	}
 
 	/**
+	 * Checks if the given {@link Class} is a JDK proxy class.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param clazz
+	 *            the class to check
+	 * @return true, if the given {@link Class} is a JDK proxy class otherwise false.
+	 */
+	public static <T> boolean isJdkProxy(Class<T> clazz)
+	{
+		return clazz != null && Proxy.isProxyClass(clazz);
+	}
+
+	/**
 	 * Checks if the given class is assignable from {@link Map}.
 	 *
 	 * @param clazz
@@ -738,6 +838,20 @@ public final class ClassExtensions
 	public static boolean isMap(final Class<?> clazz)
 	{
 		return Map.class.isAssignableFrom(clazz);
+	}
+
+	/**
+	 * Checks if the given {@link Class} is a proxy class.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param clazz
+	 *            the class to check
+	 * @return true, if the given {@link Class} is a proxy class otherwise false.
+	 */
+	public static <T> boolean isProxy(Class<T> clazz)
+	{
+		return isJdkProxy(clazz) || isCglib(clazz);
 	}
 
 	/**
@@ -884,6 +998,31 @@ public final class ClassExtensions
 			foundClasses.add(forName(qualifiedClassname));
 		}
 		return foundClasses;
+	}
+
+	/**
+	 * Unwrap the given {@link Class} if it is wrapped from cglib or jdk proxies.
+	 *
+	 * @param clazz
+	 *            the class
+	 * @return the unwrapped classes as an array
+	 */
+	public static Class<?>[] unwrapProxy(Class<?> clazz)
+	{
+		if (clazz == null)
+		{
+			return null;
+		}
+		Class<?> found = clazz;
+		if (isCglib(found))
+		{
+			found = getCglibProxy(found);
+		}
+		if (isJdkProxy(found))
+		{
+			return getJdkProxyInterfaces(found);
+		}
+		return new Class<?>[] { found };
 	}
 
 }

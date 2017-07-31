@@ -18,11 +18,17 @@ The jcommons-lang project provides several extension methods for java core class
 
 The source code comes under the liberal MIT License, making jcommons-lang great for all types of applications.
 
-# Build status and latest maven version
+## Build status
+
 [![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=master)](https://travis-ci.org/lightblueseas/jcommons-lang)
 
+## Maven Central
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang)
+
+## javadoc
+
+jcommons-lang [![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jcommons-lang.svg)](http://www.javadoc.io/doc/de.alpharogroup/jcommons-lang)
 
 ## Maven dependency
 
@@ -34,7 +40,7 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 Than you can add the dependency to your dependencies:
 
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.20.0</jcommons-lang.version>
+		<jcommons-lang.version>4.21.0</jcommons-lang.version>
 
 		<dependencies>
 			...

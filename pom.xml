@@ -46,7 +46,7 @@
 
 
 	<properties>
-		<silly-collections.version>4.16.0</silly-collections.version>
+		<silly-collections.version>4.17.0</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.16.0</test-objects.version>
 		<!-- EXTERNAL LIBRARIES versions -->

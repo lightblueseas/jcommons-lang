@@ -216,6 +216,7 @@ public final class MergeObjectExtensions
 	 *            the object to merge with
 	 * @param propertyDescriptor
 	 *            the property descriptor
+	 * @return true, if merge was successful otherwise false
 	 * @throws InvocationTargetException
 	 *             if the property accessor method throws an exception
 	 * @throws IllegalAccessException
@@ -225,7 +226,7 @@ public final class MergeObjectExtensions
 	 *             if the <code>mergeInObject</code> property type is different from the source type
 	 *             and the relevant converter has not been registered.
 	 */
-	public static final <MERGE_IN, WITH> void mergeProperty(final MERGE_IN mergeInObject,
+	public static final <MERGE_IN, WITH> boolean mergeProperty(final MERGE_IN mergeInObject,
 		final WITH withObject, final PropertyDescriptor propertyDescriptor)
 		throws IllegalAccessException, InvocationTargetException, IllegalArgumentException
 	{
@@ -238,8 +239,10 @@ public final class MergeObjectExtensions
 			{
 				final Method setter = propertyDescriptor.getWriteMethod();
 				setter.invoke(mergeInObject, value);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**

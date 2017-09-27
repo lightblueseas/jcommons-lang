@@ -34,6 +34,33 @@ import de.alpharogroup.test.objects.Person;
 public class ReflectionExtensionsTest
 {
 
+	/**
+	 * Test for {@link ReflectionExtensions#copyFieldValue(Object, Object, String)}.
+	 *
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 * @throws IllegalArgumentException
+	 *             is thrown if an illegal or inappropriate argument has been passed to a method.
+	 * @throws IllegalAccessException
+	 *             is thrown if an illegal on create an instance or access a method.
+	 */
+	@Test
+	public void testCopyFieldValue() throws NoSuchFieldException, SecurityException,
+		IllegalArgumentException, IllegalAccessException
+	{
+		String expected;
+		String actual;
+		Person alex = Person.builder().name("Alex").build();
+		Person nik = Person.builder().name("Nik").build();
+		expected = "Alex";
+		ReflectionExtensions.copyFieldValue(alex, nik, "name");
+		actual = nik.getName();
+		AssertJUnit.assertEquals(expected, actual);
+
+	}
+
 	public void testGetNewInstance()
 	{
 	}
@@ -55,7 +82,7 @@ public class ReflectionExtensionsTest
 		final A actual = ReflectionExtensions.newInstance(a);
 		AssertJUnit.assertNotNull(actual);
 	}
-	
+
 	/**
 	 * Test for {@link ReflectionExtensions#setFieldValue(Object, String, Object)}.
 	 *
@@ -64,56 +91,21 @@ public class ReflectionExtensionsTest
 	 * @throws SecurityException
 	 *             is thrown if a security manager says no.
 	 * @throws IllegalArgumentException
-	 *             is thrown if an illegal or inappropriate argument has been
-	 *             passed to a method.
+	 *             is thrown if an illegal or inappropriate argument has been passed to a method.
 	 * @throws IllegalAccessException
-	 *             is thrown if an illegal on create an instance or access a
-	 *             method.
+	 *             is thrown if an illegal on create an instance or access a method.
 	 */
 	@Test
-	public void testSetFieldValue() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+	public void testSetFieldValue() throws NoSuchFieldException, SecurityException,
+		IllegalArgumentException, IllegalAccessException
 	{
 		String expected;
 		String actual;
-		Person person = Person.builder()
-				.name("Alex")
-				.build();
+		Person person = Person.builder().name("Alex").build();
 		expected = "Leo";
 		ReflectionExtensions.setFieldValue(person, "name", "Leo");
 		actual = person.getName();
 		AssertJUnit.assertEquals(expected, actual);
-	}
-	
-	/**
-	 * Test for {@link ReflectionExtensions#copyFieldValue(Object, Object, String)}.
-	 *
-	 * @throws NoSuchFieldException
-	 *             is thrown if no such field exists.
-	 * @throws SecurityException
-	 *             is thrown if a security manager says no.
-	 * @throws IllegalArgumentException
-	 *             is thrown if an illegal or inappropriate argument has been
-	 *             passed to a method.
-	 * @throws IllegalAccessException
-	 *             is thrown if an illegal on create an instance or access a
-	 *             method.
-	 */
-	@Test
-	public void testCopyFieldValue() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException 
-	{
-		String expected;
-		String actual;
-		Person alex = Person.builder()
-				.name("Alex")
-				.build();
-		Person nik = Person.builder()
-				.name("Nik")
-				.build();
-		expected = "Alex";
-		ReflectionExtensions.copyFieldValue(alex, nik, "name");
-		actual = nik.getName();
-		AssertJUnit.assertEquals(expected, actual);
-		
 	}
 
 }

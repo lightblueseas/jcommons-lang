@@ -46,6 +46,39 @@ import lombok.experimental.UtilityClass;
 public final class ReflectionExtensions
 {
 
+
+	/**
+	 * Copies the field value of the given source object to the given target
+	 * object.
+	 *
+	 * @param <T>
+	 *            the generic type of the object
+	 * @param source
+	 *            the source
+	 * @param target
+	 *            the target
+	 * @param fieldName
+	 *            the field name
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 * @throws IllegalArgumentException
+	 *             is thrown if an illegal or inappropriate argument has been passed to a method.
+	 * @throws IllegalAccessException
+	 *             is thrown if an illegal on create an instance or access a method.  
+	 */
+	public static <T> void copyFieldValue(T source, T target, final String fieldName)
+			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException 
+	{
+		Field sourceField = source.getClass().getDeclaredField(fieldName);
+		sourceField.setAccessible(true);
+		Object sourceValue = sourceField.get(source);
+		Field targetField = target.getClass().getDeclaredField(fieldName);
+		targetField.setAccessible(true);
+		targetField.set(target, sourceValue);
+	}
+	
 	/**
 	 * Gets all fieldnames from the given class as an String array.
 	 *

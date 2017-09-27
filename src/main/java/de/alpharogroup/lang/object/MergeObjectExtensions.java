@@ -40,6 +40,7 @@ import de.alpharogroup.check.Check;
 import de.alpharogroup.exception.ExceptionExtensions;
 import de.alpharogroup.io.ChangedAttributeResult;
 import de.alpharogroup.lang.ObjectExtensions;
+import de.alpharogroup.reflection.ReflectionExtensions;
 import lombok.experimental.ExtensionMethod;
 import lombok.experimental.UtilityClass;
 
@@ -55,6 +56,39 @@ public final class MergeObjectExtensions
 	/** The logger constant. */
 	private static final Logger LOG = Logger.getLogger(MergeObjectExtensions.class.getName());
 
+	/**
+	 * Merge the given property to the given 'to' object with the given 'with' object over reflection.
+	 *
+	 * @param <MERGE_IN>
+	 *            the generic type of the object to merge in
+	 * @param <WITH>
+	 *            the generic type of the object to merge with
+	 * @param mergeInObject
+	 *            the object to merge in, in other words the target
+	 * @param withObject
+	 *            the object to merge with, in other words the source
+	 * @param propertyDescriptor
+	 *            the property descriptor
+	 * @throws IllegalAccessException
+	 *             if the caller does not have access to the property accessor method
+	 * @throws IllegalArgumentException
+	 *             if the <code>mergeInObject</code> or <code>withObject</code> argument is null or
+	 *             if the <code>mergeInObject</code> property type is different from the source type
+	 *             and the relevant converter has not been registered.
+	 * @throws SecurityException 
+	 * @throws NoSuchFieldException 
+	 */
+	public static final <MERGE_IN, WITH> boolean mergePropertyWithReflection(final MERGE_IN mergeInObject,
+		final WITH withObject, final String fieldName) 		
+	{
+		try {
+			ReflectionExtensions.copyFieldValue(withObject, mergeInObject, fieldName);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {			
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Merge the given to object with the given 'with' object.
 	 *

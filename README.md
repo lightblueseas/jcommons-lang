@@ -40,7 +40,7 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 Than you can add the dependency to your dependencies:
 
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.21.0</jcommons-lang.version>
+		<jcommons-lang.version>4.22.0</jcommons-lang.version>
 
 		<dependencies>
 			...
@@ -59,7 +59,7 @@ The source code for jcommons-lang are on GitHub. Please feel free to fork and se
 
 Create your own fork of [lightblueseas/jcommons-lang/fork](https://github.com/lightblueseas/jcommons-lang/fork)
 
-To share your changes, [submit a pull request](https://github.com/lightblueseas/jcommons-lang/pull/new/master).
+To share your changes, [submit a pull request](https://github.com/lightblueseas/jcommons-lang/pull/new/develop).
 
 Don't forget to add new units tests on your changes.
 

@@ -40,6 +40,7 @@ import de.alpharogroup.check.Check;
 import de.alpharogroup.exception.ExceptionExtensions;
 import de.alpharogroup.io.ChangedAttributeResult;
 import de.alpharogroup.lang.ObjectExtensions;
+import de.alpharogroup.reflection.ReflectionExtensions;
 import lombok.experimental.ExtensionMethod;
 import lombok.experimental.UtilityClass;
 
@@ -54,6 +55,43 @@ public final class MergeObjectExtensions
 
 	/** The logger constant. */
 	private static final Logger LOG = Logger.getLogger(MergeObjectExtensions.class.getName());
+
+	/**
+	 * Merge the given property to the given 'to' object with the given 'with' object over
+	 * reflection.
+	 *
+	 * @param <MERGE_IN>
+	 *            the generic type of the object to merge in
+	 * @param <WITH>
+	 *            the generic type of the object to merge with
+	 * @param mergeInObject
+	 *            the object to merge in, in other words the target
+	 * @param withObject
+	 *            the object to merge with, in other words the source
+	 * @param fieldName
+	 *            the field name
+	 * @return true, if successful
+	 * @throws IllegalArgumentException
+	 *             if the <code>mergeInObject</code> or <code>withObject</code> argument is null or
+	 *             if the <code>mergeInObject</code> property type is different from the source type
+	 *             and the relevant converter has not been registered.
+	 * @throws SecurityException
+	 *             the security exception
+	 */
+	public static final <MERGE_IN, WITH> boolean mergePropertyWithReflection(
+		final MERGE_IN mergeInObject, final WITH withObject, final String fieldName)
+	{
+		try
+		{
+			ReflectionExtensions.copyFieldValue(withObject, mergeInObject, fieldName);
+		}
+		catch (NoSuchFieldException | SecurityException | IllegalArgumentException
+			| IllegalAccessException e)
+		{
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Merge the given to object with the given 'with' object.
@@ -182,6 +220,7 @@ public final class MergeObjectExtensions
 	 *            the object to merge with
 	 * @param propertyDescriptor
 	 *            the property descriptor
+	 * @return true, if merge was successful otherwise false
 	 * @throws InvocationTargetException
 	 *             if the property accessor method throws an exception
 	 * @throws IllegalAccessException
@@ -191,7 +230,7 @@ public final class MergeObjectExtensions
 	 *             if the <code>mergeInObject</code> property type is different from the source type
 	 *             and the relevant converter has not been registered.
 	 */
-	public static final <MERGE_IN, WITH> void mergeProperty(final MERGE_IN mergeInObject,
+	public static final <MERGE_IN, WITH> boolean mergeProperty(final MERGE_IN mergeInObject,
 		final WITH withObject, final PropertyDescriptor propertyDescriptor)
 		throws IllegalAccessException, InvocationTargetException, IllegalArgumentException
 	{
@@ -204,8 +243,10 @@ public final class MergeObjectExtensions
 			{
 				final Method setter = propertyDescriptor.getWriteMethod();
 				setter.invoke(mergeInObject, value);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**

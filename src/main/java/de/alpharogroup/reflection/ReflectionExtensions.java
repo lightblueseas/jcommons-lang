@@ -47,6 +47,65 @@ public final class ReflectionExtensions
 {
 
 	/**
+	 * Copies the field value of the given source object to the given target object.
+	 *
+	 * @param <T>
+	 *            the generic type of the object
+	 * @param source
+	 *            the source
+	 * @param target
+	 *            the target
+	 * @param fieldName
+	 *            the field name
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 * @throws IllegalArgumentException
+	 *             is thrown if an illegal or inappropriate argument has been passed to a method.
+	 * @throws IllegalAccessException
+	 *             is thrown if an illegal on create an instance or access a method.
+	 */
+	public static <T> void copyFieldValue(T source, T target, final String fieldName)
+		throws NoSuchFieldException, SecurityException, IllegalArgumentException,
+		IllegalAccessException
+	{
+		Field sourceField = getDeclaredField(source, fieldName);
+		sourceField.setAccessible(true);
+		Object sourceValue = sourceField.get(source);
+		setFieldValue(target, fieldName, sourceValue);
+	}
+
+	/**
+	 * Sets the field value of the given source object over the field name.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param source
+	 *            the source
+	 * @param fieldName
+	 *            the field name
+	 * @param newValue
+	 *            the new value
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
+	 * @throws IllegalArgumentException
+	 *             is thrown if an illegal or inappropriate argument has been passed to a method.
+	 * @throws IllegalAccessException
+	 *             is thrown if an illegal on create an instance or access a method.
+	 */
+	public static <T> void setFieldValue(final T source, final String fieldName, Object newValue)
+		throws NoSuchFieldException, SecurityException, IllegalArgumentException,
+		IllegalAccessException
+	{
+		Field sourceField = getDeclaredField(source, fieldName);
+		sourceField.setAccessible(true);
+		sourceField.set(source, newValue);
+	}
+
+	/**
 	 * Gets all fieldnames from the given class as an String array.
 	 *
 	 * @param cls

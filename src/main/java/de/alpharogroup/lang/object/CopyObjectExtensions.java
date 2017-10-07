@@ -45,35 +45,40 @@ public final class CopyObjectExtensions
 	private static final Logger LOG = Logger.getLogger(CopyObjectExtensions.class.getName());
 
 	/**
-	 * Copy the given original object to the given destination object. This also works on private fields.
+	 * Copy the given original object to the given destination object. This also works on private
+	 * fields.
 	 *
-	 * @param <DESTINATION>
-	 *            the generic type of the destination object.
 	 * @param <ORIGINAL>
 	 *            the generic type of the original object.
+	 * @param <DESTINATION>
+	 *            the generic type of the destination object.
 	 * @param original
 	 *            the original object.
 	 * @param destination
 	 *            the destination object.
+	 * @param fieldName
+	 *            the field name
 	 * @return the destination object or null if the copy process failed.
-	 * @throws IllegalAccessException
-	 *             if the caller does not have access to the property accessor method
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists.
+	 * @throws SecurityException
+	 *             is thrown if a security manager says no.
 	 * @throws IllegalArgumentException
 	 *             if the <code>destination</code> or <code>original</code> argument is null or if
 	 *             the <code>destination</code> property type is different from the source type and
 	 *             the relevant converter has not been registered.
-	 * @throws SecurityException
-	 *             is thrown if a security manager says no.
-	 * @throws NoSuchFieldException
-	 *             is thrown if no such field exists.
+	 * @throws IllegalAccessException
+	 *             if the caller does not have access to the property accessor method
 	 */
-	public static final <ORIGINAL, DESTINATION> DESTINATION copyPropertyWithReflection(final ORIGINAL original,
-		final DESTINATION destination, final String fieldName) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+	public static final <ORIGINAL, DESTINATION> DESTINATION copyPropertyWithReflection(
+		final ORIGINAL original, final DESTINATION destination, final String fieldName)
+		throws NoSuchFieldException, SecurityException, IllegalArgumentException,
+		IllegalAccessException
 	{
 		ReflectionExtensions.copyFieldValue(original, destination, fieldName);
 		return destination;
 	}
-	
+
 	/**
 	 * Copy the given original object to the given destination object.
 	 *

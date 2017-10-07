@@ -76,7 +76,7 @@ public final class MergeObjectExtensions
 	 *             if the <code>mergeInObject</code> property type is different from the source type
 	 *             and the relevant converter has not been registered.
 	 * @throws SecurityException
-	 *             the security exception
+	 *             is thrown if a security manager says no.
 	 */
 	public static final <MERGE_IN, WITH> boolean mergePropertyWithReflection(
 		final MERGE_IN mergeInObject, final WITH withObject, final String fieldName)

@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.22.0</version>
+	<version>4.23.0</version>
 
 	<name>${project.artifactId}</name>
 
@@ -46,7 +46,7 @@
 
 
 	<properties>
-		<silly-collections.version>4.18.0</silly-collections.version>
+		<silly-collections.version>4.19.0</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.16.0</test-objects.version>
 		<!-- EXTERNAL LIBRARIES versions -->

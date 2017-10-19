@@ -25,8 +25,10 @@
 package de.alpharogroup.lang.object;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -339,4 +341,48 @@ public final class MergeObjectExtensions
 		return changedData;
 	}
 
+	/**
+	 * Gets the changed data.
+	 *
+	 * @param sourceOjbect
+	 *            the source ojbect
+	 * @param objectToCompare
+	 *            the object to compare
+	 * @return the changed data
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 *             Thrown if this {@code Method} object is enforcing Java
+	 *             language access control and the underlying method is
+	 *             inaccessible.
+	 * @throws InvocationTargetException
+	 *             Thrown if the property accessor method throws an exception
+	 */
+	public static <T> List<ChangedAttributeResult> getChangedData(final T sourceOjbect, final T objectToCompare,
+			List<ChangedAttributeResult> changedData) throws IllegalArgumentException, IllegalAccessException {
+		if (changedData == null) {
+			changedData = new ArrayList<>();
+		}
+		if (sourceOjbect == null || objectToCompare == null
+				|| !sourceOjbect.getClass().equals(objectToCompare.getClass())) {
+			return changedData;
+		}
+		Field[] fields = sourceOjbect.getClass().getDeclaredFields();
+		for (final Field field : fields) {
+			if (Modifier.isStatic(field.getModifiers()) && Modifier.isFinal(field.getModifiers())) {
+				continue;
+			}
+			field.setAccessible(true);
+			Object sourceFieldValue = field.get(sourceOjbect);
+			Object toCompareFieldValue = field.get(objectToCompare);
+			if ((sourceFieldValue == null && toCompareFieldValue != null)
+					|| (toCompareFieldValue == null && sourceFieldValue != null)
+					|| (sourceFieldValue != null && !sourceFieldValue.equals(toCompareFieldValue))) {
+				changedData.add(ChangedAttributeResult.builder().attributeName(field.getName())
+						.sourceAttribute(sourceFieldValue).changedAttribute(toCompareFieldValue).build());
+				getChangedData(sourceFieldValue, toCompareFieldValue, changedData);
+			}
+		}
+		return changedData;
+	}
+	
 }

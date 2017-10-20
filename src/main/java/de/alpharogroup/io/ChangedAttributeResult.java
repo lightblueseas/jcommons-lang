@@ -45,7 +45,7 @@ public class ChangedAttributeResult
 {
 	/** The parent if exists. */
 	private ChangedAttributeResult parent;
-	
+
 	/** The attribute name. */
 	private Object attributeName;
 

@@ -30,6 +30,7 @@ import java.util.Map;
 
 import de.alpharogroup.io.ChangedAttributeResult;
 import de.alpharogroup.lang.object.CompareObjectExtensions;
+import de.alpharogroup.lang.object.DiffObjectExtensions;
 import de.alpharogroup.lang.object.MergeObjectExtensions;
 import lombok.experimental.UtilityClass;
 
@@ -81,14 +82,14 @@ public final class ObjectExtensions
 	 *             the invocation target exception
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
-	 * @deprecated use instead {@link MergeObjectExtensions#getChangedDataMap(Object, Object)}
+	 * @deprecated use instead {@link DiffObjectExtensions#getChangedDataMap(Object, Object)}
 	 */
 	@Deprecated
 	public static Map<Object, ChangedAttributeResult> getChangedDataMap(final Object sourceOjbect,
 		final Object objectToCompare)
 		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
 	{
-		return MergeObjectExtensions.getChangedDataMap(sourceOjbect, objectToCompare);
+		return DiffObjectExtensions.getChangedDataMap(sourceOjbect, objectToCompare);
 	}
 
 	/**

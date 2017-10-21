@@ -34,6 +34,7 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import de.alpharogroup.collections.list.ListExtensions;
 import de.alpharogroup.io.ChangedAttributeResult;
 import lombok.experimental.UtilityClass;
 
@@ -54,11 +55,13 @@ public class DiffObjectExtensions
 	 *            the object to compare
 	 * @return the changed data
 	 * @throws IllegalAccessException
-	 *             the illegal access exception
+	 *             Thrown if this method or object is enforcing java language access control and the
+	 *             underlying method or object is inaccessible.
 	 * @throws InvocationTargetException
-	 *             the invocation target exception
+	 *             Thrown if the property accessor method throws an exception
 	 * @throws NoSuchMethodException
-	 *             the no such method exception
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Map<Object, ChangedAttributeResult> getChangedDataMap(final Object sourceOjbect,
@@ -89,7 +92,6 @@ public class DiffObjectExtensions
 		return changedData;
 	}
 
-
 	/**
 	 * Gets the changed data in a list.
 	 *
@@ -97,22 +99,73 @@ public class DiffObjectExtensions
 	 *            the source ojbect
 	 * @param objectToCompare
 	 *            the object to compare
+	 * @return the changed data
+	 * @throws IllegalAccessException
+	 *             Thrown if this method or object is enforcing java language access control and the
+	 *             underlying method or object is inaccessible.
+	 * @throws InvocationTargetException
+	 *             Thrown if the property accessor method throws an exception
+	 * @throws NoSuchMethodException
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
+	 */
+	@SuppressWarnings("rawtypes")
+	public static List<ChangedAttributeResult> getChangedData(final Object sourceOjbect,
+		final Object objectToCompare)
+		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	{
+		if (sourceOjbect == null || objectToCompare == null
+			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
+		{
+			throw new IllegalArgumentException("Object should not be null and be the same type.");
+		}
+		final Map beanDescription = BeanUtils.describe(sourceOjbect);
+		beanDescription.remove("class");
+		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
+		clonedBeanDescription.remove("class");
+		final List<ChangedAttributeResult> changedData = new ArrayList<>();
+		for (final Object key : beanDescription.keySet())
+		{
+			if (CompareObjectExtensions.compareTo(sourceOjbect, objectToCompare,
+				key.toString()) != 0)
+			{
+				final Object sourceAttribute = beanDescription.get(key);
+				final Object changedAttribute = clonedBeanDescription.get(key);
+				changedData.add(ChangedAttributeResult.builder().attributeName(key)
+					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
+			}
+		}
+		return changedData;
+	}
+
+	/**
+	 * Gets the changed data recursively in a list from the given source object and the object to
+	 * compare.
+	 *
+	 * @param sourceOjbect
+	 *            the source ojbect
+	 * @param objectToCompare
+	 *            the object to compare
 	 * @param changedData
-	 *            the changed data
+	 *            the changed data in a list. This can be initially null, the list will be than
+	 *            created.
+	 * @param parent
+	 *            the parent of the changed data. This is initially null.
 	 * @return the list with the changed data
 	 * @throws IllegalArgumentException
 	 *             Thrown if an illegal argument is given
 	 * @throws IllegalAccessException
-	 *             Thrown if this {@code Method} object is enforcing Java language access control
-	 *             and the underlying method is inaccessible.
+	 *             Thrown if this method or object is enforcing java language access control and the
+	 *             underlying method or object is inaccessible.
 	 */
-	public static List<ChangedAttributeResult> getChangedData(final Object sourceOjbect,
-		final Object objectToCompare, List<ChangedAttributeResult> changedData)
+	public static List<ChangedAttributeResult> getChangedDataWithReflection(
+		final Object sourceOjbect, final Object objectToCompare,
+		List<ChangedAttributeResult> changedData, final ChangedAttributeResult parent)
 		throws IllegalArgumentException, IllegalAccessException
 	{
 		if (changedData == null)
 		{
-			changedData = new ArrayList<>();
+			changedData = ListExtensions.newArrayList();
 		}
 		if (sourceOjbect == null || objectToCompare == null
 			|| !sourceOjbect.getClass().equals(objectToCompare.getClass()))
@@ -133,10 +186,12 @@ public class DiffObjectExtensions
 				|| (toCompareFieldValue == null && sourceFieldValue != null)
 				|| (sourceFieldValue != null && !sourceFieldValue.equals(toCompareFieldValue)))
 			{
-				changedData.add(ChangedAttributeResult.builder().attributeName(field.getName())
-					.sourceAttribute(sourceFieldValue).changedAttribute(toCompareFieldValue)
-					.build());
-				getChangedData(sourceFieldValue, toCompareFieldValue, changedData);
+				final ChangedAttributeResult changedAttribute = ChangedAttributeResult.builder()
+					.parent(parent).attributeName(field.getName()).sourceAttribute(sourceFieldValue)
+					.changedAttribute(toCompareFieldValue).build();
+				changedData.add(changedAttribute);
+				getChangedDataWithReflection(sourceFieldValue, toCompareFieldValue, changedData,
+					changedAttribute);
 			}
 		}
 		return changedData;

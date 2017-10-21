@@ -54,7 +54,6 @@
 		<commons-collections4.version>4.1</commons-collections4.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
 		<commons-io.version>2.5</commons-io.version>
-		<velocity.version>1.7</velocity.version>
 		<commons-codec.version>1.10</commons-codec.version>
 		<joda-time.version>2.9.7</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>

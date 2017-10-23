@@ -567,10 +567,61 @@ public class MathExtensions
 	 *            The int to check.
 	 * @return Returns true if the int is a prime number otherwise false.
 	 */
-	static boolean isPrime(final int n)
+	public static boolean isPrime(final int n)
 	{
 		int mod = 1;
 		for (int i = 2, end = (int)Math.sqrt(n); i <= end && mod != 0; i++)
+		{
+			mod = n % i;
+		}
+		return mod != 0;
+	}
+
+	/**
+	 * Checks if the given long is a prime number.
+	 *
+	 * @param n
+	 *            The int to check.
+	 * @return Returns true if the long is a prime number otherwise false.
+	 */
+	public static boolean isPrime(final long n)
+	{
+		long mod = 1L;
+		for (long i = 2L, end = (long)Math.sqrt(n); i <= end && mod != 0; i++)
+		{
+			mod = n % i;
+		}
+		return mod != 0;
+	}
+
+	/**
+	 * Checks if the given float is a prime number.
+	 *
+	 * @param n
+	 *            The int to check.
+	 * @return Returns true if the float is a prime number otherwise false.
+	 */
+	public static boolean isPrime(final float n)
+	{
+		float mod = 1f;
+		for (float i = 2f, end = (float)Math.sqrt(n); i <= end && mod != 0; i++)
+		{
+			mod = n % i;
+		}
+		return mod != 0;
+	}
+
+	/**
+	 * Checks if the given float is a prime number.
+	 *
+	 * @param n
+	 *            The int to check.
+	 * @return Returns true if the float is a prime number otherwise false.
+	 */
+	public static boolean isPrime(final double n)
+	{
+		double mod = 1;
+		for (double i = 2, end = Math.sqrt(n); i <= end && mod != 0; i++)
 		{
 			mod = n % i;
 		}

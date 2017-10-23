@@ -62,8 +62,9 @@ public class MathExtensions
 		return primes;
 	}
 
+
 	/**
-	 * Checks the given index is between the range from min and max.
+	 * Checks the given int index is between the range from min and max.
 	 *
 	 * @param min
 	 *            The minimum.
@@ -75,6 +76,145 @@ public class MathExtensions
 	 */
 	public static boolean isBetween(final int min, final int max, final int index)
 	{
+		return isBetween(min, max, index, false, false);
+	}
+
+	/**
+	 * Checks the given int index is between the range from min and max.
+	 *
+	 * @param min
+	 *            The minimum.
+	 * @param max
+	 *            The maximum.
+	 * @param index
+	 *            The index.
+	 * @param includeMin
+	 *            if true than min value is included
+	 * @param includeMax
+	 *            if true than max value is included
+	 * @return Returns true if the index is between the range from min and max considered the given
+	 *         flags otherwise false.
+	 */
+	public static boolean isBetween(final int min, final int max, final int index,
+		boolean includeMin, boolean includeMax)
+	{
+		if (includeMin && includeMax)
+		{
+
+			if (index >= min && index <= max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (includeMin && !includeMax)
+		{
+
+			if (index >= min && index < max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (!includeMin && includeMax)
+		{
+
+			if (index > min && index <= max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (min < index && index < max)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Checks the given long index is between the range from min and max.
+	 *
+	 * @param min
+	 *            The minimum.
+	 * @param max
+	 *            The maximum.
+	 * @param index
+	 *            The index.
+	 * @return Returns true if the index is betwenn the range from min and max otherwise false.
+	 */
+	public static boolean isBetween(final long min, final long max, final long index)
+	{
+		return isBetween(min, max, index, false, false);
+	}
+
+	/**
+	 * Checks the given long index is between the range from min and max.
+	 *
+	 * @param min
+	 *            The minimum.
+	 * @param max
+	 *            The maximum.
+	 * @param index
+	 *            The index.
+	 * @param includeMin
+	 *            if true than min value is included
+	 * @param includeMax
+	 *            if true than max value is included
+	 * @return Returns true if the index is between the range from min and max considered the given
+	 *         flags otherwise false.
+	 */
+	public static boolean isBetween(final long min, final long max, final long index,
+		boolean includeMin, boolean includeMax)
+	{
+		if (includeMin && includeMax)
+		{
+
+			if (index >= min && index <= max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (includeMin && !includeMax)
+		{
+
+			if (index >= min && index < max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (!includeMin && includeMax)
+		{
+
+			if (index > min && index <= max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		if (min < index && index < max)
 		{
 			return true;

@@ -33,6 +33,12 @@ public class BooleanExtensions
 	/**
 	 * Decides over the given flags if the true-case or the false-case will be return.
 	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param trueCase
+	 *            the true case
+	 * @param falseCase
+	 *            the false case
 	 * @param flags
 	 *            the flags
 	 * @return the false-case if all false or empty otherwise the true-case.

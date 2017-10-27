@@ -43,6 +43,7 @@ import java.util.logging.Logger;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.beanutils.BeanUtils;
 
+import de.alpharogroup.diff.SerializedChangedAttributeResult;
 import de.alpharogroup.file.FileConstants;
 
 /**

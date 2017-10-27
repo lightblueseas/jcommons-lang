@@ -36,7 +36,9 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link CopyObjectExtensions} provide methods for copy an original object to a given
  * destination object.
+ * @deprecated use instead the same name inteface in the new project jobject-copy. Will be removed in the next release.
  */
+@Deprecated
 @UtilityClass
 public final class CopyObjectExtensions
 {

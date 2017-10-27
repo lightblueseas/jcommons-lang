@@ -25,22 +25,41 @@
 package de.alpharogroup.lang;
 
 /**
- * A class implements the {@link Mergeable} interface indicates that it can be merged with an other
- * object of its type.
- *
- * @param <T>
- *            the type of objects that this object may be merged with
- * @deprecated use instead the same name inteface in the new project jobject-merge. Will be removed in the next release.
+ * The class {@link BooleanExtensions}.
  */
-@Deprecated
-public interface Mergeable<T>
+public class BooleanExtensions
 {
+
 	/**
-	 * Merge the given <code>object</code> with <code>this object</code>.
+	 * Decides over the given flags if the true-case or the false-case will be return.
 	 *
-	 * @param object
-	 *            the object to merge with this one
-	 * @return the merged object
+	 * @param <T>
+	 *            the generic type
+	 * @param trueCase
+	 *            the true case
+	 * @param falseCase
+	 *            the false case
+	 * @param flags
+	 *            the flags
+	 * @return the false-case if all false or empty otherwise the true-case.
 	 */
-	public T merge(T object);
+	public static <T> T trueOrFalse(final T trueCase, final T falseCase, final boolean... flags)
+	{
+		boolean interlink = false;
+		for (int i = 0; i < flags.length; i++)
+		{
+			if (i == 0)
+			{
+				interlink = !flags[i];
+				continue;
+			}
+			interlink &= !flags[i];
+		}
+		if (interlink)
+		{
+			return falseCase;
+		}
+		return trueCase;
+	}
+
 }

@@ -22,25 +22,38 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang;
+package de.alpharogroup.io;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
- * A class implements the {@link Mergeable} interface indicates that it can be merged with an other
- * object of its type.
+ * The class {@link GenericChangedAttribute} is a bean class that encapsulated the difference of the
+ * attribute from two objects.
  *
- * @param <T>
- *            the type of objects that this object may be merged with
- * @deprecated use instead the same name inteface in the new project jobject-merge. Will be removed in the next release.
+ * @param <SOURCE>
+ *            the generic type of the source attribute
+ * @param <CHANGED>
+ *            the generic type of the changed attribute
  */
-@Deprecated
-public interface Mergeable<T>
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@AllArgsConstructor
+@Builder(toBuilder = true)
+public class GenericChangedAttribute<SOURCE, CHANGED>
 {
-	/**
-	 * Merge the given <code>object</code> with <code>this object</code>.
-	 *
-	 * @param object
-	 *            the object to merge with this one
-	 * @return the merged object
-	 */
-	public T merge(T object);
+	/** The attribute name. */
+	private String attributeName;
+
+	/** The source attribute. */
+	private SOURCE sourceAttribute;
+
+	/** The changed attribute. */
+	private CHANGED changedAttribute;
 }

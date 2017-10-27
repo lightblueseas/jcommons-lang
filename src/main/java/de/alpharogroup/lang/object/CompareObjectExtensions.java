@@ -38,7 +38,9 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link CompareObjectExtensions} provide methods for compare an object with another
  * given object.
+ * @deprecated use instead the same name inteface in the new project jobject-compare. Will be removed in the next release.
  */
+@Deprecated
 @UtilityClass
 public final class CompareObjectExtensions
 {

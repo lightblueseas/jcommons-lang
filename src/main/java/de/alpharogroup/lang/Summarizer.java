@@ -27,12 +27,14 @@ package de.alpharogroup.lang;
 import java.util.List;
 
 /**
- * A class implements the {@link Summarizer} interface indicates that it can merge single or a
+ * A class that implements the {@link Summarizer} interface indicates that it can merge single or a
  * collection of objects in with each other.
  *
  * @param <T>
  *            the type of objects that may be merged
+ * @deprecated use instead the same name inteface in the new project jobject-merge. Will be removed in the next release.
  */
+@Deprecated
 public interface Summarizer<T>
 {
 

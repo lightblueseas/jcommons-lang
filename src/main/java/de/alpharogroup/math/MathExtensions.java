@@ -63,7 +63,7 @@ public class MathExtensions
 	}
 
 	/**
-	 * Checks the given int index is between the range from min and max.
+	 * Checks the given double index is between the range from min and max.
 	 *
 	 * @param min
 	 *            The minimum.
@@ -73,13 +73,13 @@ public class MathExtensions
 	 *            The index.
 	 * @return Returns true if the index is betwenn the range from min and max otherwise false.
 	 */
-	public static boolean isBetween(final int min, final int max, final int index)
+	public static boolean isBetween(final double min, final double max, final double index)
 	{
 		return isBetween(min, max, index, false, false);
 	}
 
 	/**
-	 * Checks the given int index is between the range from min and max.
+	 * Checks the given double index is between the range from min and max.
 	 *
 	 * @param min
 	 *            The minimum.
@@ -94,88 +94,7 @@ public class MathExtensions
 	 * @return Returns true if the index is between the range from min and max considered the given
 	 *         flags otherwise false.
 	 */
-	public static boolean isBetween(final int min, final int max, final int index,
-		final boolean includeMin, final boolean includeMax)
-	{
-		if (includeMin && includeMax)
-		{
-
-			if (index >= min && index <= max)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		if (includeMin && !includeMax)
-		{
-
-			if (index >= min && index < max)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		if (!includeMin && includeMax)
-		{
-
-			if (index > min && index <= max)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		if (min < index && index < max)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/**
-	 * Checks the given long index is between the range from min and max.
-	 *
-	 * @param min
-	 *            The minimum.
-	 * @param max
-	 *            The maximum.
-	 * @param index
-	 *            The index.
-	 * @return Returns true if the index is betwenn the range from min and max otherwise false.
-	 */
-	public static boolean isBetween(final long min, final long max, final long index)
-	{
-		return isBetween(min, max, index, false, false);
-	}
-
-	/**
-	 * Checks the given long index is between the range from min and max.
-	 *
-	 * @param min
-	 *            The minimum.
-	 * @param max
-	 *            The maximum.
-	 * @param index
-	 *            The index.
-	 * @param includeMin
-	 *            if true than min value is included
-	 * @param includeMax
-	 *            if true than max value is included
-	 * @return Returns true if the index is between the range from min and max considered the given
-	 *         flags otherwise false.
-	 */
-	public static boolean isBetween(final long min, final long max, final long index,
+	public static boolean isBetween(final double min, final double max, final double index,
 		final boolean includeMin, final boolean includeMax)
 	{
 		if (includeMin && includeMax)
@@ -306,7 +225,7 @@ public class MathExtensions
 	}
 
 	/**
-	 * Checks the given double index is between the range from min and max.
+	 * Checks the given int index is between the range from min and max.
 	 *
 	 * @param min
 	 *            The minimum.
@@ -316,13 +235,13 @@ public class MathExtensions
 	 *            The index.
 	 * @return Returns true if the index is betwenn the range from min and max otherwise false.
 	 */
-	public static boolean isBetween(final double min, final double max, final double index)
+	public static boolean isBetween(final int min, final int max, final int index)
 	{
 		return isBetween(min, max, index, false, false);
 	}
 
 	/**
-	 * Checks the given double index is between the range from min and max.
+	 * Checks the given int index is between the range from min and max.
 	 *
 	 * @param min
 	 *            The minimum.
@@ -337,7 +256,88 @@ public class MathExtensions
 	 * @return Returns true if the index is between the range from min and max considered the given
 	 *         flags otherwise false.
 	 */
-	public static boolean isBetween(final double min, final double max, final double index,
+	public static boolean isBetween(final int min, final int max, final int index,
+		final boolean includeMin, final boolean includeMax)
+	{
+		if (includeMin && includeMax)
+		{
+
+			if (index >= min && index <= max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (includeMin && !includeMax)
+		{
+
+			if (index >= min && index < max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (!includeMin && includeMax)
+		{
+
+			if (index > min && index <= max)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		if (min < index && index < max)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Checks the given long index is between the range from min and max.
+	 *
+	 * @param min
+	 *            The minimum.
+	 * @param max
+	 *            The maximum.
+	 * @param index
+	 *            The index.
+	 * @return Returns true if the index is betwenn the range from min and max otherwise false.
+	 */
+	public static boolean isBetween(final long min, final long max, final long index)
+	{
+		return isBetween(min, max, index, false, false);
+	}
+
+	/**
+	 * Checks the given long index is between the range from min and max.
+	 *
+	 * @param min
+	 *            The minimum.
+	 * @param max
+	 *            The maximum.
+	 * @param index
+	 *            The index.
+	 * @param includeMin
+	 *            if true than min value is included
+	 * @param includeMax
+	 *            if true than max value is included
+	 * @return Returns true if the index is between the range from min and max considered the given
+	 *         flags otherwise false.
+	 */
+	public static boolean isBetween(final long min, final long max, final long index,
 		final boolean includeMin, final boolean includeMax)
 	{
 		if (includeMin && includeMax)
@@ -561,6 +561,40 @@ public class MathExtensions
 	}
 
 	/**
+	 * Checks if the given float is a prime number.
+	 *
+	 * @param n
+	 *            The int to check.
+	 * @return Returns true if the float is a prime number otherwise false.
+	 */
+	public static boolean isPrime(final double n)
+	{
+		double mod = 1;
+		for (double i = 2, end = Math.sqrt(n); i <= end && mod != 0; i++)
+		{
+			mod = n % i;
+		}
+		return mod != 0;
+	}
+
+	/**
+	 * Checks if the given float is a prime number.
+	 *
+	 * @param n
+	 *            The int to check.
+	 * @return Returns true if the float is a prime number otherwise false.
+	 */
+	public static boolean isPrime(final float n)
+	{
+		float mod = 1f;
+		for (float i = 2f, end = (float)Math.sqrt(n); i <= end && mod != 0; i++)
+		{
+			mod = n % i;
+		}
+		return mod != 0;
+	}
+
+	/**
 	 * Checks if the given int is a prime number.
 	 *
 	 * @param n
@@ -588,40 +622,6 @@ public class MathExtensions
 	{
 		long mod = 1L;
 		for (long i = 2L, end = (long)Math.sqrt(n); i <= end && mod != 0; i++)
-		{
-			mod = n % i;
-		}
-		return mod != 0;
-	}
-
-	/**
-	 * Checks if the given float is a prime number.
-	 *
-	 * @param n
-	 *            The int to check.
-	 * @return Returns true if the float is a prime number otherwise false.
-	 */
-	public static boolean isPrime(final float n)
-	{
-		float mod = 1f;
-		for (float i = 2f, end = (float)Math.sqrt(n); i <= end && mod != 0; i++)
-		{
-			mod = n % i;
-		}
-		return mod != 0;
-	}
-
-	/**
-	 * Checks if the given float is a prime number.
-	 *
-	 * @param n
-	 *            The int to check.
-	 * @return Returns true if the float is a prime number otherwise false.
-	 */
-	public static boolean isPrime(final double n)
-	{
-		double mod = 1;
-		for (double i = 2, end = Math.sqrt(n); i <= end && mod != 0; i++)
 		{
 			mod = n % i;
 		}

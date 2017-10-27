@@ -36,7 +36,11 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link ObjectExtensions} provides extension methods to check if the object is the
  * default value. It also provides methods to find changed data between Objects.
+ *
+ * @deprecated use instead the same name inteface in the new project jobject-core. Will be removed
+ *             in the next release.
  */
+@Deprecated
 @UtilityClass
 public final class ObjectExtensions
 {

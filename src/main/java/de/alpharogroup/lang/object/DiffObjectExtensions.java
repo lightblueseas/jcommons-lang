@@ -41,7 +41,9 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link DiffObjectExtensions} can find changed data from objects in other words the
  * difference of them.
+ * @deprecated use instead the same name inteface in the new project jobject-diff. Will be removed in the next release.
  */
+@Deprecated
 @UtilityClass
 public class DiffObjectExtensions
 {

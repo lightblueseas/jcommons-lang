@@ -30,7 +30,9 @@ package de.alpharogroup.lang;
  *
  * @param <T>
  *            the type of objects that this object may be merged with
+ * @deprecated use instead the same name inteface in the new project jobject-merge. Will be removed in the next release.
  */
+@Deprecated
 public interface Mergeable<T>
 {
 	/**

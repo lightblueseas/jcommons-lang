@@ -39,7 +39,9 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link CloneObjectExtensions} provide methods for clone an object.
+ * @deprecated use instead the same name inteface in the new project jobject-clone. Will be removed in the next release.
  */
+@Deprecated
 @UtilityClass
 public final class CloneObjectExtensions
 {

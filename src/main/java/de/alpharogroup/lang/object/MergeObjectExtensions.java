@@ -41,7 +41,9 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link MergeObjectExtensions} provide extension methods for merge a source object with
  * another object.
+ * @deprecated use instead the same name inteface in the new project jobject-merge. Will be removed in the next release.
  */
+@Deprecated
 @UtilityClass
 @ExtensionMethod(ObjectExtensions.class)
 public final class MergeObjectExtensions

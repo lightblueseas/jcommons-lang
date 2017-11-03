@@ -48,6 +48,45 @@ public final class PackageExtensions
 {
 
 	/**
+	 * Determines the package path from the given String object that is in the
+	 * dot-format. 
+	 * 
+	 * For instance: given package string=='org.foo.bar' will result
+	 * to 'org/foo/bar/' if flag is true otherwise 'org/foo/bar'
+	 *
+	 * @param packagePathWithDots
+	 *            the package path with dots
+	 * @param withEndSlash
+	 *            flag that indicates if a slash will be appended at the end
+	 * @return The package path from the given String object
+	 */
+	public static String getPackagePath(final String packagePathWithDots, boolean withEndSlash) {
+		if (packagePathWithDots == null) {
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(packagePathWithDots.replace('.', '/'));
+		if (withEndSlash) {
+			sb.append("/");
+		}
+		final String packagePath = sb.toString();
+		return packagePath;
+	}
+
+	/**
+	 * Determines the package path from the given String object that is in the
+	 * dot-format. For instance: given package string=='org.foo.bar' will result
+	 * to 'org/foo/bar/'
+	 *
+	 * @param packagePathWithDots
+	 *            the package path with dots
+	 * @return The package path from the given String object
+	 */
+	public static String getPackagePath(final String packagePathWithDots) {
+		return getPackagePath(packagePathWithDots, true);
+	}
+
+	/**
 	 * Determines the package name from the given class object.
 	 *
 	 * @param clazz

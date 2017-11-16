@@ -24,14 +24,17 @@
  */
 package de.alpharogroup.io.annotations;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.IOException;
 import java.util.Map;
 
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class {@link ImportResourceComparator}.
+ * The unit test class for the class {@link ImportResourceComparator}.
  */
 public class ImportResourceComparatorTest
 {
@@ -42,60 +45,70 @@ public class ImportResourceComparatorTest
 	@Test
 	public void testCompare() throws ClassNotFoundException, IOException
 	{
+		int expectedLength;
+		int actualLength;
+		int actual;
+		int expected;
 		final Map<Class<?>, ImportResource[]> resources = ImportResourcesExtensions
 			.getImportResources("de.alpharogroup.io");
 		final ImportResource[] somePageResources = resources.get(SomePage.class);
-		AssertJUnit.assertNotNull(somePageResources);
-		AssertJUnit.assertTrue(somePageResources.length == 3);
+		assertNotNull(somePageResources);
+
+		expectedLength = 3;
+		actualLength = somePageResources.length;
+		assertTrue(expectedLength == actualLength);
+
 		final ImportResource cssResource = somePageResources[0];
-		AssertJUnit.assertTrue(cssResource.index() == 1);
+		expectedLength = 1;
+		actualLength = cssResource.index();
+		assertTrue(expectedLength == actualLength);
 
 		final ImportResource jsResource = somePageResources[1];
-		AssertJUnit.assertTrue(jsResource.index() == 2);
+		expectedLength = 2;
+		actualLength = jsResource.index();
+		assertTrue(expectedLength == actualLength);
 
 		final ImportResource jsResource2 = somePageResources[2];
-		AssertJUnit.assertTrue(jsResource2.index() == 2);
+		expectedLength = 2;
+		actualLength = jsResource2.index();
+		assertTrue(expectedLength == actualLength);
 
 		final ImportResourceComparator comparator = new ImportResourceComparator();
-		// scenario: bigger index
-		int actual = comparator.compare(jsResource, cssResource);
-		int expected = 1;
 
-		AssertJUnit.assertEquals(expected, actual);
+		// scenario: bigger index
+		actual = comparator.compare(jsResource, cssResource);
+		expected = 1;
+		assertEquals(expected, actual);
+
 		// scenario: smaller index
 		actual = comparator.compare(cssResource, jsResource);
 		expected = -1;
+		assertEquals(expected, actual);
 
-		AssertJUnit.assertEquals(expected, actual);
 		// scenario: same index
 		actual = comparator.compare(jsResource, jsResource2);
 		expected = 0;
-
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		// scenario: null second object
 		actual = comparator.compare(cssResource, null);
 		expected = 1;
-
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		// scenario: null first object
 		actual = comparator.compare(null, cssResource);
 		expected = -1;
-
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		// scenario: same object
 		actual = comparator.compare(cssResource, cssResource);
 		expected = 0;
-
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		// scenario: null objects
 		actual = comparator.compare(null, null);
 		expected = 0;
-
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 }

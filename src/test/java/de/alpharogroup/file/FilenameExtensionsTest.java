@@ -24,15 +24,39 @@
  */
 package de.alpharogroup.file;
 
+import static org.testng.AssertJUnit.assertEquals;
+
+import java.io.File;
+import java.net.URISyntaxException;
+
 import org.testng.annotations.Test;
 
+import de.alpharogroup.lang.ClassExtensions;
+
+/**
+ * The unit test class for the class {@link FilenameExtensions}.
+ */
 public class FilenameExtensionsTest
 {
 
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}
+	 *
+	 * @throws URISyntaxException the URI syntax exception
+	 */
 	@Test
-	public void testGetFilenameWithoutExtensionFile()
+	public void testGetFilenameWithoutExtensionFile() throws URISyntaxException
 	{
-		// TODO
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		expected = "resources";
+		actual = FilenameExtensions.getFilenameWithoutExtension(file);
+		assertEquals(expected, actual);
 	}
 
 }

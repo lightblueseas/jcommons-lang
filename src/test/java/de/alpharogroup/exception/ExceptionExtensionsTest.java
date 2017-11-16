@@ -24,13 +24,13 @@
  */
 package de.alpharogroup.exception;
 
-import org.testng.AssertJUnit;
+import static org.testng.AssertJUnit.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class {@link ExceptionExtensions}.
+ * The unit test class for the class {@link ExceptionExtensions}.
  *
  * @version 1.0
  * @author Asterios Raptis
@@ -68,7 +68,9 @@ public class ExceptionExtensionsTest
 	@Test
 	public void testGetStackTrace()
 	{
-		String stacktrace = null;
+		String expected;
+		String actual;
+		actual = null;
 		try
 		{
 			final Object objNull = null;
@@ -76,9 +78,10 @@ public class ExceptionExtensionsTest
 		}
 		catch (final NullPointerException npe)
 		{
-			stacktrace = ExceptionExtensions.getStackTrace(npe);
+			actual = ExceptionExtensions.getStackTrace(npe);
 		}
-		AssertJUnit.assertTrue(stacktrace.startsWith("java.lang.NullPointerException"));
+		expected = "java.lang.NullPointerException";
+		assertTrue(actual.startsWith(expected));
 	}
 
 	/**
@@ -90,7 +93,9 @@ public class ExceptionExtensionsTest
 	@Test
 	public void testGetStackTraceElements()
 	{
-		String stacktrace = null;
+		String expected;
+		String actual;
+		actual = null;
 		try
 		{
 			final Object objNull = null;
@@ -98,10 +103,10 @@ public class ExceptionExtensionsTest
 		}
 		catch (final NullPointerException npe)
 		{
-			stacktrace = ExceptionExtensions.getStackTraceElements(npe);
+			actual = ExceptionExtensions.getStackTraceElements(npe);
 		}
-		System.out.println();
-		AssertJUnit.assertTrue(stacktrace.startsWith("class java.lang.NullPointerException"));
+		expected = "class java.lang.NullPointerException";
+		assertTrue(actual.startsWith(expected));
 	}
 
 }

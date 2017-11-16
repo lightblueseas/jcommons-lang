@@ -24,35 +24,33 @@
  */
 package de.alpharogroup.id.generator;
 
-import org.testng.annotations.BeforeMethod;
+import static org.testng.AssertJUnit.assertFalse;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.testng.annotations.Test;
 
+
 /**
- * The class SystemTimeIdGeneratorTest.
+ * The unit test class for the class {@link SystemTimeIdGenerator}.
  */
 public class SystemTimeIdGeneratorTest
 {
 
 	/**
-	 * Sets the up.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	@BeforeMethod
-	public void setUp() throws Exception
-	{
-	}
-
-	/**
-	 * Test get next id.
+	 * Test method for {@link SystemTimeIdGenerator#getNextId()}
 	 */
 	@Test
 	public void testGetNextId()
 	{
+		final List<Integer> nextIds = new ArrayList<>();
 		for (int i = 0; i < 1000; i++)
 		{
-			System.err.println(SystemTimeIdGenerator.getInstance().getNextId());
+			final int nextId = SystemTimeIdGenerator.getInstance().getNextId();
+			assertFalse("Next id" + nextId + " should not generated twice",
+				nextIds.contains(nextId));
+			nextIds.add(nextId);
 		}
 	}
 

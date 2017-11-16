@@ -45,33 +45,31 @@ public class ImportResourceComparatorTest
 	@Test
 	public void testCompare() throws ClassNotFoundException, IOException
 	{
-		int expectedLength;
-		int actualLength;
 		int actual;
 		int expected;
 		final Map<Class<?>, ImportResource[]> resources = ImportResourcesExtensions
 			.getImportResources("de.alpharogroup.io");
-		final ImportResource[] somePageResources = resources.get(SomePage.class);
+		final ImportResource[] somePageResources = resources.get(TestPage.class);
 		assertNotNull(somePageResources);
 
-		expectedLength = 3;
-		actualLength = somePageResources.length;
-		assertTrue(expectedLength == actualLength);
+		expected = 3;
+		actual = somePageResources.length;
+		assertTrue(expected == actual);
 
 		final ImportResource cssResource = somePageResources[0];
-		expectedLength = 1;
-		actualLength = cssResource.index();
-		assertTrue(expectedLength == actualLength);
+		expected = 1;
+		actual = cssResource.index();
+		assertTrue(expected == actual);
 
 		final ImportResource jsResource = somePageResources[1];
-		expectedLength = 2;
-		actualLength = jsResource.index();
-		assertTrue(expectedLength == actualLength);
+		expected = 2;
+		actual = jsResource.index();
+		assertTrue(expected == actual);
 
 		final ImportResource jsResource2 = somePageResources[2];
-		expectedLength = 2;
-		actualLength = jsResource2.index();
-		assertTrue(expectedLength == actualLength);
+		expected = 2;
+		actual = jsResource2.index();
+		assertTrue(expected == actual);
 
 		final ImportResourceComparator comparator = new ImportResourceComparator();
 

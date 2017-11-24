@@ -44,6 +44,7 @@ Than you can add the dependency to your dependencies:
 
 		<dependencies>
 			...
+            <!-- JCOMMONS-LANG DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jcommons-lang</artifactId>

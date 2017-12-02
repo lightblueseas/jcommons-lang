@@ -24,11 +24,6 @@
  */
 package de.alpharogroup.io.annotations;
 
-
-@ImportResource(index = 1, resourceName = "SomePage.css", resourceType = "css")
-@ImportResources(resources = {
-		@ImportResource(index = 2, resourceName = "SomePage.js", resourceType = "js"),
-		@ImportResource(index = 2, resourceName = "SomePanel.js", resourceType = "js") })
-public class SomePage
+public class TestPanel
 {
 }

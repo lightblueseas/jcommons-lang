@@ -42,7 +42,8 @@ public class FilenameExtensionsTest
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}
 	 *
-	 * @throws URISyntaxException the URI syntax exception
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
 	 */
 	@Test
 	public void testGetFilenameWithoutExtensionFile() throws URISyntaxException

@@ -31,6 +31,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.DecoderException;
+import org.apache.commons.lang3.StringUtils;
 
 import de.alpharogroup.check.Check;
 
@@ -242,12 +243,17 @@ public class StringExtensions
 	 */
 	public static final String firstCharacterToLowerCase(final String fieldName)
 	{
-		String firstCharacter = fieldName.substring(0, 1);
-		firstCharacter = firstCharacter.toLowerCase();
-		final char[] fc = firstCharacter.toCharArray();
-		final char[] fn = fieldName.toCharArray();
-		fn[0] = fc[0];
-		return new String(fn);
+
+		if (StringUtils.isNotEmpty(fieldName))
+		{
+			String firstCharacter = fieldName.substring(0, 1);
+			firstCharacter = firstCharacter.toLowerCase();
+			final char[] fc = firstCharacter.toCharArray();
+			final char[] fn = fieldName.toCharArray();
+			fn[0] = fc[0];
+			return new String(fn);
+		}
+		return fieldName;
 	}
 
 	/**
@@ -261,14 +267,17 @@ public class StringExtensions
 	 */
 	public static final String firstCharacterToUpperCase(final String fieldName)
 	{
-		String firstCharacter = fieldName.substring(0, 1);
-		firstCharacter = firstCharacter.toUpperCase();
-		final char[] fc = firstCharacter.toCharArray();
-		final char[] fn = fieldName.toCharArray();
-		fn[0] = fc[0];
-		return new String(fn);
+		if (StringUtils.isNotEmpty(fieldName))
+		{
+			String firstCharacter = fieldName.substring(0, 1);
+			firstCharacter = firstCharacter.toUpperCase();
+			final char[] fc = firstCharacter.toCharArray();
+			final char[] fn = fieldName.toCharArray();
+			fn[0] = fc[0];
+			return new String(fn);
+		}
+		return fieldName;
 	}
-
 
 	/**
 	 * Gets the Attribut-name without brackets. For example: If "indio[5][1]" is the given String
@@ -285,6 +294,7 @@ public class StringExtensions
 		final String returnName = name.substring(0, indexStart);
 		return returnName;
 	}
+
 
 	/**
 	 * Gets the first index from the brackets. For example: If "indio[5][1]" is the given String
@@ -336,7 +346,6 @@ public class StringExtensions
 		return returnString;
 	}
 
-
 	/**
 	 * The Method getStringBeforeUnderscore(String) gets the substring before the first underscore.
 	 * For example:Assume that element=foobar_value then the result string is "foobar".
@@ -350,6 +359,7 @@ public class StringExtensions
 		Check.get().notNull(element, "string").notEmpty(element, "string");
 		return element.substring(0, element.indexOf("_"));
 	}
+
 
 	/**
 	 * Gets the value from the given map and if it does not exist or is empty the given default
@@ -423,6 +433,30 @@ public class StringExtensions
 			return "";
 		}
 		return str.substring(str.length() - 1);
+	}
+
+	/**
+	 * Sets the last character from the given string to upper case and returns it. Example:<br>
+	 * Given fieldName: userName <br>
+	 * Result: userNamE
+	 *
+	 * @param fieldName
+	 *            The String to modify.
+	 * @return The modified string.
+	 */
+	public static final String lastCharacterToUpperCase(final String fieldName)
+	{
+		if (StringUtils.isNotEmpty(fieldName))
+		{
+			final int length = fieldName.length();
+			String lastCharacter = fieldName.substring(length - 1, length);
+			lastCharacter = lastCharacter.toUpperCase();
+			final char[] fc = lastCharacter.toCharArray();
+			final char[] fn = fieldName.toCharArray();
+			fn[length - 1] = fc[0];
+			return new String(fn);
+		}
+		return fieldName;
 	}
 
 	/**
@@ -659,14 +693,15 @@ public class StringExtensions
 	 * @throws NumberFormatException
 	 *             is thrown if the given {@link String} is not valid.
 	 */
-	public static int[] toIntegerArray(String integerArrayAsString, String delimiter)
+	public static int[] toIntegerArray(final String integerArrayAsString, final String delimiter)
 		throws NumberFormatException
 	{
-		String[] splittedNumbers = integerArrayAsString.replaceAll("\\s", "").split(delimiter);
-		int[] integerArray = new int[splittedNumbers.length];
+		final String[] splittedNumbers = integerArrayAsString.replaceAll("\\s", "")
+			.split(delimiter);
+		final int[] integerArray = new int[splittedNumbers.length];
 		for (int i = 0; i < splittedNumbers.length; i++)
 		{
-			int currentNumber = Integer.parseInt(splittedNumbers[i]);
+			final int currentNumber = Integer.parseInt(splittedNumbers[i]);
 			integerArray[i] = currentNumber;
 		}
 		return integerArray;

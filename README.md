@@ -22,6 +22,10 @@ The source code comes under the liberal MIT License, making jcommons-lang great 
 
 [![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=master)](https://travis-ci.org/lightblueseas/jcommons-lang)
 
+## Coverage Status
+
+[![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg?branch=develop)](https://coveralls.io/github/lightblueseas/jcommons-lang?branch=develop)
+
 ## Maven Central
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang)
@@ -40,7 +44,7 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 Than you can add the dependency to your dependencies:
 
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.27.0</jcommons-lang.version>
+		<jcommons-lang.version>4.28.0</jcommons-lang.version>
 
 		<dependencies>
 			...

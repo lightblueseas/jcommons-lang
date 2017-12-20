@@ -413,19 +413,6 @@ public class ClassExtensionsTest
 		{
 			System.out.println(entry);
 		}
-		System.out.println("#####################################");
-		list = ClassExtensions.scanClassNames("org.apache.commons.beanutils");
-		for (final Class<?> entry : list)
-		{
-			System.out.println(entry);
-		}
-		System.out.println("#####################################");
-		list = ClassExtensions.scanClassNames("org.apache.commons.beanutils", true);
-		for (final Class<?> entry : list)
-		{
-			System.out.println(entry);
-		}
 	}
-
 
 }

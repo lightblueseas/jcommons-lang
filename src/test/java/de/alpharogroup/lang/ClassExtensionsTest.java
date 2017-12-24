@@ -48,8 +48,8 @@ import de.alpharogroup.runtime.compiler.JavaSourceCompiler;
 import de.alpharogroup.test.objects.Member;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.PremiumMember;
-import de.alpharogroup.test.objects.TestAnnotation;
-import de.alpharogroup.test.objects.annotations.AnnotatedInterface;
+import de.alpharogroup.test.objects.annotations.TestAnnotation;
+import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
 import de.alpharogroup.test.objects.enums.Brands;
 
 public class ClassExtensionsTest

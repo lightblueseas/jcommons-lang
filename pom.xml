@@ -24,9 +24,9 @@
 	<properties>
 		<silly-collections.version>4.21.1</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
-		<test-objects.version>4.18.0</test-objects.version>
+		<test-objects.version>4.19.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.5.0</jobject-extensions.version>
+		<jobject-extensions.version>1.6.0</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<!-- EXTERNAL LIBRARIES versions -->

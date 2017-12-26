@@ -45,26 +45,6 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#copySerializedObject(java.io.Serializable)}
-	 * .
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException
-	 *             is thrown when a class is not found in the classloader or no definition for the
-	 *             class with the specified name could be found.
-	 */
-	@Test
-	public void testCopySerializedObject() throws ClassNotFoundException, IOException
-	{
-		final String age = "Im too young!";
-		final String copy = SerializedObjectExtensions.copySerializedObject(age);
-		this.result = age.equals(copy);
-		AssertJUnit.assertTrue("", this.result);
-	}
-
-	/**
-	 * Test method for
 	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)}
 	 * .
 	 *

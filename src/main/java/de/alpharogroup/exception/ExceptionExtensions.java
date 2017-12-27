@@ -27,7 +27,7 @@ package de.alpharogroup.exception;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import de.alpharogroup.io.StreamExtensions;
 

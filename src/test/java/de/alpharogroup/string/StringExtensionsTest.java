@@ -24,6 +24,8 @@
  */
 package de.alpharogroup.string;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.List;
 
 import org.testng.AssertJUnit;
@@ -81,6 +83,26 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		throw new RuntimeException("Test not implemented");
 
+	}
+
+	@Test
+	public void testFirstCharacterToLowerCase()
+	{
+		String expected;
+		String actual;
+		expected = "userName";
+		actual = StringExtensions.firstCharacterToLowerCase("UserName");
+		assertEquals(actual, expected);
+	}
+
+	@Test
+	public void testFirstCharacterToUpperCase()
+	{
+		String expected;
+		String actual;
+		expected = "UserName";
+		actual = StringExtensions.firstCharacterToUpperCase("userName");
+		assertEquals(actual, expected);
 	}
 
 	/**
@@ -181,6 +203,32 @@ public class StringExtensionsTest extends BaseTestCase
 		result = notANumber.isNumber();
 		AssertJUnit.assertFalse("", result);
 
+	}
+
+	@Test
+	public void testLastCharacterToUpperCase()
+	{
+		String expected;
+		String actual;
+		expected = "UserNamE";
+		actual = StringExtensions.lastCharacterToUpperCase("UserName");
+		assertEquals(actual, expected);
+
+		expected = "E";
+		actual = StringExtensions.lastCharacterToUpperCase("e");
+		assertEquals(actual, expected);
+
+		expected = " ";
+		actual = StringExtensions.lastCharacterToUpperCase(" ");
+		assertEquals(actual, expected);
+
+		expected = "";
+		actual = StringExtensions.lastCharacterToUpperCase("");
+		assertEquals(actual, expected);
+
+		expected = null;
+		actual = StringExtensions.lastCharacterToUpperCase(null);
+		assertEquals(actual, expected);
 	}
 
 	/**

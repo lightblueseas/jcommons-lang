@@ -24,17 +24,19 @@
  */
 package de.alpharogroup.io.annotations;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
 import java.util.Map;
 
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.io.OtherPage;
 
 /**
- * Test class for the class {@link ImportResourcesExtensions}.
+ * The unit test class for the class {@link ImportResourcesExtensions}.
  *
  * @author Asterios Raptis
  * @version 1.0
@@ -48,26 +50,68 @@ public class ImportResourcesExtensionsTest
 	@Test
 	public void testGetImportResources() throws IOException, ClassNotFoundException
 	{
+		int expectedLength;
+		int actualLength;
+		int expectedIndex;
+		int actualIndex;
+		String expected;
+		String actual;
 		final Map<Class<?>, ImportResource[]> resources = ImportResourcesExtensions
 			.getImportResources("de.alpharogroup.io");
-		final ImportResource[] somePageResources = resources.get(SomePage.class);
-		AssertJUnit.assertNotNull(somePageResources);
-		AssertJUnit.assertTrue(somePageResources.length == 3);
+		final ImportResource[] somePageResources = resources.get(TestPage.class);
+
+		assertNotNull(somePageResources);
+		expectedLength = 3;
+		actualLength = somePageResources.length;
+		assertTrue(expectedLength == actualLength);
+
 		final ImportResource cssResource = somePageResources[0];
-		AssertJUnit.assertTrue(cssResource.index() == 1);
-		AssertJUnit.assertTrue(cssResource.resourceName().equals("SomePage.css"));
-		AssertJUnit.assertTrue(cssResource.resourceType().equals("css"));
+		expectedIndex = 1;
+		actualIndex = cssResource.index();
+		assertTrue(expectedIndex == actualIndex);
+
+		expected = "TestPage.css";
+		actual = cssResource.resourceName();
+		assertEquals(expected, actual);
+
+		expected = "css";
+		actual = cssResource.resourceType();
+		assertEquals(expected, actual);
+
 		final ImportResource jsResource = somePageResources[1];
-		AssertJUnit.assertTrue(jsResource.index() == 2);
-		AssertJUnit.assertTrue(jsResource.resourceName().equals("SomePage.js"));
-		AssertJUnit.assertTrue(jsResource.resourceType().equals("js"));
+
+		expectedIndex = 2;
+		actualIndex = jsResource.index();
+		assertTrue(expectedIndex == actualIndex);
+
+		expected = "TestPage.js";
+		actual = jsResource.resourceName();
+		assertEquals(expected, actual);
+
+		expected = "js";
+		actual = jsResource.resourceType();
+		assertEquals(expected, actual);
+
 		final ImportResource jsResource2 = somePageResources[2];
-		AssertJUnit.assertTrue(jsResource2.index() == 2);
-		AssertJUnit.assertTrue(jsResource2.resourceName().equals("SomePanel.js"));
-		AssertJUnit.assertTrue(jsResource2.resourceType().equals("js"));
+
+		expectedIndex = 2;
+		actualIndex = jsResource2.index();
+		assertTrue(expectedIndex == actualIndex);
+
+		expected = "TestPanel.js";
+		actual = jsResource2.resourceName();
+		assertEquals(expected, actual);
+
+		expected = "js";
+		actual = jsResource2.resourceType();
+		assertEquals(expected, actual);
+
 		final ImportResource[] otherPageResources = resources.get(OtherPage.class);
-		AssertJUnit.assertNotNull(otherPageResources);
-		AssertJUnit.assertTrue(otherPageResources.length == 1);
+		assertNotNull(otherPageResources);
+
+		expectedLength = 1;
+		actualLength = otherPageResources.length;
+		assertTrue(expectedLength == actualLength);
 
 	}
 }

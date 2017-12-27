@@ -22,38 +22,42 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang;
+package de.alpharogroup.file;
 
-import java.util.List;
+import static org.testng.AssertJUnit.assertEquals;
+
+import java.io.File;
+import java.net.URISyntaxException;
+
+import org.testng.annotations.Test;
+
+import de.alpharogroup.lang.ClassExtensions;
 
 /**
- * A class implements the {@link Summarizer} interface indicates that it can merge single or a
- * collection of objects in with each other.
- *
- * @param <T>
- *            the type of objects that may be merged
+ * The unit test class for the class {@link FilenameExtensions}.
  */
-public interface Summarizer<T>
+public class FilenameExtensionsTest
 {
 
 	/**
-	 * Merge the given <code>list</code> with the <code>objects</code> that can be merged and return
-	 * the resulted merged <code>objects</code> in a <code>list</code>.
+	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}
 	 *
-	 * @param list
-	 *            the <code>list</code> with the <code>objects</code> to merge
-	 * @return the list with the merged objects
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
 	 */
-	List<T> merge(List<T> list);
+	@Test
+	public void testGetFilenameWithoutExtensionFile() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
 
-	/**
-	 * Merge the given <code>object</code> with <code>other</code> object.
-	 *
-	 * @param object
-	 *            the object to merge in
-	 * @param other
-	 *            the other object to merge with
-	 * @return the merged object or null if it isn't possible
-	 */
-	T merge(T object, T other);
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		expected = "resources";
+		actual = FilenameExtensions.getFilenameWithoutExtension(file);
+		assertEquals(expected, actual);
+	}
+
 }

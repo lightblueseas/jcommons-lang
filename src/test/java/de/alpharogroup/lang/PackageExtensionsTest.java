@@ -24,126 +24,145 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.util.Set;
 
-import org.testng.AssertJUnit;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import de.alpharogroup.test.messages.TestMessagesExtensions;
 
 /**
  * Test class for the class {@link de.alpharogroup.lang.PackageExtensions}.
- * 
+ *
  * @version 1.0
  * @author Asterios Raptis
  */
 public class PackageExtensionsTest
 {
 
-	/** The result. */
-	private boolean result;
-
 	/**
-	 * Sets the up method.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	@BeforeMethod
-	public void setUp() throws Exception
-	{
-	}
-
-	/**
-	 * Tear down method.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	@AfterMethod
-	public void tearDown() throws Exception
-	{
-	}
-
-	/**
-	 * Test method for.
-	 *
+	 * Test method for
 	 * {@link de.alpharogroup.lang.PackageExtensions#getPackagePath(java.lang.Object)}.
 	 */
 	@Test
 	public void testGetPackagePath()
 	{
-		final String expected = "de/alpharogroup/lang/";
-		final String packagePath = PackageExtensions.getPackagePath(this);
-		this.result = expected.equals(packagePath);
-		AssertJUnit.assertTrue("", this.result);
-
+		String expected;
+		String actual;
+		expected = "de/alpharogroup/lang/";
+		actual = PackageExtensions.getPackagePath(this);
+		assertTrue(TestMessagesExtensions.newFailMessage("PackagePath", expected, actual),
+			expected.equals(actual));
 	}
 
 	/**
-	 * Test method for.
-	 *
+	 * Test method for {@link de.alpharogroup.lang.PackageExtensions#getPackagePath(String)}.
+	 */
+	@Test
+	public void testGetPackagePathString()
+	{
+		String expected;
+		String actual;
+		String input;
+		expected = "de/alpharogroup/lang";
+		input = "de.alpharogroup.lang";
+		actual = PackageExtensions.getPackagePath(input);
+		assertTrue(TestMessagesExtensions.newFailMessage("PackagePath", expected, actual),
+			expected.equals(actual));
+	}
+
+	/**
+	 * Test method for
+	 * {@link de.alpharogroup.lang.PackageExtensions#getPackagePath(String, boolean)}.
+	 */
+	@Test
+	public void testGetPackagePathStringBoolean()
+	{
+		String expected;
+		String actual;
+		String input;
+		expected = "de/alpharogroup/lang/";
+		input = "de.alpharogroup.lang";
+		actual = PackageExtensions.getPackagePath(input, true);
+		assertTrue(TestMessagesExtensions.newFailMessage("PackagePath", expected, actual),
+			expected.equals(actual));
+	}
+
+	/**
+	 * Test method for
 	 * {@link de.alpharogroup.lang.PackageExtensions#getPackagePathWithSlash(java.lang.Object)}.
 	 */
 	@Test
 	public void testGetPackagePathWithSlash()
 	{
-		final String expected = "/de/alpharogroup/lang/";
-		final String packagePath = PackageExtensions.getPackagePathWithSlash(this);
-		this.result = expected.equals(packagePath);
-		AssertJUnit.assertTrue("", this.result);
+		String expected;
+		String actual;
+		Object input;
+		expected = "/de/alpharogroup/lang/";
+		input = this;
+		actual = PackageExtensions.getPackagePathWithSlash(input);
+		assertTrue(TestMessagesExtensions.newFailMessage("PackagePath", expected, actual),
+			expected.equals(actual));
 	}
 
-	@Test
+	/**
+	 * Test method for
+	 * {@link de.alpharogroup.lang.PackageExtensions#scanClassNames(String, boolean, boolean)}.
+	 *
+	 * @throws Exception
+	 *             is thrown if any error occurs on the execution
+	 */
+	@Test(enabled = true)
 	public void testScanNames() throws Exception
 	{
 		Set<String> list = PackageExtensions.scanClassNames("de.alpharogroup.lang", false, true);
-		AssertJUnit.assertTrue("Result should contain classes from same package.",
+		assertTrue("Result should contain classes from same package.",
 			list.contains("de.alpharogroup.lang.PackageExtensionsTest"));
-		AssertJUnit.assertFalse("Result should not contain classes from subpackages.",
+		assertFalse("Result should not contain classes from subpackages.",
 			list.contains("de.alpharogroup.lang.sub.SubPackageClass"));
 
 		list = PackageExtensions.scanClassNames("de.alpharogroup.lang", true, true);
-		AssertJUnit.assertTrue("Result should contain classes from subpackages.",
+		assertTrue("Result should contain classes from subpackages.",
 			list.contains("de.alpharogroup.lang.sub.SubPackageClass"));
 
 		list = PackageExtensions.scanClassNames("org.apache.commons.beanutils", false, true);
-		AssertJUnit.assertTrue("Result should contain classes from same package.",
+		assertTrue("Result should contain classes from same package.",
 			list.contains("org.apache.commons.beanutils.BeanMap"));
-		AssertJUnit.assertFalse("Result should not contain classes from subpackages.",
+		assertFalse("Result should not contain classes from subpackages.",
 			list.contains("org.apache.commons.beanutils.locale.BaseLocaleConverter"));
-		AssertJUnit.assertFalse("Result should not contain classes from subpackages.", list
+		assertFalse("Result should not contain classes from subpackages.", list
 			.contains("org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter"));
 
 		list = PackageExtensions.scanClassNames("org.apache.commons.beanutils.locale", true, true);
-		AssertJUnit.assertTrue("Result should contain classes from same package.",
+		assertTrue("Result should contain classes from same package.",
 			list.contains("org.apache.commons.beanutils.locale.BaseLocaleConverter"));
-		AssertJUnit.assertTrue("Result should contain classes from subpackages.", list
+		assertTrue("Result should contain classes from subpackages.", list
 			.contains("org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter"));
 
 		// ......
 		list = PackageExtensions.scanClassNames("de.alpharogroup.lang", false, false);
-		AssertJUnit.assertTrue("Result should contain classes from same package.",
+		assertTrue("Result should contain classes from same package.",
 			list.contains("PackageExtensionsTest"));
-		AssertJUnit.assertFalse("Result should not contain classes from subpackages.",
+		assertFalse("Result should not contain classes from subpackages.",
 			list.contains("SubPackageClass"));
 
 		list = PackageExtensions.scanClassNames("de.alpharogroup.lang", true, false);
-		AssertJUnit.assertTrue("Result should contain classes from subpackages.",
+		assertTrue("Result should contain classes from subpackages.",
 			list.contains("SubPackageClass"));
 
 		list = PackageExtensions.scanClassNames("org.apache.commons.beanutils", false, false);
-		AssertJUnit.assertTrue("Result should contain classes from same package.",
-			list.contains("BeanMap"));
-		AssertJUnit.assertFalse("Result should not contain classes from subpackages.",
+		assertTrue("Result should contain classes from same package.", list.contains("BeanMap"));
+		assertFalse("Result should not contain classes from subpackages.",
 			list.contains("BaseLocaleConverter"));
-		AssertJUnit.assertFalse("Result should not contain classes from subpackages.",
+		assertFalse("Result should not contain classes from subpackages.",
 			list.contains("BigDecimalLocaleConverter"));
 
 		list = PackageExtensions.scanClassNames("org.apache.commons.beanutils.locale", true, false);
-		AssertJUnit.assertTrue("Result should contain classes from same package.",
+		assertTrue("Result should contain classes from same package.",
 			list.contains("BaseLocaleConverter"));
-		AssertJUnit.assertTrue("Result should contain classes from subpackages.",
+		assertTrue("Result should contain classes from subpackages.",
 			list.contains("BigDecimalLocaleConverter"));
 
 		list = PackageExtensions.scanClassNames("de.alpharogroup", true, true);
@@ -153,6 +172,5 @@ public class PackageExtensionsTest
 		}
 
 	}
-
 
 }

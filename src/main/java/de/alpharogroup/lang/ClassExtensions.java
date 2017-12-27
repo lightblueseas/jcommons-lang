@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FilenameExtensions;
@@ -145,7 +145,7 @@ public final class ClassExtensions
 	 * @return the real class if the given class is decorated with cglib proxy classes and if not
 	 *         the given class will be returned.
 	 */
-	public static Class<?> getCglibProxy(Class<?> clazz)
+	public static Class<?> getCglibProxy(final Class<?> clazz)
 	{
 		Class<?> found = clazz;
 		while (isCglib(found))
@@ -386,9 +386,9 @@ public final class ClassExtensions
 	 *            the class
 	 * @return the jdk proxy interfaces
 	 */
-	public static Class<?>[] getJdkProxyInterfaces(Class<?> clazz)
+	public static Class<?>[] getJdkProxyInterfaces(final Class<?> clazz)
 	{
-		Class<?> found = clazz;
+		final Class<?> found = clazz;
 		if (isJdkProxy(found))
 		{
 			return found.getInterfaces();
@@ -467,6 +467,7 @@ public final class ClassExtensions
 		}
 		return name;
 	}
+
 
 	/**
 	 * Gets the path from the given class. For instance /java/lang/Object.class if the given class
@@ -731,9 +732,9 @@ public final class ClassExtensions
 	 *            the class
 	 * @return the unwrapped proxy class or null if the given {@link Class} is null.
 	 */
-	public static Class<?> getUnwrappedProxy(Class<?> clazz)
+	public static Class<?> getUnwrappedProxy(final Class<?> clazz)
 	{
-		Class<?>[] found = unwrapProxy(clazz);
+		final Class<?>[] found = unwrapProxy(clazz);
 		if (found != null && 0 < found.length)
 		{
 			return found[0];
@@ -762,7 +763,7 @@ public final class ClassExtensions
 	 *            the class to check
 	 * @return true, if the given {@link Class} is cglib proxy class otherwise false.
 	 */
-	public static <T> boolean isCglib(Class<T> clazz)
+	public static <T> boolean isCglib(final Class<T> clazz)
 	{
 		return clazz != null && clazz.getName().contains(CGLIB_TAG);
 	}
@@ -823,7 +824,7 @@ public final class ClassExtensions
 	 *            the class to check
 	 * @return true, if the given {@link Class} is a JDK proxy class otherwise false.
 	 */
-	public static <T> boolean isJdkProxy(Class<T> clazz)
+	public static <T> boolean isJdkProxy(final Class<T> clazz)
 	{
 		return clazz != null && Proxy.isProxyClass(clazz);
 	}
@@ -849,7 +850,7 @@ public final class ClassExtensions
 	 *            the class to check
 	 * @return true, if the given {@link Class} is a proxy class otherwise false.
 	 */
-	public static <T> boolean isProxy(Class<T> clazz)
+	public static <T> boolean isProxy(final Class<T> clazz)
 	{
 		return isJdkProxy(clazz) || isCglib(clazz);
 	}
@@ -1007,7 +1008,7 @@ public final class ClassExtensions
 	 *            the class
 	 * @return the unwrapped classes as an array
 	 */
-	public static Class<?>[] unwrapProxy(Class<?> clazz)
+	public static Class<?>[] unwrapProxy(final Class<?> clazz)
 	{
 		if (clazz == null)
 		{

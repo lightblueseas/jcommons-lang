@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.29.0-SNAPSHOT</version>
+	<version>4.28.1</version>
 
 	<name>${project.artifactId}</name>
 
@@ -22,7 +22,7 @@
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
-		<silly-collections.version>4.21.1</silly-collections.version>
+		<silly-collections.version>4.21.2</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.19.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->

@@ -40,19 +40,19 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.test.objects.annotations.TestAnnotation;
-import de.alpharogroup.test.objects.annotations.classes.AnnotatedClass;
-import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
-import de.alpharogroup.test.objects.annotations.classes.AnnotatedTestClass;
 import de.alpharogroup.test.objects.annotations.AnotherTestAnnotation;
-import de.alpharogroup.test.objects.annotations.classes.ClassExtendsAnnotatedInterface;
-import de.alpharogroup.test.objects.annotations.classes.SubAnnotatedClass;
+import de.alpharogroup.test.objects.annotations.TestAnnotation;
 import de.alpharogroup.test.objects.annotations.TestFieldAnnotation;
 import de.alpharogroup.test.objects.annotations.TestMethodAnnotation;
 import de.alpharogroup.test.objects.annotations.TestTypeAnnotation;
+import de.alpharogroup.test.objects.annotations.classes.AnnotatedClass;
+import de.alpharogroup.test.objects.annotations.classes.AnnotatedTestClass;
+import de.alpharogroup.test.objects.annotations.classes.ClassExtendsAnnotatedInterface;
+import de.alpharogroup.test.objects.annotations.classes.SubAnnotatedClass;
 import de.alpharogroup.test.objects.annotations.foobar.AnotherAnnotatedClass;
 import de.alpharogroup.test.objects.annotations.foobar.OtherAnnotatedClass;
 import de.alpharogroup.test.objects.annotations.foobar.SomeClass;
+import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
 
 /**
  * Test class for the class {@link de.alpharogroup.lang.AnnotationExtensions}.

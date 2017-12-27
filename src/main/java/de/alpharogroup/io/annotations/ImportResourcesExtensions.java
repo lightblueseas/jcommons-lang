@@ -30,7 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import de.alpharogroup.lang.AnnotationExtensions;
 
@@ -85,7 +85,7 @@ public class ImportResourcesExtensions
 				importResourceArray = new ImportResource[1];
 				importResourceArray[0] = importResource;
 			}
-			final ImportResource[] array = (ImportResource[])ArrayUtils.addAll(importResourceArray,
+			final ImportResource[] array = ArrayUtils.addAll(importResourceArray,
 				importResourcesArray);
 			Arrays.sort(array, new ImportResourceComparator());
 			resourcesMap.put(annotatedClass, array);

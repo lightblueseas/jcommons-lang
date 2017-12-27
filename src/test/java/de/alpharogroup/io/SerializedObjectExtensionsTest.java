@@ -35,7 +35,7 @@ import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.date.CreateDateExtensions;
 
 /**
- * Test class for the class {@link SerializedObjectExtensions}.
+ * The unit test class for the class {@link SerializedObjectExtensions}.
  *
  * @version 1.0
  * @author Asterios Raptis
@@ -44,48 +44,10 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 {
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void setUp() throws Exception
-	{
-		super.setUp();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void tearDown() throws Exception
-	{
-		super.tearDown();
-	}
-
-	/**
-	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#copySerializedObject(java.io.Serializable)}
-	 * .
-	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException
-	 *             is thrown when a class is not found in the classloader or no definition for the
-	 *             class with the specified name could be found.
-	 */
-	@Test
-	public void testCopySerializedObject() throws ClassNotFoundException, IOException
-	{
-		final String age = "Im too young!";
-		final String copy = SerializedObjectExtensions.copySerializedObject(age);
-		this.result = age.equals(copy);
-		AssertJUnit.assertTrue("", this.result);
-	}
-
-	/**
 	 * Test method for
 	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)}
 	 * .
-	 * 
+	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws ClassNotFoundException
@@ -118,7 +80,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	/**
 	 * Test method for
 	 * {@link de.alpharogroup.io.SerializedObjectExtensions#writeSerializedObjectToFile(java.lang.Object, java.io.File)}
-	 * 
+	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws ClassNotFoundException

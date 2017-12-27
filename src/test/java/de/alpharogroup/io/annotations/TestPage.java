@@ -22,33 +22,13 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang;
+package de.alpharogroup.io.annotations;
 
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
 
-/**
- * The class DefaultValueTest.
- */
-public class DefaultValueTest
+@ImportResource(index = 1, resourceName = "TestPage.css", resourceType = "css")
+@ImportResources(resources = {
+		@ImportResource(index = 2, resourceName = "TestPage.js", resourceType = "js"),
+		@ImportResource(index = 2, resourceName = "TestPanel.js", resourceType = "js") })
+public class TestPage
 {
-
-	/**
-	 * Test for {@link DefaultValue#getDefaultValue(Class)}
-	 */
-	@Test
-	public void testGetDefaultValue()
-	{
-		AssertJUnit.assertEquals(false, DefaultValue.getDefaultValue(boolean.class).booleanValue());
-		AssertJUnit.assertEquals('\0', DefaultValue.getDefaultValue(char.class).charValue());
-		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(byte.class).byteValue());
-		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(short.class).shortValue());
-		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(int.class).intValue());
-		AssertJUnit.assertEquals(0, DefaultValue.getDefaultValue(long.class).longValue());
-		AssertJUnit.assertEquals(0.0f, DefaultValue.getDefaultValue(float.class).floatValue());
-		AssertJUnit.assertEquals(0.0d, DefaultValue.getDefaultValue(double.class).doubleValue());
-		AssertJUnit.assertNull("", DefaultValue.getDefaultValue(void.class));
-		AssertJUnit.assertNull("", DefaultValue.getDefaultValue(Object.class));
-	}
-
 }

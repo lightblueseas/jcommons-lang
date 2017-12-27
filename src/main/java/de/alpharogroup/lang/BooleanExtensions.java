@@ -24,51 +24,42 @@
  */
 package de.alpharogroup.lang;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import de.alpharogroup.check.Check;
-import lombok.experimental.UtilityClass;
-
 /**
- * The class DefaultValue provide the default values of the primitive types, as defined by the JLS.
+ * The class {@link BooleanExtensions}.
  */
-@UtilityClass
-public class DefaultValue
+public class BooleanExtensions
 {
 
-	/** The constant map with the default values. */
-	@SuppressWarnings("serial")
-	private static final Map<Class<?>, Object> DEFAULT_VALUE = Collections
-		.unmodifiableMap(new HashMap<Class<?>, Object>()
-		{
-			{
-				put(boolean.class, false);
-				put(char.class, '\0');
-				put(byte.class, (byte)0);
-				put(short.class, (short)0);
-				put(int.class, 0);
-				put(long.class, 0L);
-				put(float.class, 0f);
-				put(double.class, 0d);
-			}
-		});
-
 	/**
-	 * Gets the default value from the given {@link Class}.
+	 * Decides over the given flags if the true-case or the false-case will be return.
 	 *
 	 * @param <T>
 	 *            the generic type
-	 * @param classType
-	 *            the class type
-	 * @return the default value
+	 * @param trueCase
+	 *            the true case
+	 * @param falseCase
+	 *            the false case
+	 * @param flags
+	 *            the flags
+	 * @return the false-case if all false or empty otherwise the true-case.
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T getDefaultValue(final Class<T> classType)
+	public static <T> T trueOrFalse(final T trueCase, final T falseCase, final boolean... flags)
 	{
-		Check.get().notNull(classType, "classType");
-		final T defaultValue = (T)DEFAULT_VALUE.get(classType);
-		return defaultValue;
+		boolean interlink = false;
+		for (int i = 0; i < flags.length; i++)
+		{
+			if (i == 0)
+			{
+				interlink = !flags[i];
+				continue;
+			}
+			interlink &= !flags[i];
+		}
+		if (interlink)
+		{
+			return falseCase;
+		}
+		return trueCase;
 	}
+
 }

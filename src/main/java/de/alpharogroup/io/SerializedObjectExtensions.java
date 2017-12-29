@@ -74,7 +74,7 @@ public final class SerializedObjectExtensions
 	 *             is thrown when a class is not found in the classloader or no definition for the
 	 *             class with the specified name could be found.
 	 * @deprecated use instead the same name method from CopyObjectExtensions. will be deleted on
-	 *             next major release.
+	 *             next minor release.
 	 */
 	@Deprecated
 	@SuppressWarnings("unchecked")
@@ -119,7 +119,7 @@ public final class SerializedObjectExtensions
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
 	 * @deprecated use instead the same name method from DiffObjectExtensions. will be deleted on
-	 *             next major release.
+	 *             next minor release.
 	 */
 	@Deprecated
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -161,7 +161,7 @@ public final class SerializedObjectExtensions
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
 	 * @deprecated use instead the same name method from DiffObjectExtensions. will be deleted on
-	 *             next major release.
+	 *             next minor release.
 	 */
 	@Deprecated
 	@SuppressWarnings({ "rawtypes", "unchecked" })

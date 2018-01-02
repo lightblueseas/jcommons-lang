@@ -25,10 +25,10 @@
 package de.alpharogroup.file.checksum;
 
 /**
- * The Enum Algorithm.
+ * The enum {@link Algorithm} defines the message digest algorithms and one-way conversion hash algorithms.
  *
- * @version 1.0
  * @author Asterios Raptis
+ * @version 1.0
  */
 public enum Algorithm
 {

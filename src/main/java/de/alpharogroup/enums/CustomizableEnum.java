@@ -28,10 +28,8 @@ import de.alpharogroup.check.Check;
 import lombok.Getter;
 
 /**
- * The class {@link CustomizableEnum} is for use if you have an enum but you want that the user can
- * set a custom value.
- *
- * @author astrapi69
+ * The class {@link CustomizableEnum} can decorate an enum with a new value that may be extended in
+ * the next release.
  */
 public class CustomizableEnum<E extends Enum<E>, T>
 {

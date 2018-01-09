@@ -29,17 +29,16 @@ import lombok.Getter;
 
 /**
  * The class {@link CustomizableEnum} can decorate an enum with a new value that may be extended in
- * the next release.
+ * a future release.
  */
+@Getter
 public class CustomizableEnum<E extends Enum<E>, T>
 {
 
 	/** The enumtype. */
-	@Getter
 	private final E enumtype;
 
 	/** The value. */
-	@Getter
 	private final T value;
 
 	/**
@@ -52,8 +51,22 @@ public class CustomizableEnum<E extends Enum<E>, T>
 	 */
 	public CustomizableEnum(final E enumtype, final T value)
 	{
-		Check.get().notNull(value, "value").notNull(enumtype, "enumtype");
+		Check.get().notNull(value, "value");
 		this.enumtype = enumtype;
 		this.value = value;
+	}
+	
+	/**
+	 * Returns the name of the decorated enum or if it is a new value it will return the result of the toString method of value
+	 *
+	 * @return the name of the decorated enum or if it is a new value it will return the result of the toString method of value
+	 */
+	public String name() 
+	{
+		if(enumtype!=null) 
+		{
+			return enumtype.name();
+		}
+		return value.toString();
 	}
 }

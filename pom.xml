@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.5.0</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -18,7 +18,7 @@
 	<description>
 		Project that holds different usefull utility classes.
 	</description>
-	
+
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
@@ -26,7 +26,7 @@
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.21.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.6.1</jobject-extensions.version>
+		<jobject-extensions.version>1.8.0</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<!-- EXTERNAL LIBRARIES versions -->
@@ -36,6 +36,8 @@
 		<commons-codec.version>1.11</commons-codec.version>
 		<joda-time.version>2.9.9</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
+		<!-- MEANBEAN version -->
+		<meanbean.version>2.0.3</meanbean.version>
 	</properties>
 
 	<licenses>
@@ -131,6 +133,12 @@
 				<artifactId>jobject-diff</artifactId>
 				<version>${jobject-diff.version}</version>
 			</dependency>
+			<!-- MEANBEAN DEPENDENCY -->
+			<dependency>
+				<groupId>org.meanbean</groupId>
+				<artifactId>meanbean</artifactId>
+				<version>${meanbean.version}</version>
+			</dependency>
 
 		</dependencies>
 
@@ -193,6 +201,12 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>runtime-compiler</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- MEANBEAN DEPENDENCY -->
+		<dependency>
+			<groupId>org.meanbean</groupId>
+			<artifactId>meanbean</artifactId>
 			<scope>test</scope>
 		</dependency>
 

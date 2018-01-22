@@ -22,7 +22,7 @@
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
-		<silly-collections.version>4.22.0</silly-collections.version>
+		<silly-collections.version>4.23.0</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.21.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->

@@ -8,6 +8,7 @@ ADDED:
  
 - provide package.html for the javadoc of packages
 - Donation buttons extended for paypal and bitcoin
+- added new meanbean dependency for better unit testing of beans
 
 CHANGED:
 

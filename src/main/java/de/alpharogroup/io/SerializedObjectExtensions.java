@@ -43,7 +43,7 @@ import java.util.logging.Logger;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.beanutils.BeanUtils;
 
-import de.alpharogroup.diff.SerializedChangedAttributeResult;
+import de.alpharogroup.diff.beans.SerializedChangedAttributeResult;
 import de.alpharogroup.file.FileConstants;
 
 /**
@@ -73,7 +73,10 @@ public final class SerializedObjectExtensions
 	 * @throws ClassNotFoundException
 	 *             is thrown when a class is not found in the classloader or no definition for the
 	 *             class with the specified name could be found.
+	 * @deprecated use instead the same name method from CopyObjectExtensions. will be deleted on
+	 *             next minor release.
 	 */
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T copySerializedObject(final T orig)
 		throws IOException, ClassNotFoundException
@@ -115,7 +118,10 @@ public final class SerializedObjectExtensions
 	 *             the invocation target exception
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
+	 * @deprecated use instead the same name method from DiffObjectExtensions. will be deleted on
+	 *             next minor release.
 	 */
+	@Deprecated
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<SerializedChangedAttributeResult> getChangedData(final Object sourceOjbect,
 		final Object objectToCompare)
@@ -154,7 +160,10 @@ public final class SerializedObjectExtensions
 	 *             the invocation target exception
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
+	 * @deprecated use instead the same name method from DiffObjectExtensions. will be deleted on
+	 *             next minor release.
 	 */
+	@Deprecated
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map<Object, SerializedChangedAttributeResult> getChangedDataMap(
 		final Object sourceOjbect, final Object objectToCompare)

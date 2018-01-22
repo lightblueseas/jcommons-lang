@@ -6,37 +6,38 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>3.3.0</version>
+		<version>3.5.0</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.28.0</version>
+	<version>4.29.0</version>
 
 	<name>${project.artifactId}</name>
 
 	<description>
 		Project that holds different usefull utility classes.
 	</description>
-	
+
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
-		<silly-collections.version>4.21.0</silly-collections.version>
+		<silly-collections.version>4.23.0</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
-		<test-objects.version>4.17.0</test-objects.version>
+		<test-objects.version>4.21.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.5.0</jobject-extensions.version>
+		<jobject-extensions.version>1.8.0</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<!-- EXTERNAL LIBRARIES versions -->
-		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<commons-collections4.version>4.1</commons-collections4.version>
 		<commons-lang3.version>3.7</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-codec.version>1.11</commons-codec.version>
 		<joda-time.version>2.9.9</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
+		<!-- MEANBEAN version -->
+		<meanbean.version>2.0.3</meanbean.version>
 	</properties>
 
 	<licenses>
@@ -66,12 +67,6 @@
 	<dependencyManagement>
 
 		<dependencies>
-
-			<dependency>
-				<groupId>commons-beanutils</groupId>
-				<artifactId>commons-beanutils</artifactId>
-				<version>${commons-beanutils.version}</version>
-			</dependency>
 
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -138,17 +133,18 @@
 				<artifactId>jobject-diff</artifactId>
 				<version>${jobject-diff.version}</version>
 			</dependency>
+			<!-- MEANBEAN DEPENDENCY -->
+			<dependency>
+				<groupId>org.meanbean</groupId>
+				<artifactId>meanbean</artifactId>
+				<version>${meanbean.version}</version>
+			</dependency>
 
 		</dependencies>
 
 	</dependencyManagement>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -205,6 +201,12 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>runtime-compiler</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- MEANBEAN DEPENDENCY -->
+		<dependency>
+			<groupId>org.meanbean</groupId>
+			<artifactId>meanbean</artifactId>
 			<scope>test</scope>
 		</dependency>
 

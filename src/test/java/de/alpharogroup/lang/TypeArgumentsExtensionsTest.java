@@ -34,7 +34,7 @@ import de.alpharogroup.test.objects.generics.GenericDao;
 import de.alpharogroup.test.objects.generics.PersonDao;
 
 /**
- * Test class for the class {@link de.alpharogroup.lang.TypeArgumentsExtensions}.
+ * The unit test class for the class {@link de.alpharogroup.lang.TypeArgumentsExtensions}.
  * 
  * @version 1.0
  * @author Asterios Raptis

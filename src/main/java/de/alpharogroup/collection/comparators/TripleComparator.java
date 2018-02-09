@@ -42,7 +42,21 @@ import de.alpharogroup.collections.pairs.Triple;
  */
 public class TripleComparator<L, M, R> implements Comparator<Triple<L, M, R>>
 {
-
+//	Comparator<Triple<L, M, R>> comparator;
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public int compare(Triple<L, M, R> o1, Triple<L, M, R> o2)
+//	{
+//		if (comparator == null) {
+//			comparator = Comparator
+//					.comparing(Triple::getLeft)
+//					.thenComparing(Triple::getMiddle)
+//					.thenComparing(Triple::getRight);			
+//		}
+//		return comparator.compare(o1, o2);
+//	}
 	/**
 	 * {@inheritDoc}
 	 */

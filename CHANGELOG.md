@@ -4,6 +4,15 @@
 Version 4.30.0-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- new method for get the name of the current method
+- new method for get the name of the calling method
+
+CHANGED:
+
+- update of parent version and of dependencies versions
+
 Version 4.29.0
 -------------
 

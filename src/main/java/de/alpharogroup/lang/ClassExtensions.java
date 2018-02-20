@@ -58,6 +58,47 @@ public final class ClassExtensions
 	/** The Constant CGLIB_TAG contains the tag of a cglib class name. */
 	protected static final String CGLIB_TAG = "$$";
 
+
+	/**
+	 * Gets the current method name.
+	 *
+	 * @param elements the elements
+	 * @return the current method name
+	 */
+	public static String getCurrentMethodName(final StackTraceElement elements[])
+	{
+		String currentMethodName = null;
+		boolean isNext = false;
+		for (final StackTraceElement element : elements)
+		{
+			if (isNext)
+			{
+				currentMethodName = element.getMethodName();
+				break;
+			}
+			isNext = element.getMethodName().equals("getStackTrace");
+		}
+		return currentMethodName;
+	}
+
+	/**
+	 * Gets the calling method name.
+	 *
+	 * @param elements
+	 *            the elements
+	 * @return the calling method name
+	 */
+	public static String getCallingMethodName(final StackTraceElement elements[])
+	{
+		String callingMethodName = null;
+		if (2 < elements.length)
+		{
+			final StackTraceElement element = elements[2];
+			callingMethodName = element.getMethodName();
+		}
+		return callingMethodName;
+	}
+
 	/**
 	 * Equal the given class objects by they qualified class names.
 	 *

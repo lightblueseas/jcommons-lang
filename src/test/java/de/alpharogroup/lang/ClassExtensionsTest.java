@@ -91,6 +91,32 @@ public class ClassExtensionsTest
 	}
 
 
+	/**
+	 * Test method for {@link ClassExtensions#getCurrentMethodName(StackTraceElement[])}.
+	 */
+	@Test
+	public void testGetCurrentMethodName()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getCurrentMethodName(Thread.currentThread().getStackTrace());
+		expected = "testGetCurrentMethodName";
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getCallingMethodName(StackTraceElement[])}.
+	 */
+	@Test
+	public void testGetCallingMethodName()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getCallingMethodName(Thread.currentThread().getStackTrace());
+		expected = "invoke0";
+		assertEquals(expected, actual);
+	}
+
 	@Test(enabled = true)
 	public void testEqualsByClassName()
 	{

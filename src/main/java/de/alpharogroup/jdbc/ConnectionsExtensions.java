@@ -49,6 +49,13 @@ public final class ConnectionsExtensions
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ConnectionsExtensions.class.getName());
 
+	/** H2-database constants. */
+	/** Constant for the drivername from H2-database. */
+	public static final String H2_DRIVERNAME = "com.mysql.jdbc.Driver";
+
+	/** Constant for the urlprefix from H2-database. */
+	public static final String H2_PREFIX_URL = "jdbc:h2";
+
 	/** MySQL-database constants. */
 	/** Constant for the drivername from MySQL-database. */
 	public static final String MYSQL_DRIVERNAME = "com.mysql.jdbc.Driver";
@@ -339,6 +346,32 @@ public final class ConnectionsExtensions
 	{
 		final String url = MYSQL_PREFIX_URL + hostname + ":" + portNumber + "/" + databaseName;
 		Class.forName(MYSQL_DRIVERNAME);
+		return DriverManager.getConnection(url, dbuser, dbpasswort);
+	}
+
+	/**
+	 * Gets the H2 connection.
+	 *
+	 * @param path
+	 *            the path
+	 * @param databaseName
+	 *            the database name
+	 * @param dbuser
+	 *            the dbuser
+	 * @param dbpasswort
+	 *            the dbpasswort
+	 * @return the H2 connection
+	 * @throws ClassNotFoundException
+	 *             is thrown if the Class was not found or could not be located.
+	 * @throws SQLException
+	 *             is thrown if a database access error occurs or this method is called on a closed
+	 *             connection
+	 */
+	public static Connection getH2Connection(final String path, final String databaseName,
+		final String dbuser, final String dbpasswort) throws ClassNotFoundException, SQLException
+	{
+		final String url = H2_PREFIX_URL + ":" + path + databaseName;
+		Class.forName(H2_DRIVERNAME);
 		return DriverManager.getConnection(url, dbuser, dbpasswort);
 	}
 

@@ -45,9 +45,9 @@ public class ConfigurationExtensionsTest
 		String actual;
 		String expected;
 		actual = ConfigurationExtensions.getUserApplicationConfigurationFilePath("foo", ".config");
-		expected = System.getProperty(ConfigurationExtensions.USER_HOME_PROPERTY_KEY) + File.separator + "foo" + File.separator
-			+ ".config";
-		assertEquals(actual, expected);		
+		expected = System.getProperty(ConfigurationExtensions.USER_HOME_PROPERTY_KEY)
+			+ File.separator + "foo" + File.separator + ".config";
+		assertEquals(actual, expected);
 	}
 
 }

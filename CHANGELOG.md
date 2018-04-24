@@ -9,6 +9,7 @@ ADDED:
 - new method for get the name of the current method
 - new method for get the name of the calling method
 - new method for get H2 connection created
+- new class ConfigurationExtensions created for create configuration files
 
 CHANGED:
 

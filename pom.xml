@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>3.7.0</version>
+		<version>3.10.0</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -22,11 +22,11 @@
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
-		<silly-collections.version>4.25.0</silly-collections.version>
+		<silly-collections.version>4.27.0</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
-		<test-objects.version>4.22.0</test-objects.version>
+		<test-objects.version>4.24.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.8.0</jobject-extensions.version>
+		<jobject-extensions.version>1.10.0</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<!-- EXTERNAL LIBRARIES versions -->

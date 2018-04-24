@@ -58,6 +58,7 @@ public final class ClassExtensions
 	/** The Constant CGLIB_TAG contains the tag of a cglib class name. */
 	protected static final String CGLIB_TAG = "$$";
 
+
 	/**
 	 * Equal the given class objects by they qualified class names.
 	 *
@@ -138,6 +139,24 @@ public final class ClassExtensions
 	}
 
 	/**
+	 * Gets the calling method name.
+	 *
+	 * @param elements
+	 *            the elements
+	 * @return the calling method name
+	 */
+	public static String getCallingMethodName(final StackTraceElement elements[])
+	{
+		String callingMethodName = null;
+		if (2 < elements.length)
+		{
+			final StackTraceElement element = elements[2];
+			callingMethodName = element.getMethodName();
+		}
+		return callingMethodName;
+	}
+
+	/**
 	 * Gets the real class if the given class is decorated with cglib proxy classes.
 	 *
 	 * @param clazz
@@ -154,7 +173,6 @@ public final class ClassExtensions
 		}
 		return found;
 	}
-
 
 	/**
 	 * Gets the {@link Class} of the given object.
@@ -174,6 +192,7 @@ public final class ClassExtensions
 		}
 		return null;
 	}
+
 
 	/**
 	 * Gets the current class loader.
@@ -320,6 +339,29 @@ public final class ClassExtensions
 			return ClassType.ANONYMOUS;
 		}
 		return ClassType.DEFAULT;
+	}
+
+	/**
+	 * Gets the current method name.
+	 *
+	 * @param elements
+	 *            the elements
+	 * @return the current method name
+	 */
+	public static String getCurrentMethodName(final StackTraceElement elements[])
+	{
+		String currentMethodName = null;
+		boolean isNext = false;
+		for (final StackTraceElement element : elements)
+		{
+			if (isNext)
+			{
+				currentMethodName = element.getMethodName();
+				break;
+			}
+			isNext = element.getMethodName().equals("getStackTrace");
+		}
+		return currentMethodName;
 	}
 
 	/**

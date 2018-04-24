@@ -25,24 +25,30 @@
 package de.alpharogroup.enums;
 
 import de.alpharogroup.check.Check;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 /**
- * The class {@link CustomizableEnum} is for use if you have an enum but you want that the user can
- * set a custom value.
- *
- * @author astrapi69
+ * The class {@link CustomizableEnum} can decorate an enum with a new value that may be extended in
+ * a future release.
  */
-public class CustomizableEnum<E extends Enum<E>, T>
+@Getter
+@Builder
+@EqualsAndHashCode
+@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public final class CustomizableEnum<E extends Enum<E>, T>
 {
 
 	/** The enumtype. */
-	@Getter
-	private final E enumtype;
+	final E enumtype;
 
 	/** The value. */
-	@Getter
-	private final T value;
+	final T value;
 
 	/**
 	 * Instantiates a new {@link CustomizableEnum}.
@@ -54,8 +60,27 @@ public class CustomizableEnum<E extends Enum<E>, T>
 	 */
 	public CustomizableEnum(final E enumtype, final T value)
 	{
-		Check.get().notNull(value, "value").notNull(enumtype, "enumtype");
+		if (enumtype == null)
+		{
+			Check.get().notNull(value, "value");
+		}
 		this.enumtype = enumtype;
 		this.value = value;
+	}
+
+	/**
+	 * Returns the name of the decorated enum or if it is a new value it will return the result of
+	 * the toString method of value
+	 *
+	 * @return the name of the decorated enum or if it is a new value it will return the result of
+	 *         the toString method of value
+	 */
+	public String name()
+	{
+		if (enumtype != null)
+		{
+			return enumtype.name();
+		}
+		return value.toString();
 	}
 }

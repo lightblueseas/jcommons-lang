@@ -22,36 +22,36 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.collection.comparators;
+package de.alpharogroup.config;
 
-import java.util.Comparator;
+import java.io.File;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
-
-import de.alpharogroup.collections.pairs.Triple;
+import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link TripleComparator} is a comparator for {@link Triple} objects.
- *
- * @param <L>
- *            The type of the left content of this Triple.
- * @param <M>
- *            The type of the middle content of this Triple.
- * @param <R>
- *            The type of the right content of this Triple.
+ * The class {@link ConfigurationExtensions}.
  */
-public class TripleComparator<L, M, R> implements Comparator<Triple<L, M, R>>
+@UtilityClass
+public class ConfigurationExtensions
 {
 
+	public static final String USER_HOME_PROPERTY_KEY = "user.home";
+
 	/**
-	 * {@inheritDoc}
+	 * Gets the user application configuration file path.
+	 *
+	 * @param applicationName
+	 *            the application name
+	 * @param configFileName
+	 *            the config file name
+	 * @return the user application configuration file path
 	 */
-	@Override
-	public int compare(final Triple<L, M, R> o1, final Triple<L, M, R> o2)
+	public static String getUserApplicationConfigurationFilePath(
+		@NonNull final String applicationName, @NonNull final String configFileName)
 	{
-		return new CompareToBuilder().append(o1.getLeft(), o2.getLeft())
-			.append(o1.getMiddle(), o2.getMiddle()).append(o1.getRight(), o2.getRight())
-			.toComparison();
+		return System.getProperty(USER_HOME_PROPERTY_KEY) + File.separator + applicationName
+			+ File.separator + configFileName;
 	}
 
 }

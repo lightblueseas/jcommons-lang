@@ -35,7 +35,7 @@ import de.alpharogroup.BaseTestCase;
 import lombok.experimental.ExtensionMethod;
 
 /**
- * Test class for the class StringExtensions.
+ * The unit test class for the class StringExtensions.
  *
  * @version 1.0
  * @author Asterios Raptis

@@ -142,6 +142,19 @@ public class ClassExtensionsTest
 	}
 
 	/**
+	 * Test method for {@link ClassExtensions#getCallingMethodName(StackTraceElement[])}.
+	 */
+	@Test
+	public void testGetCallingMethodName()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getCallingMethodName(Thread.currentThread().getStackTrace());
+		expected = "invoke0";
+		assertEquals(expected, actual);
+	}
+
+	/**
 	 * Test method for.
 	 *
 	 * {@link de.alpharogroup.lang.ClassExtensions#getClassnameWithSuffix(java.lang.Object)}.
@@ -222,6 +235,19 @@ public class ClassExtensionsTest
 
 		actual = ClassExtensions.getClassType(clazz);
 		expected = ClassType.DEFAULT;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getCurrentMethodName(StackTraceElement[])}.
+	 */
+	@Test
+	public void testGetCurrentMethodName()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getCurrentMethodName(Thread.currentThread().getStackTrace());
+		expected = "testGetCurrentMethodName";
 		assertEquals(expected, actual);
 	}
 

@@ -4,6 +4,10 @@
 Version 4.31.0-SNAPSHOT
 -------------
 
+CHANGED:
+
+- handle interface case in method getTypeArguments
+- new getTypeArguments method with one argument created
 
 Version 4.30.0
 -------------

@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>3.10.0</version>
+		<version>3.11</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.31.0</version>
+	<version>4.32-SNAPSHOT</version>
 
 	<name>${project.artifactId}</name>
 
@@ -22,7 +22,7 @@
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
-		<silly-collections.version>4.27.0</silly-collections.version>
+		<silly-collections.version>4.28.0</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.24.0</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->

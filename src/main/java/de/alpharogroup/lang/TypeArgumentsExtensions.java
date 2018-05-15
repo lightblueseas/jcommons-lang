@@ -138,14 +138,20 @@ public class TypeArgumentsExtensions
 	 *            the child class
 	 * @return a list of the raw classes for the actual type arguments.
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> List<Class<?>> getTypeArguments(final Class<T> baseClass,
 		final Class<? extends T> childClass)
 	{
 		Check.get().notNull(baseClass, "baseClass").notNull(childClass, "childClass");
+		Class<T> realBaseClass = baseClass;
+		// handle interface case
+		if(realBaseClass.isInterface()) {
+			realBaseClass = (Class<T>)ClassExtensions.getBaseClass(childClass);
+		}
 		final Map<Type, Type> resolvedTypes = new HashMap<>();
 		Type type = childClass;
 		// start walking up the inheritance hierarchy until we hit baseClass
-		while (!getClass(type).equals(baseClass))
+		while (!getClass(type).equals(realBaseClass))
 		{
 			if (type instanceof Class)
 			{
@@ -160,7 +166,7 @@ public class TypeArgumentsExtensions
 
 				resolvedTypes.putAll(getTypeArgumentsAndParameters(type));
 
-				if (!rawType.equals(baseClass))
+				if (!rawType.equals(realBaseClass))
 				{
 					type = rawType.getGenericSuperclass();
 				}
@@ -190,6 +196,24 @@ public class TypeArgumentsExtensions
 			typeArgumentsAsClasses.add(getClass(baseType));
 		}
 		return typeArgumentsAsClasses;
+	}
+
+	/**
+	 * Get the actual type arguments from the given child class.
+	 *
+	 * @param <T>
+	 *            the generic type of the baseClass
+	 * @param childClass
+	 *            the child class
+	 * @return a list of the raw classes for the actual type arguments.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> List<Class<?>> getTypeArguments(
+		final Class<? extends T> childClass)
+	{
+		Check.get().notNull(childClass, "childClass");
+		Class<T> baseClass = (Class<T>)ClassExtensions.getBaseClass(childClass);		
+		return getTypeArguments(baseClass, childClass);
 	}
 
 	/**

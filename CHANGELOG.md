@@ -4,6 +4,10 @@
 Version 4.32-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- new method getTypeArgument over the child class and the index
+
 CHANGED:
 
 - update of parent version to 3.11

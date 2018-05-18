@@ -87,6 +87,20 @@ public class TypeArgumentsExtensions
 	}
 
 	/**
+	 * Gets the first type argument from the childClass. The base class will be resolved.
+	 *
+	 * @param <T>
+	 *            the generic type of the baseClass
+	 * @param childClass
+	 *            the child class
+	 * @return the first type argument
+	 */
+	public static <T> Class<?> getFirstTypeArgument(final @NonNull Class<? extends T> childClass)
+	{
+		return getTypeArgument(childClass, 0);
+	}
+
+	/**
 	 * Gets the first type argument from the childClass.
 	 *
 	 * @param <T>

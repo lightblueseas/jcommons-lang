@@ -1,6 +1,20 @@
 ## Change log
 ----------------------
 
+Version 4.32
+-------------
+
+ADDED:
+ 
+- new method getTypeArgument over the child class and the index
+- new method getFirstTypeArgument over the child class
+
+CHANGED:
+
+- update of parent version to 3.11
+- removed unneeded .0 at the end of version
+- update of silly-collections version to 4.28.0
+
 Version 4.31.0
 -------------
 

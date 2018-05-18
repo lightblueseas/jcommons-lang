@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.alpharogroup.check.Check;
+import lombok.NonNull;
 
 /**
  * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a
@@ -56,7 +57,7 @@ public class TypeArgumentsExtensions
 	 *            the type
 	 * @return the underlying class
 	 */
-	private static Class<?> getClass(final Type type)
+	private static Class<?> getClass(final @NonNull Type type)
 	{
 		if (type instanceof Class)
 		{
@@ -86,6 +87,20 @@ public class TypeArgumentsExtensions
 	}
 
 	/**
+	 * Gets the first type argument from the childClass. The base class will be resolved.
+	 *
+	 * @param <T>
+	 *            the generic type of the baseClass
+	 * @param childClass
+	 *            the child class
+	 * @return the first type argument
+	 */
+	public static <T> Class<?> getFirstTypeArgument(final @NonNull Class<? extends T> childClass)
+	{
+		return getTypeArgument(childClass, 0);
+	}
+
+	/**
 	 * Gets the first type argument from the childClass.
 	 *
 	 * @param <T>
@@ -96,10 +111,31 @@ public class TypeArgumentsExtensions
 	 *            the child class
 	 * @return the first type argument
 	 */
-	public static <T> Class<?> getFirstTypeArgument(final Class<T> baseClass,
-		final Class<? extends T> childClass)
+	public static <T> Class<?> getFirstTypeArgument(final @NonNull Class<T> baseClass,
+		final @NonNull Class<? extends T> childClass)
 	{
 		return getTypeArgument(baseClass, childClass, 0);
+	}
+
+	/**
+	 * Gets the type argument from the childClass at the given index or null if it does not exists.
+	 * The base class will be resolved.
+	 *
+	 * @param <T>
+	 *            the generic type of the baseClass
+	 * @param childClass
+	 *            the child class
+	 * @param index
+	 *            the index of the type argument
+	 * @return the type argument from the childClass at the given index or null if it does not
+	 *         exists.
+	 */
+	public static <T> Class<?> getTypeArgument(final @NonNull Class<? extends T> childClass,
+		final int index)
+	{
+		@SuppressWarnings("unchecked")
+		Class<T> baseClass = (Class<T>)ClassExtensions.getBaseClass(childClass);
+		return getTypeArgument(baseClass, childClass, index);
 	}
 
 	/**
@@ -116,8 +152,8 @@ public class TypeArgumentsExtensions
 	 * @return the type argument from the childClass at the given index or null if it does not
 	 *         exists.
 	 */
-	public static <T> Class<?> getTypeArgument(final Class<T> baseClass,
-		final Class<? extends T> childClass, final int index)
+	public static <T> Class<?> getTypeArgument(final @NonNull Class<T> baseClass,
+		final @NonNull Class<? extends T> childClass, final int index)
 	{
 		final List<Class<?>> typeArguments = getTypeArguments(baseClass, childClass);
 		if (typeArguments != null && !typeArguments.isEmpty() && index < typeArguments.size())
@@ -137,7 +173,7 @@ public class TypeArgumentsExtensions
 	 * @return a list of the raw classes for the actual type arguments.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> List<Class<?>> getTypeArguments(final Class<? extends T> childClass)
+	public static <T> List<Class<?>> getTypeArguments(final @NonNull Class<? extends T> childClass)
 	{
 		Check.get().notNull(childClass, "childClass");
 		Class<T> baseClass = (Class<T>)ClassExtensions.getBaseClass(childClass);
@@ -156,8 +192,8 @@ public class TypeArgumentsExtensions
 	 * @return a list of the raw classes for the actual type arguments.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> List<Class<?>> getTypeArguments(final Class<T> baseClass,
-		final Class<? extends T> childClass)
+	public static <T> List<Class<?>> getTypeArguments(final @NonNull Class<T> baseClass,
+		final @NonNull Class<? extends T> childClass)
 	{
 		Check.get().notNull(baseClass, "baseClass").notNull(childClass, "childClass");
 		Class<T> realBaseClass = baseClass;
@@ -223,7 +259,7 @@ public class TypeArgumentsExtensions
 	 *            the type
 	 * @return the type arguments and parameters
 	 */
-	private static Map<Type, Type> getTypeArgumentsAndParameters(final Type type)
+	private static Map<Type, Type> getTypeArgumentsAndParameters(final @NonNull Type type)
 	{
 		final ParameterizedType parameterizedType = (ParameterizedType)type;
 		final Class<?> rawType = (Class<?>)parameterizedType.getRawType();

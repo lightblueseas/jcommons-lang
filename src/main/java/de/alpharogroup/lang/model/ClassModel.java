@@ -24,7 +24,6 @@
  */
 package de.alpharogroup.lang.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +43,8 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@EqualsAndHashCode(exclude = {"classAnnotations"})
+@ToString(exclude = {"classAnnotations"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
@@ -60,8 +59,7 @@ public class ClassModel
 	private String packageName;
 
 	/** The imports. */
-	@Builder.Default
-	private List<String> imports = new ArrayList<>();
+	private List<String> imports;
 
 	/** The class annotations. */
 	private List<ClassModel> classAnnotations;
@@ -79,8 +77,7 @@ public class ClassModel
 	private String extendedClassName;
 
 	/** The interface implementations. */
-	@Builder.Default
-	private List<String> interfaceImplementations = new ArrayList<>();
+	private List<String> interfaceImplementations;
 
 	/** The methods. */
 	private Map<String, MethodModel> methods;

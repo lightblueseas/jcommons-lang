@@ -38,6 +38,8 @@
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
 		<!-- MEANBEAN version -->
 		<meanbean.version>2.0.3</meanbean.version>
+		<!-- MEANBEAN-FACTORIES version -->
+		<meanbean-factories.version>1.0.0</meanbean-factories.version>
 	</properties>
 
 	<licenses>
@@ -139,6 +141,12 @@
 				<artifactId>meanbean</artifactId>
 				<version>${meanbean.version}</version>
 			</dependency>
+			<!-- MEANBEAN-FACTORIES DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>meanbean-factories</artifactId>
+				<version>${meanbean-factories.version}</version>
+			</dependency>
 
 		</dependencies>
 
@@ -209,9 +217,15 @@
 			<artifactId>meanbean</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- MEANBEAN-FACTORIES DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>meanbean-factories</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
-	
+
 	<build>
 
 		<resources>
@@ -280,7 +294,7 @@
 								<!-- constant classes with only constants -->
 								<!-- explicit abstract classes -->
 								<!-- explicit bean classes -->
-								<!-- explicit deprecated classes -->							
+								<!-- explicit deprecated classes -->
 								<!-- explicit enums -->
 								<!-- explicit interfaces -->
 								<!-- explicit abstract classes -->
@@ -316,6 +330,6 @@
 
 		</plugins>
 
-	</build>	
-	
+	</build>
+
 </project>

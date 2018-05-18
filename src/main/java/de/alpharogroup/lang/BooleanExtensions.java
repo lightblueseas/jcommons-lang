@@ -36,16 +36,19 @@ public class BooleanExtensions
 	 * @param <T>
 	 *            the generic type
 	 * @param trueCase
-	 *            the true case
+	 *            the object to return in true case
 	 * @param falseCase
-	 *            the false case
+	 *            the object to return in false case
 	 * @param flags
-	 *            the flags
+	 *            the flags whice decide what to return
 	 * @return the false-case if all false or empty otherwise the true-case.
 	 */
 	public static <T> T trueOrFalse(final T trueCase, final T falseCase, final boolean... flags)
 	{
-		boolean interlink = false;
+		boolean interlink = true;
+		if (flags != null && 0 < flags.length) {
+			interlink = false;
+		}
 		for (int i = 0; i < flags.length; i++)
 		{
 			if (i == 0)

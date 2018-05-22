@@ -30,8 +30,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.alpharogroup.collections.array.ArrayExtensions;
+
 /**
- * The class MultiplyExtensionsFileFilter accepts File-objects that are directories or end with one
+ * The class {@link MultiplyExtensionsFileFilter} accepts File-objects that are directories or end with one
  * of the extension in the collection. Accepts directories to allow search files recursive in
  * directories.
  *
@@ -48,7 +50,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 	private boolean acceptDir;
 
 	/**
-	 * Instantiates a new multiply extensions file filter.
+	 * Instantiates a new {@link MultiplyExtensionsFileFilter}.
 	 *
 	 *
 	 * @param acceptDir
@@ -58,21 +60,11 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 	 */
 	public MultiplyExtensionsFileFilter(final boolean acceptDir, final String... fileExtensions)
 	{
-		if (null == fileExtensions || fileExtensions.length == 0)
-		{
-			throw new IllegalArgumentException("Argument fileExtensions cant be null or empty. "
-				+ "Please set the argument fileExtensions appropriate.");
-		}
-		this.acceptDir = acceptDir;
-		this.fileExtensions = new HashSet<>(fileExtensions.length);
-		for (final String extension : fileExtensions)
-		{
-			this.fileExtensions.add(extension.toLowerCase());
-		}
+		this(ArrayExtensions.toList(fileExtensions), acceptDir);
 	}
 
 	/**
-	 * Instantiates a new multiply extensions file filter.
+	 * Instantiates a new {@link MultiplyExtensionsFileFilter}.
 	 *
 	 * @param fileExtensions
 	 *            the file extensions
@@ -83,7 +75,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 	}
 
 	/**
-	 * Instantiates a new multiply extensions file filter.
+	 * Instantiates a new {@link MultiplyExtensionsFileFilter}.
 	 *
 	 * @param fileExtensions
 	 *            the file extensions.
@@ -107,7 +99,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 	}
 
 	/**
-	 * Instantiates a new multiply extensions file filter.
+	 * Instantiates a new {@link MultiplyExtensionsFileFilter}.
 	 *
 	 * @param fileExtensions
 	 *            the file extensions
@@ -118,12 +110,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 	}
 
 	/**
-	 * Accept.
-	 *
-	 * @param pathname
-	 *            the pathname
-	 * @return true, if accept {@inheritDoc}
-	 * @see java.io.FileFilter#accept(java.io.File)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean accept(final File pathname)
@@ -144,10 +131,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 	}
 
 	/**
-	 * To string.
-	 *
-	 * @return the string {@inheritDoc}
-	 * @see java.lang.Object#toString()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString()

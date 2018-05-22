@@ -41,8 +41,6 @@ public class ClassFileFilter implements FileFilter
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * @see java.io.FileFilter#accept(java.io.File)
 	 */
 	@Override
 	public boolean accept(final File pathname)
@@ -63,11 +61,8 @@ public class ClassFileFilter implements FileFilter
 		return false;
 	}
 
-
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()

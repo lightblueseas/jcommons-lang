@@ -4,6 +4,13 @@
 Version 4.33-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- provide package.html for package de.alpharogroup.config
+
+CHANGED:
+
+- unit tests extended for improve code coverage
 
 Version 4.32
 -------------

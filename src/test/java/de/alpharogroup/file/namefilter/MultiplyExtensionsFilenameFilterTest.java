@@ -29,6 +29,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URISyntaxException;
 import java.util.Collection;
 
 import org.testng.annotations.Test;
@@ -37,11 +38,20 @@ import de.alpharogroup.collections.list.ListExtensions;
 import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.test.objects.evaluations.ToStringEvaluator;
 
+/**
+ * The class {@link MultiplyExtensionsFilenameFilter}.
+ */
 public class MultiplyExtensionsFilenameFilterTest
 {
 
+	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter#accept(File, String)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
 	@Test
-	public final void testAccept() throws Exception
+	public final void testAccept() throws URISyntaxException
 	{
 		boolean expected;
 		boolean actual;
@@ -85,8 +95,11 @@ public class MultiplyExtensionsFilenameFilterTest
 		
 	}
 
+	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter#toString()}
+	 */
 	@Test
-	public final void testToString() throws Exception
+	public final void testToString()
 	{
 		boolean expected;
 		boolean actual;

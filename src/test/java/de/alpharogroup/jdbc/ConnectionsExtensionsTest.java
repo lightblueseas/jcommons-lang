@@ -24,12 +24,44 @@
  */
 package de.alpharogroup.jdbc;
 
-import org.testng.annotations.BeforeMethod;
+import static org.testng.AssertJUnit.assertNotNull;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import org.testng.annotations.Test;
+
+/**
+ * The unit test class for the class {@link ConnectionsExtensions}.
+ */
 public class ConnectionsExtensionsTest
 {
-	@BeforeMethod
-	public void beforeMethod()
+
+	/**
+	 * Test method for {@link ConnectionsExtensions#getH2Connection(String, String, String, String)}
+	 * 
+	 * @throws ClassNotFoundException
+	 *             is thrown if the Class was not found or could not be located.
+	 * @throws SQLException
+	 *             is thrown if a database access error occurs or this method is called on a closed
+	 *             connection
+	 */
+	@Test
+	public void testGetH2Connection() throws ClassNotFoundException, SQLException
 	{
+		String path;
+		String databaseName;
+		String dbuser;
+		String dbpasswort;
+		Connection connection;
+		
+		path = "file:~/";
+		databaseName = "resourcebundles";
+		dbuser = "sa";
+		dbpasswort = "";
+		connection = ConnectionsExtensions.getH2Connection(path, databaseName, dbuser,
+			dbpasswort);
+		assertNotNull(connection);
 	}
+
 }

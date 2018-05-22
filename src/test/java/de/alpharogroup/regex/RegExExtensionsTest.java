@@ -24,7 +24,6 @@
  */
 package de.alpharogroup.regex;
 
-
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -65,8 +64,8 @@ public class RegExExtensionsTest extends BaseTestCase
 		final String expected = "Hel.*W[a-zA-Z0-9._-]{1}rld!";
 		final String queryString = "Hel*W?rld!";
 		final String compare = RegExExtensions.replaceWildcardsWithRE(queryString);
-		result = expected.equals(compare);
-		AssertJUnit.assertTrue("", result);
+		actual = expected.equals(compare);
+		AssertJUnit.assertTrue("", actual);
 	}
 
 	@Test
@@ -84,8 +83,8 @@ public class RegExExtensionsTest extends BaseTestCase
 			strip = StringExtensions.replaceAll(strip, ")", "");
 			strip = StringExtensions.replaceAll(strip, " ", "");
 			strip = StringExtensions.replaceAll(strip, "-", "");
-			result = strip.matches(RegExExtensions.VALID_PHONE);
-			AssertJUnit.assertTrue("", result);
+			actual = strip.matches(RegExExtensions.VALID_PHONE);
+			AssertJUnit.assertTrue("", actual);
 		}
 
 		final String[] invalideInput = { "(0049)17e/123450", };
@@ -97,8 +96,8 @@ public class RegExExtensionsTest extends BaseTestCase
 			strip = StringExtensions.replaceAll(strip, ")", "");
 			strip = StringExtensions.replaceAll(strip, " ", "");
 			strip = StringExtensions.replaceAll(strip, "-", "");
-			result = strip.matches(RegExExtensions.VALID_PHONE);
-			AssertJUnit.assertFalse("", result);
+			actual = strip.matches(RegExExtensions.VALID_PHONE);
+			AssertJUnit.assertFalse("", actual);
 		}
 	}
 
@@ -112,8 +111,8 @@ public class RegExExtensionsTest extends BaseTestCase
 		final String expected = "Hel%W_rld!";
 		final String query = "Hel*W?rld!";
 		final String compare = RegExExtensions.wildcardCriterionSQL(query);
-		result = expected.equals(compare);
-		AssertJUnit.assertTrue("", result);
+		actual = expected.equals(compare);
+		AssertJUnit.assertTrue("", actual);
 	}
 
 }

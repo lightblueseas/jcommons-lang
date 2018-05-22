@@ -24,11 +24,12 @@
  */
 package de.alpharogroup.io;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
@@ -45,7 +46,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)}
+	 * {@link SerializedObjectExtensions#readSerializedObjectFromFile(File)}
 	 * .
 	 *
 	 * @throws IOException
@@ -59,14 +60,14 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	{
 		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
 			writeInMe);
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", actual);
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
 		final Date readedObj = (Date)readedObjectFromFile;
-		this.result = birthdayFromNiko.equals(readedObj);
-		AssertJUnit.assertTrue("", this.result);
+		actual = birthdayFromNiko.equals(readedObj);
+		assertTrue("", actual);
 		try
 		{
 			writeInMe.deleteOnExit();
@@ -79,7 +80,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#writeSerializedObjectToFile(java.lang.Object, java.io.File)}
+	 * {@link SerializedObjectExtensions#writeSerializedObjectToFile(Object, File)}
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -93,14 +94,14 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
 			writeInMe);
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", actual);
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
 		final Date readedObj = (Date)readedObjectFromFile;
-		this.result = birthdayFromNiko.equals(readedObj);
-		AssertJUnit.assertTrue("", this.result);
+		actual = birthdayFromNiko.equals(readedObj);
+		assertTrue("", actual);
 
 	}
 

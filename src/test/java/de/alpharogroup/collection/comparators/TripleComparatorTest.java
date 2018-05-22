@@ -24,7 +24,7 @@
  */
 package de.alpharogroup.collection.comparators;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertTrue;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;

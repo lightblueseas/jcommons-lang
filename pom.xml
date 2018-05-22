@@ -40,6 +40,8 @@
 		<meanbean.version>2.0.3</meanbean.version>
 		<!-- MEANBEAN-FACTORIES version -->
 		<meanbean-factories.version>1.0.0</meanbean-factories.version>
+		<!-- DB DRIVER version -->
+		<h2.version>1.4.197</h2.version>
 	</properties>
 
 	<licenses>
@@ -147,6 +149,12 @@
 				<artifactId>meanbean-factories</artifactId>
 				<version>${meanbean-factories.version}</version>
 			</dependency>
+			<!-- H2 DEPENDENCIES -->
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+			</dependency>
 
 		</dependencies>
 
@@ -221,6 +229,12 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>meanbean-factories</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- H2 DEPENDENCIES -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
 

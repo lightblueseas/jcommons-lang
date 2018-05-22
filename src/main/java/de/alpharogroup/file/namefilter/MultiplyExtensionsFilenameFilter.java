@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * The class MultiplyExtensionsFilenameFilter accepts File-objects that end with one of the
+ * The class {@link MultiplyExtensionsFilenameFilter} accepts File-objects that end with one of the
  * extension in the collection.
  *
  * @version 1.0
@@ -46,28 +46,18 @@ public class MultiplyExtensionsFilenameFilter implements FilenameFilter
 	private boolean acceptDir;
 
 	/**
-	 * Instantiates a new multiply extensions filename filter.
+	 * Instantiates a new {@link MultiplyExtensionsFilenameFilter}.
 	 *
 	 * @param fileExtensions
 	 *            the file extensions
 	 */
 	public MultiplyExtensionsFilenameFilter(final Collection<String> fileExtensions)
 	{
-		if (null == fileExtensions || fileExtensions.isEmpty())
-		{
-			throw new IllegalArgumentException("Argument fileExtensions cant be null or empty. "
-				+ "Please set the argument fileExtensions appropriate.");
-		}
-		this.fileExtensions = new ArrayList<>(fileExtensions.size());
-		for (final String extension : fileExtensions)
-		{
-			this.fileExtensions.add(extension.toLowerCase());
-		}
+		this(fileExtensions, false);
 	}
 
-
 	/**
-	 * Instantiates a new multiply extensions filename filter.
+	 * Instantiates a new {@link MultiplyExtensionsFilenameFilter}.
 	 *
 	 * @param fileExtensions
 	 *            the file extensions
@@ -91,14 +81,7 @@ public class MultiplyExtensionsFilenameFilter implements FilenameFilter
 	}
 
 	/**
-	 * Accept.
-	 *
-	 * @param dir
-	 *            the dir
-	 * @param name
-	 *            the name
-	 * @return true, if accept {@inheritDoc}
-	 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean accept(final File dir, final String name)
@@ -118,12 +101,8 @@ public class MultiplyExtensionsFilenameFilter implements FilenameFilter
 		return false;
 	}
 
-
 	/**
-	 * To string.
-	 *
-	 * @return the string {@inheritDoc}
-	 * @see java.lang.Object#toString()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString()

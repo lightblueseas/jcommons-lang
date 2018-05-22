@@ -29,6 +29,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URISyntaxException;
 
 import org.testng.annotations.Test;
 
@@ -43,9 +44,12 @@ public class SimpleFilenameFilterTest
 
 	/**
 	 * Test method for {@link SimpleFilenameFilter#accept(File, String)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
 	 */
 	@Test
-	public final void testAccept() throws Exception
+	public final void testAccept() throws URISyntaxException
 	{
 		boolean expected;
 		boolean actual;

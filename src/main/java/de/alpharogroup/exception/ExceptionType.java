@@ -26,6 +26,8 @@ package de.alpharogroup.exception;
 
 /**
  * The enum {@link ExceptionType} defines the types of {@link Exception}'s.
+ * 
+ * @deprecated seems that this enum is not in use. Note: will be removed in next minor release.
  */
 public enum ExceptionType
 {

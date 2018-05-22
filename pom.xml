@@ -293,9 +293,13 @@
 								<!-- deprecated classes -->
 								<!-- constant classes with only constants -->
 								<!-- explicit abstract classes -->
+								<!-- explicit annotations -->
+								<exclude>de/alpharogroup/annotations/Premium.class</exclude>
 								<!-- explicit bean classes -->
 								<!-- explicit deprecated classes -->
 								<!-- explicit enums -->
+								<exclude>de/alpharogroup/file/checksum/Algorithm.class</exclude>
+								<exclude>de/alpharogroup/exception/ExceptionType.class</exclude>
 								<!-- explicit interfaces -->
 								<!-- explicit abstract classes -->
 								<!-- explicit constant classes with only constants -->

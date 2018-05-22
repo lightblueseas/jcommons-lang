@@ -24,12 +24,16 @@
  */
 package de.alpharogroup.file.checksum;
 
+import lombok.Getter;
+
 /**
  * The enum {@link Algorithm} defines the message digest algorithms and one-way conversion hash
  * algorithms.
  *
  * @author Asterios Raptis
  * @version 1.0
+ * @deprecated use instead the {@code MdAlgorithm} and the {@code HashAlgorithm} from the project
+ *             crypt-api. Note: will be removed in next minor release.
  */
 public enum Algorithm
 {
@@ -56,10 +60,11 @@ public enum Algorithm
 	SHA_512("SHA-512");
 
 	/** The algorithm. */
+	@Getter
 	private final String algorithm;
 
 	/**
-	 * Instantiates a new Algorithm object.
+	 * Instantiates a new {@link Algorithm} object.
 	 *
 	 * @param algorithm
 	 *            the algorithm.
@@ -69,13 +74,4 @@ public enum Algorithm
 		this.algorithm = algorithm;
 	}
 
-	/**
-	 * Gets the algorithm.
-	 *
-	 * @return the algorithm
-	 */
-	public String getAlgorithm()
-	{
-		return algorithm;
-	}
 }

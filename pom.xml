@@ -307,6 +307,7 @@
 								<!-- deprecated classes -->
 								<!-- constant classes with only constants -->
 								<!-- explicit abstract classes -->
+								<exclude>de/alpharogroup/file/FileConstants.class</exclude>
 								<!-- explicit annotations -->
 								<exclude>de/alpharogroup/annotations/Premium.class</exclude>
 								<exclude>de/alpharogroup/io/annotations/ImportResource.class</exclude>
@@ -316,8 +317,10 @@
 								<!-- explicit enums -->
 								<exclude>de/alpharogroup/file/checksum/Algorithm.class</exclude>
 								<exclude>de/alpharogroup/exception/ExceptionType.class</exclude>
+								<exclude>de/alpharogroup/file/FileExtension.class</exclude>
 								<!-- explicit interfaces -->
 								<exclude>de/alpharogroup/id/generator/IdGenerator.class</exclude>
+								<exclude>de/alpharogroup/file/FileSuffix.class</exclude>
 								<!-- explicit abstract classes -->
 								<!-- explicit constant classes with only constants -->
 								<!-- explicit delegation classes -->

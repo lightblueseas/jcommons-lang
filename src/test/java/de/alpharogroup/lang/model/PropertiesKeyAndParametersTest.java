@@ -45,7 +45,8 @@ public class PropertiesKeyAndParametersTest
 {
 
 	/**
-	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} , {@link PropertiesKeyAndParameters#hashCode()} and
+	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} ,
+	 * {@link PropertiesKeyAndParameters#hashCode()} and
 	 * {@link PropertiesKeyAndParameters#toString()}
 	 *
 	 * @throws NoSuchMethodException
@@ -72,7 +73,8 @@ public class PropertiesKeyAndParametersTest
 	}
 
 	/**
-	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} , {@link PropertiesKeyAndParameters#hashCode()} and
+	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} ,
+	 * {@link PropertiesKeyAndParameters#hashCode()} and
 	 * {@link PropertiesKeyAndParameters#toString()}
 	 */
 	@Test

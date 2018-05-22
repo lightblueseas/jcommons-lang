@@ -13,7 +13,8 @@ public class BooleanExtensionsTest
 	/**
 	 * Test method for {@link BooleanExtensions#trueOrFalse(Object, Object, boolean...)}
 	 *
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public final void testTrueOrFalse() throws Exception

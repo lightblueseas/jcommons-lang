@@ -92,5 +92,5 @@ public class FieldModelTest
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(FieldModel.class);
 	}
-	
+
 }

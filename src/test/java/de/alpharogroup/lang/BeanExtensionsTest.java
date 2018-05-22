@@ -15,7 +15,8 @@ public class BeanExtensionsTest
 	/**
 	 * Test method for {@link BeanExtensions#setPropertyQuietly(Object, String, Object)}
 	 *
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public final void testSetPropertyQuietly() throws Exception

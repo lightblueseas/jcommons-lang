@@ -46,7 +46,8 @@ public class BooleanExtensions
 	public static <T> T trueOrFalse(final T trueCase, final T falseCase, final boolean... flags)
 	{
 		boolean interlink = true;
-		if (flags != null && 0 < flags.length) {
+		if (flags != null && 0 < flags.length)
+		{
 			interlink = false;
 		}
 		for (int i = 0; i < flags.length; i++)

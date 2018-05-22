@@ -30,7 +30,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * The class {@link MathExtensionsTest}.
+ * The unit test class for the class {@link MathExtensions}.
  */
 public class MathExtensionsTest
 {

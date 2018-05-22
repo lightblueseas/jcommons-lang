@@ -78,12 +78,8 @@ public class SimpleFilenameFilter implements FilenameFilter
 		return name.toLowerCase().endsWith(this.filesuffix);
 	}
 
-
 	/**
-	 * To string.
-	 *
-	 * @return the string {@inheritDoc}
-	 * @see java.lang.Object#toString()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString()

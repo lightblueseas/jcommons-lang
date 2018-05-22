@@ -32,7 +32,7 @@ import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.string.StringExtensions;
 
 /**
- * The class {@link RegExExtensionsTest}.
+ * The unit test class for the class {@link RegExExtensions}.
  */
 public class RegExExtensionsTest extends BaseTestCase
 {

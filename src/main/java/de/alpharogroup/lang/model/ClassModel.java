@@ -43,8 +43,8 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"classAnnotations"})
-@ToString(exclude = {"classAnnotations"})
+@EqualsAndHashCode(exclude = { "classAnnotations" })
+@ToString(exclude = { "classAnnotations" })
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

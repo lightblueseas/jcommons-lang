@@ -42,8 +42,8 @@ public class AnnotationModelTest
 {
 
 	/**
-	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()} and
-	 * {@link AnnotationModel#toString()}
+	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()}
+	 * and {@link AnnotationModel#toString()}
 	 *
 	 * @throws NoSuchMethodException
 	 *             if an accessor method for this property cannot be found
@@ -69,8 +69,8 @@ public class AnnotationModelTest
 	}
 
 	/**
-	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()} and
-	 * {@link AnnotationModel#toString()}
+	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()}
+	 * and {@link AnnotationModel#toString()}
 	 */
 	@Test
 	public void testEqualsHashcodeAndToStringWithClassSilently()

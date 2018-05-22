@@ -31,7 +31,7 @@ import java.io.File;
 import org.testng.annotations.Test;
 
 /**
- * The class {@link ConfigurationExtensionsTest}.
+ * The unit test class for the class {@link ConfigurationExtensions}.
  */
 public class ConfigurationExtensionsTest
 {

@@ -309,12 +309,15 @@
 								<!-- explicit abstract classes -->
 								<!-- explicit annotations -->
 								<exclude>de/alpharogroup/annotations/Premium.class</exclude>
+								<exclude>de/alpharogroup/io/annotations/ImportResource.class</exclude>
+								<exclude>de/alpharogroup/io/annotations/ImportResources.class</exclude>
 								<!-- explicit bean classes -->
 								<!-- explicit deprecated classes -->
 								<!-- explicit enums -->
 								<exclude>de/alpharogroup/file/checksum/Algorithm.class</exclude>
 								<exclude>de/alpharogroup/exception/ExceptionType.class</exclude>
 								<!-- explicit interfaces -->
+								<exclude>de/alpharogroup/id/generator/IdGenerator.class</exclude>
 								<!-- explicit abstract classes -->
 								<!-- explicit constant classes with only constants -->
 								<!-- explicit delegation classes -->

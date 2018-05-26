@@ -26,7 +26,7 @@
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.26</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.10.0</jobject-extensions.version>
+		<jobject-extensions.version>1.11</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>

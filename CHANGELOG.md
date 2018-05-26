@@ -7,11 +7,12 @@ Version 4.33-SNAPSHOT
 ADDED:
  
 - provide package.html for package de.alpharogroup.config
-- new dependency jobject-evaluate in version 1.10.0
+- new dependency jobject-evaluate in version 1.11
 
 CHANGED:
 
 - unit tests extended for improve code coverage
+- update of jobject-extensions version to 1.11
 
 Version 4.32
 -------------

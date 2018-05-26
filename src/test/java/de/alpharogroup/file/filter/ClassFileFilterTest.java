@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.lang.ClassExtensions;
-import de.alpharogroup.test.objects.evaluations.ToStringEvaluator;
+import de.alpharogroup.evaluate.object.ToStringEvaluator;
 
 /**
  * The unit test class for the class {@link ClassFileFilter}.

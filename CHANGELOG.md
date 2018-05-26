@@ -7,6 +7,7 @@ Version 4.33-SNAPSHOT
 ADDED:
  
 - provide package.html for package de.alpharogroup.config
+- new dependency jobject-evaluate in version 1.10.0
 
 CHANGED:
 

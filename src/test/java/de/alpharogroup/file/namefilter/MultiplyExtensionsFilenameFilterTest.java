@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListExtensions;
 import de.alpharogroup.lang.ClassExtensions;
-import de.alpharogroup.test.objects.evaluations.ToStringEvaluator;
+import de.alpharogroup.evaluate.object.ToStringEvaluator;
 
 /**
  * The class {@link MultiplyExtensionsFilenameFilter}.

@@ -331,6 +331,8 @@
 								<exclude>de/alpharogroup/file/checksum/Algorithm.class</exclude>
 								<exclude>de/alpharogroup/exception/ExceptionType.class</exclude>
 								<exclude>de/alpharogroup/file/FileExtension.class</exclude>
+								<!-- explicit exceptions -->
+								<exclude>de/alpharogroup/string/MalformedUnicodeException.class</exclude>
 								<!-- explicit interfaces -->
 								<exclude>de/alpharogroup/id/generator/IdGenerator.class</exclude>
 								<exclude>de/alpharogroup/file/FileSuffix.class</exclude>

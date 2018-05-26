@@ -25,7 +25,7 @@
 package de.alpharogroup.string;
 
 /**
- * The class MalformedUnicodeException.
+ * The class {@link MalformedUnicodeException} is thrown when the given character is not unicode conform.
  */
 public class MalformedUnicodeException extends RuntimeException
 {
@@ -36,15 +36,14 @@ public class MalformedUnicodeException extends RuntimeException
 	private static final long serialVersionUID = -1280189273365922248L;
 
 	/**
-	 * Instantiates a new malformed unicode exception.
+	 * Instantiates a new {@link MalformedUnicodeException}
 	 */
 	public MalformedUnicodeException()
 	{
-		super();
 	}
 
 	/**
-	 * Instantiates a new malformed unicode exception.
+	 * Instantiates a new {@link MalformedUnicodeException}
 	 *
 	 * @param message
 	 *            the message
@@ -55,7 +54,7 @@ public class MalformedUnicodeException extends RuntimeException
 	}
 
 	/**
-	 * Instantiates a new malformed unicode exception.
+	 * Instantiates a new {@link MalformedUnicodeException}
 	 *
 	 * @param message
 	 *            the message
@@ -68,7 +67,7 @@ public class MalformedUnicodeException extends RuntimeException
 	}
 
 	/**
-	 * Instantiates a new malformed unicode exception.
+	 * Instantiates a new {@link MalformedUnicodeException}
 	 *
 	 * @param cause
 	 *            the cause

@@ -60,19 +60,8 @@ Release version numbers will be incremented in the following format:
 
 `<major>.<minor>.<patch>`
 
-For more information on SemVer you can visit [semver.org](http://semver.org/).
+For detailed information on versioning you can visit the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
 
-The only exception from the official guidelines are the following:
-
-If the minor and patch version ends with a zero then the minor and the patch can be omitted.
- 
-For instance if the project version is '1.0.0' we will write '1'. So we omit the '.0.0'.
-
-The same applies if only the patch version ends with a zero then the patch can be omitted.
- 
-For instance if the project version is '1.1.0' we will write '1.1'. So we omit the '.0'.
-
-The reason why we do this is obviously and need no explanation.
 
 ## Want to Help and improve it? ###
 

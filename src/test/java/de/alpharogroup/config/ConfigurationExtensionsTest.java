@@ -28,6 +28,9 @@ import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.File;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 /**
@@ -48,6 +51,16 @@ public class ConfigurationExtensionsTest
 		expected = System.getProperty(ConfigurationExtensions.USER_HOME_PROPERTY_KEY)
 			+ File.separator + "foo" + File.separator + ".config";
 		assertEquals(actual, expected);
+	}	
+
+	/**
+	 * Test method for {@link ConfigurationExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(ConfigurationExtensions.class);
 	}
 
 }

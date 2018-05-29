@@ -24,6 +24,9 @@
  */
 package de.alpharogroup.regex;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -113,6 +116,16 @@ public class RegExExtensionsTest extends BaseTestCase
 		final String compare = RegExExtensions.wildcardCriterionSQL(query);
 		actual = expected.equals(compare);
 		AssertJUnit.assertTrue("", actual);
+	}
+
+	/**
+	 * Test method for {@link RegExExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(RegExExtensions.class);
 	}
 
 }

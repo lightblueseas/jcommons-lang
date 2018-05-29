@@ -24,6 +24,9 @@
  */
 package de.alpharogroup.math;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -372,6 +375,16 @@ public class MathExtensionsTest
 			this.result = expected[i] == compare[i];
 			AssertJUnit.assertTrue("", this.result);
 		}
+	}
+
+	/**
+	 * Test method for {@link MathExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(MathExtensions.class);
 	}
 
 }

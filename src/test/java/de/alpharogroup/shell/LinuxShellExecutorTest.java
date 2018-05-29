@@ -24,19 +24,42 @@
  */
 package de.alpharogroup.shell;
 
+import static org.testng.Assert.assertNotNull;
+
 import java.io.IOException;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-
+/**
+ * The unit test class for the class {@link LinuxShellExecutor}.
+ */
 public class LinuxShellExecutorTest
 {
 
+	/**
+	 * Test method for {@link LinuxShellExecutor#execute(boolean, String...)}
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void testExecute() throws IOException, InterruptedException
 	{
-		final String output = LinuxShellExecutor.execute(true, "ls -al");
-		System.out.println(output);
+		String actual;
+		actual = LinuxShellExecutor.execute(true, "ls -al");
+		assertNotNull(actual);
+	}
+
+	/**
+	 * Test method for {@link LinuxShellExecutor}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(LinuxShellExecutor.class);
 	}
 
 }

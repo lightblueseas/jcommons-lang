@@ -51,11 +51,9 @@ public final class LinuxShellExecutor
 	 * @return the string
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 * @throws InterruptedException
-	 *             the interrupted exception
 	 */
 	public static String execute(final boolean withResponse, final String... command)
-		throws IOException, InterruptedException
+		throws IOException
 	{
 		final List<String> commands = new ArrayList<>();
 		commands.add("bash");

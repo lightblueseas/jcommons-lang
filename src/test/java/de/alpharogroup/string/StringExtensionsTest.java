@@ -28,6 +28,9 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -387,6 +390,16 @@ public class StringExtensionsTest extends BaseTestCase
 		expected = "\\u00F6\\u002C\\u0020\\u00DF\\u0020\\u00E4";
 		actual = "ö, ß ä".toUnicode(false);
 		AssertJUnit.assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(StringExtensions.class);
 	}
 
 }

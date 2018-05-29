@@ -29,6 +29,9 @@ import static org.testng.AssertJUnit.assertNotNull;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 /**
@@ -62,6 +65,16 @@ public class ConnectionsExtensionsTest
 		connection = ConnectionsExtensions.getH2Connection(path, databaseName, dbuser,
 			dbpasswort);
 		assertNotNull(connection);
+	}
+
+	/**
+	 * Test method for {@link ConnectionsExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(ConnectionsExtensions.class);
 	}
 
 }

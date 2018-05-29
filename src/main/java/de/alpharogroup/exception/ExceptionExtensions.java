@@ -132,6 +132,8 @@ public final class ExceptionExtensions
 	 * @param object
 	 *            the object
 	 * @return the string
+	 * @deprecated use instead the same name method in class {@code StringExtensions}. Note: will be
+	 *             removed in the next minor release
 	 */
 	public static <T> String toString(final T object)
 	{

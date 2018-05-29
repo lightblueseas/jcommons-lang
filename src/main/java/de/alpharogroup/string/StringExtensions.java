@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import de.alpharogroup.check.Check;
 import lombok.experimental.UtilityClass;
@@ -836,6 +837,25 @@ public final class StringExtensions
 		{
 			return returnString;
 		}
+	}
+
+	/**
+	 * Prints the {@link Object#toString()} and if the given object is null a corresponding
+	 * information.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
+	 * @return the string
+	 */
+	public static <T> String toString(final T object)
+	{
+		if (object == null)
+		{
+			return "Given object is null!!!";
+		}
+		return ReflectionToStringBuilder.toString(object);
 	}
 
 }

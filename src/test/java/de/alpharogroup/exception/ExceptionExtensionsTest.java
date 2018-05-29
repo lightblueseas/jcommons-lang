@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.exception;
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import org.meanbean.factories.ObjectCreationException;
@@ -86,6 +87,11 @@ public class ExceptionExtensionsTest
 		}
 		expected = "java.lang.NullPointerException";
 		assertTrue(actual.startsWith(expected));
+		
+		// null case...
+		actual = ExceptionExtensions.getStackTrace(null);
+		expected = "throwable is null...";
+		assertEquals(actual, expected);
 	}
 
 	/**
@@ -111,6 +117,11 @@ public class ExceptionExtensionsTest
 		}
 		expected = "class java.lang.NullPointerException";
 		assertTrue(actual.startsWith(expected));
+
+		// null case...
+		actual = ExceptionExtensions.getStackTraceElements(null);
+		expected = "throwable is null...";
+		assertEquals(actual, expected);
 	}
 
 	/**

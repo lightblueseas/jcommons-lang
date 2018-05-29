@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListExtensions;
@@ -69,7 +71,7 @@ public class MultiplyExtensionsFileFilterTest
 	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
-	public final void testAccept() throws URISyntaxException
+	public final void testAccept() throws URISyntaxException, IOException
 	{
 		boolean expected;
 		boolean actual;
@@ -99,16 +101,19 @@ public class MultiplyExtensionsFileFilterTest
 		expected = true;
 		assertEquals(expected, actual);
 
-
-		filesuffix = ".properties";
 		acceptDir = true;
 		fileFilter = new MultiplyExtensionsFileFilter(fileExtensions, acceptDir);
 		assertNotNull(fileFilter);
 
-		filename = "";
-
 		actual = fileFilter.accept(dir);
 		expected = true;
+		assertEquals(expected, actual);		
+
+		file = new File(".", "TestFind.class");
+		FileUtils.writeStringToFile(file, "", Charset.defaultCharset());
+
+		actual = fileFilter.accept(file);
+		expected = false;
 		assertEquals(expected, actual);
 	}
 

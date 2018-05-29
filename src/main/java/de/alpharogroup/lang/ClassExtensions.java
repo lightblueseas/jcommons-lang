@@ -46,14 +46,12 @@ import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
-import lombok.experimental.ExtensionMethod;
 import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ClassExtensions} provides extension methods for the class {@link Class}.
  */
 @UtilityClass
-@ExtensionMethod(StringExtensions.class)
 public final class ClassExtensions
 {
 
@@ -924,7 +922,8 @@ public final class ClassExtensions
 		String result = className;
 		if (className.endsWith(FileExtension.CLASS.getExtension()))
 		{
-			result = className.replaceLast(FileExtension.CLASS.getExtension(), "");
+			result = StringExtensions.replaceLast(className, FileExtension.CLASS.getExtension(),
+				"");
 		}
 		final int lastIndexOf$ = result.lastIndexOf("$");
 		if (lastIndexOf$ != -1)

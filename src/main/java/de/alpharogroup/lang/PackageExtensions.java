@@ -38,14 +38,12 @@ import java.util.jar.JarFile;
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
-import lombok.experimental.ExtensionMethod;
 import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link PackageExtensions}.
  */
 @UtilityClass
-@ExtensionMethod(StringExtensions.class)
 public final class PackageExtensions
 {
 
@@ -271,7 +269,7 @@ public final class PackageExtensions
 				if (isDir && recursive)
 				{
 					String entryPath = entryName.replace("/", ".");
-					if (entryPath.lastCharacter().equals("."))
+					if (StringExtensions.lastCharacter(entryPath).equals("."))
 					{
 						entryPath = entryPath.substring(0, entryPath.length() - 1);
 					}

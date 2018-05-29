@@ -24,21 +24,32 @@
  */
 package de.alpharogroup.string;
 
+import lombok.Getter;
+
+/**
+ * The enum {@link CharacterEncoding}.
+ */
 public enum CharacterEncoding
 {
 
-	UTF_8("UTF-8"), UTF_16("UTF-16");
+	/** The UTF-8 character encoding. */
+	UTF_8("UTF-8"),
+	/** The UTF-16 character encoding. */
+	UTF_16("UTF-16");
 
+	/** The character encoding. */
+	@Getter
 	private final String encoding;
 
+	/**
+	 * Instantiates a new {@link CharacterEncoding}
+	 *
+	 * @param encoding
+	 *            the encoding
+	 */
 	private CharacterEncoding(final String encoding)
 	{
 		this.encoding = encoding;
-	}
-
-	public String getEncoding()
-	{
-		return encoding;
 	}
 
 }

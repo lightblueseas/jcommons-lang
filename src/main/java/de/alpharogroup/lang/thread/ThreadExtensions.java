@@ -34,9 +34,8 @@ import lombok.experimental.UtilityClass;
  * The class {@link ThreadExtensions}.
  */
 @UtilityClass
-public class ThreadExtensions
+public final class ThreadExtensions
 {
-
 
 	/**
 	 * Finds all threads the are currently running.
@@ -49,7 +48,6 @@ public class ThreadExtensions
 		final Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
 		return threadArray;
 	}
-
 
 	/**
 	 * Finds all threads the are currently running and converts them to {@link ThreadDataBean} and
@@ -68,4 +66,5 @@ public class ThreadExtensions
 		}
 		return snapshotOfThreadDataBeans;
 	}
+	
 }

@@ -33,7 +33,7 @@ import lombok.experimental.UtilityClass;
  * The class {@link ConfigurationExtensions}.
  */
 @UtilityClass
-public class ConfigurationExtensions
+public final class ConfigurationExtensions
 {
 
 	public static final String USER_HOME_PROPERTY_KEY = "user.home";

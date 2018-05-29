@@ -38,7 +38,7 @@ import de.alpharogroup.lang.AnnotationExtensions;
  * The class {@link ImportResourcesExtensions} contains extension methods for {@link ImportResource}
  * objects.
  */
-public class ImportResourcesExtensions
+public final class ImportResourcesExtensions
 {
 
 	/**

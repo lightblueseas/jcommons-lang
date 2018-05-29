@@ -30,6 +30,7 @@ import java.io.StringWriter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import de.alpharogroup.io.StreamExtensions;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ExceptionExtensions}.
@@ -37,7 +38,8 @@ import de.alpharogroup.io.StreamExtensions;
  * @author Asterios Raptis
  * @version 1.0
  */
-public class ExceptionExtensions
+@UtilityClass
+public final class ExceptionExtensions
 {
 
 	/**

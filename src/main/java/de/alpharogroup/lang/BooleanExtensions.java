@@ -24,10 +24,13 @@
  */
 package de.alpharogroup.lang;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * The class {@link BooleanExtensions}.
  */
-public class BooleanExtensions
+@UtilityClass
+public final class BooleanExtensions
 {
 
 	/**

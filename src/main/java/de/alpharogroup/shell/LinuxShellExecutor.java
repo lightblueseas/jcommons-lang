@@ -32,10 +32,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * The class LinuxShellExecutor.
  */
-public class LinuxShellExecutor
+@UtilityClass
+public final class LinuxShellExecutor
 {
 
 	/**

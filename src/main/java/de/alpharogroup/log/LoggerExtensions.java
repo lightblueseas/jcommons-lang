@@ -35,7 +35,7 @@ import lombok.experimental.UtilityClass;
  * The class {@link LoggerExtensions} provides extensions for logger appenders.
  */
 @UtilityClass
-public class LoggerExtensions
+public final class LoggerExtensions
 {
 
 	/**

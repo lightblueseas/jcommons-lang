@@ -34,8 +34,16 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
 
 import de.alpharogroup.check.Check;
+import lombok.experimental.UtilityClass;
 
-public class StringExtensions
+/**
+ * The class {@link StringExtensions} provides methods for manipulate string objects.<br><br> 
+ * Note: As the
+ * {@link String} class is immutable not the given String is manipulated, a new {@link String} object
+ * is created with the manipulation.
+ */
+@UtilityClass
+public final class StringExtensions
 {
 
 	/** A char array from the hexadecimal digits. */

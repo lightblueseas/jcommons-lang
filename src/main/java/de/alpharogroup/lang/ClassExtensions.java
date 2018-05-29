@@ -47,10 +47,12 @@ import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.ExtensionMethod;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ClassExtensions} provides extension methods for the class {@link Class}.
  */
+@UtilityClass
 @ExtensionMethod(StringExtensions.class)
 public final class ClassExtensions
 {

@@ -37,12 +37,14 @@ import java.util.Set;
 
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link AnnotationExtensions}.
  *
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class AnnotationExtensions
 {
 
@@ -447,11 +449,4 @@ public final class AnnotationExtensions
 		return oldValue;
 	}
 
-	/**
-	 * Private constructor.
-	 */
-	private AnnotationExtensions()
-	{
-		super();
-	}
 }

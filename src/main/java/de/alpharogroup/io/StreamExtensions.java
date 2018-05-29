@@ -42,12 +42,15 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Utility class for input/output operations.
  *
  * @version 1.0
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class StreamExtensions implements Serializable
 {
 
@@ -679,13 +682,6 @@ public final class StreamExtensions implements Serializable
 				StreamExtensions.closeOutputStream(outputStream);
 			}
 		}
-	}
-
-	/**
-	 * Private constructor.
-	 */
-	private StreamExtensions()
-	{
 	}
 
 }

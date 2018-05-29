@@ -37,12 +37,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql, H2
  * or postgresql databases.
  *
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class ConnectionsExtensions
 {
 
@@ -571,14 +574,6 @@ public final class ConnectionsExtensions
 			stmt.close();
 			connection.close();
 		}
-	}
-
-	/**
-	 * Instantiates a new jdbc connections utils.
-	 */
-	private ConnectionsExtensions()
-	{
-		super();
 	}
 
 }

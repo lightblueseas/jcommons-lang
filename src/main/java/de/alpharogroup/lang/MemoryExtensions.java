@@ -24,12 +24,15 @@
  */
 package de.alpharogroup.lang;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Utility class for getting the Memory status.
  *
  * @version 1.0
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class MemoryExtensions
 {
 	/**
@@ -68,14 +71,6 @@ public final class MemoryExtensions
 	public static long getTotalMemoryInKB()
 	{
 		return Runtime.getRuntime().totalMemory() / 1024;
-	}
-
-	/**
-	 * Private constructor.
-	 */
-	private MemoryExtensions()
-	{
-		super();
 	}
 
 }

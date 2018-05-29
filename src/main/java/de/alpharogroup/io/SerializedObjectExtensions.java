@@ -45,6 +45,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import de.alpharogroup.diff.beans.SerializedChangedAttributeResult;
 import de.alpharogroup.file.FileConstants;
+import lombok.experimental.UtilityClass;
 
 /**
  * Helper-class for make exact copys from serialized objects.
@@ -52,6 +53,7 @@ import de.alpharogroup.file.FileConstants;
  * @version 1.0
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class SerializedObjectExtensions
 {
 
@@ -319,10 +321,4 @@ public final class SerializedObjectExtensions
 		return written;
 	}
 
-	/**
-	 * Private Constructor.
-	 */
-	private SerializedObjectExtensions()
-	{
-	}
 }

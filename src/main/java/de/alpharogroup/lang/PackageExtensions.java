@@ -39,10 +39,12 @@ import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.ExtensionMethod;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link PackageExtensions}.
  */
+@UtilityClass
 @ExtensionMethod(StringExtensions.class)
 public final class PackageExtensions
 {
@@ -344,13 +346,5 @@ public final class PackageExtensions
 		}
 		return classNames;
 	}
-
-	/**
-	 * Private constructor.
-	 */
-	private PackageExtensions()
-	{
-	}
-
 
 }

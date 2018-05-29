@@ -26,6 +26,9 @@ package de.alpharogroup.lang;
 
 import java.util.List;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -72,6 +75,16 @@ public class TypeArgumentsExtensionsTest
 		AssertJUnit.assertEquals(2, typeArguments.size());
 		AssertJUnit.assertEquals(Person.class, typeArguments.get(0));
 		AssertJUnit.assertEquals(Integer.class, typeArguments.get(1));
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(TypeArgumentsExtensions.class);
 	}
 
 }

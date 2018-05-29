@@ -29,6 +29,9 @@ import static org.testng.AssertJUnit.assertTrue;
 
 import java.util.Set;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.test.messages.TestMessagesExtensions;
@@ -171,6 +174,16 @@ public class PackageExtensionsTest
 			System.out.println("<class name=\"" + string + "\"/>");
 		}
 
+	}
+
+	/**
+	 * Test method for {@link PackageExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(PackageExtensions.class);
 	}
 
 }

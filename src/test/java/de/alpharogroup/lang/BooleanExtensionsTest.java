@@ -26,6 +26,9 @@ package de.alpharogroup.lang;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 /**
@@ -72,6 +75,16 @@ public class BooleanExtensionsTest
 		expected = "where";
 		actual = BooleanExtensions.trueOrFalse("and", "where", false, false, false);
 		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link BooleanExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(BooleanExtensions.class);
 	}
 
 }

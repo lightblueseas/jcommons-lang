@@ -32,7 +32,7 @@ import org.apache.log4j.PatternLayout;
 import lombok.experimental.UtilityClass;
 
 /**
- * Logger extensions for appenders.
+ * The class {@link LoggerExtensions} provides extensions for logger appenders.
  */
 @UtilityClass
 public class LoggerExtensions

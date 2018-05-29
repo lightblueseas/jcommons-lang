@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.shell;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
@@ -50,6 +51,21 @@ public class LinuxShellExecutorTest
 		String actual;
 		actual = LinuxShellExecutor.execute(true, "ls -al");
 		assertNotNull(actual);
+	}
+	
+	/**
+	 * Test method for {@link LinuxShellExecutor#toString(java.io.InputStream)}
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testToString() throws IOException
+	{
+		String expected;
+		String actual;
+		expected = "";
+		actual = LinuxShellExecutor.toString(null);
+		assertEquals(actual, expected);
 	}
 
 	/**

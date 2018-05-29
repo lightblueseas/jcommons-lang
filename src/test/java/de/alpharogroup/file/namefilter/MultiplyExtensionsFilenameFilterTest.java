@@ -29,14 +29,17 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListExtensions;
-import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.evaluate.object.ToStringEvaluator;
+import de.alpharogroup.lang.ClassExtensions;
 
 /**
  * The class {@link MultiplyExtensionsFilenameFilter}.
@@ -45,13 +48,57 @@ public class MultiplyExtensionsFilenameFilterTest
 {
 
 	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		boolean acceptDir;
+		String filesuffix;
+		FilenameFilter filenameFilter;
+		Collection<String> fileExtensions;
+
+		acceptDir = false;
+		filesuffix = ".properties";
+		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
+
+		filenameFilter = new MultiplyExtensionsFilenameFilter(
+			fileExtensions, acceptDir);
+		assertNotNull(filenameFilter);
+
+		filenameFilter = new MultiplyExtensionsFilenameFilter(fileExtensions);
+		assertNotNull(filenameFilter);
+	}
+
+	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors with null values
+	 */
+	@Test(expectedExceptions=IllegalArgumentException.class)
+	public final void testConstructorsWithNullValues()
+	{
+		Collection<String> fileExtensions = null;
+		new MultiplyExtensionsFilenameFilter(fileExtensions);
+	}
+	
+	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors with empty list
+	 */
+	@Test(expectedExceptions=IllegalArgumentException.class)
+	public final void testConstructorsWithEmptyList()
+	{
+		new MultiplyExtensionsFilenameFilter(ListExtensions.newArrayList());
+	}
+	
+	/**
 	 * Test method for {@link MultiplyExtensionsFilenameFilter#accept(File, String)}.
 	 * 
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
-	public final void testAccept() throws URISyntaxException
+	public final void testAccept() throws URISyntaxException, IOException
 	{
 		boolean expected;
 		boolean actual;
@@ -63,12 +110,12 @@ public class MultiplyExtensionsFilenameFilterTest
 		File file;
 		File dir;
 		Collection<String> fileExtensions;
-		
+
 		filesuffix = ".properties";
 		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
 		acceptDir = false;
 		filenameFilter = new MultiplyExtensionsFilenameFilter(fileExtensions, acceptDir);
-		assertNotNull(filenameFilter);		
+		assertNotNull(filenameFilter);
 
 		filename = "resources.properties";
 
@@ -80,7 +127,7 @@ public class MultiplyExtensionsFilenameFilterTest
 		actual = filenameFilter.accept(dir, filename);
 		expected = true;
 		assertEquals(expected, actual);
-		
+
 
 		filesuffix = ".properties";
 		acceptDir = true;
@@ -92,7 +139,23 @@ public class MultiplyExtensionsFilenameFilterTest
 		actual = filenameFilter.accept(dir, filename);
 		expected = true;
 		assertEquals(expected, actual);
-		
+
+		filename = "TestFind.class";
+		file = new File(".", filename);
+		FileUtils.writeStringToFile(file, "", Charset.defaultCharset());
+		dir = file.getParentFile();
+		actual = filenameFilter.accept(dir, filename);
+		expected = false;
+		assertEquals(expected, actual);
+		try
+		{
+			file.deleteOnExit();
+		}
+		catch (final Exception e)
+		{
+			// ignore...
+		}
+
 	}
 
 	/**
@@ -109,7 +172,7 @@ public class MultiplyExtensionsFilenameFilterTest
 		filesuffix = ".properties";
 		acceptDir = false;
 		Collection<String> fileExtensions;
-		
+
 		filesuffix = ".properties";
 		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
 		actual = ToStringEvaluator

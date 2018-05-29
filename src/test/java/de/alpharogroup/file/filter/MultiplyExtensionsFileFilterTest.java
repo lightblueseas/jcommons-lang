@@ -51,7 +51,6 @@ public class MultiplyExtensionsFileFilterTest
 		assertNotNull(fileFilter);
 	}
 
-
 	/**
 	 * Test method for {@link MultiplyExtensionsFileFilter} constructors with null values
 	 */
@@ -60,6 +59,15 @@ public class MultiplyExtensionsFileFilterTest
 	{
 		Collection<String> fileExtensions = null;
 		new MultiplyExtensionsFileFilter(fileExtensions);
+	}
+	
+	/**
+	 * Test method for {@link MultiplyExtensionsFileFilter} constructors with empty list
+	 */
+	@Test(expectedExceptions=IllegalArgumentException.class)
+	public final void testConstructorsWithEmptyList()
+	{
+		new MultiplyExtensionsFileFilter(ListExtensions.newArrayList());
 	}
 
 	/**
@@ -115,6 +123,14 @@ public class MultiplyExtensionsFileFilterTest
 		actual = fileFilter.accept(file);
 		expected = false;
 		assertEquals(expected, actual);
+		try
+		{
+			file.deleteOnExit();
+		}
+		catch (final Exception e)
+		{
+			// ignore...
+		}
 	}
 
 	/**

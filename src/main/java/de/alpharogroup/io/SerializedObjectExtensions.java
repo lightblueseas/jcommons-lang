@@ -32,23 +32,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
-import org.apache.commons.beanutils.BeanComparator;
-import org.apache.commons.beanutils.BeanUtils;
-
-import de.alpharogroup.diff.beans.SerializedChangedAttributeResult;
 import de.alpharogroup.file.FileConstants;
 import lombok.experimental.UtilityClass;
 
 /**
- * Helper-class for make exact copys from serialized objects.
+ * Helper-class for read from and write to serialized objects.
  *
  * @version 1.0
  * @author Asterios Raptis
@@ -60,135 +50,6 @@ public final class SerializedObjectExtensions
 	/** The LOGGER. */
 	protected static final Logger LOGGER = Logger
 		.getLogger(SerializedObjectExtensions.class.getName());
-
-	/**
-	 * Copys the given Object and returns the copy from the object or null if the object can't be
-	 * serialized.
-	 *
-	 * @param <T>
-	 *            the generic type of the given object
-	 * @param orig
-	 *            The object to copy.
-	 * @return Returns a copy from the original object.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException
-	 *             is thrown when a class is not found in the classloader or no definition for the
-	 *             class with the specified name could be found.
-	 * @deprecated use instead the same name method from CopyObjectExtensions. will be deleted on
-	 *             next minor release.
-	 */
-	@Deprecated
-	@SuppressWarnings("unchecked")
-	public static <T extends Serializable> T copySerializedObject(final T orig)
-		throws IOException, ClassNotFoundException
-	{
-		T object = null;
-		ByteArrayOutputStream byteArrayOutputStream = null;
-		ObjectOutputStream objectOutputStream = null;
-		try
-		{
-			byteArrayOutputStream = new ByteArrayOutputStream();
-			objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-			objectOutputStream.writeObject(orig);
-			objectOutputStream.flush();
-			objectOutputStream.close();
-			final ByteArrayInputStream bis = new ByteArrayInputStream(
-				byteArrayOutputStream.toByteArray());
-			final ObjectInputStream ois = new ObjectInputStream(bis);
-			object = (T)ois.readObject();
-		}
-		finally
-		{
-			StreamExtensions.closeOutputStream(byteArrayOutputStream);
-			StreamExtensions.closeOutputStream(objectOutputStream);
-		}
-		return object;
-	}
-
-	/**
-	 * Gets only the changed data.
-	 *
-	 * @param sourceOjbect
-	 *            the source ojbect
-	 * @param objectToCompare
-	 *            the object to compare
-	 * @return the changed data
-	 * @throws IllegalAccessException
-	 *             the illegal access exception
-	 * @throws InvocationTargetException
-	 *             the invocation target exception
-	 * @throws NoSuchMethodException
-	 *             the no such method exception
-	 * @deprecated use instead the same name method from DiffObjectExtensions. will be deleted on
-	 *             next minor release.
-	 */
-	@Deprecated
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static List<SerializedChangedAttributeResult> getChangedData(final Object sourceOjbect,
-		final Object objectToCompare)
-		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
-	{
-		final Map beanDescription = BeanUtils.describe(sourceOjbect);
-		beanDescription.remove("class");
-		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
-		clonedBeanDescription.remove("class");
-		final List<SerializedChangedAttributeResult> changedData = new ArrayList<>();
-		for (final Object key : beanDescription.keySet())
-		{
-			final BeanComparator comparator = new BeanComparator(key.toString());
-			if (comparator.compare(sourceOjbect, objectToCompare) != 0)
-			{
-				final Object sourceAttribute = beanDescription.get(key);
-				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.add(SerializedChangedAttributeResult.builder().attributeName(key)
-					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
-			}
-		}
-		return changedData;
-	}
-
-	/**
-	 * Compares the given two objects and gets only the changed data.
-	 *
-	 * @param sourceOjbect
-	 *            the source ojbect
-	 * @param objectToCompare
-	 *            the object to compare
-	 * @return the changed data
-	 * @throws IllegalAccessException
-	 *             the illegal access exception
-	 * @throws InvocationTargetException
-	 *             the invocation target exception
-	 * @throws NoSuchMethodException
-	 *             the no such method exception
-	 * @deprecated use instead the same name method from DiffObjectExtensions. will be deleted on
-	 *             next minor release.
-	 */
-	@Deprecated
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Map<Object, SerializedChangedAttributeResult> getChangedDataMap(
-		final Object sourceOjbect, final Object objectToCompare)
-		throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
-	{
-		final Map beanDescription = BeanUtils.describe(sourceOjbect);
-		beanDescription.remove("class");
-		final Map clonedBeanDescription = BeanUtils.describe(objectToCompare);
-		clonedBeanDescription.remove("class");
-		final Map<Object, SerializedChangedAttributeResult> changedData = new HashMap<>();
-		for (final Object key : beanDescription.keySet())
-		{
-			final BeanComparator comparator = new BeanComparator(key.toString());
-			if (comparator.compare(sourceOjbect, objectToCompare) != 0)
-			{
-				final Object sourceAttribute = beanDescription.get(key);
-				final Object changedAttribute = clonedBeanDescription.get(key);
-				changedData.put(key, SerializedChangedAttributeResult.builder().attributeName(key)
-					.sourceAttribute(sourceAttribute).changedAttribute(changedAttribute).build());
-			}
-		}
-		return changedData;
-	}
 
 	/**
 	 * Reads the object from the given file.
@@ -240,7 +101,6 @@ public final class SerializedObjectExtensions
 		ObjectOutputStream objectOutputStream = null;
 		try
 		{
-
 			byteArrayOutputStream = new ByteArrayOutputStream(FileConstants.KILOBYTE);
 
 			byteArrayOutputStream.reset();

@@ -30,6 +30,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
@@ -103,6 +106,16 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 		actual = birthdayFromNiko.equals(readedObj);
 		assertTrue("", actual);
 
+	}
+
+	/**
+	 * Test method for {@link SerializedObjectExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(SerializedObjectExtensions.class);
 	}
 
 }

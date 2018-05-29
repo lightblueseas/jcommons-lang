@@ -29,6 +29,9 @@ import static org.testng.AssertJUnit.assertEquals;
 import java.io.File;
 import java.net.URISyntaxException;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.lang.ClassExtensions;
@@ -60,4 +63,14 @@ public class FilenameExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link FilenameExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(FilenameExtensions.class);
+	}
+	
 }

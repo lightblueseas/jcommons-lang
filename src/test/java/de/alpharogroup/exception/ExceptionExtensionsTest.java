@@ -134,7 +134,7 @@ public class ExceptionExtensionsTest
 			actual = ExceptionExtensions.getStackTraceElements(e);
 		}
 
-		expected = "org.meanbean.test.BeanTestException";
+		expected = "class org.meanbean.test.BeanTestException";
 		assertTrue(actual.startsWith(expected));
 	}
 

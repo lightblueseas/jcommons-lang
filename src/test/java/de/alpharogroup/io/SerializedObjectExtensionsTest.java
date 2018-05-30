@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.io;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.File;
@@ -37,6 +38,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.date.CreateDateExtensions;
+import de.alpharogroup.test.objects.Person;
 
 /**
  * The unit test class for the class {@link SerializedObjectExtensions}.
@@ -48,9 +50,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 {
 
 	/**
-	 * Test method for
-	 * {@link SerializedObjectExtensions#readSerializedObjectFromFile(File)}
-	 * .
+	 * Test method for {@link SerializedObjectExtensions#readSerializedObjectFromFile(File)} .
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -82,8 +82,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link SerializedObjectExtensions#writeSerializedObjectToFile(Object, File)}
+	 * Test method for {@link SerializedObjectExtensions#writeSerializedObjectToFile(Object, File)}
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -106,6 +105,20 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 		actual = birthdayFromNiko.equals(readedObj);
 		assertTrue("", actual);
 
+	}
+
+	/**
+	 * Test method for {@link SerializedObjectExtensions#toByteArray(Object)}.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testToByteArray() throws IOException
+	{
+		Person person = Person.builder().build();
+		byte[] byteArray = SerializedObjectExtensions.toByteArray(person);
+		assertNotNull(byteArray);
 	}
 
 	/**

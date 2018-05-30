@@ -13,6 +13,7 @@ CHANGED:
 
 - unit tests extended for improve code coverage
 - update of jobject-extensions version to 1.11
+- update of dependency joda-time version to 2.10
 
 Version 4.32
 -------------

@@ -87,11 +87,12 @@ public class ExceptionExtensionsTest
 		}
 		expected = "java.lang.NullPointerException";
 		assertTrue(actual.startsWith(expected));
-		
+
 		// null case...
 		actual = ExceptionExtensions.getStackTrace(null);
 		expected = "throwable is null...";
 		assertEquals(actual, expected);
+
 	}
 
 	/**
@@ -122,6 +123,19 @@ public class ExceptionExtensionsTest
 		actual = ExceptionExtensions.getStackTraceElements(null);
 		expected = "throwable is null...";
 		assertEquals(actual, expected);
+
+		try
+		{
+			final BeanTester beanTester = new BeanTester();
+			beanTester.testBean(ExceptionExtensions.class);
+		}
+		catch (final Exception e)
+		{
+			actual = ExceptionExtensions.getStackTraceElements(e);
+		}
+
+		expected = "org.meanbean.test.BeanTestException";
+		assertTrue(actual.startsWith(expected));
 	}
 
 	/**
@@ -133,5 +147,5 @@ public class ExceptionExtensionsTest
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(ExceptionExtensions.class);
 	}
-	
+
 }

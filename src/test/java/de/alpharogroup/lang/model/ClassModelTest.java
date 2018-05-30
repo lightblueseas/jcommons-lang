@@ -24,14 +24,22 @@
  */
 package de.alpharogroup.lang.model;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Map;
+
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Modifier;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
@@ -41,6 +49,50 @@ import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 public class ClassModelTest
 {
 
+	/**
+	 * Test method for {@link ClassModel} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		ClassModel classModel = new ClassModel();
+		assertNotNull(classModel);
+		
+		ElementKind kind = ElementKind.CLASS;
+
+		/** The package name. */
+		String packageName = "de.alpharogroup.lang.model";
+
+		/** The imports. */
+		List<String> imports = ListExtensions.newArrayList("import static org.testng.Assert.assertNotNull;", "import java.util.Map;");
+
+		/** The class annotations. */
+		List<ClassModel> classAnnotations = ListExtensions.newArrayList();
+
+		/** The modifiers. */
+		List<Modifier> modifiers = ListExtensions.newArrayList();
+
+		/** The generic types. */
+		List<String> genericTypes = ListExtensions.newArrayList();
+
+		/** The class name. */
+		String className = "Foo";
+
+		/** The extended class name. */
+		String extendedClassName = "";
+
+		/** The interface implementations. */
+		List<String> interfaceImplementations = ListExtensions.newArrayList();
+
+		/** The methods. */
+		Map<String, MethodModel> methods = MapFactory.newHashMap();
+		
+		classModel = new ClassModel(kind, packageName, imports, classAnnotations, modifiers, genericTypes, className, extendedClassName, interfaceImplementations, methods);
+		assertNotNull(classModel);
+		classModel = ClassModel.builder().build();
+		assertNotNull(classModel);
+	}
+	
 	/**
 	 * Test method for {@link ClassModel#equals(Object)} , {@link ClassModel#hashCode()} and
 	 * {@link ClassModel#toString()}

@@ -24,14 +24,19 @@
  */
 package de.alpharogroup.lang.model;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+import javax.lang.model.element.Modifier;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.collections.list.ListExtensions;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
@@ -41,6 +46,21 @@ import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 public class FieldModelTest
 {
 
+	/**
+	 * Test method for {@link FieldModel} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		FieldModel model = new FieldModel();
+		assertNotNull(model);
+		List<Modifier> modifiers = ListExtensions.newArrayList();
+		model = new FieldModel(modifiers);
+		assertNotNull(model);
+		model = FieldModel.builder().build();
+		assertNotNull(model);
+	}
+	
 	/**
 	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
 	 * {@link FieldModel#toString()}

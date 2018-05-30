@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.lang.model;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
@@ -41,6 +42,20 @@ import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 public class AnnotationModelTest
 {
 
+	/**
+	 * Test method for {@link AnnotationModel} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		AnnotationModel model = new AnnotationModel();
+		assertNotNull(model);
+		model = new AnnotationModel("name", "value");
+		assertNotNull(model);
+		model = AnnotationModel.builder().build();
+		assertNotNull(model);
+	}
+	
 	/**
 	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()}
 	 * and {@link AnnotationModel#toString()}

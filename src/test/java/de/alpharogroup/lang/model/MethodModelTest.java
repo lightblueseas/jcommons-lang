@@ -24,14 +24,21 @@
  */
 package de.alpharogroup.lang.model;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Map;
+
+import javax.lang.model.element.Modifier;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
@@ -41,6 +48,49 @@ import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 public class MethodModelTest
 {
 
+	/**
+	 * Test method for {@link MethodModel} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		MethodModel model = new MethodModel();
+		assertNotNull(model);
+
+
+		/** The method annotations. */
+		List<AnnotationModel> methodAnnotations = ListExtensions.newArrayList();
+
+		/** The modifiers. */
+		List<Modifier> modifiers = ListExtensions.newArrayList();
+
+		/** The generic types. */
+		List<String> genericTypes = ListExtensions.newArrayList();
+
+		/** The return type. */
+		String returnType = "";
+
+		/** The method name. */
+		String methodName = "";
+
+		/** The parameters. */
+		List<String> parameters = ListExtensions.newArrayList();
+
+		/** The parameter annotations. */
+		Map<String, List<String>> parameterAnnotations = MapFactory.newHashMap();
+
+		/** The static flag. */
+		boolean staticFlag = false;
+
+		/** The synchronized flag. */
+		boolean synchronizedFlag = false;
+		
+		model = new MethodModel(methodAnnotations, modifiers, genericTypes, returnType, methodName, parameters, parameterAnnotations, staticFlag, synchronizedFlag);
+		assertNotNull(model);
+		model = MethodModel.builder().build();
+		assertNotNull(model);
+	}
+	
 	/**
 	 * Test method for {@link MethodModel#equals(Object)} , {@link MethodModel#hashCode()} and
 	 * {@link MethodModel#toString()}

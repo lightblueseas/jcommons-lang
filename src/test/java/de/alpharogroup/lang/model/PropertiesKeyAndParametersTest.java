@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.lang.model;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ import org.meanbean.test.ConfigurationBuilder;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.meanbean.factories.ObjectArrayFactory;
+import de.alpharogroup.collections.array.ArrayExtensions;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
@@ -44,6 +46,27 @@ import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 public class PropertiesKeyAndParametersTest
 {
 
+	/**
+	 * Test method for {@link PropertiesKeyAndParameters} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		PropertiesKeyAndParameters model = new PropertiesKeyAndParameters();
+		assertNotNull(model);		
+
+		/** The key. */
+		String key = "";
+
+		/** The parameters. */
+		Object[] parameters = ArrayExtensions.newArray("foo", "bar");
+		
+		model = new PropertiesKeyAndParameters(key, parameters);
+		assertNotNull(model);
+		model = PropertiesKeyAndParameters.builder().build();
+		assertNotNull(model);
+	}
+	
 	/**
 	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} ,
 	 * {@link PropertiesKeyAndParameters#hashCode()} and

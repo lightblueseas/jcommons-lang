@@ -63,6 +63,29 @@ public class FilenameExtensionsTest
 		actual = FilenameExtensions.getFilenamePrefix(file);
 		assertTrue(actual.endsWith(expected));
 	}
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenamePrefix(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenamePrefixWithDir() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		File dir = file.getParentFile();
+		expected = null;
+		
+		expected = "de/alpharogroup/lang";
+		actual = FilenameExtensions.getFilenamePrefix(dir);
+		assertTrue(actual.endsWith(expected));
+	}
 
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenameSuffix(File)}.
@@ -81,6 +104,33 @@ public class FilenameExtensionsTest
 		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
 
 		expected = ".properties";
+		actual = FilenameExtensions.getFilenameSuffix(file);
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameSuffix(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenameSuffixNullCase() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		File dir = file.getParentFile();
+		expected = null;
+		actual = FilenameExtensions.getFilenameSuffix(dir);
+		assertEquals(expected, actual);
+		
+		file = new File(dir, "noextensionfile");
+		expected = null;
 		actual = FilenameExtensions.getFilenameSuffix(file);
 		assertEquals(expected, actual);
 	}

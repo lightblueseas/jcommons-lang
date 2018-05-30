@@ -1,13 +1,16 @@
 package de.alpharogroup.lang.thread;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
@@ -16,6 +19,23 @@ import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
  */
 public class ThreadFieldDataBeanTest
 {
+
+	/**
+	 * Test method for {@link ThreadFieldDataBean} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		ThreadFieldDataBean model = new ThreadFieldDataBean();
+		assertNotNull(model);
+		
+		Map<String, Object> fields = MapFactory.newHashMap();
+		
+		model = new ThreadFieldDataBean(fields);
+		assertNotNull(model);
+		model = ThreadFieldDataBean.builder().build();
+		assertNotNull(model);
+	}
 
 	/**
 	 * Test method for {@link ThreadFieldDataBean#equals(Object)} , {@link ThreadFieldDataBean#hashCode()}

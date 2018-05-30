@@ -53,11 +53,9 @@ public class PropertiesKeyAndParametersTest
 	public final void testConstructors()
 	{
 		PropertiesKeyAndParameters model = new PropertiesKeyAndParameters();
-		assertNotNull(model);		
-
+		assertNotNull(model);	
 		/** The key. */
 		String key = "";
-
 		/** The parameters. */
 		Object[] parameters = ArrayExtensions.newArray("foo", "bar");
 		

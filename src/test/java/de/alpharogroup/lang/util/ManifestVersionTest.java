@@ -24,8 +24,9 @@
  */
 package de.alpharogroup.lang.util;
 
-import org.junit.Test;
-import org.testng.AssertJUnit;
+import static org.testng.AssertJUnit.assertNotNull;
+
+import org.testng.annotations.Test;
 
 public class ManifestVersionTest
 {
@@ -34,7 +35,7 @@ public class ManifestVersionTest
 	public void testGet()
 	{
 		final ManifestVersion manifestVersion = ManifestVersion.get(Object.class);
-		AssertJUnit.assertNotNull(manifestVersion);
+		assertNotNull(manifestVersion);
 	}
 
 }

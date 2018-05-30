@@ -28,15 +28,19 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Container for a properties key and possible parameters.
  */
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
@@ -44,73 +48,12 @@ public class PropertiesKeyAndParameters implements Serializable
 {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1722891718823672512L;
+	private static final long serialVersionUID = 1L;
 
 	/** The key. */
 	private String key;
 
 	/** The parameters. */
 	private Object[] parameters;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(final Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (o == null)
-		{
-			return false;
-		}
-		if (o.getClass() != getClass())
-		{
-			return false;
-		}
-		final PropertiesKeyAndParameters castedObj = (PropertiesKeyAndParameters)o;
-		return (this.key == null ? castedObj.key == null : this.key.equals(castedObj.key))
-			&& java.util.Arrays.equals(this.parameters, castedObj.parameters);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode()
-	{
-		int hashCode = 1;
-		hashCode = 31 * hashCode + (key == null ? 0 : key.hashCode());
-		for (int i0 = 0; parameters != null && i0 < parameters.length; i0++)
-		{
-			hashCode = 31 * hashCode + (parameters == null ? 0 : parameters[i0].hashCode());
-		}
-		return hashCode;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString()
-	{
-		final StringBuilder buffer = new StringBuilder();
-		buffer.append("[PropertiesKeyAndParameters:");
-		buffer.append(" key: ");
-		buffer.append(key);
-		if (parameters != null && 0 < parameters.length)
-		{
-			buffer.append(": Parameters { ");
-			for (int i0 = 0; parameters != null && i0 < parameters.length; i0++)
-			{
-				buffer.append(" parameters[").append(i0).append("]: ").append(parameters[i0]);
-			}
-			buffer.append(" } ");
-		}
-		buffer.append("]");
-		return buffer.toString();
-	}
 
 }

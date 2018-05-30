@@ -35,6 +35,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -315,6 +318,16 @@ public class AnnotationExtensionsTest
 
 		AssertJUnit.assertEquals(expected, actual);
 
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(AnnotationExtensions.class);
 	}
 
 }

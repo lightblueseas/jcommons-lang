@@ -1,5 +1,16 @@
 # jcommons-lang
 
+<div align="center">
+
+[![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=master)](https://travis-ci.org/lightblueseas/jcommons-lang)
+[![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg?branch=develop)](https://coveralls.io/github/lightblueseas/jcommons-lang?branch=develop)
+[![Open Issues](https://img.shields.io/github/issues/lightblueseas/jcommons-lang.svg?style=flat)](https://github.com/lightblueseas/jcommons-lang/issues)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang)
+[![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jcommons-lang.svg)](http://www.javadoc.io/doc/de.alpharogroup/jcommons-lang)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
+
+</div>
+
 The jcommons-lang project provides several extension methods for java core classes like Class and other extension for Annotations. 
 The feature extension methods can be provided over the lombok library. 
 
@@ -18,22 +29,6 @@ The feature extension methods can be provided over the lombok library.
 
 The source code comes under the liberal MIT License, making jcommons-lang great for all types of applications.
 
-## Build status
-
-[![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=master)](https://travis-ci.org/lightblueseas/jcommons-lang)
-
-## Coverage Status
-
-[![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg?branch=develop)](https://coveralls.io/github/lightblueseas/jcommons-lang?branch=develop)
-
-## Maven Central
-
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang)
-
-## javadoc
-
-jcommons-lang [![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jcommons-lang.svg)](http://www.javadoc.io/doc/de.alpharogroup/jcommons-lang)
-
 ## Maven dependency
 
 Maven dependency is now on sonatype.
@@ -44,7 +39,7 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 Than you can add the dependency to your dependencies:
 
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.32</jcommons-lang.version>
+		<jcommons-lang.version>4.33</jcommons-lang.version>
 
 		<dependencies>
 			...
@@ -56,6 +51,16 @@ Than you can add the dependency to your dependencies:
 			</dependency>
 			...
 		</dependencies>
+
+## Semantic Versioning
+
+The versions of jcommons-lang are maintained with the Semantic Versioning guidelines.
+
+Release version numbers will be incremented in the following format:
+
+`<major>.<minor>.<patch>`
+
+For detailed information on versioning you can visit the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
 
 
 ## Want to Help and improve it? ###

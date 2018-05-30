@@ -24,11 +24,15 @@
  */
 package de.alpharogroup.file;
 
+import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.File;
 import java.net.URISyntaxException;
 
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.lang.ClassExtensions;
@@ -40,10 +44,137 @@ public class FilenameExtensionsTest
 {
 
 	/**
+	 * Test method for {@link FilenameExtensions#getFilenamePrefix(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenamePrefix() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		expected = "de/alpharogroup/lang/resources";
+		actual = FilenameExtensions.getFilenamePrefix(file);
+		assertTrue(actual.endsWith(expected));
+	}
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenamePrefix(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenamePrefixWithDir() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		File dir = file.getParentFile();
+		expected = null;
+		
+		expected = "de/alpharogroup/lang";
+		actual = FilenameExtensions.getFilenamePrefix(dir);
+		assertTrue(actual.endsWith(expected));
+	}
+
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameSuffix(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenameSuffix() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		expected = ".properties";
+		actual = FilenameExtensions.getFilenameSuffix(file);
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameSuffix(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenameSuffixNullCase() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		File dir = file.getParentFile();
+		expected = null;
+		actual = FilenameExtensions.getFilenameSuffix(dir);
+		assertEquals(expected, actual);
+		
+		file = new File(dir, "noextensionfile");
+		expected = null;
+		actual = FilenameExtensions.getFilenameSuffix(file);
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenameWithoutExtensionFileNullCase() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+		File dir = file.getParentFile();
+		expected = null;
+		actual = FilenameExtensions.getFilenameWithoutExtension(dir);
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(String)}.
+	 */
+	@Test
+	public void testGetFilenameWithoutExtensionString()
+	{
+		String expected;
+		String actual;
+		final String fileName ="de/alpharogroup/lang/resources";
+		actual = FilenameExtensions.getFilenameWithoutExtension(fileName);
+		expected = fileName;
+		assertEquals(expected, actual);
+	}
+
+	/**
 	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}
 	 *
 	 * @throws URISyntaxException
-	 *             the URI syntax exception
+	 *             occurs by creation of the file with an uri.
 	 */
 	@Test
 	public void testGetFilenameWithoutExtensionFile() throws URISyntaxException
@@ -59,5 +190,16 @@ public class FilenameExtensionsTest
 		actual = FilenameExtensions.getFilenameWithoutExtension(file);
 		assertEquals(expected, actual);
 	}
+
+	/**
+	 * Test method for {@link FilenameExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(FilenameExtensions.class);
+	}
+
 
 }

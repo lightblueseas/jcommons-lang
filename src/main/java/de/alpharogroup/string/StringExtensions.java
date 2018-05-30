@@ -32,10 +32,19 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import de.alpharogroup.check.Check;
+import lombok.experimental.UtilityClass;
 
-public class StringExtensions
+/**
+ * The class {@link StringExtensions} provides methods for manipulate string objects.<br><br> 
+ * Note: As the
+ * {@link String} class is immutable not the given String is manipulated, a new {@link String} object
+ * is created with the manipulation.
+ */
+@UtilityClass
+public final class StringExtensions
 {
 
 	/** A char array from the hexadecimal digits. */
@@ -828,6 +837,25 @@ public class StringExtensions
 		{
 			return returnString;
 		}
+	}
+
+	/**
+	 * Prints the {@link Object#toString()} and if the given object is null a corresponding
+	 * information.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
+	 * @return the string
+	 */
+	public static <T> String toString(final T object)
+	{
+		if (object == null)
+		{
+			return "Given object is null!!!";
+		}
+		return ReflectionToStringBuilder.toString(object);
 	}
 
 }

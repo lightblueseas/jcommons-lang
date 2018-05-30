@@ -28,10 +28,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 /**
- * The class SimpleFilenameFilter.
+ * The class {@link SimpleFilenameFilter}.
  *
- * @version 1.0
  * @author Asterios Raptis
+ * @version 1.0
  */
 public class SimpleFilenameFilter implements FilenameFilter
 {
@@ -43,7 +43,7 @@ public class SimpleFilenameFilter implements FilenameFilter
 	private boolean acceptDir;
 
 	/**
-	 * Instantiates a new simple FilenameFilter.
+	 * Instantiates a new {@link SimpleFilenameFilter}.
 	 *
 	 * @param filesuffix
 	 *            the filesuffix
@@ -78,12 +78,8 @@ public class SimpleFilenameFilter implements FilenameFilter
 		return name.toLowerCase().endsWith(this.filesuffix);
 	}
 
-
 	/**
-	 * To string.
-	 *
-	 * @return the string {@inheritDoc}
-	 * @see java.lang.Object#toString()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString()

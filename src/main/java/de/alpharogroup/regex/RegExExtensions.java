@@ -25,6 +25,7 @@
 package de.alpharogroup.regex;
 
 import de.alpharogroup.string.StringExtensions;
+import lombok.experimental.UtilityClass;
 
 /**
  * Utility class for the use with regular expressions.
@@ -32,7 +33,8 @@ import de.alpharogroup.string.StringExtensions;
  * @version 1.0
  * @author Asterios Raptis
  */
-public class RegExExtensions
+@UtilityClass
+public final class RegExExtensions
 {
 
 	/**

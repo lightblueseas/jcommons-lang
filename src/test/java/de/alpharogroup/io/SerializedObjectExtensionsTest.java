@@ -24,15 +24,21 @@
  */
 package de.alpharogroup.io;
 
+import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import org.testng.AssertJUnit;
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.date.CreateDateExtensions;
+import de.alpharogroup.test.objects.Person;
 
 /**
  * The unit test class for the class {@link SerializedObjectExtensions}.
@@ -44,9 +50,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 {
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#readSerializedObjectFromFile(java.io.File)}
-	 * .
+	 * Test method for {@link SerializedObjectExtensions#readSerializedObjectFromFile(File)} .
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -59,14 +63,14 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	{
 		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
 			writeInMe);
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", actual);
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
 		final Date readedObj = (Date)readedObjectFromFile;
-		this.result = birthdayFromNiko.equals(readedObj);
-		AssertJUnit.assertTrue("", this.result);
+		actual = birthdayFromNiko.equals(readedObj);
+		assertTrue("", actual);
 		try
 		{
 			writeInMe.deleteOnExit();
@@ -78,8 +82,7 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.io.SerializedObjectExtensions#writeSerializedObjectToFile(java.lang.Object, java.io.File)}
+	 * Test method for {@link SerializedObjectExtensions#writeSerializedObjectToFile(Object, File)}
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -93,15 +96,39 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 
 		final Date birthdayFromNiko = CreateDateExtensions.newDate(2007, 11, 8);
 		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		this.result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromNiko,
 			writeInMe);
-		AssertJUnit.assertTrue("", this.result);
+		assertTrue("", actual);
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(writeInMe);
 		final Date readedObj = (Date)readedObjectFromFile;
-		this.result = birthdayFromNiko.equals(readedObj);
-		AssertJUnit.assertTrue("", this.result);
+		actual = birthdayFromNiko.equals(readedObj);
+		assertTrue("", actual);
 
+	}
+
+	/**
+	 * Test method for {@link SerializedObjectExtensions#toByteArray(Object)}.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testToByteArray() throws IOException
+	{
+		Person person = Person.builder().build();
+		byte[] byteArray = SerializedObjectExtensions.toByteArray(person);
+		assertNotNull(byteArray);
+	}
+
+	/**
+	 * Test method for {@link SerializedObjectExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(SerializedObjectExtensions.class);
 	}
 
 }

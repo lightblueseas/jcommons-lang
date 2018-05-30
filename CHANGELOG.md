@@ -1,6 +1,20 @@
 ## Change log
 ----------------------
 
+Version 4.33
+-------------
+
+ADDED:
+ 
+- provide package.html for package de.alpharogroup.config
+- new dependency jobject-evaluate in version 1.11
+
+CHANGED:
+
+- unit tests extended for improve code coverage
+- update of jobject-extensions version to 1.11
+- update of dependency joda-time version to 2.10
+
 Version 4.32
 -------------
 

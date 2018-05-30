@@ -24,18 +24,18 @@
  */
 package de.alpharogroup.io;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 /**
- * The class {@link StringOutputStreamTest} is the test class for the class
- * {@link StringOutputStream}.
+ * The unit test class for the class {@link StringOutputStream}
  *
  * @version 1.0
  * @author Asterios Raptis
@@ -67,7 +67,7 @@ public class StringOutputStreamTest
 
 		final String actual = stringOutput.toString();
 		stringOutput.close();
-		AssertJUnit.assertTrue("", actual.startsWith(expected));
+		assertTrue("", actual.startsWith(expected));
 		FileUtils.deleteQuietly(writeInMe);
 	}
 

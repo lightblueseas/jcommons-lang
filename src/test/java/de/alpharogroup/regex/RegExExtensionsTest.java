@@ -24,7 +24,9 @@
  */
 package de.alpharogroup.regex;
 
-
+import org.meanbean.factories.ObjectCreationException;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -32,7 +34,7 @@ import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.string.StringExtensions;
 
 /**
- * The class {@link RegExExtensionsTest}.
+ * The unit test class for the class {@link RegExExtensions}.
  */
 public class RegExExtensionsTest extends BaseTestCase
 {
@@ -65,8 +67,8 @@ public class RegExExtensionsTest extends BaseTestCase
 		final String expected = "Hel.*W[a-zA-Z0-9._-]{1}rld!";
 		final String queryString = "Hel*W?rld!";
 		final String compare = RegExExtensions.replaceWildcardsWithRE(queryString);
-		result = expected.equals(compare);
-		AssertJUnit.assertTrue("", result);
+		actual = expected.equals(compare);
+		AssertJUnit.assertTrue("", actual);
 	}
 
 	@Test
@@ -84,8 +86,8 @@ public class RegExExtensionsTest extends BaseTestCase
 			strip = StringExtensions.replaceAll(strip, ")", "");
 			strip = StringExtensions.replaceAll(strip, " ", "");
 			strip = StringExtensions.replaceAll(strip, "-", "");
-			result = strip.matches(RegExExtensions.VALID_PHONE);
-			AssertJUnit.assertTrue("", result);
+			actual = strip.matches(RegExExtensions.VALID_PHONE);
+			AssertJUnit.assertTrue("", actual);
 		}
 
 		final String[] invalideInput = { "(0049)17e/123450", };
@@ -97,8 +99,8 @@ public class RegExExtensionsTest extends BaseTestCase
 			strip = StringExtensions.replaceAll(strip, ")", "");
 			strip = StringExtensions.replaceAll(strip, " ", "");
 			strip = StringExtensions.replaceAll(strip, "-", "");
-			result = strip.matches(RegExExtensions.VALID_PHONE);
-			AssertJUnit.assertFalse("", result);
+			actual = strip.matches(RegExExtensions.VALID_PHONE);
+			AssertJUnit.assertFalse("", actual);
 		}
 	}
 
@@ -112,8 +114,18 @@ public class RegExExtensionsTest extends BaseTestCase
 		final String expected = "Hel%W_rld!";
 		final String query = "Hel*W?rld!";
 		final String compare = RegExExtensions.wildcardCriterionSQL(query);
-		result = expected.equals(compare);
-		AssertJUnit.assertTrue("", result);
+		actual = expected.equals(compare);
+		AssertJUnit.assertTrue("", actual);
+	}
+
+	/**
+	 * Test method for {@link RegExExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(RegExExtensions.class);
 	}
 
 }

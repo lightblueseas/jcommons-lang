@@ -37,12 +37,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import lombok.experimental.UtilityClass;
+
 /**
- * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql
+ * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql, H2
  * or postgresql databases.
  *
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class ConnectionsExtensions
 {
 
@@ -51,7 +54,7 @@ public final class ConnectionsExtensions
 
 	/** H2-database constants. */
 	/** Constant for the drivername from H2-database. */
-	public static final String H2_DRIVERNAME = "com.mysql.jdbc.Driver";
+	public static final String H2_DRIVERNAME = "org.h2.Driver";
 
 	/** Constant for the urlprefix from H2-database. */
 	public static final String H2_PREFIX_URL = "jdbc:h2";
@@ -571,14 +574,6 @@ public final class ConnectionsExtensions
 			stmt.close();
 			connection.close();
 		}
-	}
-
-	/**
-	 * Instantiates a new jdbc connections utils.
-	 */
-	private ConnectionsExtensions()
-	{
-		super();
 	}
 
 }

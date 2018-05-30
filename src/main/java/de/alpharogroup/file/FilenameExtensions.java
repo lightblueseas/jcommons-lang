@@ -26,11 +26,13 @@ package de.alpharogroup.file;
 
 import java.io.File;
 
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link FilenameExtensions}.
  */
-public class FilenameExtensions
+@UtilityClass
+public final class FilenameExtensions
 {
 
 	/**

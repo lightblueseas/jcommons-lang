@@ -37,12 +37,14 @@ import java.util.Set;
 
 import de.alpharogroup.file.FilenameExtensions;
 import de.alpharogroup.file.filter.ClassFileFilter;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link AnnotationExtensions}.
  *
  * @author Asterios Raptis
  */
+@UtilityClass
 public final class AnnotationExtensions
 {
 
@@ -353,43 +355,36 @@ public final class AnnotationExtensions
 				try
 				{
 					foundClass = Class.forName(qualifiedClassname);
-					if (null != annotationClasses)
-					{
-						for (final Class<? extends Annotation> annotationClass : annotationClasses)
-						{
-							if (foundClass.isAnnotationPresent(annotationClass))
-							{
-								foundClasses.add(foundClass);
-							}
-						}
-					}
-					else
-					{
-						foundClasses.add(foundClass);
-					}
+					resolveAnnotatedClasses(annotationClasses, foundClasses, foundClass);
 				}
 				catch (final Throwable throwable)
 				{
 					foundClass = Class.forName(qualifiedClassname, false,
 						ClassExtensions.getClassLoader());
-					if (null != annotationClasses)
-					{
-						for (final Class<? extends Annotation> annotationClass : annotationClasses)
-						{
-							if (foundClass.isAnnotationPresent(annotationClass))
-							{
-								foundClasses.add(foundClass);
-							}
-						}
-					}
-					else
-					{
-						foundClasses.add(foundClass);
-					}
+					resolveAnnotatedClasses(annotationClasses, foundClasses, foundClass);
 				}
 			}
 		}
 		return foundClasses;
+	}
+
+	private static void resolveAnnotatedClasses(Set<Class<? extends Annotation>> annotationClasses,
+		Set<Class<?>> foundClasses, Class<?> foundClass)
+	{
+		if (null != annotationClasses)
+		{
+			for (final Class<? extends Annotation> annotationClass : annotationClasses)
+			{
+				if (foundClass.isAnnotationPresent(annotationClass))
+				{
+					foundClasses.add(foundClass);
+				}
+			}
+		}
+		else
+		{
+			foundClasses.add(foundClass);
+		}
 	}
 
 	/**
@@ -447,11 +442,4 @@ public final class AnnotationExtensions
 		return oldValue;
 	}
 
-	/**
-	 * Private constructor.
-	 */
-	private AnnotationExtensions()
-	{
-		super();
-	}
 }

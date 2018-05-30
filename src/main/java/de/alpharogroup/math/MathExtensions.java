@@ -24,13 +24,16 @@
  */
 package de.alpharogroup.math;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Utility class for the use numbers.
  *
  * @version 1.0
  * @author Asterios Raptis
  */
-public class MathExtensions
+@UtilityClass
+public final class MathExtensions
 {
 
 	/**

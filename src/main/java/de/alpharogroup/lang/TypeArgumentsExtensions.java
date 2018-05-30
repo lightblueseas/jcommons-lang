@@ -36,6 +36,7 @@ import java.util.Map;
 
 import de.alpharogroup.check.Check;
 import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a
@@ -46,7 +47,8 @@ import lombok.NonNull;
  * Absolutely, you may use this code. "Consider it open sourced".
  *
  */
-public class TypeArgumentsExtensions
+@UtilityClass
+public final class TypeArgumentsExtensions
 {
 
 

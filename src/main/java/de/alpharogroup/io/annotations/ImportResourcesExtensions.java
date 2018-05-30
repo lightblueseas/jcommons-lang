@@ -33,12 +33,14 @@ import java.util.Set;
 import org.apache.commons.lang3.ArrayUtils;
 
 import de.alpharogroup.lang.AnnotationExtensions;
+import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ImportResourcesExtensions} contains extension methods for {@link ImportResource}
  * objects.
  */
-public class ImportResourcesExtensions
+@UtilityClass
+public final class ImportResourcesExtensions
 {
 
 	/**
@@ -93,4 +95,5 @@ public class ImportResourcesExtensions
 		}
 		return resourcesMap;
 	}
+	
 }

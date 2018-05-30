@@ -27,10 +27,9 @@ package de.alpharogroup.lang;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -38,11 +37,9 @@ import lombok.experimental.UtilityClass;
  * the commons-beanutils classes.
  */
 @UtilityClass
+@Slf4j
 public final class BeanExtensions
 {
-
-	/** The Constant LOGGER. */
-	protected static final Logger LOGGER = LoggerFactory.getLogger(BeanExtensions.class);
 
 	/**
 	 * <p>
@@ -67,7 +64,7 @@ public final class BeanExtensions
 		}
 		catch (IllegalAccessException | InvocationTargetException e)
 		{
-			LOGGER.error("Bean failed to set property.", e);
+			log.error("Bean failed to set property.", e);
 		}
 	}
 

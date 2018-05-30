@@ -24,31 +24,44 @@
  */
 package de.alpharogroup.file;
 
+import lombok.Getter;
+
+/**
+ * The enum {@link FileExtension} for file extensions.
+ */
+@Getter
 public enum FileExtension
 {
 
+	/** The file extension for backup files. */
 	BACKUP(".bak"),
 
+	/** The file extension for class files. */
 	CLASS(".class"),
 
+	/** The file extension for java files. */
 	JAVA(".java"),
 
+	/** The file extension for properties files. */
 	PROPERTIES(".properties"),
 
+	/** The file extension for txt files. */
 	TXT(".txt"),
 
+	/** The file extension for velocity template files. */
 	VELOCITY_TEMPLATE(".vm");
 
+	/** The file extension. */
 	private final String extension;
 
+	/**
+	 * Instantiates a new {@link FileExtension} 
+	 *
+	 * @param extension the file extension
+	 */
 	FileExtension(final String extension)
 	{
 		this.extension = extension;
-	}
-
-	public String getExtension()
-	{
-		return extension;
 	}
 
 }

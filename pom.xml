@@ -327,6 +327,7 @@
 								<exclude>de/alpharogroup/io/annotations/ImportResources.class</exclude>
 								<!-- explicit bean classes -->
 								<!-- explicit deprecated classes -->
+								<exclude>de/alpharogroup/io/StreamExtensions.class</exclude>
 								<!-- explicit enums -->
 								<exclude>de/alpharogroup/file/checksum/Algorithm.class</exclude>
 								<exclude>de/alpharogroup/exception/ExceptionType.class</exclude>
@@ -340,6 +341,7 @@
 								<!-- explicit abstract classes -->
 								<!-- explicit constant classes with only constants -->
 								<!-- explicit delegation classes -->
+								<exclude>de/alpharogroup/jdbc/ConnectionsExtensions.class</exclude>
 							</excludes>
 						</instrumentation>
 					</configuration>

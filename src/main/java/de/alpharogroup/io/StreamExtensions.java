@@ -49,6 +49,7 @@ import lombok.experimental.UtilityClass;
  *
  * @version 1.0
  * @author Asterios Raptis
+ * @deprecated since the new feature try-with-resources statement this class gets deprecated.
  */
 @UtilityClass
 public final class StreamExtensions implements Serializable

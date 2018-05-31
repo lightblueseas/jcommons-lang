@@ -28,6 +28,8 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
+import java.io.IOException;
+
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -69,12 +71,14 @@ public class ExceptionExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.exception.ExceptionExtensions#getStackTrace(java.lang.Throwable)} .
+	 * Test method for {@link ExceptionExtensions#getStackTrace(Throwable)}
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@SuppressWarnings("null")
 	@Test
-	public void testGetStackTrace()
+	public void testGetStackTrace() throws IOException
 	{
 		String expected;
 		String actual;
@@ -100,12 +104,13 @@ public class ExceptionExtensionsTest
 
 	/**
 	 * Test method for
-	 * {@link de.alpharogroup.exception.ExceptionExtensions#getStackTraceElements(java.lang.Throwable)}
-	 * .
+	 * {@link ExceptionExtensions#getStackTraceElements(Throwable)}
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@SuppressWarnings("null")
 	@Test
-	public void testGetStackTraceElements()
+	public void testGetStackTraceElements() throws IOException
 	{
 		String expected;
 		String actual;
@@ -140,7 +145,7 @@ public class ExceptionExtensionsTest
 		expected = "class org.meanbean.test.BeanTestException";
 		assertTrue(actual.startsWith(expected));
 	}
-	
+
 	/**
 	 * Test method for {@link ExceptionExtensions#toString(Object)}
 	 */
@@ -152,12 +157,12 @@ public class ExceptionExtensionsTest
 		String actual;
 		actual = ExceptionExtensions.toString(Person.builder().build());
 		assertNotNull(actual);
-		
+
 		actual = ExceptionExtensions.toString(null);
 		assertNotNull(actual);
 		expected = "Given object is null!!!";
 		assertEquals(actual, expected);
-		
+
 	}
 
 	/**

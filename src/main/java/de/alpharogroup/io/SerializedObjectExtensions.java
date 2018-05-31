@@ -67,19 +67,11 @@ public final class SerializedObjectExtensions
 		throws IOException, ClassNotFoundException
 	{
 		Object object = null;
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-		try
+		try (FileInputStream fis = new FileInputStream(file);
+			ObjectInputStream in = new ObjectInputStream(fis);)
 		{
-			fis = new FileInputStream(file);
-			in = new ObjectInputStream(fis);
 			object = in.readObject();
 			in.close();
-		}
-		finally
-		{
-			StreamExtensions.closeInputStream(in);
-			StreamExtensions.closeInputStream(fis);
 		}
 		return object;
 	}
@@ -97,22 +89,14 @@ public final class SerializedObjectExtensions
 	 */
 	public static <T> byte[] toByteArray(final T object) throws IOException
 	{
-		ByteArrayOutputStream byteArrayOutputStream = null;
-		ObjectOutputStream objectOutputStream = null;
-		try
+		try (
+			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
+				FileConstants.KILOBYTE);
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);)
 		{
-			byteArrayOutputStream = new ByteArrayOutputStream(FileConstants.KILOBYTE);
-
 			byteArrayOutputStream.reset();
-			objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
 			objectOutputStream.writeObject(object);
-			objectOutputStream.close();
 			return byteArrayOutputStream.toByteArray();
-		}
-		finally
-		{
-			StreamExtensions.closeOutputStream(byteArrayOutputStream);
-			StreamExtensions.closeOutputStream(objectOutputStream);
 		}
 	}
 
@@ -131,19 +115,11 @@ public final class SerializedObjectExtensions
 	public static Object toObject(final byte[] byteArray) throws IOException, ClassNotFoundException
 	{
 		Object object = null;
-		ByteArrayInputStream byteArrayInputStream = null;
-		ObjectInputStream objectInputStream = null;
-		try
+		try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+			ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);)
 		{
-			byteArrayInputStream = new ByteArrayInputStream(byteArray);
-			objectInputStream = new ObjectInputStream(byteArrayInputStream);
 			object = objectInputStream.readObject();
 			objectInputStream.close();
-		}
-		finally
-		{
-			StreamExtensions.closeInputStream(byteArrayInputStream);
-			StreamExtensions.closeInputStream(objectInputStream);
 		}
 		return object;
 	}
@@ -162,21 +138,14 @@ public final class SerializedObjectExtensions
 	public static boolean writeSerializedObjectToFile(final Object obj, final File file)
 		throws IOException
 	{
-		final boolean written = true;
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
-		try
+		boolean written = false;
+		try (FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);)
 		{
-			fos = new FileOutputStream(file);
-			oos = new ObjectOutputStream(fos);
 			oos.writeObject(obj);
 			oos.flush();
 			oos.close();
-		}
-		finally
-		{
-			StreamExtensions.closeOutputStream(oos);
-			StreamExtensions.closeOutputStream(fos);
+			written = true;
 		}
 		return written;
 	}

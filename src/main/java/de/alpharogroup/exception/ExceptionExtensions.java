@@ -24,12 +24,12 @@
  */
 package de.alpharogroup.exception;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import de.alpharogroup.io.StreamExtensions;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -48,8 +48,10 @@ public final class ExceptionExtensions
 	 * @param throwable
 	 *            the throwable
 	 * @return the stacktrace as string.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public static String getStackTrace(final Throwable throwable)
+	public static String getStackTrace(final Throwable throwable) throws IOException
 	{
 		StringBuilder stacktrace = new StringBuilder();
 		if (null == throwable)
@@ -57,19 +59,10 @@ public final class ExceptionExtensions
 			stacktrace.append("throwable is null...");
 			return stacktrace.toString();
 		}
-		StringWriter sw = null;
-		PrintWriter pw = null;
-		try
+		try (StringWriter sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw);)
 		{
-			sw = new StringWriter();
-			pw = new PrintWriter(sw);
 			throwable.printStackTrace(pw);
 			stacktrace.append(sw.toString());
-		}
-		finally
-		{
-			StreamExtensions.closeWriter(sw);
-			StreamExtensions.closeWriter(pw);
 		}
 		return stacktrace.toString();
 	}
@@ -81,8 +74,10 @@ public final class ExceptionExtensions
 	 * @param throwable
 	 *            the throwable
 	 * @return the stack trace elements
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public static String getStackTraceElements(Throwable throwable)
+	public static String getStackTraceElements(Throwable throwable) throws IOException
 	{
 		StringBuilder stacktrace = new StringBuilder();
 		if (null == throwable)
@@ -90,12 +85,8 @@ public final class ExceptionExtensions
 			stacktrace.append("throwable is null...");
 			return stacktrace.toString();
 		}
-		StringWriter sw = null;
-		PrintWriter pw = null;
-		try
+		try (StringWriter sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw);)
 		{
-			sw = new StringWriter();
-			pw = new PrintWriter(sw);
 			pw.println(throwable.getClass().toString());
 			while (throwable != null)
 			{
@@ -114,12 +105,6 @@ public final class ExceptionExtensions
 			}
 			stacktrace.append(sw.toString());
 		}
-		finally
-		{
-			StreamExtensions.closeWriter(sw);
-			StreamExtensions.closeWriter(pw);
-		}
-
 		return stacktrace.toString();
 	}
 

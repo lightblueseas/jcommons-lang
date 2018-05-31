@@ -49,7 +49,6 @@ import lombok.experimental.UtilityClass;
  *
  * @version 1.0
  * @author Asterios Raptis
- * @deprecated since the new feature try-with-resources statement this class gets deprecated.
  */
 @UtilityClass
 public final class StreamExtensions implements Serializable
@@ -68,7 +67,13 @@ public final class StreamExtensions implements Serializable
 	 *            The InputStream to close.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static void close(InputStream in) throws IOException
 	{
 		try
@@ -100,7 +105,13 @@ public final class StreamExtensions implements Serializable
 	 *            The OutputStream to close.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static void close(OutputStream out) throws IOException
 	{
 		try
@@ -133,7 +144,13 @@ public final class StreamExtensions implements Serializable
 	 *            The Reader to close.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static void close(Reader reader) throws IOException
 	{
 
@@ -167,7 +184,13 @@ public final class StreamExtensions implements Serializable
 	 *            The Writer to close.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static void close(Writer writer) throws IOException
 	{
 		try
@@ -199,7 +222,13 @@ public final class StreamExtensions implements Serializable
 	 * @param in
 	 *            The InputStream to close.
 	 * @return Returns true if the OutputStream is closed otherwise false.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static boolean closeInputStream(InputStream in)
 	{
 		boolean closed = true;
@@ -238,7 +267,13 @@ public final class StreamExtensions implements Serializable
 	 * @param out
 	 *            The OutputStream to close.
 	 * @return Returns true if the OutputStream is closed otherwise false.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static boolean closeOutputStream(OutputStream out)
 	{
 		boolean closed = true;
@@ -279,7 +314,13 @@ public final class StreamExtensions implements Serializable
 	 * @param reader
 	 *            The Reader to close.
 	 * @return Returns true if the Reader is closed otherwise false.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static boolean closeReader(Reader reader)
 	{
 		boolean closed = true;
@@ -318,7 +359,13 @@ public final class StreamExtensions implements Serializable
 	 * @param writer
 	 *            The Writer to close.
 	 * @return Returns true if the Writer is closed otherwise false.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets
+	 *             deprecated.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static boolean closeWriter(Writer writer)
 	{
 		boolean closed = true;
@@ -658,18 +705,9 @@ public final class StreamExtensions implements Serializable
 	public static void writeInputStreamToOutputStream(final InputStream inputStream,
 		final OutputStream outputStream, final boolean closeStream) throws IOException
 	{
-		int byt;
 		try
 		{
-			while ((byt = inputStream.read()) != -1)
-			{
-				outputStream.write(byt);
-			}
-			if (closeStream)
-			{
-				inputStream.close();
-				outputStream.close();
-			}
+			writeInputStreamToOutputStream(inputStream, outputStream);
 		}
 		catch (final IOException e)
 		{
@@ -683,6 +721,27 @@ public final class StreamExtensions implements Serializable
 				StreamExtensions.closeOutputStream(outputStream);
 			}
 		}
+	}
+
+	/**
+	 * The Method writeInputStreamToOutputStream(InputStream, OutputStream, boolean) writes to the
+	 * given OutputStream from an opened InputStream.
+	 *
+	 * @param inputStream
+	 *            The opened InputStream.
+	 * @param outputStream
+	 *            The opened OutputStream.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public static void writeInputStreamToOutputStream(final InputStream inputStream,
+		final OutputStream outputStream) throws IOException
+	{
+		int byt;
+		while ((byt = inputStream.read()) != -1)
+		{
+			outputStream.write(byt);
+		}		
 	}
 
 }

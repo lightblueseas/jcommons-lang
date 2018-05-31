@@ -429,24 +429,11 @@ public final class StreamExtensions implements Serializable
 		throws IOException
 	{
 		int byt;
-		byte[] bytes = null;
-		try
+		while ((byt = in.read()) != -1)
 		{
-			while ((byt = in.read()) != -1)
-			{
-				os.write(byt);
-			}
-
+			os.write(byt);
 		}
-		catch (final IOException e)
-		{
-			throw e;
-		}
-		finally
-		{
-			bytes = os.toByteArray();
-		}
-		return bytes;
+		return os.toByteArray();
 	}
 
 	/**
@@ -701,6 +688,11 @@ public final class StreamExtensions implements Serializable
 	 *            If true then close the outputStream otherwise keep open.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @deprecated since the new feature try-with-resources statement this method gets deprecated.
+	 *             Use instead the same name method without the flag closeStream.<br>
+	 *             <br>
+	 *             Note: This method will be removed in next minor release.
 	 */
 	public static void writeInputStreamToOutputStream(final InputStream inputStream,
 		final OutputStream outputStream, final boolean closeStream) throws IOException
@@ -741,7 +733,7 @@ public final class StreamExtensions implements Serializable
 		while ((byt = inputStream.read()) != -1)
 		{
 			outputStream.write(byt);
-		}		
+		}
 	}
 
 }

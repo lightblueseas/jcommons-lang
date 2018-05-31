@@ -24,18 +24,57 @@
  */
 package de.alpharogroup.lang.util;
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
+import java.util.jar.Attributes;
+
+import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
+
+/**
+ * The unit test class for the class {@link ManifestVersion}.
+ */
 public class ManifestVersionTest
 {
 
+	/**
+	 * Test method for {@link ManifestVersion#get(Class)}
+	 */
 	@Test
 	public void testGet()
 	{
 		final ManifestVersion manifestVersion = ManifestVersion.get(Object.class);
 		assertNotNull(manifestVersion);
+		manifestVersion.setManifest(null);
+		String manifestAttribute = manifestVersion.getManifestAttribute(new Attributes.Name("foo"));
+		assertEquals("", manifestAttribute);
 	}
 
+	/**
+	 * Test method for {@link ManifestVersion#equals(Object)} , {@link ManifestVersion#hashCode()}
+	 * and {@link ManifestVersion#toString()}
+	 */
+	@Test
+	public void testEqualsHashcodeAndToStringWithClassSilently()
+	{
+		boolean expected;
+		boolean actual;
+		actual = SilentEqualsHashCodeAndToStringEvaluator
+			.evaluateEqualsHashcodeAndToStringQuietly(ManifestVersion.class);
+		expected = true;
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test method for {@link ManifestVersion}
+	 */
+	@Test
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(ManifestVersion.class);
+	}
 }

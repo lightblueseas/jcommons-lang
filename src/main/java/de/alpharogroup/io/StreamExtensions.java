@@ -498,9 +498,8 @@ public final class StreamExtensions implements Serializable
 		return getOutputStream(file, false);
 	}
 
-
 	/**
-	 * Gets the output stream from a File object.
+	 * Gets a {@link BufferedOutputStream} from the given {@link File} object.
 	 *
 	 * @param file
 	 *            the file

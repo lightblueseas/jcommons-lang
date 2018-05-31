@@ -294,11 +294,43 @@ public class StreamExtensionsTest extends BaseTestCase
 	/**
 	 * Test method for
 	 * {@link StreamExtensions#writeInputStreamToOutputStream(InputStream, OutputStream)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             is thrown when a class is not found in the classloader or no definition for the
+	 *             class with the specified name could be found.
 	 */
 	@Test
 	public void testWriteInputStreamToOutputStreamInputStreamOutputStream()
+		throws IOException, ClassNotFoundException
 	{
+		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
+		final File writeInMe = new File(".",
+			"testWriteInputStreamToOutputStreamInputStreamOutputStream.in");
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+			writeInMe);
+		InputStream inputStream = StreamExtensions.getInputStream(writeInMe, true);
 
+		File fileout = new File(".",
+			"testWriteInputStreamToOutputStreamInputStreamOutputStream.out");
+		try (final OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);)
+		{
+			StreamExtensions.writeInputStreamToOutputStream(inputStream, outputStream);
+		}
+
+		final Object readedObjectFromFile = SerializedObjectExtensions
+			.readSerializedObjectFromFile(fileout);
+		assertEquals(readedObjectFromFile, birthdayFromLeonardo);
+		try
+		{
+			fileout.deleteOnExit();
+			writeInMe.deleteOnExit();
+		}
+		catch (final Exception e)
+		{
+			// ignore...
+		}
 	}
 
 }

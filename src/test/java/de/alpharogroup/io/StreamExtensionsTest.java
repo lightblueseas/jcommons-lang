@@ -333,4 +333,120 @@ public class StreamExtensionsTest extends BaseTestCase
 		}
 	}
 
+	/**
+	 * Test method for {@link StreamExtensions#getOutputStream(File)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testGetOutputStreamFile() throws IOException
+	{
+		File fileout = new File(".", "testGetOutputStreamFile.out");
+		OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);
+		assertNotNull(outputStream);
+		try
+		{
+			fileout.deleteOnExit();
+		}
+		catch (final Exception e)
+		{
+			// ignore...
+		}
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getOutputStream(File, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetOutputStreamFileBooleanFalse() throws IOException
+	{
+		StreamExtensions.getOutputStream(new File(".", "testGetOutputStreamFileBooleanFalse.dat"),
+			false);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getReader(File)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testGetReaderFile() throws IOException
+	{
+		File inputFile = new File(".", "testGetReaderFile.in");
+		Reader reader = StreamExtensions.getReader(inputFile, null, true);
+		assertNotNull(reader);
+
+		reader = StreamExtensions.getReader(inputFile, "UTF-8", true);
+		assertNotNull(reader);
+		try
+		{
+			inputFile.deleteOnExit();
+		}
+		catch (final Exception e)
+		{
+			// ignore...
+		}
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getReader(File, String, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetReaderFileStringBooleanFalse() throws IOException
+	{
+		StreamExtensions.getReader(new File(".", "testGetReaderFileStringBooleanFalse.out"), null,
+			false);
+	}
+
+
+	/**
+	 * Test method for {@link StreamExtensions#getWriter(File)}.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException
+	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
+	 *             converted to a URI.
+	 */
+	@Test
+	public void testGetWriterFile() throws IOException, URISyntaxException
+	{
+		final URL url = ClassExtensions.getResource(propertiesFilename);
+		Writer writer = StreamExtensions.getWriter(new File(url.toURI()));
+		assertNotNull(writer);
+
+		File inputFile = new File(".", "testGetWriterFile.in");
+		writer = StreamExtensions.getWriter(inputFile, "UTF-8", true);
+		assertNotNull(writer);
+		try
+		{
+			inputFile.deleteOnExit();
+		}
+		catch (final Exception e)
+		{
+			// ignore...
+		}
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getWriter(File, String, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetWriterFileStringBooleanFalse() throws IOException
+	{
+		StreamExtensions.getWriter(new File(".", "testGetWriterFileStringBooleanFalse.out"), null,
+			false);
+	}
+	
 }

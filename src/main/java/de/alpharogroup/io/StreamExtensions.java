@@ -693,6 +693,7 @@ public final class StreamExtensions implements Serializable
 	 *             <br>
 	 *             Note: This method will be removed in next minor release.
 	 */
+	@Deprecated
 	public static void writeInputStreamToOutputStream(final InputStream inputStream,
 		final OutputStream outputStream, final boolean closeStream) throws IOException
 	{

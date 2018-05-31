@@ -40,6 +40,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -160,14 +161,7 @@ public class StreamExtensionsTest extends BaseTestCase
 		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;
 		assertEquals(birthdayFromLeonardo, readedObj);
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -195,14 +189,7 @@ public class StreamExtensionsTest extends BaseTestCase
 		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;
 		assertEquals(birthdayFromLeonardo, readedObj);
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -244,14 +231,7 @@ public class StreamExtensionsTest extends BaseTestCase
 		assertTrue("", actual);
 		InputStream inputStream = StreamExtensions.getInputStream(writeInMe);
 		assertNotNull(inputStream);
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -267,14 +247,7 @@ public class StreamExtensionsTest extends BaseTestCase
 
 		InputStream inputStream = StreamExtensions.getInputStream(writeInMe, true);
 		assertNotNull(inputStream);
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -322,15 +295,8 @@ public class StreamExtensionsTest extends BaseTestCase
 		final Object readedObjectFromFile = SerializedObjectExtensions
 			.readSerializedObjectFromFile(fileout);
 		assertEquals(readedObjectFromFile, birthdayFromLeonardo);
-		try
-		{
-			fileout.deleteOnExit();
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(fileout);
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -345,14 +311,8 @@ public class StreamExtensionsTest extends BaseTestCase
 		File fileout = new File(".", "testGetOutputStreamFile.out");
 		OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);
 		assertNotNull(outputStream);
-		try
-		{
-			fileout.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+
+		FileUtils.deleteQuietly(fileout);
 	}
 
 	/**
@@ -383,14 +343,8 @@ public class StreamExtensionsTest extends BaseTestCase
 
 		reader = StreamExtensions.getReader(inputFile, "UTF-8", true);
 		assertNotNull(reader);
-		try
-		{
-			inputFile.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+
+		FileUtils.deleteQuietly(inputFile);
 	}
 
 	/**
@@ -426,14 +380,7 @@ public class StreamExtensionsTest extends BaseTestCase
 		File inputFile = new File(".", "testGetWriterFile.in");
 		writer = StreamExtensions.getWriter(inputFile, "UTF-8", true);
 		assertNotNull(writer);
-		try
-		{
-			inputFile.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(inputFile);
 	}
 
 	/**

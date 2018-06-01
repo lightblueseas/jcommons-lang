@@ -29,6 +29,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.meanbean.factories.ObjectCreationException;
@@ -49,9 +50,12 @@ public class ImportResourcesExtensionsTest
 
 	/**
 	 * Test for method {@link ImportResourcesExtensions#getImportResources(String)}
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	@Test
-	public void testGetImportResources() throws IOException, ClassNotFoundException
+	public void testGetImportResources() throws IOException, ClassNotFoundException, URISyntaxException
 	{
 		int expectedLength;
 		int actualLength;

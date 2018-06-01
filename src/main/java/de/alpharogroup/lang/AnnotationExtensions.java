@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -62,10 +63,13 @@ public final class AnnotationExtensions
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	public static Set<Class<?>> getAllAnnotatedClasses(final String packagePath,
 		final Class<? extends Annotation> annotationClass)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath,
 			true);
@@ -90,10 +94,13 @@ public final class AnnotationExtensions
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	public static Set<Class<?>> getAllAnnotatedClassesFromSet(final String packagePath,
 		final Set<Class<? extends Annotation>> annotationClasses)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath,
 			true);
@@ -118,9 +125,12 @@ public final class AnnotationExtensions
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		return getAllAnnotatedClasses(packagePath, null);
 	}
@@ -137,10 +147,13 @@ public final class AnnotationExtensions
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath,
 		final Set<Class<? extends Annotation>> annotationClasses)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		return getAllAnnotatedClassesFromSet(packagePath, annotationClasses);
 	}
@@ -312,7 +325,7 @@ public final class AnnotationExtensions
 		}
 		return foundClasses;
 	}
-
+	
 	/**
 	 * Scan recursive for annotated classes in the given directory.
 	 *

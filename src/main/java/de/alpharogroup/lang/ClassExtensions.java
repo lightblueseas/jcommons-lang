@@ -374,9 +374,12 @@ public final class ClassExtensions
 	 * @return the directories from resources
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	public static List<File> getDirectoriesFromResources(String path, final boolean isPackage)
-		throws IOException
+		throws IOException, URISyntaxException
 	{
 		if (isPackage)
 		{
@@ -385,7 +388,7 @@ public final class ClassExtensions
 		final List<URL> resources = ClassExtensions.getResources(path);
 		final List<File> dirs = new ArrayList<>();
 		for (final URL resource : resources)
-		{
+		{			
 			dirs.add(new File(URLDecoder.decode(resource.getFile(), "UTF-8")));
 		}
 		return dirs;
@@ -630,6 +633,7 @@ public final class ClassExtensions
 	 * @param name
 	 *            The name from the file.
 	 * @return The file or null if the file does not exists.
+	 * 
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -660,6 +664,7 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The Object.
 	 * @return The file or null if the file does not exists.
+	 * 
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */

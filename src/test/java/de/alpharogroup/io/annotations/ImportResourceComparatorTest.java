@@ -29,6 +29,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.testng.annotations.Test;
@@ -41,9 +42,12 @@ public class ImportResourceComparatorTest
 
 	/**
 	 * Test for method {@link ImportResourceComparator#compare(ImportResource, ImportResource)}
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	@Test
-	public void testCompare() throws ClassNotFoundException, IOException
+	public void testCompare() throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		int actual;
 		int expected;

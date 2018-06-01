@@ -101,9 +101,12 @@ public class AnnotationExtensionsTest
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
-	@Test(enabled = false) // TODO set to true
-	public void testGetAllAnnotatedClasses() throws ClassNotFoundException, IOException
+	@Test(enabled = true) // TODO set to true
+	public void testGetAllAnnotatedClasses() throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		String packagePath = "de.alpharogroup.test.objects";
 		Class<? extends Annotation> annotationClass = TestAnnotation.class;
@@ -128,9 +131,12 @@ public class AnnotationExtensionsTest
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	@Test(enabled = false) // TODO set to true
-	public void testGetAllAnnotatedClassesFromSet() throws ClassNotFoundException, IOException
+	public void testGetAllAnnotatedClassesFromSet() throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		String packagePath = "de.alpharogroup.test.objects";
 		Set<Class<? extends Annotation>> annotationClasses = SetFactory.newHashSet(TestAnnotation.class);
@@ -153,9 +159,12 @@ public class AnnotationExtensionsTest
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	@Test(enabled = false) // TODO set to true
-	public void testGetAllAnnotatedClassesSet() throws ClassNotFoundException, IOException
+	public void testGetAllAnnotatedClassesSet() throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
 		allAnotations.add(TestAnnotation.class);
@@ -194,9 +203,12 @@ public class AnnotationExtensionsTest
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	@Test(enabled = false) // TODO set to true
-	public void testGetAllClassesStringSet() throws ClassNotFoundException, IOException
+	public void testGetAllClassesStringSet() throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
 		allAnotations.add(TestAnnotation.class);
@@ -268,7 +280,9 @@ public class AnnotationExtensionsTest
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
 	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 *             occurs by creation of the file with an uri.
 	 */
 	@Test(enabled = false)
@@ -299,7 +313,9 @@ public class AnnotationExtensionsTest
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
 	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 *             occurs by creation of the file with an uri.
 	 */
 	@Test(enabled = false) // TODO set to true

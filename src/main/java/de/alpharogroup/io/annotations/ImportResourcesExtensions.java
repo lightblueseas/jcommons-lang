@@ -25,6 +25,7 @@
 package de.alpharogroup.io.annotations;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -56,9 +57,12 @@ public final class ImportResourcesExtensions
 	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
 	public static Map<Class<?>, ImportResource[]> getImportResources(final String packageName)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final Map<Class<?>, ImportResource[]> resourcesMap = new LinkedHashMap<>();
 

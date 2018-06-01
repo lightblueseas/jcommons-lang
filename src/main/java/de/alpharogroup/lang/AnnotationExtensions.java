@@ -40,7 +40,8 @@ import de.alpharogroup.file.filter.ClassFileFilter;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link AnnotationExtensions}.
+ * The class {@link AnnotationExtensions} provides methods for scan and resolve annotations in
+ * classes and interfaces.
  *
  * @author Asterios Raptis
  */
@@ -336,7 +337,6 @@ public final class AnnotationExtensions
 		}
 		// define the include filefilter for class files...
 		final FileFilter includeFileFilter = new ClassFileFilter();
-
 		final File[] files = directory.listFiles(includeFileFilter);
 		for (final File file : files)
 		{

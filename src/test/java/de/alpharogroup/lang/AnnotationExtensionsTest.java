@@ -24,6 +24,9 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,11 +41,11 @@ import org.apache.log4j.Logger;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
-import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.test.objects.annotations.AnotherTestAnnotation;
 import de.alpharogroup.test.objects.annotations.TestAnnotation;
 import de.alpharogroup.test.objects.annotations.TestFieldAnnotation;
@@ -92,28 +95,54 @@ public class AnnotationExtensionsTest
 	}
 
 	/**
-	 * Test get all annotated classes.
+	 * Test method for {@link AnnotationExtensions#getAllAnnotatedClasses(String, Class)}
 	 *
 	 * @throws ClassNotFoundException
 	 *             the class not found exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = false) // TODO set to true
 	public void testGetAllAnnotatedClasses() throws ClassNotFoundException, IOException
 	{
+		String packagePath = "de.alpharogroup.test.objects";
+		Class<? extends Annotation> annotationClass = TestAnnotation.class;
 		final Set<Class<?>> classes = AnnotationExtensions
-			.getAllAnnotatedClasses("de.alpharogroup.test.objects", TestAnnotation.class);
+			.getAllAnnotatedClasses(packagePath, annotationClass);
 		LOGGER.info(classes);
-		AssertJUnit.assertTrue("Size should be 3 but is " + classes.size() + ".",
-			classes.size() == 3);
-		AssertJUnit.assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+		assertTrue("Size should be 3 but is " + classes.size() + ".", classes.size() == 3);
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
 			classes.contains(OtherAnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedClass.class.",
+		assertTrue("Set should contain class object AnnotatedClass.class.",
 			classes.contains(AnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedInterface.class.",
+		assertTrue("Set should contain class object AnnotatedInterface.class.",
 			classes.contains(AnnotatedInterface.class));
-		AssertJUnit.assertFalse("Set should not contain class object SomeClass.class.",
+		assertFalse("Set should not contain class object SomeClass.class.",
+			classes.contains(SomeClass.class));
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#getAllAnnotatedClassesFromSet(String, Set)}.
+	 *
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(enabled = false) // TODO set to true
+	public void testGetAllAnnotatedClassesFromSet() throws ClassNotFoundException, IOException
+	{
+		String packagePath = "de.alpharogroup.test.objects";
+		Set<Class<? extends Annotation>> annotationClasses = SetFactory.newHashSet(TestAnnotation.class);
+		final Set<Class<?>> classes = AnnotationExtensions.getAllAnnotatedClassesFromSet(packagePath, annotationClasses);
+		assertTrue("Size should be 3 but is " + classes.size() + ".", classes.size() == 3);
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+			classes.contains(OtherAnnotatedClass.class));
+		assertTrue("Set should contain class object AnnotatedClass.class.",
+			classes.contains(AnnotatedClass.class));
+		assertTrue("Set should contain class object AnnotatedInterface.class.",
+			classes.contains(AnnotatedInterface.class));
+		assertFalse("Set should not contain class object SomeClass.class.",
 			classes.contains(SomeClass.class));
 	}
 
@@ -125,7 +154,7 @@ public class AnnotationExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = false) // TODO set to true
 	public void testGetAllAnnotatedClassesSet() throws ClassNotFoundException, IOException
 	{
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
@@ -134,20 +163,28 @@ public class AnnotationExtensionsTest
 		final Set<Class<?>> classes = AnnotationExtensions
 			.getAllAnnotatedClassesFromSet("de.alpharogroup.test.objects", allAnotations);
 
-		AssertJUnit.assertTrue("Size should be 4  but is " + classes.size() + ".",
-			classes.size() == 4);
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedInterface.class.",
+		assertTrue("Size should be 4  but is " + classes.size() + ".", classes.size() == 4);
+		assertTrue("Set should contain class object AnnotatedInterface.class.",
 			classes.contains(AnnotatedInterface.class));
-		AssertJUnit.assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
 			classes.contains(OtherAnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedClass.class.",
+		assertTrue("Set should contain class object AnnotatedClass.class.",
 			classes.contains(AnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
+		assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
 			classes.contains(AnotherAnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
 			classes.contains(OtherAnnotatedClass.class));
-		AssertJUnit.assertFalse("Set should not contain class object SomeClass.class.",
+		assertFalse("Set should not contain class object SomeClass.class.",
 			classes.contains(SomeClass.class));
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#getAllClasses(String)}.
+	 */
+	@Test(enabled = false)
+	public void testGetAllClassesString()
+	{
+		// TODO implement unit test...
 	}
 
 	/**
@@ -158,7 +195,7 @@ public class AnnotationExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = false) // TODO set to true
 	public void testGetAllClassesStringSet() throws ClassNotFoundException, IOException
 	{
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
@@ -167,38 +204,65 @@ public class AnnotationExtensionsTest
 
 		final Set<Class<?>> classes = AnnotationExtensions
 			.getAllClasses("de.alpharogroup.test.objects", allAnotations);
-		AssertJUnit.assertTrue("Size should be 4  but is " + classes.size() + ".",
-			classes.size() == 4);
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedInterface.class.",
+		assertTrue("Size should be 4  but is " + classes.size() + ".", classes.size() == 4);
+		assertTrue("Set should contain class object AnnotatedInterface.class.",
 			classes.contains(AnnotatedInterface.class));
-		AssertJUnit.assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
 			classes.contains(OtherAnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedClass.class.",
+		assertTrue("Set should contain class object AnnotatedClass.class.",
 			classes.contains(AnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
+		assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
 			classes.contains(AnotherAnnotatedClass.class));
-		AssertJUnit.assertFalse("Set should not contain class object SomeClass.class.",
+		assertFalse("Set should not contain class object SomeClass.class.",
 			classes.contains(SomeClass.class));
 	}
 
 	/**
-	 * Test is annotation present in super classes.
+	 * Test method for {@link AnnotationExtensions#getAllClasses(String, Set)}.
+	 */
+	@Test(enabled = false)
+	public void testGetAllClassesStringSetOfClassOfQextendsAnnotation()
+	{
+		// TODO implement unit test...
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#getAnnotation(Class, Class)}.
+	 */
+	@Test(enabled = false)
+	public void testGetAnnotation()
+	{
+		// TODO implement unit test...
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#isAnnotationPresentInSuperClasses(Class, Class)}
 	 */
 	@Test(enabled = true)
 	public void testIsAnnotationPresentInSuperClasses()
 	{
 		boolean result = AnnotationExtensions
 			.isAnnotationPresentInSuperClasses(SubAnnotatedClass.class, TestAnnotation.class);
-		AssertJUnit.assertTrue(
-			"If an Annotation is present in the super class then it should return true!", result);
+		assertTrue("If an Annotation is present in the super class then it should return true!",
+			result);
 		result = AnnotationExtensions.isAnnotationPresentInSuperClassesOrInterfaces(
 			ClassExtendsAnnotatedInterface.class, TestAnnotation.class);
-		AssertJUnit.assertTrue(
-			"If an Annotation is present in the super class then it should return true!", result);
+		assertTrue("If an Annotation is present in the super class then it should return true!",
+			result);
 	}
 
 	/**
-	 * Test scan for annotated classes.
+	 * Test method for
+	 * {@link AnnotationExtensions#isAnnotationPresentInSuperClassesOrInterfaces(Class, Class)}.
+	 */
+	@Test(enabled = false)
+	public void testIsAnnotationPresentInSuperClassesOrInterfaces()
+	{
+		// TODO implement unit test...
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#scanForAnnotatedClasses(File, String, Class)}
 	 *
 	 * @throws ClassNotFoundException
 	 *             the class not found exception
@@ -216,21 +280,20 @@ public class AnnotationExtensionsTest
 		directory = directory.getParentFile();
 		final Set<Class<?>> classes = AnnotationExtensions.scanForAnnotatedClasses(directory,
 			"de.alpharogroup.test.objects.annotations", TestAnnotation.class);
-		AssertJUnit.assertTrue("Size should be 3  but is " + classes.size() + ".",
-			classes.size() == 3);
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedInterface.class.",
+		assertTrue("Size should be 3  but is " + classes.size() + ".", classes.size() == 3);
+		assertTrue("Set should contain class object AnnotatedInterface.class.",
 			classes.contains(AnnotatedInterface.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedClass.class.",
+		assertTrue("Set should contain class object AnnotatedClass.class.",
 			classes.contains(AnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
 			classes.contains(OtherAnnotatedClass.class));
-		AssertJUnit.assertFalse("Set should not contain class object SomeClass.class.",
+		assertFalse("Set should not contain class object SomeClass.class.",
 			classes.contains(SomeClass.class));
 	}
 
-
 	/**
-	 * Test scan for annotated classes from set.
+	 * Test method for
+	 * {@link AnnotationExtensions#scanForAnnotatedClassesFromSet(File, String, Set)}.
 	 *
 	 * @throws ClassNotFoundException
 	 *             the class not found exception
@@ -239,7 +302,7 @@ public class AnnotationExtensionsTest
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = false) // TODO set to true
 	public void testScanForAnnotatedClassesFromSet()
 		throws ClassNotFoundException, IOException, URISyntaxException
 	{
@@ -252,20 +315,31 @@ public class AnnotationExtensionsTest
 		final Set<Class<?>> classes = AnnotationExtensions.scanForAnnotatedClassesFromSet(directory,
 			"de.alpharogroup.test.objects.annotations", allAnotations);
 
-		AssertJUnit.assertTrue("Size should be 4  but is " + classes.size() + ".",
-			classes.size() == 4);
-		AssertJUnit.assertTrue("Set should contain class object OtherAnnotatedClass.class.",
+		assertTrue("Size should be 4  but is " + classes.size() + ".", classes.size() == 4);
+		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
 			classes.contains(OtherAnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedInterface.class.",
+		assertTrue("Set should contain class object AnnotatedInterface.class.",
 			classes.contains(AnnotatedInterface.class));
-		AssertJUnit.assertTrue("Set should contain class object AnnotatedClass.class.",
+		assertTrue("Set should contain class object AnnotatedClass.class.",
 			classes.contains(AnnotatedClass.class));
-		AssertJUnit.assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
+		assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
 			classes.contains(AnotherAnnotatedClass.class));
-		AssertJUnit.assertFalse("Set should not contain class object SomeClass.class.",
+		assertFalse("Set should not contain class object SomeClass.class.",
 			classes.contains(SomeClass.class));
 	}
 
+	/**
+	 * Test method for {@link AnnotationExtensions#scanForClasses(File, String)}.
+	 */
+	@Test(enabled = false)
+	public void testScanForClasses()
+	{
+		// TODO implement unit test...
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#setAnnotationValue(Annotation, String, Object)}
+	 */
 	@Test(enabled = true)
 	public void testSetAnnotationValue() throws NoSuchFieldException, SecurityException,
 		IllegalArgumentException, IllegalAccessException, NoSuchMethodException
@@ -274,32 +348,32 @@ public class AnnotationExtensionsTest
 			.getAnnotation(TestTypeAnnotation.class);
 		String expected = "type test value";
 		String actual = typeAnnotation.value();
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 		String newValue = "type test new value";
 		String oldValue = (String)AnnotationExtensions.setAnnotationValue(typeAnnotation, "value",
 			newValue);
-		AssertJUnit.assertEquals(expected, oldValue);
+		assertEquals(expected, oldValue);
 
 		actual = typeAnnotation.value();
 		expected = newValue;
 
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		final Field nameField = AnnotatedTestClass.class.getDeclaredField("name");
 		final TestFieldAnnotation testFieldAnnotation = nameField
 			.getAnnotation(TestFieldAnnotation.class);
 		expected = "name test value";
 		actual = testFieldAnnotation.value();
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 		newValue = "name test new value";
 		oldValue = (String)AnnotationExtensions.setAnnotationValue(testFieldAnnotation, "value",
 			newValue);
-		AssertJUnit.assertEquals(expected, oldValue);
+		assertEquals(expected, oldValue);
 
 		actual = testFieldAnnotation.value();
 		expected = newValue;
 
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 
 		final Method method = AnnotatedTestClass.class.getDeclaredMethod("getFullname");
@@ -307,16 +381,16 @@ public class AnnotationExtensionsTest
 			.getAnnotation(TestMethodAnnotation.class);
 		expected = "method test value";
 		actual = testMethodAnnotation.value();
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 		newValue = "method test new value";
 		oldValue = (String)AnnotationExtensions.setAnnotationValue(testMethodAnnotation, "value",
 			newValue);
-		AssertJUnit.assertEquals(expected, oldValue);
+		assertEquals(expected, oldValue);
 
 		actual = testMethodAnnotation.value();
 		expected = newValue;
 
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 	}
 
@@ -329,5 +403,6 @@ public class AnnotationExtensionsTest
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(AnnotationExtensions.class);
 	}
+	// ======================================================================================== //
 
 }

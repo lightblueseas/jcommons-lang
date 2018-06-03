@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
 import de.alpharogroup.test.messages.TestMessagesExtensions;
 
 /**
- * The unit test class for the class {@link de.alpharogroup.lang.PackageExtensions}.
+ * The unit test class for the class {@link PackageExtensions}.
  *
  * @version 1.0
  * @author Asterios Raptis
@@ -46,8 +46,17 @@ public class PackageExtensionsTest
 {
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.lang.PackageExtensions#getPackagePath(java.lang.Object)}.
+	 * Test method for {@link PackageExtensions#getPackageName(Class)}.
+	 */
+	@Test
+	public void testGetPackageNameClassOfQ()
+	{
+		String packageName = PackageExtensions.getPackageName((Class<?>)null);
+		assertTrue(packageName == null);
+	}
+	
+	/**
+	 * Test method for {@link PackageExtensions#getPackagePath(Object)}.
 	 */
 	@Test
 	public void testGetPackagePath()
@@ -61,7 +70,7 @@ public class PackageExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.lang.PackageExtensions#getPackagePath(String)}.
+	 * Test method for {@link PackageExtensions#getPackagePath(String)}.
 	 */
 	@Test
 	public void testGetPackagePathString()
@@ -77,8 +86,7 @@ public class PackageExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.lang.PackageExtensions#getPackagePath(String, boolean)}.
+	 * Test method for {@link PackageExtensions#getPackagePath(String, boolean)}.
 	 */
 	@Test
 	public void testGetPackagePathStringBoolean()
@@ -94,8 +102,7 @@ public class PackageExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.lang.PackageExtensions#getPackagePathWithSlash(java.lang.Object)}.
+	 * Test method for {@link PackageExtensions#getPackagePathWithSlash(Object)}.
 	 */
 	@Test
 	public void testGetPackagePathWithSlash()
@@ -111,8 +118,7 @@ public class PackageExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.lang.PackageExtensions#scanClassNames(String, boolean, boolean)}.
+	 * Test method for {@link PackageExtensions#scanClassNames(String, boolean, boolean)}.
 	 *
 	 * @throws Exception
 	 *             is thrown if any error occurs on the execution

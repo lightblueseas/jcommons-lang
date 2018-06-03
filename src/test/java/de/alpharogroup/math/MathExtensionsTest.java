@@ -24,70 +24,24 @@
  */
 package de.alpharogroup.math;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
-import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.BaseTestCase;
+
 /**
  * The unit test class for the class {@link MathExtensions}.
  */
-public class MathExtensionsTest
+public class MathExtensionsTest extends BaseTestCase
 {
-
-	boolean result;
-
-	int zero = 0;
-
-	int one = 1;
-
-	// few prime numbers.
-
-	int two = 2;
-
-	int three = 3;
-
-	int five = 5;
-
-	int seven = 7;
-
-	int eleven = 11;
-
-	int thirtteen = 13;
-
-	int seventeen = 17;
-
-	int nineteen = 19;
-
-	int twentythree = 23;
-
-	// few that are no prime numbers.
-	int four = 4;
-
-	int six = 6;
-
-	int eight = 8;
-
-	int nine = 9;
-
-	int ten = 10;
-
-	int twelve = 12;
-
-	int fourteen = 14;
-
-	int fiveteen = 15;
-
-	int sixteen = 16;
-
-	int eightteen = 18;
-
-	int twentyfour = 24;
-
-	int twentyfive = 25;
 
 	/**
 	 * Sets up method will be invoked before every unit test method in this class.
@@ -98,7 +52,7 @@ public class MathExtensionsTest
 	@BeforeMethod
 	protected void setUp() throws Exception
 	{
-		this.result = false;
+		actual = false;
 	}
 
 	/**
@@ -113,267 +67,446 @@ public class MathExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#getPrimeNumbers(int)}.
+	 * Test method for {@link MathExtensions#getPrimeNumbers(int)}.
 	 */
 	@Test
 	public void testGetPrimeNumbers()
 	{
-		final int[] expected = { this.two, this.three, this.five, this.seven, this.eleven,
-				this.thirtteen, this.seventeen, this.nineteen };
+		final int[] expected = { 2, 3, 5, 7, 11, 13, 17, 19 };
 		final int[] compare = MathExtensions.getPrimeNumbers(8);
 		for (int i = 0; i < compare.length; i++)
 		{
-			this.result = expected[i] == compare[i];
-			AssertJUnit.assertTrue("", this.result);
+			actual = expected[i] == compare[i];
+			assertTrue(actual);
 		}
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#isBetween(int, int, int)}.
+	 * Test method for {@link MathExtensions#isBetween(int, int, int)}.
 	 */
 	@Test
-	public void testIsBetween()
+	public void testIsBetweenIntIntInt()
 	{
-		final int min = -1;
-		final int max = 10;
-		int index = min;
-		boolean isBetween = MathExtensions.isBetween(min, max, index);
-		AssertJUnit.assertFalse(isBetween);
-		for (index = min + 1; index < max; index++)
+		int min;
+		int max;
+		int index;
+
+		final int primitiveOne = 1;
+		min = 0;
+		max = 10;
+		index = min;
+
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
 		{
-			isBetween = MathExtensions.isBetween(min, max, index);
-			AssertJUnit.assertTrue(isBetween);
+			actual = MathExtensions.isBetween(min, max, index);
+			expected = true;
+			assertEquals(actual, expected);
 		}
 		index = max;
-		isBetween = MathExtensions.isBetween(min, max, index);
-		AssertJUnit.assertFalse(isBetween);
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#isInRange(int, int, int)}.
+	 * Test method for {@link MathExtensions#isBetween(int, int, int, boolean, boolean)}.
+	 */
+	@Test
+	public void testIsBetweenIntIntIntBooleanBoolean()
+	{
+		int min;
+		int max;
+		int index;
+		final int primitiveOne = 1;
+		boolean includeMin;
+		boolean includeMax;
+		min = 0;
+		max = 10;
+		// first test case
+		index = min;
+		includeMin = false;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// second test case
+		index = min;
+		includeMin = true;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// third test case
+		index = min;
+		includeMin = false;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// fourth test case
+		index = min;
+		includeMin = true;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isInRange(int, int, int)}.
 	 */
 	@Test
 	public void testIsInRange()
 	{
 
-		boolean isInRange;
+		actual = MathExtensions.isInRange(13, 24, 12);
+		expected = false;
+		assertEquals(actual, expected);
 
-		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 12);
+		actual = MathExtensions.isInRange(13, 24, 13);
+		expected = false;
+		assertEquals(actual, expected);
 
-		AssertJUnit.assertFalse("", isInRange);
+		actual = MathExtensions.isInRange(13, 24, 14);
+		expected = true;
+		assertEquals(actual, expected);
 
-		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 13);
+		actual = MathExtensions.isInRange(13, 24, 23);
+		expected = true;
+		assertEquals(actual, expected);
 
-		AssertJUnit.assertFalse("", isInRange);
+		actual = MathExtensions.isInRange(13, 24, 24);
+		expected = false;
+		assertEquals(actual, expected);
 
-		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 14);
-
-		AssertJUnit.assertTrue("", isInRange);
-
-		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 23);
-
-		AssertJUnit.assertTrue("", isInRange);
-
-		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 24);
-
-		AssertJUnit.assertFalse("", isInRange);
-
-		isInRange = MathExtensions.isInRange(this.thirtteen, this.twentyfour, 25);
-
-		AssertJUnit.assertFalse("", isInRange);
+		actual = MathExtensions.isInRange(13, 24, 25);
+		expected = false;
+		assertEquals(actual, expected);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#isNegative(int)}.
+	 * Test method for {@link MathExtensions#isNegative(int)}.
 	 */
 	@Test
 	public void testIsNegative()
 	{
-
 		final int negative = -10;
-		this.result = MathExtensions.isNegative(negative);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isNegative(negative);
+		expected = true;
+		assertEquals(actual, expected);
 
 		final int ambisious = 0;
-		this.result = MathExtensions.isNegative(ambisious);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isNegative(ambisious);
+		expected = true;
+		assertEquals(actual, expected);
 
-		final int positive = this.one;
-		this.result = MathExtensions.isNegative(positive);
-		AssertJUnit.assertFalse("", this.result);
+		final int positive = 1;
+		actual = MathExtensions.isNegative(positive);
+		expected = false;
+		assertEquals(actual, expected);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#isPositive(int)}.
+	 * Test method for {@link MathExtensions#isPositive(int)}.
 	 */
 	@Test
 	public void testIsPositive()
 	{
 		final int negative = -10;
-		this.result = MathExtensions.isPositive(negative);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPositive(negative);
+		expected = false;
+		assertEquals(actual, expected);
 
-		final int ambisious = this.zero;
-		this.result = MathExtensions.isPositive(ambisious);
-		AssertJUnit.assertFalse("", this.result);
+		final int ambisious = 0;
+		actual = MathExtensions.isPositive(ambisious);
+		expected = false;
+		assertEquals(actual, expected);
 
-		final int positive = this.one;
-		this.result = MathExtensions.isPositive(positive);
-		AssertJUnit.assertTrue("", this.result);
-
+		final int positive = 1;
+		actual = MathExtensions.isPositive(positive);
+		expected = true;
+		assertEquals(actual, expected);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#isPrime(int)}.
+	 * Test method for {@link MathExtensions#isPrime(int)}.
 	 */
 	@Test
-	public void testIsPrime()
+	public void testIsPrimeInt()
 	{
+		actual = MathExtensions.isPrime(0);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.zero);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(1);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.one);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(2);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.two);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(3);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.three);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(4);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.four);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(5);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.five);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(6);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.six);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(7);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.seven);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(8);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.eight);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(9);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.nine);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(10);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.ten);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(11);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.eleven);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(12);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.twelve);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(13);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.thirtteen);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(14);
+		assertFalse("", actual);
 
-		this.result = MathExtensions.isPrime(this.fourteen);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(15);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.fiveteen);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(16);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.sixteen);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrime(17);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.seventeen);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrime(18);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrime(this.eightteen);
-		AssertJUnit.assertFalse("", this.result);
-
-		this.result = MathExtensions.isPrime(this.nineteen);
-		AssertJUnit.assertTrue("", this.result);
-
+		actual = MathExtensions.isPrime(19);
+		expected = true;
+		assertEquals(actual, expected);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#isPrimeNumber(int)}.
+	 * Test method for {@link MathExtensions#isPrimeNumber(int)}.
 	 */
 	@Test
 	public void testIsPrimeNumber()
 	{
+		actual = MathExtensions.isPrimeNumber(0);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.zero);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(1);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.one);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(2);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.two);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(3);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.three);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(4);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.four);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(5);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.five);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(6);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.six);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(7);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.seven);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(8);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.eight);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(9);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.nine);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(10);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.ten);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(11);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.eleven);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(12);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.twelve);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(13);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.thirtteen);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(14);
+		assertFalse("", actual);
 
-		this.result = MathExtensions.isPrimeNumber(this.fourteen);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(15);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.fiveteen);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(16);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.sixteen);
-		AssertJUnit.assertFalse("", this.result);
+		actual = MathExtensions.isPrimeNumber(17);
+		expected = true;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.seventeen);
-		AssertJUnit.assertTrue("", this.result);
+		actual = MathExtensions.isPrimeNumber(18);
+		expected = false;
+		assertEquals(actual, expected);
 
-		this.result = MathExtensions.isPrimeNumber(this.eightteen);
-		AssertJUnit.assertFalse("", this.result);
-
-		this.result = MathExtensions.isPrimeNumber(this.nineteen);
-		AssertJUnit.assertTrue("", this.result);
-
+		actual = MathExtensions.isPrimeNumber(19);
+		expected = true;
+		assertEquals(actual, expected);
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.math.MathExtensions#printAllPrimeNumbersTill(int)}.
+	 * Test method for {@link MathExtensions#printAllPrimeNumbersTill(int)}.
 	 */
 	@Test
 	public void testPrintAllPrimeNumbersTill()
 	{
-		final int[] expected = { this.two, this.three, this.five, this.seven, this.eleven,
-				this.thirtteen, this.seventeen, this.nineteen };
+		final int[] expected = { 2, 3, 5, 7, 11, 13, 17, 19 };
 		final int[] compare = MathExtensions.printAllPrimeNumbersTill(8);
 		for (int i = 0; i < compare.length; i++)
 		{
-			this.result = expected[i] == compare[i];
-			AssertJUnit.assertTrue("", this.result);
+			actual = expected[i] == compare[i];
+			assertTrue("", actual);
 		}
 	}
 
@@ -385,6 +518,938 @@ public class MathExtensionsTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(MathExtensions.class);
+	}
+
+	// ===================================================================================== //
+
+	/**
+	 * Test method for {@link MathExtensions#isBetween(double, double, double)}.
+	 */
+	@Test
+	public void testIsBetweenDoubleDoubleDouble()
+	{
+		double min;
+		double max;
+		double index;
+
+		final double primitiveOne = 1.0D;
+		min = 0.0D;
+		max = 10.0D;
+		index = min;
+
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isBetween(double, double, double, boolean, boolean)}.
+	 */
+	@Test
+	public void testIsBetweenDoubleDoubleDoubleBooleanBoolean()
+	{
+		double min;
+		double max;
+		double index;
+
+		final double primitiveOne = 1.0D;
+		min = 0.0D;
+		max = 10.0D;
+
+		boolean includeMin;
+		boolean includeMax;
+		// first test case
+		index = min;
+		includeMin = false;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// second test case
+		index = min;
+		includeMin = true;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// third test case
+		index = min;
+		includeMin = false;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// fourth test case
+		index = min;
+		includeMin = true;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isBetween(float, float, float)}.
+	 */
+	@Test
+	public void testIsBetweenFloatFloatFloat()
+	{
+		float min;
+		float max;
+		float index;
+
+		final float primitiveOne = 1.0F;
+		min = 0.0F;
+		max = 10.0F;
+		index = min;
+
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isBetween(float, float, float, boolean, boolean)}.
+	 */
+	@Test
+	public void testIsBetweenFloatFloatFloatBooleanBoolean()
+	{
+		float min;
+		float max;
+		float index;
+
+		final float primitiveOne = 1.0F;
+		min = 0.0F;
+		max = 10.0F;
+
+		boolean includeMin;
+		boolean includeMax;
+		// first test case
+		index = min;
+		includeMin = false;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// second test case
+		index = min;
+		includeMin = true;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// third test case
+		index = min;
+		includeMin = false;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// fourth test case
+		index = min;
+		includeMin = true;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isBetween(long, long, long)}.
+	 */
+	@Test
+	public void testIsBetweenLongLongLong()
+	{
+		long min;
+		long max;
+		long index;
+
+		final long primitiveOne = 1L;
+		min = 0L;
+		max = 10L;
+		index = min;
+
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isBetween(long, long, long, boolean, boolean)}.
+	 */
+	@Test
+	public void testIsBetweenLongLongLongBooleanBoolean()
+	{
+		long min;
+		long max;
+		long index;
+		final long primitiveOne = 1L;
+		min = 0L;
+		max = 10L;
+		boolean includeMin;
+		boolean includeMax;
+		// first test case
+		index = min;
+		includeMin = false;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// second test case
+		index = min;
+		includeMin = true;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// third test case
+		index = min;
+		includeMin = false;
+		includeMax = true;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+
+		// fourth test case
+		index = min;
+		includeMin = true;
+		includeMax = false;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = true;
+		assertEquals(actual, expected);
+		for (index = min + primitiveOne; index < max; index++)
+		{
+			actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+			expected = true;
+			assertEquals(actual, expected);
+		}
+		index = max;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		// Now check negative cases
+		index = min - primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+		index = max + primitiveOne;
+		actual = MathExtensions.isBetween(min, max, index, includeMin, includeMax);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isNegative(double)}.
+	 */
+	@Test
+	public void testIsNegativeDouble()
+	{
+		final double negative = -10.0D;
+		actual = MathExtensions.isNegative(negative);
+		expected = true;
+		assertEquals(actual, expected);
+
+		final double ambisious = 0.0D;
+		actual = MathExtensions.isNegative(ambisious);
+		expected = true;
+		assertEquals(actual, expected);
+
+		final double positive = 1.0D;
+		actual = MathExtensions.isNegative(positive);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isNegative(float)}.
+	 */
+	@Test
+	public void testIsNegativeFloat()
+	{
+		final float negative = -10.0F;
+		actual = MathExtensions.isNegative(negative);
+		expected = true;
+		assertEquals(actual, expected);
+
+		final float ambisious = 0.0F;
+		actual = MathExtensions.isNegative(ambisious);
+		expected = true;
+		assertEquals(actual, expected);
+
+		final float positive = 1.0F;
+		actual = MathExtensions.isNegative(positive);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isNegative(long)}.
+	 */
+	@Test
+	public void testIsNegativeLong()
+	{
+		final long negative = -10L;
+		actual = MathExtensions.isNegative(negative);
+		expected = true;
+		assertEquals(actual, expected);
+
+		final long ambisious = 0L;
+		actual = MathExtensions.isNegative(ambisious);
+		expected = true;
+		assertEquals(actual, expected);
+
+		final long positive = 1L;
+		actual = MathExtensions.isNegative(positive);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isNext(Integer, Integer)}.
+	 */
+	@Test
+	public void testIsNext()
+	{
+		actual = MathExtensions.isNext(0, -1);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isNext(0, 0);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isNext(0, 1);
+		expected = true;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPositive(double)}.
+	 */
+	@Test
+	public void testIsPositiveDouble()
+	{
+		final double negative = -10.D;
+		actual = MathExtensions.isPositive(negative);
+		expected = false;
+		assertEquals(actual, expected);
+
+		final double ambisious = 0.D;
+		actual = MathExtensions.isPositive(ambisious);
+		expected = false;
+		assertEquals(actual, expected);
+
+		final double positive = 1.D;
+		actual = MathExtensions.isPositive(positive);
+		expected = true;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPositive(float)}.
+	 */
+	@Test
+	public void testIsPositiveFloat()
+	{
+		final float negative = -10.F;
+		actual = MathExtensions.isPositive(negative);
+		expected = false;
+		assertEquals(actual, expected);
+
+		final float ambisious = 0.F;
+		actual = MathExtensions.isPositive(ambisious);
+		expected = false;
+		assertEquals(actual, expected);
+
+		final float positive = 1.F;
+		actual = MathExtensions.isPositive(positive);
+		expected = true;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPositive(long)}.
+	 */
+	@Test
+	public void testIsPositiveLong()
+	{
+		final long negative = -10L;
+		actual = MathExtensions.isPositive(negative);
+		expected = false;
+		assertEquals(actual, expected);
+
+		final long ambisious = 0L;
+		actual = MathExtensions.isPositive(ambisious);
+		expected = false;
+		assertEquals(actual, expected);
+
+		final long positive = 1L;
+		actual = MathExtensions.isPositive(positive);
+		expected = true;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPrevious(Integer, Integer)}.
+	 */
+	@Test
+	public void testIsPrevious()
+	{
+		actual = MathExtensions.isPrevious(0, -1);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrevious(0, 0);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrevious(0, 1);
+		expected = false;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPrime(double)}.
+	 */
+	@Test
+	public void testIsPrimeDouble()
+	{
+		actual = MathExtensions.isPrime(0.0D);
+
+		actual = MathExtensions.isPrime(0.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(1.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(2.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(3.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(4.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(5.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(6.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(7.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(8.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(9.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(10.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(11.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(12.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(13.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(14.0D);
+		assertFalse("", actual);
+
+		actual = MathExtensions.isPrime(15.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(16.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(17.0D);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(18.0D);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(19.0D);
+		expected = true;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPrime(float)}.
+	 */
+	@Test
+	public void testIsPrimeFloat()
+	{
+		actual = MathExtensions.isPrime(0.0F);
+
+		actual = MathExtensions.isPrime(0.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(1.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(2.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(3.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(4.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(5.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(6.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(7.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(8.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(9.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(10.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(11.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(12.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(13.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(14.0F);
+		assertFalse("", actual);
+
+		actual = MathExtensions.isPrime(15.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(16.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(17.0F);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(18.0F);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(19.0F);
+		expected = true;
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link MathExtensions#isPrime(long)}.
+	 */
+	@Test
+	public void testIsPrimeLong()
+	{
+		actual = MathExtensions.isPrime(0L);
+
+		actual = MathExtensions.isPrime(0L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(1L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(2L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(3L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(4L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(5L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(6L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(7L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(8L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(9L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(10L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(11L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(12L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(13L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(14L);
+		assertFalse("", actual);
+
+		actual = MathExtensions.isPrime(15L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(16L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(17L);
+		expected = true;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(18L);
+		expected = false;
+		assertEquals(actual, expected);
+
+		actual = MathExtensions.isPrime(19L);
+		expected = true;
+		assertEquals(actual, expected);
 	}
 
 }

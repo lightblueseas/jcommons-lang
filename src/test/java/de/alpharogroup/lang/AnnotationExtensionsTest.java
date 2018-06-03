@@ -66,6 +66,7 @@ import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
  * @author Asterios Raptis
  * @version 1.0
  */
+@TestAnnotation
 public class AnnotationExtensionsTest
 {
 
@@ -105,8 +106,32 @@ public class AnnotationExtensionsTest
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference. 
 	 */
-	@Test(enabled = true) // TODO set to true
+	@Test(enabled = true)
 	public void testGetAllAnnotatedClasses() throws ClassNotFoundException, IOException, URISyntaxException
+	{
+		String packagePath = "de.alpharogroup.lang";
+		Class<? extends Annotation> annotationClass = TestAnnotation.class;
+		final Set<Class<?>> classes = AnnotationExtensions
+			.getAllAnnotatedClasses(packagePath, annotationClass);
+		LOGGER.info(classes);
+		assertTrue("Size should be 1 but is " + classes.size() + ".", classes.size() == 1);
+		assertTrue("Set should contain class object AnnotationExtensionsTest.class.",
+			classes.contains(AnnotationExtensionsTest.class));		
+	}
+
+	/**
+	 * Test method for {@link AnnotationExtensions#getAllAnnotatedClasses(String, Class)}
+	 *
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference. 
+	 */
+	@Test(enabled = false) // TODO set to true
+	public void testGetAllAnnotatedClassesInJarFile() throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		String packagePath = "de.alpharogroup.test.objects";
 		Class<? extends Annotation> annotationClass = TestAnnotation.class;

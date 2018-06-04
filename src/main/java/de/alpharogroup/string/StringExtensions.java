@@ -38,10 +38,10 @@ import de.alpharogroup.check.Check;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link StringExtensions} provides methods for manipulate string objects.<br><br> 
- * Note: As the
- * {@link String} class is immutable not the given String is manipulated, a new {@link String} object
- * is created with the manipulation.
+ * The class {@link StringExtensions} provides methods for manipulate string objects.<br>
+ * <br>
+ * Note: As the {@link String} class is immutable not the given String is manipulated, a new
+ * {@link String} object is created with the manipulation.
  */
 @UtilityClass
 public final class StringExtensions
@@ -84,6 +84,10 @@ public final class StringExtensions
 	 */
 	public static final byte[] convertToBytearray(final char[] source)
 	{
+		if (source == null)
+		{
+			return null;
+		}
 		final byte[] result = new byte[source.length];
 		for (int i = 0; i < source.length; i++)
 		{
@@ -220,13 +224,15 @@ public final class StringExtensions
 	 *            the data
 	 * @return the byte[]
 	 * @throws DecoderException
-	 *             the decoder exception
+	 *             is thrown if an odd number or illegal of characters is supplied
+	 * @deprecated use instead {@code Hex#decodeHex(char[])} <br>
+	 *             <br>
+	 *             Note: will be removed in the next minor release.
 	 */
 	public static byte[] decodeHex(final char[] data) throws DecoderException
 	{
 		return org.apache.commons.codec.binary.Hex.decodeHex(data);
 	}
-
 
 	/**
 	 * Encode hex.
@@ -234,6 +240,9 @@ public final class StringExtensions
 	 * @param data
 	 *            the data
 	 * @return the char[]
+	 * @deprecated use instead {@code Hex#encodeHex(byte[], boolean)} <br>
+	 *             <br>
+	 *             Note: will be removed in the next minor release.
 	 */
 	public static char[] encodeHex(final byte[] data)
 	{

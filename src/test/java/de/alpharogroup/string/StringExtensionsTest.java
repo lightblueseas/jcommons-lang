@@ -24,17 +24,21 @@
  */
 package de.alpharogroup.string;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.util.List;
+import java.util.Map;
 
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
+import de.alpharogroup.collections.map.MapFactory;
 import lombok.experimental.ExtensionMethod;
 
 /**
@@ -48,46 +52,27 @@ public class StringExtensionsTest extends BaseTestCase
 {
 
 	/**
-	 * {@inheritDoc}
+	 * Test method for {@link StringExtensions#toUnicodeChars(String, boolean)}
 	 */
-	@Override
-	protected void setUp() throws Exception
-	{
-		super.setUp();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void tearDown() throws Exception
-	{
-		super.tearDown();
-	}
-
 	@Test(enabled = true)
 	public void testConvertCharsToUnicodeChars()
 	{
 		String expected = "\\u00f6";
 		String actual = "ö".toUnicodeChars(true);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		expected = "\\u00F6";
 		actual = "ö".toUnicodeChars(false);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		expected = "\\u00F6, \\u00DF \\u00E4";
 		actual = "ö, ß ä".toUnicodeChars(false);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
-	@Test(enabled = false)
-	public void testConvertToBytearray()
-	{
-		throw new RuntimeException("Test not implemented");
-
-	}
-
+	/**
+	 * Test method for {@link StringExtensions#firstCharacterToLowerCase(String)}
+	 */
 	@Test
 	public void testFirstCharacterToLowerCase()
 	{
@@ -98,6 +83,9 @@ public class StringExtensionsTest extends BaseTestCase
 		assertEquals(actual, expected);
 	}
 
+	/**
+	 * Test method for {@link StringExtensions#firstCharacterToUpperCase(String)}
+	 */
 	@Test
 	public void testFirstCharacterToUpperCase()
 	{
@@ -109,7 +97,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#getAttributName(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getAttributName(String)}
 	 */
 	@Test
 	public void testGetAttributName()
@@ -118,11 +106,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String testString = "indio[5][1]";
 		final String compare = StringExtensions.getAttributName(testString);
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#getIndex(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getIndex(String)}
 	 */
 	@Test
 	public void testGetIndex()
@@ -131,11 +119,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String testString = "indio[5][1]";
 		final String compare = StringExtensions.getIndex(testString);
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#getItemNumber(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getItemNumber(String)}
 	 */
 	@Test
 	public void testGetItemNumber()
@@ -144,11 +132,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String testString = "indio[5][1]";
 		final String compare = StringExtensions.getItemNumber(testString);
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#getStringAfterUnderscore(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getStringAfterUnderscore(String)}
 	 */
 	@Test
 	public void testGetStringAfterUnderscore()
@@ -157,11 +145,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String element = "foobar_value";
 		final String compare = StringExtensions.getStringAfterUnderscore(element);
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#getStringBeforeUnderscore(java.lang.String)}.
+	 * Test method for {@link StringExtensions#getStringBeforeUnderscore(String)}
 	 */
 	@Test
 	public void testGetStringBeforeUnderscore()
@@ -170,11 +158,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String element = "foobar_value";
 		final String compare = StringExtensions.getStringBeforeUnderscore(element);
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#isNullOrEmpty(java.lang.String)}.
+	 * Test method for {@link StringExtensions#isNullOrEmpty(String)}
 	 */
 	@Test
 	public void testIsNullOrEmpty()
@@ -184,30 +172,33 @@ public class StringExtensionsTest extends BaseTestCase
 		final String isNotNullOrEmpty = "foobar";
 
 		actual = isNull.isNullOrEmpty();
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 		actual = isEmpty.isNullOrEmpty();
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 		actual = isNotNullOrEmpty.isNullOrEmpty();
-		AssertJUnit.assertFalse("", actual);
+		assertFalse("", actual);
 
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#isNumber(java.lang.String)}.
+	 * Test method for {@link StringExtensions#isNumber(String)}
 	 */
 	@Test
 	public void testIsNumber()
 	{
 		final String five = "5";
 		actual = five.isNumber();
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 
 		final String notANumber = "foo";
 		actual = notANumber.isNumber();
-		AssertJUnit.assertFalse("", actual);
+		assertFalse("", actual);
 
 	}
 
+	/**
+	 * Test method for {@link StringExtensions#lastCharacterToUpperCase(String)}
+	 */
 	@Test
 	public void testLastCharacterToUpperCase()
 	{
@@ -235,7 +226,7 @@ public class StringExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#putQuotesToString(java.lang.String)}.
+	 * Test method for {@link StringExtensions#putQuotesToString(String)}
 	 */
 	@Test
 	public void testPutQuotesToString()
@@ -244,11 +235,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String withoutQuotes = "Leonidas";
 		final String compare = withoutQuotes.addDoubleQuotationMarks();
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#readLine(java.lang.String)}.
+	 * Test method for {@link StringExtensions#readLine(String)}
 	 */
 	@Test
 	public void testReadLine()
@@ -258,11 +249,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String expected = "This is a test: Aha :";
 		final String compare = StringExtensions.readLine(original);
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#removeQuotationMarks(String)}.
+	 * Test method for {@link StringExtensions#removeQuotationMarks(String)}
 	 */
 	@Test
 	public void testRemoveQuotesFromString()
@@ -271,12 +262,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String withQuotes = "\"Leonidas\"";
 		final String compare = withQuotes.removeQuotationMarks();
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringExtensions#replaceAll(java.lang.String, java.lang.String, java.lang.String)} .
+	 * Test method for {@link StringExtensions#replaceAll(String, String, String)}
 	 */
 	@Test
 	public void testReplaceAll()
@@ -286,12 +276,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String expected = "This is a test; Aha ; and than foo bar;";
 		final String compare = StringExtensions.replaceAll(original, ":", ";");
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringExtensions#replaceAll(java.lang.String, java.lang.String, java.lang.String)} .
+	 * Test method for {@link StringExtensions#replaceAll(String, String[], String)}
 	 */
 	@Test
 	public void testReplaceAllStringArray()
@@ -302,9 +291,12 @@ public class StringExtensionsTest extends BaseTestCase
 		final String[] array = { "(", ")", "-", "/", " " };
 		final String compare = StringExtensions.replaceAll(original, array, "");
 		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
+		assertTrue("", actual);
 	}
 
+	/**
+	 * Test method for {@link StringExtensions#replaceEach(String, String, String)}
+	 */
 	@Test(enabled = true)
 	public void testReplaceEach()
 	{
@@ -313,12 +305,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String input = "Hickory Dickory Dock \"com.foo.bar\" mouse ran up the clock The \"com.foo.bar\" struck one The \"com.foo.bar\" ran down";
 		final String expected = "Hickory Dickory Dock \"bla.fasel\" mouse ran up the clock The \"bla.fasel\" struck one The \"bla.fasel\" ran down";
 		final String actual = StringExtensions.replaceEach(input, search, replace);
-		AssertJUnit.assertTrue(expected.equals(actual));
+		assertTrue(expected.equals(actual));
 	}
 
 	/**
-	 * Test method for
-	 * {@link StringExtensions#replaceLast(java.lang.String, java.lang.String, java.lang.String)} .
+	 * Test method for {@link StringExtensions#replaceLast(String, String, String)}
 	 */
 	@Test
 	public void testReplaceLast()
@@ -326,39 +317,24 @@ public class StringExtensionsTest extends BaseTestCase
 		final String original = "This is a test: Aha : and than foo bar:";
 		final String expected = "This is a test: Aha : and than foo bar;";
 		final String actual = original.replaceLast(":", ";");
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#setFirstCharacterToUpperCase(java.lang.String)} .
-	 */
-	@Test
-	public void testSetFirstCharacterToUpperCase()
-	{
-		final String fieldName = "name";
-		final String expected = "Name";
-		final String compare = fieldName.firstCharacterToUpperCase();
-		actual = expected.equals(compare);
-		AssertJUnit.assertTrue("", actual);
-	}
-
-	/**
-	 * Test method for {@link StringExtensions#splitByFixedLength(String, int)} .
+	 * Test method for {@link StringExtensions#splitByFixedLength(String, int)}
 	 */
 	@Test
 	public void testSplitByLength()
 	{
-
 		final String input = "HickoryDickoryDockxxxmousexranxupxthexclockxThexcom.foo.barxstruckxonexThexxyxranxdownBlogBarFooEEE";
 		final List<String> output = input.splitByFixedLength(7);
 
-		AssertJUnit.assertTrue(output.size() == 15);
-		AssertJUnit.assertEquals(output.get(1), "Dickory");
-
+		assertTrue(output.size() == 15);
+		assertEquals(output.get(1), "Dickory");
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#toIntegerArray(String, String)}.
+	 * Test method for {@link StringExtensions#toIntegerArray(String, String)}
 	 */
 	@Test
 	public void testToIntegerArray()
@@ -369,27 +345,27 @@ public class StringExtensionsTest extends BaseTestCase
 		final int[] intArray = StringExtensions.toIntegerArray(stringArray1, ",");
 		for (int i = 0; i < intArray.length; i++)
 		{
-			AssertJUnit.assertTrue(intArray[i] == expectedIntArray[i]);
+			assertTrue(intArray[i] == expectedIntArray[i]);
 		}
 	}
 
 	/**
-	 * Test method for {@link StringExtensions#toUnicode(String, boolean)} .
+	 * Test method for {@link StringExtensions#toUnicode(String, boolean)}
 	 */
 	@Test(enabled = true)
 	public void testToUnicode()
 	{
 		String expected = "\\u00f6";
 		String actual = "ö".toUnicode(true);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		expected = "\\u00F6";
 		actual = "ö".toUnicode(false);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 
 		expected = "\\u00F6\\u002C\\u0020\\u00DF\\u0020\\u00E4";
 		actual = "ö, ß ä".toUnicode(false);
-		AssertJUnit.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	/**
@@ -400,6 +376,130 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(StringExtensions.class);
+	}
+
+	// =================================================================================== //
+
+
+	/**
+	 * Test method for {@link StringExtensions#addSingleQuotationMarks(String)}.
+	 */
+	@Test
+	public void testAddSingleQuotationMarks()
+	{
+		String expected;
+		String actual;
+		actual = StringExtensions.addSingleQuotationMarks("foo");
+		expected = "'foo'";
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#convertToBytearray(char[])}.
+	 */
+	@Test
+	public void testConvertToBytearray()
+	{		
+		byte[] actualBytearray;
+		byte expected;
+		byte actual;
+		char[] charArray = { 'a', 'b', 'c', 'd', 'e' };
+		byte[] expectedBytearray = "abcde".getBytes();
+		actualBytearray = StringExtensions.convertToBytearray(charArray);
+		
+		for (int i = 0; i < actualBytearray.length; i++)
+		{
+			expected = expectedBytearray[i];
+			actual = actualBytearray[i];
+			assertEquals(expected, actual);
+		}
+
+		actualBytearray = StringExtensions.convertToBytearray(null);
+		assertNull(actualBytearray);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#convertToCharArray(byte[])}.
+	 */
+	@Test
+	public void testConvertToCharArray()
+	{
+		char[] actualCharArray;
+		char expected;
+		char actual;
+		char[] expectedCharArray = { 'a', 'b', 'c', 'd', 'e' };
+		byte[] bytearray = "abcde".getBytes();
+		actualCharArray = StringExtensions.convertToCharArray(bytearray);
+		
+		for (int i = 0; i < actualCharArray.length; i++)
+		{
+			expected = expectedCharArray[i];
+			actual = actualCharArray[i];
+			assertEquals(expected, actual);
+		}
+		actualCharArray = StringExtensions.convertToCharArray(null);
+		assertNull(actualCharArray);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#convertUnicodeStringToCharacter(String)}.
+	 */
+	@Test
+	public void testConvertUnicodeStringToCharacter()
+	{
+		Character expected;
+		Character actual;
+		String theUnicodeString = "\u03A9";
+		actual = StringExtensions.convertUnicodeStringToCharacter(theUnicodeString);
+		expected = Character.valueOf('\u03A9');
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#getValue(Map, String, String)}.
+	 */
+	@Test
+	public void testGetValue()
+	{
+		String expected;
+		String actual;
+		Map<String, String> data;
+		String key;
+		String value;
+		data = MapFactory.newHashMap();
+		key = "foo";
+		value = "bar";
+		data.put(key, value);
+		actual = StringExtensions.getValue(data, key, "bla");
+		expected = value;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#removeEmptyString(String[])}.
+	 */
+	@Test
+	public void testRemoveEmptyString()
+	{
+		// TODO implement unit test...
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#removeNewlineCharacters(String)}.
+	 */
+	@Test
+	public void testRemoveNewlineCharacters()
+	{
+		// TODO implement unit test...
+	}
+
+	/**
+	 * Test method for {@link StringExtensions#toString(Object)}.
+	 */
+	@Test
+	public void testToStringT()
+	{
+		// TODO implement unit test...
 	}
 
 }

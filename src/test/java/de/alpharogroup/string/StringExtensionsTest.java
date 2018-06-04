@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.string;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
@@ -466,12 +467,26 @@ public class StringExtensionsTest extends BaseTestCase
 		Map<String, String> data;
 		String key;
 		String value;
+		String defaultValue;
 		data = MapFactory.newHashMap();
 		key = "foo";
 		value = "bar";
+		defaultValue = "bla";
 		data.put(key, value);
-		actual = StringExtensions.getValue(data, key, "bla");
+		actual = StringExtensions.getValue(data, key, defaultValue);
 		expected = value;
+		assertEquals(expected, actual);
+		
+		key = "fasel";
+		actual = StringExtensions.getValue(data, key, defaultValue);
+		expected = defaultValue;
+		assertEquals(expected, actual);
+		
+		key = "fasel";
+		value = "";
+		data.put(key, value);
+		actual = StringExtensions.getValue(data, key, defaultValue);
+		expected = defaultValue;
 		assertEquals(expected, actual);
 	}
 
@@ -481,7 +496,13 @@ public class StringExtensionsTest extends BaseTestCase
 	@Test
 	public void testRemoveEmptyString()
 	{
-		// TODO implement unit test...
+		final String expected = "Hickory   Dickory Dock mouse ran up the clock The struck one The ran down";
+		String[] words = expected.split("\\W");
+		
+		String[] actual = StringExtensions.removeEmptyString(words);
+		assertNotNull(actual);
+		assertTrue(words.length == 16);
+		assertTrue(actual.length == 14);
 	}
 
 	/**

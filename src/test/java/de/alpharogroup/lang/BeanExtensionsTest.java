@@ -55,6 +55,9 @@ public class BeanExtensionsTest
 		BeanExtensions.setPropertyQuietly(person, "name", "Leo");
 		actual = person.getName();
 		assertEquals(expected, actual);
+		// provocation of InvocationTargetException...
+		Foo foo = new Foo();
+		BeanExtensions.setPropertyQuietly(foo, "bar", "bla");
 	}
 
 	/**
@@ -66,5 +69,18 @@ public class BeanExtensionsTest
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(BeanExtensions.class);
 	}
+
+}
+class Foo
+{
+    String bar;
+
+    public String getBar() {
+        return bar;
+    }
+
+    public void setBar(String bar) {
+        this.bar = bar;
+    }
 
 }

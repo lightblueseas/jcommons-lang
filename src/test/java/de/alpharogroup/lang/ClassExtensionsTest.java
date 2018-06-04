@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNull;
 import static org.testng.AssertJUnit.assertTrue;
@@ -55,11 +56,21 @@ import de.alpharogroup.test.objects.annotations.TestAnnotation;
 import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
 import de.alpharogroup.test.objects.enums.Brands;
 
+/**
+ * The unit test class for the class {@link ClassExtensions}.
+ */
 public class ClassExtensionsTest
 {
 
+	/**
+	 * The class {@link StaticNestedClass} for unit test purposes.
+	 */
 	static class StaticNestedClass
 	{
+
+		/**
+		 * Static nested class method for unit test purposes.
+		 */
 		public static void staticNestedClassMethod()
 		{
 			final Runnable runnable = new Runnable()
@@ -83,29 +94,50 @@ public class ClassExtensionsTest
 	/** The result. */
 	private boolean result;
 
+	/**
+	 * Sets up method will be invoked before every unit test method
+	 *
+	 * @throws Exception
+	 *             is thrown if an exception occurs
+	 */
 	@BeforeMethod
 	public void setUp() throws Exception
 	{
 	}
 
+	/**
+	 * Tear down method will be invoked after every unit test method
+	 *
+	 * @throws Exception
+	 *             is thrown if an exception occurs
+	 */
 	@AfterMethod
 	public void tearDown() throws Exception
 	{
 	}
 
-
+	/**
+	 * Test method for {@link ClassExtensions#equalsByClassName(Class, Class)}
+	 */
 	@Test(enabled = true)
 	public void testEqualsByClassName()
 	{
 		final OuterClass outerClass = new OuterClass();
 		final OuterClass.InnerClass innerClass1 = outerClass.new InnerClass();
 		final OuterClass.InnerClass innerClass2 = outerClass.new InnerClass();
-		final boolean actual = ClassExtensions.equalsByClassName(innerClass1.getClass(),
+		boolean actual = ClassExtensions.equalsByClassName(innerClass1.getClass(),
 			innerClass2.getClass());
 		assertTrue(actual);
-
+		actual = ClassExtensions.equalsByClassName(outerClass.getClass(), innerClass2.getClass());
+		assertFalse(actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#forName(String)}
+	 *
+	 * @throws ClassNotFoundException
+	 *             is thrown if the class was not found or could not be located
+	 */
 	@Test(enabled = true)
 	public void testForName() throws ClassNotFoundException
 	{
@@ -114,9 +146,23 @@ public class ClassExtensionsTest
 		final Class<?> actual = ClassExtensions.forName(classname);
 
 		assertEquals(expected, actual);
-
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#forName(String)} in case of ClassNotFoundException
+	 *
+	 * @throws ClassNotFoundException
+	 *             is thrown if the class was not found or could not be located
+	 */
+	@Test(enabled = true, expectedExceptions = ClassNotFoundException.class)
+	public void testForNameClassNotFoundException() throws ClassNotFoundException
+	{
+		ClassExtensions.forName("ClassExtensionsTe");
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getBaseClass(Class)}
+	 */
 	@Test(enabled = true)
 	public void testGetBaseClass()
 	{
@@ -158,9 +204,7 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for.
-	 *
-	 * {@link de.alpharogroup.lang.ClassExtensions#getClassnameWithSuffix(java.lang.Object)}.
+	 * Test method for {@link ClassExtensions#getClassnameWithSuffix(Object)}.
 	 */
 	@Test(enabled = true)
 	public void testGetClassnameWithSuffix()
@@ -172,10 +216,12 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.lang.ClassExtensions#getClassType(Class)}.
+	 * Test method for {@link ClassExtensions#getClassType(Class)}.
 	 *
-	 * @throws IllegalAccessException
 	 * @throws InstantiationException
+	 *             if a new instance of the bean's class cannot be instantiated
+	 * @throws IllegalAccessException
+	 *             if the caller does not have access to the property accessor method
 	 */
 	@Test(enabled = true)
 	public void testGetClassType() throws InstantiationException, IllegalAccessException
@@ -254,6 +300,9 @@ public class ClassExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getJarPath(Class)}
+	 */
 	@Test
 	public void testGetJarPath()
 	{
@@ -262,12 +311,11 @@ public class ClassExtensionsTest
 
 		actual = ClassExtensions.getJarPath(ClassExtensions.class);
 		assertNull(actual);
-		// Get manifest file from zip4j-*.jar
-		// actual = ClassExtensions.getJarPath(ZipFile.class);
-		// assertNotNull(actual);
-		// assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getManifestUrl(Class)}
+	 */
 	@Test
 	public void testGetManifestURL()
 	{
@@ -279,13 +327,11 @@ public class ClassExtensionsTest
 		assertTrue(actual.toString().startsWith("file:"));
 		assertTrue(
 			actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
-		// Get manifest file from zip4j-*.jar
-		// actual = ClassExtensions.getManifestUrl(ZipFile.class);
-		// assertNotNull(actual);
-		// assertTrue(actual.toString().startsWith("jar:file:"));
-		// assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getPath(Class)}
+	 */
 	@Test
 	public void testGetPath()
 	{
@@ -298,6 +344,9 @@ public class ClassExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getResource(String)}
+	 */
 	@Test(enabled = true)
 	public void testGetResource()
 	{
@@ -308,6 +357,9 @@ public class ClassExtensionsTest
 
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String)}
+	 */
 	@Test(enabled = true)
 	public void testGetResourceAsFileString() throws URISyntaxException
 	{
@@ -320,12 +372,10 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for.
+	 * Test method for {@link ClassExtensions#getResourceAsStream(String)}
 	 *
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 *             {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.String)}
-	 *             .
+	 *             Signals that an I/O exception has occurred
 	 */
 	@Test(enabled = true)
 	public void testGetResourceAsStreamString() throws IOException
@@ -340,17 +390,12 @@ public class ClassExtensionsTest
 		this.result = prop.size() == 3;
 	}
 
-	@Test
-	public void testGetResourceString()
-	{
-
-	}
-
-
+	/**
+	 * Test method for {@link ClassExtensions#getResource(String, Object)}
+	 */
 	@Test(enabled = true)
 	public void testGetResourceStringObject()
 	{
-
 		final String propertiesFilename = "resources.properties";
 
 		final ClassExtensionsTest obj = new ClassExtensionsTest();
@@ -360,7 +405,9 @@ public class ClassExtensionsTest
 		assertTrue("", this.result);
 	}
 
-
+	/**
+	 * Test method for {@link ClassExtensions#getResource(Class, String)}
+	 */
 	@Test(enabled = true)
 	public void testGetRessource()
 	{
@@ -373,9 +420,7 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.Class, java.lang.String)}
-	 * .
+	 * Test method for {@link ClassExtensions#getResourceAsStream(Class, String)}
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -397,6 +442,9 @@ public class ClassExtensionsTest
 		assertTrue("Size of prop should be 3.", this.result);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getURL(Class)}
+	 */
 	@Test
 	public void testGetURL()
 	{
@@ -405,6 +453,9 @@ public class ClassExtensionsTest
 		assertTrue(actual.toString().endsWith("/java/lang/Object.class"));
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#normalizeSimpleClassName(String)}
+	 */
 	@Test(enabled = true)
 	public void testNormalizeClassName()
 	{
@@ -418,6 +469,9 @@ public class ClassExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#normalizeSimpleClassName(String)}
+	 */
 	@Test(enabled = true)
 	public void testNormalizeSimpleClassName()
 	{
@@ -425,9 +479,14 @@ public class ClassExtensionsTest
 		final String className = "Foo$Component$2.class";
 		final String actual = ClassExtensions.normalizeSimpleClassName(className);
 		assertEquals(expected, actual);
-
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getDirectoriesFromResources(String, boolean)}
+	 *
+	 * @throws Exception the exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test(enabled = true)
 	public void testScanClassesFromPackage() throws Exception, IOException
 	{
@@ -435,7 +494,7 @@ public class ClassExtensionsTest
 			.getDirectoriesFromResources("de.alpharogroup.lang", true);
 		final Set<Class<?>> foundClasses = ClassExtensions
 			.scanClassesFromPackage(directories.get(0), "de.alpharogroup.lang");
-		assertTrue("", foundClasses.contains(ClassExtensionsTest.class));
+		assertTrue(foundClasses.contains(ClassExtensionsTest.class));
 		Set<Class<?>> list = null;
 		list = ClassExtensions.scanClassNames("de.alpharogroup.lang");
 		for (final Class<?> entry : list)
@@ -453,5 +512,5 @@ public class ClassExtensionsTest
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(ClassExtensions.class);
 	}
-	
+
 }

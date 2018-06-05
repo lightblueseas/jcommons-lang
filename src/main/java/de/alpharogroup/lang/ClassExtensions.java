@@ -651,7 +651,15 @@ public final class ClassExtensions
 		}
 		else
 		{
-			file = new File(url.toURI());
+			if (url.getProtocol().equals("jar"))
+			{
+				throw new URISyntaxException(url.toString(),
+					"Resource is in a jar file. Use instead the method ClassExtensions#getResourceAsStream(String). Given resource is");
+			}
+			if (url.getProtocol().equals("file"))
+			{
+				file = new File(url.toURI());
+			}
 		}
 		return file;
 	}

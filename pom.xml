@@ -37,6 +37,7 @@
 		<commons-codec.version>1.11</commons-codec.version>
 		<joda-time.version>2.10</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
+		<cglib.version>3.2.4</cglib.version>
 		<!-- MEANBEAN version -->
 		<meanbean.version>2.0.3</meanbean.version>
 		<!-- MEANBEAN-FACTORIES version -->
@@ -156,11 +157,17 @@
 				<artifactId>meanbean-factories</artifactId>
 				<version>${meanbean-factories.version}</version>
 			</dependency>
-			<!-- H2 DEPENDENCIES -->
+			<!-- H2 DEPENDENCY -->
 			<dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2.version}</version>
+			</dependency>
+			<!-- CGLIB DEPENDENCY -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>${cglib.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -248,6 +255,12 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- CGLIB DEPENDENCY -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
 			<scope>test</scope>
 		</dependency>
 

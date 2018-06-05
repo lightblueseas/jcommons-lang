@@ -40,6 +40,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.collections.map.MapFactory;
+import de.alpharogroup.test.objects.Person;
 import lombok.experimental.ExtensionMethod;
 
 /**
@@ -58,8 +59,11 @@ public class StringExtensionsTest extends BaseTestCase
 	@Test(enabled = true)
 	public void testConvertCharsToUnicodeChars()
 	{
-		String expected = "\\u00f6";
-		String actual = "ö".toUnicodeChars(true);
+		String expected;
+		String actual;
+		
+		expected = "\\u00f6";
+		actual = "ö".toUnicodeChars(true);
 		assertEquals(expected, actual);
 
 		expected = "\\u00F6";
@@ -68,6 +72,20 @@ public class StringExtensionsTest extends BaseTestCase
 
 		expected = "\\u00F6, \\u00DF \\u00E4";
 		actual = "ö, ß ä".toUnicodeChars(false);
+		assertEquals(expected, actual);
+
+	    expected = "\\u03C4\\u1F78 \\u03BC\\u1F72\\u03BD \\u03BF\\u1F56\\u03BD"
+	    	+ " \\u03BA\\u03B1\\u03C4\\u1F70 \\u03C4\\u1F74\\u03BD "
+	    	+ "\\u1F08\\u03C1\\u03AC\\u03C4\\u03BF\\u03C5 \\u03C4\\u03BF\\u1FE6"
+	    	+ " \\u03BD\\u03B5\\u03C9\\u03C4\\u03AD\\u03C1\\u03BF\\u03C5 "
+	    	+ "\\u03C3\\u03C4\\u03C1\\u03B1\\u03C4\\u03B7\\u03B3\\u03AF\\u03B1\\u03BD"
+	    	+ " \\u1F14\\u03C4\\u03BF\\u03C2 "
+	    	+ "\\u1F10\\u03C4\\u03CD\\u03B3\\u03C7\\u03B1\\u03BD\\u03B5 "
+	    	+ "\\u03B4\\u03B9\\u03B5\\u03BB\\u03B7\\u03BB\\u03C5\\u03B8\\u1F78\\u03C2 "
+	    	+ "\\u03C0\\u03B5\\u03C1\\u1F76 \\u03C4\\u1F74\\u03BD \\u03C4\\u1FC6\\u03C2"
+	    	+ " \\u03A0\\u03BB\\u03B5\\u03B9\\u03AC\\u03B4\\u03BF\\u03C2";
+		actual = "τὸ μὲν οὖν κατὰ τὴν Ἀράτου τοῦ νεωτέρου στρατηγίαν ἔτος ἐτύγχανε διεληλυθὸς περὶ τὴν τῆς Πλειάδος"
+			.toUnicodeChars(false);
 		assertEquals(expected, actual);
 	}
 
@@ -400,14 +418,14 @@ public class StringExtensionsTest extends BaseTestCase
 	 */
 	@Test
 	public void testConvertToBytearray()
-	{		
+	{
 		byte[] actualBytearray;
 		byte expected;
 		byte actual;
 		char[] charArray = { 'a', 'b', 'c', 'd', 'e' };
 		byte[] expectedBytearray = "abcde".getBytes();
 		actualBytearray = StringExtensions.convertToBytearray(charArray);
-		
+
 		for (int i = 0; i < actualBytearray.length; i++)
 		{
 			expected = expectedBytearray[i];
@@ -431,7 +449,7 @@ public class StringExtensionsTest extends BaseTestCase
 		char[] expectedCharArray = { 'a', 'b', 'c', 'd', 'e' };
 		byte[] bytearray = "abcde".getBytes();
 		actualCharArray = StringExtensions.convertToCharArray(bytearray);
-		
+
 		for (int i = 0; i < actualCharArray.length; i++)
 		{
 			expected = expectedCharArray[i];
@@ -476,12 +494,12 @@ public class StringExtensionsTest extends BaseTestCase
 		actual = StringExtensions.getValue(data, key, defaultValue);
 		expected = value;
 		assertEquals(expected, actual);
-		
+
 		key = "fasel";
 		actual = StringExtensions.getValue(data, key, defaultValue);
 		expected = defaultValue;
 		assertEquals(expected, actual);
-		
+
 		key = "fasel";
 		value = "";
 		data.put(key, value);
@@ -498,7 +516,7 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		final String expected = "Hickory   Dickory Dock mouse ran up the clock The struck one The ran down";
 		String[] words = expected.split("\\W");
-		
+
 		String[] actual = StringExtensions.removeEmptyString(words);
 		assertNotNull(actual);
 		assertTrue(words.length == 16);
@@ -511,7 +529,12 @@ public class StringExtensionsTest extends BaseTestCase
 	@Test
 	public void testRemoveNewlineCharacters()
 	{
-		// TODO implement unit test...
+		String expected;
+		String actual;
+		String subject = "Foo bar\r\n bla fasel\n";
+		actual = StringExtensions.removeNewlineCharacters(subject);
+		expected = "Foo bar bla fasel";
+		assertEquals(expected, actual);
 	}
 
 	/**
@@ -520,7 +543,16 @@ public class StringExtensionsTest extends BaseTestCase
 	@Test
 	public void testToStringT()
 	{
-		// TODO implement unit test...
+		String expected;
+		String actual;
+		Person person = Person.builder().build();
+		actual = StringExtensions.toString(person);
+		assertTrue(actual.startsWith("de.alpharogroup.test.objects.Person@"));
+		assertTrue(actual.endsWith("[name=,nickname=,gender=UNDEFINED,about=,married=false]"));
+
+		actual = StringExtensions.toString(null);
+		expected = "Given object is null!!!";
+		assertEquals(expected, actual);
 	}
 
 }

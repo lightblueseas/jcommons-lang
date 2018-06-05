@@ -618,7 +618,7 @@ public class ClassExtensionsTest
 		Class<?> expected;
 		Class<?> actual;
 		Class<?>[] jdkProxyInterfaces;
-		
+
 		PersonDao personDao = new PersonDao();
 		MethodInterceptor handler = new MethodInterceptorHandler<>(personDao);
 		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, handler);
@@ -629,11 +629,10 @@ public class ClassExtensionsTest
 
 		Bla bla = new Bla();
 		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
-		Foo jdkProxy = (Foo) Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
-                new Class[] { Foo.class },
-                invocationHandler);
+		Foo jdkProxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
+			new Class[] { Foo.class }, invocationHandler);
 		jdkProxyInterfaces = ClassExtensions.getJdkProxyInterfaces(jdkProxy.getClass());
-		
+
 		assertNotNull(jdkProxyInterfaces);
 		assertTrue(jdkProxyInterfaces.length == 1);
 		expected = Foo.class;
@@ -686,7 +685,7 @@ public class ClassExtensionsTest
 		actual = ClassExtensions.getPathFromObject(null);
 		expected = null;
 		assertEquals(expected, actual);
-		
+
 	}
 
 	/**
@@ -733,14 +732,37 @@ public class ClassExtensionsTest
 	{
 		// TODO implement unit test...
 	}
-
+	
 	/**
-	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)}.
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)} that throws an URISyntaxException
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
 	 */
-	@Test
-	public void testGetResourceAsFileStringObject()
+	@Test(expectedExceptions = URISyntaxException.class)
+	public void testGetResourceAsFileStringObjectThrowsURISyntaxException() throws URISyntaxException
 	{
 		// TODO implement unit test...
+		ClassExtensions.getResourceAsFile("de/alpharogroup/test/objects/Person.class", Person.builder().build());
+	}
+	
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetResourceAsFileStringObject() throws URISyntaxException
+	{
+		// TODO implement unit test...
+
+		final String filename = "de/alpharogroup/lang/model/ClassModel.class";
+
+		final File file = ClassExtensions.getResourceAsFile(filename, ClassModel.builder().build());
+		this.result = file != null;
+		assertTrue("File should not be null", this.result);
+		assertTrue("File should exist.", file.exists());
 	}
 
 	/**
@@ -841,37 +863,43 @@ public class ClassExtensionsTest
 			return null;
 		}
 	}
-	
+
 	/**
 	 * The class {@link InvocationHandlerHandler} for unit tests purposes.
 	 */
-	static class InvocationHandlerHandler<T> implements InvocationHandler {
-        private final T original;
-        public InvocationHandlerHandler(T original) {
-            this.original = original;
-        }
-        public Object invoke(Object proxy, Method method, Object[] args)
-                throws IllegalAccessException, IllegalArgumentException,
-                InvocationTargetException {
+	static class InvocationHandlerHandler<T> implements InvocationHandler
+	{
+		private final T original;
+
+		public InvocationHandlerHandler(T original)
+		{
+			this.original = original;
+		}
+
+		public Object invoke(Object proxy, Method method, Object[] args)
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
+		{
 			log.debug("intercept before execution...");
-            method.invoke(original, args);
+			method.invoke(original, args);
 			log.debug("intercept before execution...");
-            return null;
-        }
-    }
-	
-	interface Foo {
+			return null;
+		}
+	}
+
+	interface Foo
+	{
 		String bar(String string);
 	}
-	
-	class Bla implements Foo {
+
+	class Bla implements Foo
+	{
 
 		@Override
 		public String bar(String string)
 		{
 			return string + "!!!";
 		}
-		
+
 	}
 
 
@@ -907,15 +935,14 @@ public class ClassExtensionsTest
 		expected = false;
 		actual = ClassExtensions.isJdkProxy(proxy.getClass());
 		assertEquals(expected, actual);
-		
+
 		Bla bla = new Bla();
 		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
-		Foo jdkProxy = (Foo) Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
-                new Class[] { Foo.class },
-                invocationHandler);
+		Foo jdkProxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
+			new Class[] { Foo.class }, invocationHandler);
 		expected = true;
 		actual = ClassExtensions.isJdkProxy(jdkProxy.getClass());
-		assertEquals(expected, actual);		
+		assertEquals(expected, actual);
 	}
 
 	/**

@@ -376,7 +376,7 @@ public final class ClassExtensions
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static List<File> getDirectoriesFromResources(String path, final boolean isPackage)
 		throws IOException, URISyntaxException
@@ -388,7 +388,7 @@ public final class ClassExtensions
 		final List<URL> resources = ClassExtensions.getResources(path);
 		final List<File> dirs = new ArrayList<>();
 		for (final URL resource : resources)
-		{			
+		{
 			dirs.add(new File(URLDecoder.decode(resource.getFile(), "UTF-8")));
 		}
 		return dirs;
@@ -683,7 +683,15 @@ public final class ClassExtensions
 		}
 		else
 		{
-			file = new File(url.toURI());
+			if (url.getProtocol().equals("jar"))
+			{
+				throw new URISyntaxException(url.toString(),
+					"Resource is in a jar file. Use instead the method ClassExtensions#getResourceAsStream(String, Object). Given resource is");
+			}
+			if (url.getProtocol().equals("file"))
+			{
+				file = new File(url.toURI());
+			}
 
 		}
 		return file;

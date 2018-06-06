@@ -44,7 +44,7 @@ public class ImportResourceComparatorTest
 	 * Test for method {@link ImportResourceComparator#compare(ImportResource, ImportResource)}
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	@Test
 	public void testCompare() throws ClassNotFoundException, IOException, URISyntaxException

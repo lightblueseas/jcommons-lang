@@ -54,7 +54,7 @@ public class PackageExtensionsTest
 		String packageName = PackageExtensions.getPackageName((Class<?>)null);
 		assertTrue(packageName == null);
 	}
-	
+
 	/**
 	 * Test method for {@link PackageExtensions#getPackagePath(Object)}.
 	 */

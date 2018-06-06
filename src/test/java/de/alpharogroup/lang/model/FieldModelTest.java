@@ -36,7 +36,7 @@ import javax.lang.model.element.Modifier;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
@@ -54,13 +54,13 @@ public class FieldModelTest
 	{
 		FieldModel model = new FieldModel();
 		assertNotNull(model);
-		List<Modifier> modifiers = ListExtensions.newArrayList();
+		List<Modifier> modifiers = ListFactory.newArrayList();
 		model = new FieldModel(modifiers);
 		assertNotNull(model);
 		model = FieldModel.builder().build();
 		assertNotNull(model);
 	}
-	
+
 	/**
 	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
 	 * {@link FieldModel#toString()}

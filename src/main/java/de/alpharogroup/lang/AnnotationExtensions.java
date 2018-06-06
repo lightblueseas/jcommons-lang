@@ -65,7 +65,7 @@ public final class AnnotationExtensions
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllAnnotatedClasses(final String packagePath,
 		final Class<? extends Annotation> annotationClass)
@@ -93,12 +93,12 @@ public final class AnnotationExtensions
 	 * 
 	 * @throws ClassNotFoundException
 	 *             occurs if a given class cannot be located by the specified class loader
-	 *             
+	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllAnnotatedClassesFromSet(final String packagePath,
 		final Set<Class<? extends Annotation>> annotationClasses)
@@ -129,7 +129,7 @@ public final class AnnotationExtensions
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath)
 		throws ClassNotFoundException, IOException, URISyntaxException
@@ -151,7 +151,7 @@ public final class AnnotationExtensions
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath,
 		final Set<Class<? extends Annotation>> annotationClasses)
@@ -327,7 +327,7 @@ public final class AnnotationExtensions
 		}
 		return foundClasses;
 	}
-	
+
 	/**
 	 * Scan recursive for annotated classes in the given directory.
 	 *

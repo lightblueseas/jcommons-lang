@@ -40,8 +40,8 @@ import org.apache.log4j.Logger;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql, H2
- * or postgresql databases.
+ * The class {@link ConnectionsExtensions} have convenience methods to create and connect to mysql,
+ * H2 or postgresql databases.
  *
  * @author Asterios Raptis
  */

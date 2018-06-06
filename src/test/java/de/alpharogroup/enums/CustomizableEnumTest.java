@@ -33,11 +33,11 @@ import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.test.objects.enums.Brands;
-import de.alpharogroup.test.objects.enums.Gender;
 import de.alpharogroup.evaluate.object.EqualsEvaluator;
 import de.alpharogroup.evaluate.object.HashcodeEvaluator;
 import de.alpharogroup.evaluate.object.ToStringEvaluator;
+import de.alpharogroup.test.objects.enums.Brands;
+import de.alpharogroup.test.objects.enums.Gender;
 
 /**
  * The unit test class for the class {@link CustomizableEnum}.

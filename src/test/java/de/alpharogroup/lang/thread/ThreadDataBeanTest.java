@@ -42,8 +42,8 @@ public class ThreadDataBeanTest
 {
 
 	/**
-	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()}
-	 * and {@link ThreadDataBean#toString()}
+	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()} and
+	 * {@link ThreadDataBean#toString()}
 	 *
 	 * @throws NoSuchMethodException
 	 *             if an accessor method for this property cannot be found
@@ -69,8 +69,8 @@ public class ThreadDataBeanTest
 	}
 
 	/**
-	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()}
-	 * and {@link ThreadDataBean#toString()}
+	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()} and
+	 * {@link ThreadDataBean#toString()}
 	 */
 	@Test
 	public void testEqualsHashcodeAndToStringWithClassSilently()

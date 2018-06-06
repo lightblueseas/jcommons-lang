@@ -33,9 +33,9 @@ import java.util.Set;
 import de.alpharogroup.collections.array.ArrayExtensions;
 
 /**
- * The class {@link MultiplyExtensionsFileFilter} accepts File-objects that are directories or end with one
- * of the extension in the collection. Accepts directories to allow search files recursive in
- * directories.
+ * The class {@link MultiplyExtensionsFileFilter} accepts File-objects that are directories or end
+ * with one of the extension in the collection. Accepts directories to allow search files recursive
+ * in directories.
  *
  * @version 1.0
  * @author Asterios Raptis

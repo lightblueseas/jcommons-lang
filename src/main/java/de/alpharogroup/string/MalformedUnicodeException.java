@@ -25,7 +25,8 @@
 package de.alpharogroup.string;
 
 /**
- * The class {@link MalformedUnicodeException} is thrown when the given character is not unicode conform.
+ * The class {@link MalformedUnicodeException} is thrown when the given character is not unicode
+ * conform.
  */
 public class MalformedUnicodeException extends RuntimeException
 {

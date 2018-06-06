@@ -49,7 +49,35 @@ import de.alpharogroup.test.objects.generics.PersonDao;
  */
 public class TypeArgumentsExtensionsTest extends BaseTestCase
 {
+	static class Bar extends Foo<String, Integer>
+	{
+
+	}
+
+	static class Foo<T, E>
+	{
+
+	}
+
 	List<String>[] array;
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getClass(Type)}.
+	 * 
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws NoSuchMethodException
+	 */
+	@Test
+	public void testGetClassType()
+		throws NoSuchFieldException, SecurityException, NoSuchMethodException
+	{
+		Type type;
+		type = List.class.getMethod("toArray", Object[].class).getGenericReturnType();
+		Class<?> class1 = TypeArgumentsExtensions.getClass(type);
+		assertNull(class1);
+	}
+
 	/**
 	 * Test method for {@link TypeArgumentsExtensions#getFirstTypeArgument(Class, Class)}.
 	 */
@@ -65,6 +93,19 @@ public class TypeArgumentsExtensionsTest extends BaseTestCase
 	}
 
 	/**
+	 * Test method for {@link TypeArgumentsExtensions#getFirstTypeArgument(Class)}.
+	 */
+	@Test
+	public void testGetFirstTypeArgumentClassOfQextendsT()
+	{
+		Class<?> expected;
+		Class<?> actual;
+		actual = TypeArgumentsExtensions.getFirstTypeArgument(Bar.class);
+		expected = String.class;
+		assertEquals(expected, actual);
+	}
+
+	/**
 	 * Test method for {@link TypeArgumentsExtensions#getTypeArgument(Class, Class, int)}.
 	 */
 	@SuppressWarnings("unchecked")
@@ -77,6 +118,8 @@ public class TypeArgumentsExtensionsTest extends BaseTestCase
 		assertEquals(expectedClass, integerClass);
 	}
 
+	// ====================================================================== //
+
 	/**
 	 * Test method for {@link TypeArgumentsExtensions#getTypeArgument(Class, int)}.
 	 */
@@ -86,7 +129,7 @@ public class TypeArgumentsExtensionsTest extends BaseTestCase
 	{
 		final Class<Person> expectedPersonClass = Person.class;
 		Class<Person> personClass = (Class<Person>)TypeArgumentsExtensions
-		.getTypeArgument(PersonDao.class, 0);
+			.getTypeArgument(PersonDao.class, 0);
 		assertEquals(expectedPersonClass, personClass);
 	}
 
@@ -102,6 +145,23 @@ public class TypeArgumentsExtensionsTest extends BaseTestCase
 		assertEquals(2, typeArguments.size());
 		assertEquals(Person.class, typeArguments.get(0));
 		assertEquals(Integer.class, typeArguments.get(1));
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getTypeArgumentsAndParameters(Type)}.
+	 * 
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 */
+	@Test
+	public void testGetTypeArgumentsAndParameters() throws NoSuchMethodException, SecurityException
+	{
+		// TODO implement unit test...
+		// ParameterizedType parameterizedType;
+		//
+		// Map<Type, Type> typeArgumentsAndParameters =
+		// TypeArgumentsExtensions.getTypeArgumentsAndParameters(parameterizedType);
+		// System.out.println(type);
 	}
 
 	/**
@@ -125,59 +185,6 @@ public class TypeArgumentsExtensionsTest extends BaseTestCase
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(TypeArgumentsExtensions.class);
-	}
-	
-	// ====================================================================== //
-	
-	/**
-	 * Test method for {@link TypeArgumentsExtensions#getClass(Type)}.
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws NoSuchMethodException 
-	 */
-	@Test
-	public void testGetClassType() throws NoSuchFieldException, SecurityException, NoSuchMethodException
-	{
-		Type type;		
-		type = List.class.getMethod("toArray", Object[].class).getGenericReturnType();
-		Class<?> class1 = TypeArgumentsExtensions.getClass(type);
-		assertNull(class1);
-	}
-
-	/**
-	 * Test method for {@link TypeArgumentsExtensions#getFirstTypeArgument(Class)}.
-	 */
-	@Test
-	public void testGetFirstTypeArgumentClassOfQextendsT()
-	{
-		Class<?> expected;
-		Class<?> actual;
-		actual = TypeArgumentsExtensions.getFirstTypeArgument(Bar.class);
-		expected = String.class;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link TypeArgumentsExtensions#getTypeArgumentsAndParameters(Type)}.
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
-	 */
-	@Test
-	public void testGetTypeArgumentsAndParameters() throws NoSuchMethodException, SecurityException
-	{
-		// TODO implement unit test...	
-//		ParameterizedType parameterizedType;	
-//		
-//		Map<Type, Type> typeArgumentsAndParameters = TypeArgumentsExtensions.getTypeArgumentsAndParameters(parameterizedType);
-//		System.out.println(type);
-	}
-	
-	static class Foo<T, E> {
-		
-	}
-	
-	static class Bar extends Foo<String, Integer> {
-		
 	}
 
 }

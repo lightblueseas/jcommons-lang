@@ -37,7 +37,7 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.evaluate.object.ToStringEvaluator;
 import de.alpharogroup.lang.ClassExtensions;
 
@@ -47,48 +47,6 @@ import de.alpharogroup.lang.ClassExtensions;
 public class MultiplyExtensionsFilenameFilterTest
 {
 
-	/**
-	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors
-	 */
-	@Test
-	public final void testConstructors()
-	{
-		boolean acceptDir;
-		String filesuffix;
-		FilenameFilter filenameFilter;
-		Collection<String> fileExtensions;
-
-		acceptDir = false;
-		filesuffix = ".properties";
-		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
-
-		filenameFilter = new MultiplyExtensionsFilenameFilter(
-			fileExtensions, acceptDir);
-		assertNotNull(filenameFilter);
-
-		filenameFilter = new MultiplyExtensionsFilenameFilter(fileExtensions);
-		assertNotNull(filenameFilter);
-	}
-
-	/**
-	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors with null values
-	 */
-	@Test(expectedExceptions=IllegalArgumentException.class)
-	public final void testConstructorsWithNullValues()
-	{
-		Collection<String> fileExtensions = null;
-		new MultiplyExtensionsFilenameFilter(fileExtensions);
-	}
-	
-	/**
-	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors with empty list
-	 */
-	@Test(expectedExceptions=IllegalArgumentException.class)
-	public final void testConstructorsWithEmptyList()
-	{
-		new MultiplyExtensionsFilenameFilter(ListExtensions.newArrayList());
-	}
-	
 	/**
 	 * Test method for {@link MultiplyExtensionsFilenameFilter#accept(File, String)}.
 	 * 
@@ -112,7 +70,7 @@ public class MultiplyExtensionsFilenameFilterTest
 		Collection<String> fileExtensions;
 
 		filesuffix = ".properties";
-		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
+		fileExtensions = ListFactory.newArrayList(filesuffix, ".txt");
 		acceptDir = false;
 		filenameFilter = new MultiplyExtensionsFilenameFilter(fileExtensions, acceptDir);
 		assertNotNull(filenameFilter);
@@ -159,6 +117,47 @@ public class MultiplyExtensionsFilenameFilterTest
 	}
 
 	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		boolean acceptDir;
+		String filesuffix;
+		FilenameFilter filenameFilter;
+		Collection<String> fileExtensions;
+
+		acceptDir = false;
+		filesuffix = ".properties";
+		fileExtensions = ListFactory.newArrayList(filesuffix, ".txt");
+
+		filenameFilter = new MultiplyExtensionsFilenameFilter(fileExtensions, acceptDir);
+		assertNotNull(filenameFilter);
+
+		filenameFilter = new MultiplyExtensionsFilenameFilter(fileExtensions);
+		assertNotNull(filenameFilter);
+	}
+
+	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors with empty list
+	 */
+	@Test(expectedExceptions = IllegalArgumentException.class)
+	public final void testConstructorsWithEmptyList()
+	{
+		new MultiplyExtensionsFilenameFilter(ListFactory.newArrayList());
+	}
+
+	/**
+	 * Test method for {@link MultiplyExtensionsFilenameFilter} constructors with null values
+	 */
+	@Test(expectedExceptions = IllegalArgumentException.class)
+	public final void testConstructorsWithNullValues()
+	{
+		Collection<String> fileExtensions = null;
+		new MultiplyExtensionsFilenameFilter(fileExtensions);
+	}
+
+	/**
 	 * Test method for {@link MultiplyExtensionsFilenameFilter#toString()}
 	 */
 	@Test
@@ -174,7 +173,7 @@ public class MultiplyExtensionsFilenameFilterTest
 		Collection<String> fileExtensions;
 
 		filesuffix = ".properties";
-		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
+		fileExtensions = ListFactory.newArrayList(filesuffix, ".txt");
 		actual = ToStringEvaluator
 			.evaluateConsistency(new MultiplyExtensionsFilenameFilter(fileExtensions, acceptDir));
 		expected = true;

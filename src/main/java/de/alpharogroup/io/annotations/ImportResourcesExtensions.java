@@ -59,7 +59,7 @@ public final class ImportResourcesExtensions
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Map<Class<?>, ImportResource[]> getImportResources(final String packageName)
 		throws ClassNotFoundException, IOException, URISyntaxException
@@ -99,5 +99,5 @@ public final class ImportResourcesExtensions
 		}
 		return resourcesMap;
 	}
-	
+
 }

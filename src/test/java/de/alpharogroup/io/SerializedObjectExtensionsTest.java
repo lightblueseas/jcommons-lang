@@ -82,6 +82,30 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	}
 
 	/**
+	 * Test method for {@link SerializedObjectExtensions#toByteArray(Object)}.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testToByteArray() throws IOException
+	{
+		Person person = Person.builder().build();
+		byte[] byteArray = SerializedObjectExtensions.toByteArray(person);
+		assertNotNull(byteArray);
+	}
+
+	/**
+	 * Test method for {@link SerializedObjectExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(SerializedObjectExtensions.class);
+	}
+
+	/**
 	 * Test method for {@link SerializedObjectExtensions#writeSerializedObjectToFile(Object, File)}
 	 *
 	 * @throws IOException
@@ -105,30 +129,6 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 		actual = birthdayFromNiko.equals(readedObj);
 		assertTrue("", actual);
 
-	}
-
-	/**
-	 * Test method for {@link SerializedObjectExtensions#toByteArray(Object)}.
-	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@Test
-	public void testToByteArray() throws IOException
-	{
-		Person person = Person.builder().build();
-		byte[] byteArray = SerializedObjectExtensions.toByteArray(person);
-		assertNotNull(byteArray);
-	}
-
-	/**
-	 * Test method for {@link SerializedObjectExtensions}
-	 */
-	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
-	public void testWithBeanTester()
-	{
-		final BeanTester beanTester = new BeanTester();
-		beanTester.testBean(SerializedObjectExtensions.class);
 	}
 
 }

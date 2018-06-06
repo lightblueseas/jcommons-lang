@@ -52,9 +52,9 @@ public class ThreadFieldDataBeanTest
 	{
 		ThreadFieldDataBean model = new ThreadFieldDataBean();
 		assertNotNull(model);
-		
+
 		Map<String, Object> fields = MapFactory.newHashMap();
-		
+
 		model = new ThreadFieldDataBean(fields);
 		assertNotNull(model);
 		model = ThreadFieldDataBean.builder().build();
@@ -62,8 +62,8 @@ public class ThreadFieldDataBeanTest
 	}
 
 	/**
-	 * Test method for {@link ThreadFieldDataBean#equals(Object)} , {@link ThreadFieldDataBean#hashCode()}
-	 * and {@link ThreadFieldDataBean#toString()}
+	 * Test method for {@link ThreadFieldDataBean#equals(Object)} ,
+	 * {@link ThreadFieldDataBean#hashCode()} and {@link ThreadFieldDataBean#toString()}
 	 *
 	 * @throws NoSuchMethodException
 	 *             if an accessor method for this property cannot be found
@@ -89,8 +89,8 @@ public class ThreadFieldDataBeanTest
 	}
 
 	/**
-	 * Test method for {@link ThreadFieldDataBean#equals(Object)} , {@link ThreadFieldDataBean#hashCode()}
-	 * and {@link ThreadFieldDataBean#toString()}
+	 * Test method for {@link ThreadFieldDataBean#equals(Object)} ,
+	 * {@link ThreadFieldDataBean#hashCode()} and {@link ThreadFieldDataBean#toString()}
 	 */
 	@Test
 	public void testEqualsHashcodeAndToStringWithClassSilently()

@@ -52,10 +52,11 @@ public class ImportResourcesExtensionsTest
 	 * Test for method {@link ImportResourcesExtensions#getImportResources(String)}
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	@Test
-	public void testGetImportResources() throws IOException, ClassNotFoundException, URISyntaxException
+	public void testGetImportResources()
+		throws IOException, ClassNotFoundException, URISyntaxException
 	{
 		int expectedLength;
 		int actualLength;

@@ -52,15 +52,16 @@ public class LoggerExtensionsTest
 	public final void testAddFileAppender()
 	{
 		String fileName = "testLoggerExtensions.log";
-		FileAppender fileAppender = LoggerExtensions.newFileAppender("./"+fileName);
+		FileAppender fileAppender = LoggerExtensions.newFileAppender("./" + fileName);
 		LoggerExtensions.addFileAppender(log, fileAppender);
 		Appender appender = log.getAppender("MyFileAppender");
 		assertNotNull(appender);
 		assertEquals(fileAppender, appender);
 		File logFile = new File(".", fileName);
-		if(logFile.exists()) {
+		if (logFile.exists())
+		{
 			logFile.deleteOnExit();
-		}		
+		}
 	}
 
 	/**
@@ -70,11 +71,12 @@ public class LoggerExtensionsTest
 	public final void testNewFileAppender()
 	{
 		String fileName = "testLoggerExtensions.log";
-		FileAppender fileAppender = LoggerExtensions.newFileAppender("./"+fileName);
-		
+		FileAppender fileAppender = LoggerExtensions.newFileAppender("./" + fileName);
+
 		assertNotNull(fileAppender);
 		File logFile = new File(".", fileName);
-		if(logFile.exists()) {
+		if (logFile.exists())
+		{
 			logFile.deleteOnExit();
 		}
 	}

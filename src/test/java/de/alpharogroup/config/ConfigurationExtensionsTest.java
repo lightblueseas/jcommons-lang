@@ -51,7 +51,7 @@ public class ConfigurationExtensionsTest
 		expected = System.getProperty(ConfigurationExtensions.USER_HOME_PROPERTY_KEY)
 			+ File.separator + "foo" + File.separator + ".config";
 		assertEquals(actual, expected);
-	}	
+	}
 
 	/**
 	 * Test method for {@link ConfigurationExtensions}

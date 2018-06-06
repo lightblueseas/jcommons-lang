@@ -259,11 +259,12 @@ public final class TypeArgumentsExtensions
 	/**
 	 * Gets the type arguments and parameters.
 	 *
-	 * @param type
-	 *            the type
+	 * @param parameterizedType
+	 *            the parameterized type
 	 * @return the type arguments and parameters
 	 */
-	public static Map<Type, Type> getTypeArgumentsAndParameters(final @NonNull ParameterizedType parameterizedType)
+	public static Map<Type, Type> getTypeArgumentsAndParameters(
+		final @NonNull ParameterizedType parameterizedType)
 	{
 		final Class<?> rawType = (Class<?>)parameterizedType.getRawType();
 		final Map<Type, Type> resolvedTypes = new HashMap<>();

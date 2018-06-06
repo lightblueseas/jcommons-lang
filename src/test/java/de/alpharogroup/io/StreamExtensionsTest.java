@@ -193,29 +193,6 @@ public class StreamExtensionsTest extends BaseTestCase
 	}
 
 	/**
-	 * Test get serial version uid.
-	 */
-	@SuppressWarnings("unchecked")
-	@Test(enabled = true)
-	public void testGetSerialVersionUID()
-	{
-		final Class<Person> personClass = (Class<Person>)new Person().getClass();
-		final long serialVersionUID = StreamExtensions.getSerialVersionUID(personClass);
-		assertTrue("serialVersionUID should be 1L.", serialVersionUID == 1L);
-	}
-
-	/**
-	 * Test method for {@link StreamExtensions}
-	 */
-	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
-	public void testWithBeanTester()
-	{
-		final BeanTester beanTester = new BeanTester();
-		beanTester.testBean(StreamExtensions.class);
-	}
-
-
-	/**
 	 * Test method for {@link StreamExtensions#getInputStream(File)}.
 	 *
 	 * @throws IOException
@@ -250,6 +227,7 @@ public class StreamExtensionsTest extends BaseTestCase
 		FileUtils.deleteQuietly(writeInMe);
 	}
 
+
 	/**
 	 * Test method for {@link StreamExtensions#getInputStream(File, boolean)} in case of the file
 	 * not exists and the flag createFile is false.
@@ -262,41 +240,6 @@ public class StreamExtensionsTest extends BaseTestCase
 	{
 		StreamExtensions.getInputStream(new File(".", "testGetInputStreamFileBooleanFalse.dat"),
 			false);
-	}
-
-	/**
-	 * Test method for
-	 * {@link StreamExtensions#writeInputStreamToOutputStream(InputStream, OutputStream)}.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException
-	 *             is thrown when a class is not found in the classloader or no definition for the
-	 *             class with the specified name could be found.
-	 */
-	@Test
-	public void testWriteInputStreamToOutputStreamInputStreamOutputStream()
-		throws IOException, ClassNotFoundException
-	{
-		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
-		final File writeInMe = new File(".",
-			"testWriteInputStreamToOutputStreamInputStreamOutputStream.in");
-		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
-			writeInMe);
-		InputStream inputStream = StreamExtensions.getInputStream(writeInMe, true);
-
-		File fileout = new File(".",
-			"testWriteInputStreamToOutputStreamInputStreamOutputStream.out");
-		try (final OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);)
-		{
-			StreamExtensions.writeInputStreamToOutputStream(inputStream, outputStream);
-		}
-
-		final Object readedObjectFromFile = SerializedObjectExtensions
-			.readSerializedObjectFromFile(fileout);
-		assertEquals(readedObjectFromFile, birthdayFromLeonardo);
-		FileUtils.deleteQuietly(fileout);
-		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -360,6 +303,17 @@ public class StreamExtensionsTest extends BaseTestCase
 			false);
 	}
 
+	/**
+	 * Test get serial version uid.
+	 */
+	@SuppressWarnings("unchecked")
+	@Test(enabled = true)
+	public void testGetSerialVersionUID()
+	{
+		final Class<Person> personClass = (Class<Person>)new Person().getClass();
+		final long serialVersionUID = StreamExtensions.getSerialVersionUID(personClass);
+		assertTrue("serialVersionUID should be 1L.", serialVersionUID == 1L);
+	}
 
 	/**
 	 * Test method for {@link StreamExtensions#getWriter(File)}.
@@ -395,5 +349,51 @@ public class StreamExtensionsTest extends BaseTestCase
 		StreamExtensions.getWriter(new File(".", "testGetWriterFileStringBooleanFalse.out"), null,
 			false);
 	}
-	
+
+
+	/**
+	 * Test method for {@link StreamExtensions}
+	 */
+	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(StreamExtensions.class);
+	}
+
+	/**
+	 * Test method for
+	 * {@link StreamExtensions#writeInputStreamToOutputStream(InputStream, OutputStream)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             is thrown when a class is not found in the classloader or no definition for the
+	 *             class with the specified name could be found.
+	 */
+	@Test
+	public void testWriteInputStreamToOutputStreamInputStreamOutputStream()
+		throws IOException, ClassNotFoundException
+	{
+		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
+		final File writeInMe = new File(".",
+			"testWriteInputStreamToOutputStreamInputStreamOutputStream.in");
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+			writeInMe);
+		InputStream inputStream = StreamExtensions.getInputStream(writeInMe, true);
+
+		File fileout = new File(".",
+			"testWriteInputStreamToOutputStreamInputStreamOutputStream.out");
+		try (final OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);)
+		{
+			StreamExtensions.writeInputStreamToOutputStream(inputStream, outputStream);
+		}
+
+		final Object readedObjectFromFile = SerializedObjectExtensions
+			.readSerializedObjectFromFile(fileout);
+		assertEquals(readedObjectFromFile, birthdayFromLeonardo);
+		FileUtils.deleteQuietly(fileout);
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
 }

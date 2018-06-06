@@ -55,9 +55,10 @@ public enum FileExtension
 	private final String extension;
 
 	/**
-	 * Instantiates a new {@link FileExtension} 
+	 * Instantiates a new {@link FileExtension}
 	 *
-	 * @param extension the file extension
+	 * @param extension
+	 *            the file extension
 	 */
 	FileExtension(final String extension)
 	{

@@ -37,7 +37,7 @@ import javax.lang.model.element.Modifier;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
@@ -59,13 +59,13 @@ public class MethodModelTest
 
 
 		/** The method annotations. */
-		List<AnnotationModel> methodAnnotations = ListExtensions.newArrayList();
+		List<AnnotationModel> methodAnnotations = ListFactory.newArrayList();
 
 		/** The modifiers. */
-		List<Modifier> modifiers = ListExtensions.newArrayList();
+		List<Modifier> modifiers = ListFactory.newArrayList();
 
 		/** The generic types. */
-		List<String> genericTypes = ListExtensions.newArrayList();
+		List<String> genericTypes = ListFactory.newArrayList();
 
 		/** The return type. */
 		String returnType = "";
@@ -74,7 +74,7 @@ public class MethodModelTest
 		String methodName = "";
 
 		/** The parameters. */
-		List<String> parameters = ListExtensions.newArrayList();
+		List<String> parameters = ListFactory.newArrayList();
 
 		/** The parameter annotations. */
 		Map<String, List<String>> parameterAnnotations = MapFactory.newHashMap();
@@ -84,13 +84,14 @@ public class MethodModelTest
 
 		/** The synchronized flag. */
 		boolean synchronizedFlag = false;
-		
-		model = new MethodModel(methodAnnotations, modifiers, genericTypes, returnType, methodName, parameters, parameterAnnotations, staticFlag, synchronizedFlag);
+
+		model = new MethodModel(methodAnnotations, modifiers, genericTypes, returnType, methodName,
+			parameters, parameterAnnotations, staticFlag, synchronizedFlag);
 		assertNotNull(model);
 		model = MethodModel.builder().build();
 		assertNotNull(model);
 	}
-	
+
 	/**
 	 * Test method for {@link MethodModel#equals(Object)} , {@link MethodModel#hashCode()} and
 	 * {@link MethodModel#toString()}

@@ -66,5 +66,5 @@ public final class ThreadExtensions
 		}
 		return snapshotOfThreadDataBeans;
 	}
-	
+
 }

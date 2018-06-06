@@ -72,33 +72,6 @@ public class StringOutputStreamTest
 	}
 
 	/**
-	 * Test method for {@link StringOutputStream#write(int)}
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@Test
-	public void testWriteInt() throws IOException
-	{
-		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
-		final File writeInMe = new File(".", "testWriteInt.log");
-		FileUtils.writeStringToFile(writeInMe, expected, Charset.forName("UTF-8"));
-		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
-		final StringOutputStream stringOutput = new StringOutputStream();
-		stringOutput.setCharset(Charset.forName("UTF-8"));
-		int readLength;
-		while ((readLength = inputStream.read()) != -1)
-		{
-			stringOutput.write(readLength);
-		}
-
-		final String actual = stringOutput.toString();
-		stringOutput.close();
-		assertTrue(actual.startsWith(expected));
-		FileUtils.deleteQuietly(writeInMe);
-	}
-
-	/**
 	 * Test method for {@link StringOutputStream#write(byte[])}
 	 *
 	 * @throws IOException
@@ -117,6 +90,33 @@ public class StringOutputStreamTest
 		while ((inputStream.read(buffer)) != -1)
 		{
 			stringOutput.write(buffer);
+		}
+
+		final String actual = stringOutput.toString();
+		stringOutput.close();
+		assertTrue(actual.startsWith(expected));
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+	/**
+	 * Test method for {@link StringOutputStream#write(int)}
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testWriteInt() throws IOException
+	{
+		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
+		final File writeInMe = new File(".", "testWriteInt.log");
+		FileUtils.writeStringToFile(writeInMe, expected, Charset.forName("UTF-8"));
+		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
+		final StringOutputStream stringOutput = new StringOutputStream();
+		stringOutput.setCharset(Charset.forName("UTF-8"));
+		int readLength;
+		while ((readLength = inputStream.read()) != -1)
+		{
+			stringOutput.write(readLength);
 		}
 
 		final String actual = stringOutput.toString();

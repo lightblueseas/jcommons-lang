@@ -103,10 +103,10 @@ public class ExceptionExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link ExceptionExtensions#getStackTraceElements(Throwable)}
+	 * Test method for {@link ExceptionExtensions#getStackTraceElements(Throwable)}
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@SuppressWarnings("null")
 	@Test

@@ -41,19 +41,6 @@ public class ManifestVersionTest
 {
 
 	/**
-	 * Test method for {@link ManifestVersion#get(Class)}
-	 */
-	@Test
-	public void testGet()
-	{
-		final ManifestVersion manifestVersion = ManifestVersion.get(Object.class);
-		assertNotNull(manifestVersion);
-		manifestVersion.setManifest(null);
-		String manifestAttribute = manifestVersion.getManifestAttribute(new Attributes.Name("foo"));
-		assertEquals("", manifestAttribute);
-	}
-
-	/**
 	 * Test method for {@link ManifestVersion#equals(Object)} , {@link ManifestVersion#hashCode()}
 	 * and {@link ManifestVersion#toString()}
 	 */
@@ -67,7 +54,20 @@ public class ManifestVersionTest
 		expected = true;
 		assertEquals(expected, actual);
 	}
-	
+
+	/**
+	 * Test method for {@link ManifestVersion#get(Class)}
+	 */
+	@Test
+	public void testGet()
+	{
+		final ManifestVersion manifestVersion = ManifestVersion.get(Object.class);
+		assertNotNull(manifestVersion);
+		manifestVersion.setManifest(null);
+		String manifestAttribute = manifestVersion.getManifestAttribute(new Attributes.Name("foo"));
+		assertEquals("", manifestAttribute);
+	}
+
 	/**
 	 * Test method for {@link ManifestVersion}
 	 */

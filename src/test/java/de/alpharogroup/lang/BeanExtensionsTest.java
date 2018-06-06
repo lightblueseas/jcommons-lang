@@ -73,16 +73,19 @@ public class BeanExtensionsTest
 	}
 
 }
+
 class Foo
 {
-    String bar;
+	String bar;
 
-    public String getBar() {
-        return bar;
-    }
+	public String getBar()
+	{
+		return bar;
+	}
 
-    public void setBar(String bar) {
-        this.bar = bar;
-    }
+	public void setBar(String bar)
+	{
+		this.bar = bar;
+	}
 
 }

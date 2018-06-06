@@ -39,13 +39,15 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments a
- * child class has used to extend a generic base class. It is inspired from the article Reflecting
- * generics by Ian Robertson at <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=208860"
- * >http://www.artima.com/weblogs/viewpost.jsp?thread=208860</a>. In the comments someone asked if
- * we are allowed to use the source code from the article. The answer of Ian Robertson is:
- * Absolutely, you may use this code. "Consider it open sourced".
- *
+ * The class {@link TypeArgumentsExtensions} is a utility class for getting the type arguments from
+ * a child class that extended a generic base class. <br>
+ * <br>
+ * It is inspired from the article Reflecting generics by Ian Robertson at
+ * <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=208860"
+ * >http://www.artima.com/weblogs/viewpost.jsp?thread=208860</a>. <br>
+ * <br>
+ * In the comments someone asked if we are allowed to use the source code from the article. The
+ * answer of Ian Robertson is: Absolutely, you may use this code. "Consider it open sourced".
  */
 @UtilityClass
 public final class TypeArgumentsExtensions
@@ -59,7 +61,7 @@ public final class TypeArgumentsExtensions
 	 *            the type
 	 * @return the underlying class
 	 */
-	private static Class<?> getClass(final @NonNull Type type)
+	public static Class<?> getClass(final @NonNull Type type)
 	{
 		if (type instanceof Class)
 		{
@@ -220,7 +222,7 @@ public final class TypeArgumentsExtensions
 				final ParameterizedType parameterizedType = (ParameterizedType)type;
 				final Class<?> rawType = (Class<?>)parameterizedType.getRawType();
 
-				resolvedTypes.putAll(getTypeArgumentsAndParameters(type));
+				resolvedTypes.putAll(getTypeArgumentsAndParameters(parameterizedType));
 
 				if (!rawType.equals(realBaseClass))
 				{
@@ -261,9 +263,8 @@ public final class TypeArgumentsExtensions
 	 *            the type
 	 * @return the type arguments and parameters
 	 */
-	private static Map<Type, Type> getTypeArgumentsAndParameters(final @NonNull Type type)
+	public static Map<Type, Type> getTypeArgumentsAndParameters(final @NonNull ParameterizedType parameterizedType)
 	{
-		final ParameterizedType parameterizedType = (ParameterizedType)type;
 		final Class<?> rawType = (Class<?>)parameterizedType.getRawType();
 		final Map<Type, Type> resolvedTypes = new HashMap<>();
 		final Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();

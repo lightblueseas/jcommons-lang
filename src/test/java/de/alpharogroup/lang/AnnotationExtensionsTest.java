@@ -366,7 +366,7 @@ public class AnnotationExtensionsTest
 		String packagePath = "de.alpharogroup.lang";
 		Set<Class<?>> classes = AnnotationExtensions.scanForClasses(directory, packagePath);
 		assertNotNull(classes);
-		assertTrue("Size should be 25 but is " + classes.size() + ".", classes.size() == 25);
+		assertTrue("Size should be 27 but is " + classes.size() + ".", classes.size() == 27);
 	}
 
 	/**

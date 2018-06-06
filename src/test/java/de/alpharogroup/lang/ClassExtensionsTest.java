@@ -777,9 +777,9 @@ public class ClassExtensionsTest
 			throws Throwable
 		{
 			log.debug("intercept before execution...");
-			method.invoke(origin, args);
+			Object object = method.invoke(origin, args);
 			log.debug("intercept after execution...");
-			return null;
+			return object;
 		}
 	}
 
@@ -799,9 +799,9 @@ public class ClassExtensionsTest
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 		{
 			log.debug("intercept before execution...");
-			method.invoke(original, args);
+			Object object = method.invoke(original, args);
 			log.debug("intercept before execution...");
-			return null;
+			return object;
 		}
 	}
 

@@ -33,8 +33,6 @@ import static org.testng.AssertJUnit.assertTrue;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.StringUtils;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -137,42 +135,6 @@ public class StringExtensionsTest extends BaseTestCase
 		theUnicodeString = "\\u03BC";
 		actual = StringExtensions.convertUnicodeStringToCharacter(theUnicodeString);
 		expected = Character.valueOf('\u03BC');
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link StringExtensions#decodeHex(char[])}
-	 * 
-	 * @throws DecoderException
-	 *             is thrown if an odd number or illegal of characters is supplied
-	 */
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testDecodeHex() throws DecoderException
-	{
-		final String expected = "Secret message";
-		final char[] actualCharArray = StringExtensions
-			.encodeHex(StringUtils.getBytesUtf8(expected));
-		final byte[] decoded = StringExtensions.decodeHex(actualCharArray);
-		final String actual = new String(decoded);
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link StringExtensions#encodeHex(byte[])}
-	 * 
-	 * @throws DecoderException
-	 *             is thrown if an odd number or illegal of characters is supplied
-	 */
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testEncodeHex() throws DecoderException
-	{
-		final String expected = "Secret message";
-		final char[] actualCharArray = StringExtensions
-			.encodeHex(StringUtils.getBytesUtf8(expected));
-		final byte[] decoded = StringExtensions.decodeHex(actualCharArray);
-		final String actual = new String(decoded);
 		assertEquals(expected, actual);
 	}
 

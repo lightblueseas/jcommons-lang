@@ -28,8 +28,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import lombok.experimental.UtilityClass;
 
 /**
@@ -106,27 +104,6 @@ public final class ExceptionExtensions
 			stacktrace.append(sw.toString());
 		}
 		return stacktrace.toString();
-	}
-
-	/**
-	 * Prints the {@link Object#toString()} and if the given object is null a corresponding
-	 * information.
-	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param object
-	 *            the object
-	 * @return the string
-	 * @deprecated use instead the same name method in class {@code StringExtensions}. Note: will be
-	 *             removed in the next minor release
-	 */
-	public static <T> String toString(final T object)
-	{
-		if (object == null)
-		{
-			return "Given object is null!!!";
-		}
-		return ReflectionToStringBuilder.toString(object);
 	}
 
 }

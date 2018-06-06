@@ -44,7 +44,6 @@ import org.apache.commons.io.FileUtils;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
@@ -59,84 +58,6 @@ public class StreamExtensionsTest extends BaseTestCase
 {
 	/** The file. */
 	final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
-	// boolean actual;
-
-	/**
-	 * Sets up method will be invoked before every unit test method in this class.
-	 */
-	@BeforeMethod
-	protected void setUp()
-	{
-	}
-
-	/**
-	 * Test close input stream.
-	 */
-	@SuppressWarnings("deprecation")
-	@Test(enabled = true)
-	public void testCloseInputStream()
-	{
-		final InputStream is = ClassExtensions.getResourceAsStream(propertiesFilename);
-		actual = StreamExtensions.closeInputStream(is);
-		assertTrue("", actual);
-	}
-
-	/**
-	 * Test close output stream.
-	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws URISyntaxException
-	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
-	 *             converted to a URI.
-	 */
-	@SuppressWarnings("deprecation")
-	@Test(enabled = true)
-	public void testCloseOutputStream() throws IOException, URISyntaxException
-	{
-		final URL url = ClassExtensions.getResource(propertiesFilename);
-		final OutputStream os = StreamExtensions.getOutputStream(new File(url.toURI()));
-		this.actual = StreamExtensions.closeOutputStream(os);
-		assertTrue("", this.actual);
-	}
-
-	/**
-	 * Test close reader.
-	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws URISyntaxException
-	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
-	 *             converted to a URI.
-	 */
-	@SuppressWarnings("deprecation")
-	@Test(enabled = true)
-	public void testCloseReader() throws IOException, URISyntaxException
-	{
-		final URL url = ClassExtensions.getResource(propertiesFilename);
-		final Reader reader = StreamExtensions.getReader(new File(url.toURI()));
-		this.actual = StreamExtensions.closeReader(reader);
-		assertTrue("", this.actual);
-	}
-
-	/**
-	 * Test close writer.
-	 * 
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws URISyntaxException
-	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
-	 *             converted to a URI.
-	 */
-	@SuppressWarnings("deprecation")
-	@Test(enabled = true)
-	public void testCloseWriter() throws IOException, URISyntaxException
-	{
-		final URL url = ClassExtensions.getResource(propertiesFilename);
-		final Writer writer = StreamExtensions.getWriter(new File(url.toURI()));
-		this.actual = StreamExtensions.closeWriter(writer);
-		assertTrue("", this.actual);
-	}
 
 	/**
 	 * Test get byte array input stream.

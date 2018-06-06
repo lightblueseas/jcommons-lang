@@ -24,7 +24,6 @@
  */
 package de.alpharogroup.exception;
 
-import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -36,8 +35,6 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import de.alpharogroup.test.objects.Person;
 
 /**
  * The unit test class for the class {@link ExceptionExtensions}.
@@ -144,25 +141,6 @@ public class ExceptionExtensionsTest
 
 		expected = "class org.meanbean.test.BeanTestException";
 		assertTrue(actual.startsWith(expected));
-	}
-
-	/**
-	 * Test method for {@link ExceptionExtensions#toString(Object)}
-	 */
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testToStringObject()
-	{
-		String expected;
-		String actual;
-		actual = ExceptionExtensions.toString(Person.builder().build());
-		assertNotNull(actual);
-
-		actual = ExceptionExtensions.toString(null);
-		assertNotNull(actual);
-		expected = "Given object is null!!!";
-		assertEquals(actual, expected);
-
 	}
 
 	/**

@@ -423,7 +423,7 @@ public final class StringExtensions
 	 */
 	public static final boolean isNumber(final String testString)
 	{
-		if (null == testString)
+		if (StringUtils.isEmpty(testString))
 		{
 			return false;
 		}

@@ -24,6 +24,7 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -99,159 +100,126 @@ public class AnnotationExtensionsTest
 	 * Test method for {@link AnnotationExtensions#getAllAnnotatedClasses(String, Class)}
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	@Test(enabled = true)
-	public void testGetAllAnnotatedClasses() throws ClassNotFoundException, IOException, URISyntaxException
+	public void testGetAllAnnotatedClasses()
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		String packagePath = "de.alpharogroup.lang";
 		Class<? extends Annotation> annotationClass = TestAnnotation.class;
-		final Set<Class<?>> classes = AnnotationExtensions
-			.getAllAnnotatedClasses(packagePath, annotationClass);
+		final Set<Class<?>> classes = AnnotationExtensions.getAllAnnotatedClasses(packagePath,
+			annotationClass);
 		LOGGER.info(classes);
 		assertTrue("Size should be 1 but is " + classes.size() + ".", classes.size() == 1);
 		assertTrue("Set should contain class object AnnotationExtensionsTest.class.",
-			classes.contains(AnnotationExtensionsTest.class));		
-	}
-
-	/**
-	 * Test method for {@link AnnotationExtensions#getAllAnnotatedClasses(String, Class)}
-	 *
-	 * @throws ClassNotFoundException
-	 *             the class not found exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * 
-	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
-	 */
-	@Test(enabled = false) // TODO set to true
-	public void testGetAllAnnotatedClassesInJarFile() throws ClassNotFoundException, IOException, URISyntaxException
-	{
-		String packagePath = "de.alpharogroup.test.objects";
-		Class<? extends Annotation> annotationClass = TestAnnotation.class;
-		final Set<Class<?>> classes = AnnotationExtensions
-			.getAllAnnotatedClasses(packagePath, annotationClass);
-		LOGGER.info(classes);
-		assertTrue("Size should be 3 but is " + classes.size() + ".", classes.size() == 3);
-		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
-			classes.contains(OtherAnnotatedClass.class));
-		assertTrue("Set should contain class object AnnotatedClass.class.",
-			classes.contains(AnnotatedClass.class));
-		assertTrue("Set should contain class object AnnotatedInterface.class.",
-			classes.contains(AnnotatedInterface.class));
-		assertFalse("Set should not contain class object SomeClass.class.",
-			classes.contains(SomeClass.class));
+			classes.contains(AnnotationExtensionsTest.class));
 	}
 
 	/**
 	 * Test method for {@link AnnotationExtensions#getAllAnnotatedClassesFromSet(String, Set)}.
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
-	@Test(enabled = false) // TODO set to true
-	public void testGetAllAnnotatedClassesFromSet() throws ClassNotFoundException, IOException, URISyntaxException
+	@Test(enabled = true) 
+	public void testGetAllAnnotatedClassesFromSet()
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
-		String packagePath = "de.alpharogroup.test.objects";
-		Set<Class<? extends Annotation>> annotationClasses = SetFactory.newHashSet(TestAnnotation.class);
-		final Set<Class<?>> classes = AnnotationExtensions.getAllAnnotatedClassesFromSet(packagePath, annotationClasses);
-		assertTrue("Size should be 3 but is " + classes.size() + ".", classes.size() == 3);
-		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
-			classes.contains(OtherAnnotatedClass.class));
-		assertTrue("Set should contain class object AnnotatedClass.class.",
-			classes.contains(AnnotatedClass.class));
-		assertTrue("Set should contain class object AnnotatedInterface.class.",
-			classes.contains(AnnotatedInterface.class));
-		assertFalse("Set should not contain class object SomeClass.class.",
-			classes.contains(SomeClass.class));
+		String packagePath = "de.alpharogroup.lang";
+		Set<Class<? extends Annotation>> annotationClasses = SetFactory
+			.newHashSet(TestAnnotation.class);
+		final Set<Class<?>> classes = AnnotationExtensions
+			.getAllAnnotatedClassesFromSet(packagePath, annotationClasses);
+		assertTrue("Size should be 1 but is " + classes.size() + ".", classes.size() == 1);
+		assertTrue("Set should contain class object AnnotationExtensionsTest.class.",
+			classes.contains(AnnotationExtensionsTest.class));
 	}
 
 	/**
 	 * Test get all annotated classes set.
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
-	@Test(enabled = false) // TODO set to true
-	public void testGetAllAnnotatedClassesSet() throws ClassNotFoundException, IOException, URISyntaxException
+	@Test(enabled = true) 
+	public void testGetAllAnnotatedClassesSet()
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
 		allAnotations.add(TestAnnotation.class);
 		allAnotations.add(AnotherTestAnnotation.class);
 		final Set<Class<?>> classes = AnnotationExtensions
-			.getAllAnnotatedClassesFromSet("de.alpharogroup.test.objects", allAnotations);
+			.getAllAnnotatedClassesFromSet("de.alpharogroup.lang", allAnotations);
 
-		assertTrue("Size should be 4  but is " + classes.size() + ".", classes.size() == 4);
-		assertTrue("Set should contain class object AnnotatedInterface.class.",
-			classes.contains(AnnotatedInterface.class));
-		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
-			classes.contains(OtherAnnotatedClass.class));
-		assertTrue("Set should contain class object AnnotatedClass.class.",
-			classes.contains(AnnotatedClass.class));
-		assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
-			classes.contains(AnotherAnnotatedClass.class));
-		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
-			classes.contains(OtherAnnotatedClass.class));
-		assertFalse("Set should not contain class object SomeClass.class.",
-			classes.contains(SomeClass.class));
+		assertTrue("Size should be 2 but is " + classes.size() + ".", classes.size() == 2);
+		assertTrue("Set should contain class object AnnotationExtensionsTest.class.",
+			classes.contains(AnnotationExtensionsTest.class));
+		assertTrue("Set should contain class object BeanExtensionsTest.class.",
+			classes.contains(BeanExtensionsTest.class));		
 	}
 
 	/**
 	 * Test method for {@link AnnotationExtensions#getAllClasses(String)}.
+	 *
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testGetAllClassesString()
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
-		// TODO implement unit test...
+		String packagePath = "de.alpharogroup.lang.thread";
+		Set<Class<?>> allClasses = AnnotationExtensions.getAllClasses(packagePath);
+		assertNotNull(allClasses);
+		assertTrue(allClasses.size()==8);
 	}
 
 	/**
 	 * Test get all classes string set.
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference. 
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
-	@Test(enabled = false) // TODO set to true
-	public void testGetAllClassesStringSet() throws ClassNotFoundException, IOException, URISyntaxException
+	@Test(enabled = true) 
+	public void testGetAllClassesStringSet()
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final Set<Class<? extends Annotation>> allAnotations = new HashSet<>();
 		allAnotations.add(TestAnnotation.class);
 		allAnotations.add(AnotherTestAnnotation.class);
 
 		final Set<Class<?>> classes = AnnotationExtensions
-			.getAllClasses("de.alpharogroup.test.objects", allAnotations);
-		assertTrue("Size should be 4  but is " + classes.size() + ".", classes.size() == 4);
-		assertTrue("Set should contain class object AnnotatedInterface.class.",
-			classes.contains(AnnotatedInterface.class));
-		assertTrue("Set should contain class object OtherAnnotatedClass.class.",
-			classes.contains(OtherAnnotatedClass.class));
-		assertTrue("Set should contain class object AnnotatedClass.class.",
-			classes.contains(AnnotatedClass.class));
-		assertTrue("Set should contain class object AnotherAnnotatedClass.class.",
-			classes.contains(AnotherAnnotatedClass.class));
-		assertFalse("Set should not contain class object SomeClass.class.",
-			classes.contains(SomeClass.class));
+			.getAllClasses("de.alpharogroup.lang", allAnotations);
+		assertTrue("Size should be 2 but is " + classes.size() + ".", classes.size() == 2);
+		assertTrue("Set should contain class object AnnotationExtensionsTest.class.",
+			classes.contains(AnnotationExtensionsTest.class));
+		assertTrue("Set should contain class object BeanExtensionsTest.class.",
+			classes.contains(BeanExtensionsTest.class));
 	}
 
 	/**
@@ -278,39 +246,52 @@ public class AnnotationExtensionsTest
 	@Test(enabled = true)
 	public void testIsAnnotationPresentInSuperClasses()
 	{
-		boolean result = AnnotationExtensions
+		boolean expected;
+		boolean actual;
+		
+		actual = AnnotationExtensions
 			.isAnnotationPresentInSuperClasses(SubAnnotatedClass.class, TestAnnotation.class);
-		assertTrue("If an Annotation is present in the super class then it should return true!",
-			result);
-		result = AnnotationExtensions.isAnnotationPresentInSuperClassesOrInterfaces(
-			ClassExtendsAnnotatedInterface.class, TestAnnotation.class);
-		assertTrue("If an Annotation is present in the super class then it should return true!",
-			result);
+		expected = true;
+		assertEquals("If an Annotation is present in the super class then it should return true!", 
+			expected, actual);		
 	}
 
 	/**
 	 * Test method for
 	 * {@link AnnotationExtensions#isAnnotationPresentInSuperClassesOrInterfaces(Class, Class)}.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testIsAnnotationPresentInSuperClassesOrInterfaces()
 	{
-		// TODO implement unit test...
+		boolean expected;
+		boolean actual;
+		
+		actual = AnnotationExtensions
+			.isAnnotationPresentInSuperClassesOrInterfaces(SubAnnotatedClass.class, TestAnnotation.class);
+		expected = true;
+		assertEquals("If an Annotation is present in the super class then it should return true!", 
+			expected, actual);
+		
+		actual = AnnotationExtensions.isAnnotationPresentInSuperClassesOrInterfaces(
+			ClassExtendsAnnotatedInterface.class, TestAnnotation.class);
+		expected = true;
+		assertEquals("If an Annotation is present in the super class then it should return true!", 
+			expected, actual);
 	}
 
 	/**
 	 * Test method for {@link AnnotationExtensions#scanForAnnotatedClasses(File, String, Class)}
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference.
-	 *             occurs by creation of the file with an uri.
+	 *             is thrown if a string could not be parsed as a URI reference. occurs by creation
+	 *             of the file with an uri.
 	 */
-	@Test(enabled = false)
+	@Test(enabled = false)// TODO set to true
 	public void testScanForAnnotatedClasses()
 		throws ClassNotFoundException, IOException, URISyntaxException
 	{
@@ -335,13 +316,13 @@ public class AnnotationExtensionsTest
 	 * {@link AnnotationExtensions#scanForAnnotatedClassesFromSet(File, String, Set)}.
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * 
 	 * @throws URISyntaxException
-	 *             is thrown if a string could not be parsed as a URI reference.
-	 *             occurs by creation of the file with an uri.
+	 *             is thrown if a string could not be parsed as a URI reference. occurs by creation
+	 *             of the file with an uri.
 	 */
 	@Test(enabled = false) // TODO set to true
 	public void testScanForAnnotatedClassesFromSet()
@@ -371,11 +352,21 @@ public class AnnotationExtensionsTest
 
 	/**
 	 * Test method for {@link AnnotationExtensions#scanForClasses(File, String)}.
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
-	@Test(enabled = false)
-	public void testScanForClasses()
+	@Test(enabled = true)
+	public void testScanForClasses() throws URISyntaxException, ClassNotFoundException
 	{
-		// TODO implement unit test...
+		File directory = ClassExtensions.getResourceAsFile("AnnotationExtensionsTest.class",
+			this);
+		directory = directory.getParentFile();
+		String packagePath = "de.alpharogroup.lang";
+		Set<Class<?>> classes = AnnotationExtensions.scanForClasses(directory, packagePath);
+		assertNotNull(classes);
+		assertTrue("Size should be 25 but is " + classes.size() + ".", classes.size() == 25);
 	}
 
 	/**

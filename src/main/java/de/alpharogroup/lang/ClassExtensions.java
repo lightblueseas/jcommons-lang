@@ -968,7 +968,7 @@ public final class ClassExtensions
 	 *            the package path
 	 * @return the list
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	public static Set<Class<?>> scanClassesFromPackage(final File directory,
 		final String packagePath) throws ClassNotFoundException

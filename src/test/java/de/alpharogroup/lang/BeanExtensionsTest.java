@@ -32,10 +32,12 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.test.objects.Person;
+import de.alpharogroup.test.objects.annotations.AnotherTestAnnotation;
 
 /**
  * The unit test class for the class {@link BeanExtensions}.
  */
+@AnotherTestAnnotation
 public class BeanExtensionsTest
 {
 

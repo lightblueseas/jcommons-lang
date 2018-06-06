@@ -6,6 +6,7 @@ Version 4.34-SNAPSHOT
 
 CHANGED:
 
+- unit tests extended for improve code coverage
 - removed deprecated enum de.alpharogroup.file.checksum.Algorithm
 - removed deprecated enum de.alpharogroup.exception.ExceptionType
 - tagged several close methods as deprecated in class StreamExtensions since jdk7 the new feature try-with-resources statement

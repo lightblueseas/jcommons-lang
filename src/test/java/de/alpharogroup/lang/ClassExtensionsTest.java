@@ -24,6 +24,8 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNull;
 import static org.testng.AssertJUnit.assertTrue;
@@ -31,6 +33,10 @@ import static org.testng.AssertJUnit.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,6 +53,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.classes.inner.OuterClass;
+import de.alpharogroup.lang.model.ClassModel;
 import de.alpharogroup.runtime.compiler.JavaSourceCompiler;
 import de.alpharogroup.test.objects.Member;
 import de.alpharogroup.test.objects.Person;
@@ -54,12 +61,94 @@ import de.alpharogroup.test.objects.PremiumMember;
 import de.alpharogroup.test.objects.annotations.TestAnnotation;
 import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
 import de.alpharogroup.test.objects.enums.Brands;
+import de.alpharogroup.test.objects.generics.PersonDao;
+import lombok.extern.slf4j.Slf4j;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
+/**
+ * The unit test class for the class {@link ClassExtensions}.
+ */
+@Slf4j
 public class ClassExtensionsTest
 {
 
+	/**
+	 * The class {@link Bla} for unit tests purposes.
+	 */
+	class Bla implements Foo
+	{
+
+		@Override
+		public String bar(String string)
+		{
+			return string + "!!!";
+		}
+
+	}
+
+	/**
+	 * The interface {@link Foo} for unit tests purposes.
+	 */
+	interface Foo
+	{
+		String bar(String string);
+	}
+
+	/**
+	 * The class {@link InvocationHandlerHandler} for unit tests purposes.
+	 */
+	static class InvocationHandlerHandler<T> implements InvocationHandler
+	{
+		private final T original;
+
+		public InvocationHandlerHandler(T original)
+		{
+			this.original = original;
+		}
+
+		public Object invoke(Object proxy, Method method, Object[] args)
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
+		{
+			log.debug("intercept before execution...");
+			Object object = method.invoke(original, args);
+			log.debug("intercept before execution...");
+			return object;
+		}
+	}
+
+	/**
+	 * The class {@link MethodInterceptorHandler} for unit tests purposes.
+	 */
+	static class MethodInterceptorHandler<T> implements MethodInterceptor
+	{
+		private final T origin;
+
+		public MethodInterceptorHandler(T origin)
+		{
+			this.origin = origin;
+		}
+
+		public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy)
+			throws Throwable
+		{
+			log.debug("intercept before execution...");
+			Object object = method.invoke(origin, args);
+			log.debug("intercept after execution...");
+			return object;
+		}
+	}
+
+	/**
+	 * The class {@link StaticNestedClass} for unit test purposes.
+	 */
 	static class StaticNestedClass
 	{
+
+		/**
+		 * Static nested class method for unit test purposes.
+		 */
 		public static void staticNestedClassMethod()
 		{
 			final Runnable runnable = new Runnable()
@@ -83,29 +172,50 @@ public class ClassExtensionsTest
 	/** The result. */
 	private boolean result;
 
+	/**
+	 * Sets up method will be invoked before every unit test method
+	 *
+	 * @throws Exception
+	 *             is thrown if an exception occurs
+	 */
 	@BeforeMethod
 	public void setUp() throws Exception
 	{
 	}
 
+	/**
+	 * Tear down method will be invoked after every unit test method
+	 *
+	 * @throws Exception
+	 *             is thrown if an exception occurs
+	 */
 	@AfterMethod
 	public void tearDown() throws Exception
 	{
 	}
 
-
+	/**
+	 * Test method for {@link ClassExtensions#equalsByClassName(Class, Class)}
+	 */
 	@Test(enabled = true)
 	public void testEqualsByClassName()
 	{
 		final OuterClass outerClass = new OuterClass();
 		final OuterClass.InnerClass innerClass1 = outerClass.new InnerClass();
 		final OuterClass.InnerClass innerClass2 = outerClass.new InnerClass();
-		final boolean actual = ClassExtensions.equalsByClassName(innerClass1.getClass(),
+		boolean actual = ClassExtensions.equalsByClassName(innerClass1.getClass(),
 			innerClass2.getClass());
 		assertTrue(actual);
-
+		actual = ClassExtensions.equalsByClassName(outerClass.getClass(), innerClass2.getClass());
+		assertFalse(actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#forName(String)}
+	 *
+	 * @throws ClassNotFoundException
+	 *             is thrown if the class was not found or could not be located
+	 */
 	@Test(enabled = true)
 	public void testForName() throws ClassNotFoundException
 	{
@@ -114,9 +224,23 @@ public class ClassExtensionsTest
 		final Class<?> actual = ClassExtensions.forName(classname);
 
 		assertEquals(expected, actual);
-
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#forName(String)} in case of ClassNotFoundException
+	 *
+	 * @throws ClassNotFoundException
+	 *             is thrown if the class was not found or could not be located
+	 */
+	@Test(enabled = true, expectedExceptions = ClassNotFoundException.class)
+	public void testForNameClassNotFoundException() throws ClassNotFoundException
+	{
+		ClassExtensions.forName("ClassExtensionsTe");
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getBaseClass(Class)}
+	 */
 	@Test(enabled = true)
 	public void testGetBaseClass()
 	{
@@ -158,9 +282,66 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for.
-	 *
-	 * {@link de.alpharogroup.lang.ClassExtensions#getClassnameWithSuffix(java.lang.Object)}.
+	 * Test method for {@link ClassExtensions#getCglibProxy(Class)}.
+	 */
+	@Test
+	public void testGetCglibProxy()
+	{
+		PersonDao personDao = new PersonDao();
+		MethodInterceptor handler = new MethodInterceptorHandler<>(personDao);
+		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, handler);
+
+		Class<?> actual = ClassExtensions.getCglibProxy(proxy.getClass());
+		Class<?> expected = PersonDao.class;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getClass(Object)}.
+	 */
+	@Test(enabled = true)
+	public void testGetClass()
+	{
+		Class<ClassExtensionsTest> expected;
+		Class<ClassExtensionsTest> actual;
+
+		actual = ClassExtensions.getClass(this);
+		expected = ClassExtensionsTest.class;
+		assertEquals(expected, actual);
+
+		actual = ClassExtensions.getClass(null);
+		expected = null;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getClassLoader(Object)}.
+	 */
+	@Test
+	public void testGetClassLoaderObject()
+	{
+		ClassLoader classLoader = ClassExtensions.getClassLoader(Person.builder().build());
+		assertNotNull(classLoader);
+
+		classLoader = ClassExtensions.getClassLoader(this);
+		assertNotNull(classLoader);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getClassname(Class)}.
+	 */
+	@Test
+	public void testGetClassname()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getClassname(Person.class);
+		expected = "de.alpharogroup.test.objects.Person";
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getClassnameWithSuffix(Object)}.
 	 */
 	@Test(enabled = true)
 	public void testGetClassnameWithSuffix()
@@ -172,10 +353,12 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link de.alpharogroup.lang.ClassExtensions#getClassType(Class)}.
+	 * Test method for {@link ClassExtensions#getClassType(Class)}.
 	 *
-	 * @throws IllegalAccessException
 	 * @throws InstantiationException
+	 *             if a new instance of the bean's class cannot be instantiated
+	 * @throws IllegalAccessException
+	 *             if the caller does not have access to the property accessor method
 	 */
 	@Test(enabled = true)
 	public void testGetClassType() throws InstantiationException, IllegalAccessException
@@ -254,6 +437,9 @@ public class ClassExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getJarPath(Class)}
+	 */
 	@Test
 	public void testGetJarPath()
 	{
@@ -262,12 +448,42 @@ public class ClassExtensionsTest
 
 		actual = ClassExtensions.getJarPath(ClassExtensions.class);
 		assertNull(actual);
-		// Get manifest file from zip4j-*.jar
-		// actual = ClassExtensions.getJarPath(ZipFile.class);
-		// assertNotNull(actual);
-		// assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar"));
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getJdkProxyInterfaces(Class)}.
+	 */
+	@Test
+	public void testGetJdkProxyInterfaces()
+	{
+		Class<?> expected;
+		Class<?> actual;
+		Class<?>[] jdkProxyInterfaces;
+
+		PersonDao personDao = new PersonDao();
+		MethodInterceptor handler = new MethodInterceptorHandler<>(personDao);
+		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, handler);
+		jdkProxyInterfaces = ClassExtensions.getJdkProxyInterfaces(proxy.getClass());
+
+		assertNotNull(jdkProxyInterfaces);
+		assertTrue(jdkProxyInterfaces.length == 1);
+
+		Bla bla = new Bla();
+		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
+		Foo jdkProxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
+			new Class[] { Foo.class }, invocationHandler);
+		jdkProxyInterfaces = ClassExtensions.getJdkProxyInterfaces(jdkProxy.getClass());
+
+		assertNotNull(jdkProxyInterfaces);
+		assertTrue(jdkProxyInterfaces.length == 1);
+		expected = Foo.class;
+		actual = jdkProxyInterfaces[0];
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getManifestUrl(Class)}
+	 */
 	@Test
 	public void testGetManifestURL()
 	{
@@ -279,13 +495,41 @@ public class ClassExtensionsTest
 		assertTrue(actual.toString().startsWith("file:"));
 		assertTrue(
 			actual.toString().endsWith("/jcommons-lang/target/classes/META-INF/MANIFEST.MF"));
-		// Get manifest file from zip4j-*.jar
-		// actual = ClassExtensions.getManifestUrl(ZipFile.class);
-		// assertNotNull(actual);
-		// assertTrue(actual.toString().startsWith("jar:file:"));
-		// assertTrue(actual.toString().endsWith("/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2.jar!/META-INF/MANIFEST.MF"));
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getName(Class)}.
+	 */
+	@Test
+	public void testGetNameClass()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getName(getClass());
+		expected = "de.alpharogroup.lang.ClassExtensionsTest";
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getName(Class, boolean)}.
+	 */
+	@Test
+	public void testGetNameClassBoolean()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getName(getClass(), false);
+		expected = "de.alpharogroup.lang.ClassExtensionsTest";
+		assertEquals(expected, actual);
+
+		actual = ClassExtensions.getName(getClass(), true);
+		expected = "ClassExtensionsTest";
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getPath(Class)}
+	 */
 	@Test
 	public void testGetPath()
 	{
@@ -298,6 +542,30 @@ public class ClassExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getPathFromObject(Object)}.
+	 */
+	@Test
+	public void testGetPathFromObject()
+	{
+		String expected;
+		String actual;
+		actual = ClassExtensions.getPathFromObject(Person.builder().build());
+		assertTrue(actual.endsWith("/de/alpharogroup/test/objects/Person.class"));
+		assertTrue(actual.startsWith("file:"));
+
+		actual = ClassExtensions.getPathFromObject(ClassModel.builder().build());
+		assertTrue(actual.endsWith("/de/alpharogroup/lang/model/ClassModel.class"));
+
+		actual = ClassExtensions.getPathFromObject(null);
+		expected = null;
+		assertEquals(expected, actual);
+
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getResource(String)}
+	 */
 	@Test(enabled = true)
 	public void testGetResource()
 	{
@@ -308,6 +576,9 @@ public class ClassExtensionsTest
 
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String)}
+	 */
 	@Test(enabled = true)
 	public void testGetResourceAsFileString() throws URISyntaxException
 	{
@@ -320,12 +591,66 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for.
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)}.
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetResourceAsFileStringObject() throws URISyntaxException
+	{
+		final String filename = "de/alpharogroup/lang/model/ClassModel.class";
+
+		final File file = ClassExtensions.getResourceAsFile(filename, ClassModel.builder().build());
+		this.result = file != null;
+		assertTrue("File should not be null", this.result);
+		assertTrue("File should exist.", file.exists());
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)} that throws an
+	 * URISyntaxException
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test(expectedExceptions = URISyntaxException.class)
+	public void testGetResourceAsFileStringObjectThrowsURISyntaxException()
+		throws URISyntaxException
+	{
+		ClassExtensions.getResourceAsFile("de/alpharogroup/test/objects/Person.class",
+			Person.builder().build());
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)} that throws an
+	 * URISyntaxException
+	 * 
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test(expectedExceptions = URISyntaxException.class)
+	public void testGetResourceAsFileStringThrowsURISyntaxException() throws URISyntaxException
+	{
+		ClassExtensions.getResourceAsFile("de/alpharogroup/test/objects/Person.class");
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsStream(Class, String)}.
+	 */
+	@Test
+	public void testGetResourceAsStreamClassOfQString()
+	{
+		InputStream inputStream = ClassExtensions.getResourceAsStream(ClassModel.class,
+			"de/alpharogroup/lang/model/ClassModel.class");
+		assertNotNull(inputStream);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsStream(String)}
 	 *
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 *             {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.String)}
-	 *             .
+	 *             Signals that an I/O exception has occurred
 	 */
 	@Test(enabled = true)
 	public void testGetResourceAsStreamString() throws IOException
@@ -340,17 +665,43 @@ public class ClassExtensionsTest
 		this.result = prop.size() == 3;
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getResourceAsStream(String, Object)}.
+	 */
 	@Test
-	public void testGetResourceString()
+	public void testGetResourceAsStreamStringObject()
 	{
+		final String filename = "de/alpharogroup/lang/model/ClassModel.class";
 
+		InputStream inputStream = ClassExtensions.getResourceAsStream(filename,
+			ClassModel.builder().build());
+		assertNotNull(inputStream);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getResource(Class)}.
+	 */
+	@Test
+	public void testGetResourceClass()
+	{
+		String expected;
+		String actual;
+		URL resource = ClassExtensions.getResource(this.getClass());
 
+		actual = resource.getProtocol();
+		expected = "file";
+		assertEquals(expected, actual);
+
+		actual = resource.getPath();
+		assertTrue(actual.endsWith("/de/alpharogroup/lang/ClassExtensionsTest.class"));
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getResource(String, Object)}
+	 */
 	@Test(enabled = true)
 	public void testGetResourceStringObject()
 	{
-
 		final String propertiesFilename = "resources.properties";
 
 		final ClassExtensionsTest obj = new ClassExtensionsTest();
@@ -360,7 +711,9 @@ public class ClassExtensionsTest
 		assertTrue("", this.result);
 	}
 
-
+	/**
+	 * Test method for {@link ClassExtensions#getResource(Class, String)}
+	 */
 	@Test(enabled = true)
 	public void testGetRessource()
 	{
@@ -373,9 +726,7 @@ public class ClassExtensionsTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link de.alpharogroup.lang.ClassExtensions#getResourceAsStream(java.lang.Class, java.lang.String)}
-	 * .
+	 * Test method for {@link ClassExtensions#getResourceAsStream(Class, String)}
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -397,6 +748,30 @@ public class ClassExtensionsTest
 		assertTrue("Size of prop should be 3.", this.result);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getUnwrappedProxy(Class)}.
+	 */
+	@Test
+	public void testGetUnwrappedProxy()
+	{
+		Class<?> actual;
+		Class<?> expected;
+		PersonDao personDao = new PersonDao();
+		MethodInterceptor handler = new MethodInterceptorHandler<>(personDao);
+		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, handler);
+
+		actual = ClassExtensions.getUnwrappedProxy(proxy.getClass());
+		expected = PersonDao.class;
+		assertEquals(expected, actual);
+
+		actual = ClassExtensions.getUnwrappedProxy(null);
+		expected = null;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#getURL(Class)}
+	 */
 	@Test
 	public void testGetURL()
 	{
@@ -405,6 +780,100 @@ public class ClassExtensionsTest
 		assertTrue(actual.toString().endsWith("/java/lang/Object.class"));
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#isCglib(Class)}.
+	 */
+	@Test
+	public void testIsCglib()
+	{
+		PersonDao personDao = new PersonDao();
+		MethodInterceptor handler = new MethodInterceptorHandler<>(personDao);
+		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, handler);
+
+		boolean cglib = ClassExtensions.isCglib(proxy.getClass());
+		assertTrue(cglib);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#isDerivate(ClassLoader, ClassLoader)}.
+	 */
+	@Test
+	public void testIsDerivate()
+	{
+		boolean expected;
+		boolean actual;
+
+		actual = ClassExtensions.isDerivate(Thread.currentThread().getContextClassLoader(),
+			ClassLoader.getSystemClassLoader());
+		expected = true;
+		assertEquals(expected, actual);
+
+
+		actual = ClassExtensions.isDerivate(null, null);
+		expected = true;
+		assertEquals(expected, actual);
+
+		actual = ClassExtensions.isDerivate(null, ClassExtensions.getClassLoader());
+		expected = true;
+		assertEquals(expected, actual);
+
+		actual = ClassExtensions.isDerivate(ClassExtensions.getClassLoader(), null);
+		expected = false;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#isJdkProxy(Class)}.
+	 */
+	@Test
+	public void testIsJdkProxy()
+	{
+		boolean actual;
+		boolean expected;
+		PersonDao personDao = new PersonDao();
+		MethodInterceptor methodInterceptor = new MethodInterceptorHandler<PersonDao>(personDao);
+		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, methodInterceptor);
+		expected = false;
+		actual = ClassExtensions.isJdkProxy(proxy.getClass());
+		assertEquals(expected, actual);
+
+		Bla bla = new Bla();
+		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
+		Foo jdkProxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
+			new Class[] { Foo.class }, invocationHandler);
+		expected = true;
+		actual = ClassExtensions.isJdkProxy(jdkProxy.getClass());
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#isProxy(Class)}.
+	 */
+	@Test
+	public void testIsProxy()
+	{
+		boolean actual;
+		boolean expected;
+
+		PersonDao personDao = new PersonDao();
+		MethodInterceptor methodInterceptor = new MethodInterceptorHandler<PersonDao>(personDao);
+		PersonDao cglibProxy = (PersonDao)Enhancer.create(PersonDao.class, methodInterceptor);
+		expected = true;
+		actual = ClassExtensions.isProxy(cglibProxy.getClass());
+		assertEquals(expected, actual);
+
+		Bla bla = new Bla();
+		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
+		Foo proxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
+			new Class[] { Foo.class }, invocationHandler);
+		expected = true;
+		actual = ClassExtensions.isProxy(proxy.getClass());
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ClassExtensions#normalizeSimpleClassName(String)}
+	 */
 	@Test(enabled = true)
 	public void testNormalizeClassName()
 	{
@@ -418,6 +887,9 @@ public class ClassExtensionsTest
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#normalizeSimpleClassName(String)}
+	 */
 	@Test(enabled = true)
 	public void testNormalizeSimpleClassName()
 	{
@@ -425,9 +897,16 @@ public class ClassExtensionsTest
 		final String className = "Foo$Component$2.class";
 		final String actual = ClassExtensions.normalizeSimpleClassName(className);
 		assertEquals(expected, actual);
-
 	}
 
+	/**
+	 * Test method for {@link ClassExtensions#getDirectoriesFromResources(String, boolean)}
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test(enabled = true)
 	public void testScanClassesFromPackage() throws Exception, IOException
 	{
@@ -435,7 +914,7 @@ public class ClassExtensionsTest
 			.getDirectoriesFromResources("de.alpharogroup.lang", true);
 		final Set<Class<?>> foundClasses = ClassExtensions
 			.scanClassesFromPackage(directories.get(0), "de.alpharogroup.lang");
-		assertTrue("", foundClasses.contains(ClassExtensionsTest.class));
+		assertTrue(foundClasses.contains(ClassExtensionsTest.class));
 		Set<Class<?>> list = null;
 		list = ClassExtensions.scanClassNames("de.alpharogroup.lang");
 		for (final Class<?> entry : list)
@@ -453,5 +932,6 @@ public class ClassExtensionsTest
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(ClassExtensions.class);
 	}
-	
+	// =========================================================================== //
+
 }

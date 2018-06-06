@@ -24,27 +24,63 @@
  */
 package de.alpharogroup.lang;
 
+import static org.testng.Assert.assertNull;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.test.objects.Person;
 import de.alpharogroup.test.objects.generics.GenericDao;
 import de.alpharogroup.test.objects.generics.PersonDao;
 
 /**
- * The unit test class for the class {@link de.alpharogroup.lang.TypeArgumentsExtensions}.
+ * The unit test class for the class {@link TypeArgumentsExtensions}.
  * 
  * @version 1.0
  * @author Asterios Raptis
  */
-public class TypeArgumentsExtensionsTest
+public class TypeArgumentsExtensionsTest extends BaseTestCase
 {
+	static class Bar extends Foo<String, Integer>
+	{
 
+	}
+
+	static class Foo<T, E>
+	{
+
+	}
+
+	List<String>[] array;
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getClass(Type)}.
+	 * 
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws NoSuchMethodException
+	 */
+	@Test
+	public void testGetClassType()
+		throws NoSuchFieldException, SecurityException, NoSuchMethodException
+	{
+		Type type;
+		type = List.class.getMethod("toArray", Object[].class).getGenericReturnType();
+		Class<?> class1 = TypeArgumentsExtensions.getClass(type);
+		assertNull(class1);
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getFirstTypeArgument(Class, Class)}.
+	 */
 	@Test(enabled = true)
 	public void testGetFirstTypeArgument()
 	{
@@ -53,28 +89,92 @@ public class TypeArgumentsExtensionsTest
 		@SuppressWarnings("unchecked")
 		final Class<Person> personClass = (Class<Person>)TypeArgumentsExtensions
 			.getFirstTypeArgument(GenericDao.class, PersonDao.class);
-		AssertJUnit.assertEquals(expectedClass, personClass);
+		assertEquals(expectedClass, personClass);
 	}
 
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getFirstTypeArgument(Class)}.
+	 */
+	@Test
+	public void testGetFirstTypeArgumentClassOfQextendsT()
+	{
+		Class<?> expected;
+		Class<?> actual;
+		actual = TypeArgumentsExtensions.getFirstTypeArgument(Bar.class);
+		expected = String.class;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getTypeArgument(Class, Class, int)}.
+	 */
+	@SuppressWarnings("unchecked")
 	@Test(enabled = true)
-	public void testGetTypeArgument()
+	public void testGetTypeArgumentClassClassInt()
 	{
 		final Class<Integer> expectedClass = Integer.class;
-		@SuppressWarnings("unchecked")
 		final Class<Integer> integerClass = (Class<Integer>)TypeArgumentsExtensions
 			.getTypeArgument(GenericDao.class, PersonDao.class, 1);
-		AssertJUnit.assertEquals(expectedClass, integerClass);
+		assertEquals(expectedClass, integerClass);
 	}
 
+	// ====================================================================== //
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getTypeArgument(Class, int)}.
+	 */
+	@SuppressWarnings("unchecked")
+	@Test(enabled = true)
+	public void testGetTypeArgumentClassInt()
+	{
+		final Class<Person> expectedPersonClass = Person.class;
+		Class<Person> personClass = (Class<Person>)TypeArgumentsExtensions
+			.getTypeArgument(PersonDao.class, 0);
+		assertEquals(expectedPersonClass, personClass);
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getTypeArguments(Class, Class)}.
+	 */
 	@Test(enabled = true)
 	public void testGetTypeArguments()
 	{
 		final List<Class<?>> typeArguments = TypeArgumentsExtensions
 			.getTypeArguments(GenericDao.class, new PersonDao().getClass());
-		AssertJUnit.assertNotNull(typeArguments);
-		AssertJUnit.assertEquals(2, typeArguments.size());
-		AssertJUnit.assertEquals(Person.class, typeArguments.get(0));
-		AssertJUnit.assertEquals(Integer.class, typeArguments.get(1));
+		assertNotNull(typeArguments);
+		assertEquals(2, typeArguments.size());
+		assertEquals(Person.class, typeArguments.get(0));
+		assertEquals(Integer.class, typeArguments.get(1));
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getTypeArgumentsAndParameters(Type)}.
+	 * 
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 */
+	@Test
+	public void testGetTypeArgumentsAndParameters() throws NoSuchMethodException, SecurityException
+	{
+		// TODO implement unit test...
+		// ParameterizedType parameterizedType;
+		//
+		// Map<Type, Type> typeArgumentsAndParameters =
+		// TypeArgumentsExtensions.getTypeArgumentsAndParameters(parameterizedType);
+		// System.out.println(type);
+	}
+
+	/**
+	 * Test method for {@link TypeArgumentsExtensions#getTypeArguments(Class)}.
+	 */
+	@Test
+	public void testGetTypeArgumentsClassOfQextendsT()
+	{
+		List<Class<?>> typeArguments = TypeArgumentsExtensions.getTypeArguments(PersonDao.class);
+		assertNotNull(typeArguments);
+		assertEquals(2, typeArguments.size());
+		assertEquals(Person.class, typeArguments.get(0));
+		assertEquals(Integer.class, typeArguments.get(1));
 	}
 
 	/**

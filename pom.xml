@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.33</version>
+	<version>4.34</version>
 
 	<name>${project.artifactId}</name>
 
@@ -22,7 +22,7 @@
 	<url>https://github.com/lightblueseas/jcommons-lang</url>
 
 	<properties>
-		<silly-collections.version>4.28.0</silly-collections.version>
+		<silly-collections.version>4.29</silly-collections.version>
 		<vintage-time.version>4.11.0</vintage-time.version>
 		<test-objects.version>4.26</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
@@ -37,6 +37,7 @@
 		<commons-codec.version>1.11</commons-codec.version>
 		<joda-time.version>2.10</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
+		<cglib.version>3.2.6</cglib.version>
 		<!-- MEANBEAN version -->
 		<meanbean.version>2.0.3</meanbean.version>
 		<!-- MEANBEAN-FACTORIES version -->
@@ -156,11 +157,17 @@
 				<artifactId>meanbean-factories</artifactId>
 				<version>${meanbean-factories.version}</version>
 			</dependency>
-			<!-- H2 DEPENDENCIES -->
+			<!-- H2 DEPENDENCY -->
 			<dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2.version}</version>
+			</dependency>
+			<!-- CGLIB DEPENDENCY -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>${cglib.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -250,6 +257,12 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- CGLIB DEPENDENCY -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -329,8 +342,6 @@
 								<!-- explicit deprecated classes -->
 								<exclude>de/alpharogroup/io/StreamExtensions.class</exclude>
 								<!-- explicit enums -->
-								<exclude>de/alpharogroup/file/checksum/Algorithm.class</exclude>
-								<exclude>de/alpharogroup/exception/ExceptionType.class</exclude>
 								<exclude>de/alpharogroup/file/FileExtension.class</exclude>
 								<exclude>de/alpharogroup/string/CharacterEncoding.class</exclude>
 								<!-- explicit exceptions -->

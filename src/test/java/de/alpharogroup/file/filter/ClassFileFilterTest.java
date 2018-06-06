@@ -36,8 +36,8 @@ import java.nio.charset.Charset;
 import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.evaluate.object.ToStringEvaluator;
+import de.alpharogroup.lang.ClassExtensions;
 
 /**
  * The unit test class for the class {@link ClassFileFilter}.

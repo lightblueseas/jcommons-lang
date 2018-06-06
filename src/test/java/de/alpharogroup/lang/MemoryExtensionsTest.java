@@ -68,6 +68,19 @@ public class MemoryExtensionsTest
 	}
 
 	/**
+	 * Test method for {@link MemoryExtensions#disposeUnusedMemory()}.
+	 */
+	@Test
+	public void testDisposeUnusedMemory()
+	{
+		long before = MemoryExtensions.getFreeMemoryForAppInKB();
+		MemoryExtensions.disposeUnusedMemory();
+		long after = MemoryExtensions.getFreeMemoryForAppInKB();
+		this.result = after <= before;
+		AssertJUnit.assertTrue("", this.result);
+	}
+
+	/**
 	 * Test method for {@link de.alpharogroup.lang.MemoryExtensions#getFreeMemoryForAppInKB()}.
 	 */
 	@Test(enabled = true)

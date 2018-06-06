@@ -32,10 +32,12 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.test.objects.Person;
+import de.alpharogroup.test.objects.annotations.AnotherTestAnnotation;
 
 /**
  * The unit test class for the class {@link BeanExtensions}.
  */
+@AnotherTestAnnotation
 public class BeanExtensionsTest
 {
 
@@ -55,6 +57,9 @@ public class BeanExtensionsTest
 		BeanExtensions.setPropertyQuietly(person, "name", "Leo");
 		actual = person.getName();
 		assertEquals(expected, actual);
+		// provocation of InvocationTargetException...
+		Foo foo = new Foo();
+		BeanExtensions.setPropertyQuietly(foo, "bar", "bla");
 	}
 
 	/**
@@ -65,6 +70,22 @@ public class BeanExtensionsTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(BeanExtensions.class);
+	}
+
+}
+
+class Foo
+{
+	String bar;
+
+	public String getBar()
+	{
+		return bar;
+	}
+
+	public void setBar(String bar)
+	{
+		this.bar = bar;
 	}
 
 }

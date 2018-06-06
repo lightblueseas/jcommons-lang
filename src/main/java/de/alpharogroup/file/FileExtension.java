@@ -29,7 +29,6 @@ import lombok.Getter;
 /**
  * The enum {@link FileExtension} for file extensions.
  */
-@Getter
 public enum FileExtension
 {
 
@@ -52,12 +51,14 @@ public enum FileExtension
 	VELOCITY_TEMPLATE(".vm");
 
 	/** The file extension. */
+	@Getter
 	private final String extension;
 
 	/**
-	 * Instantiates a new {@link FileExtension} 
+	 * Instantiates a new {@link FileExtension}
 	 *
-	 * @param extension the file extension
+	 * @param extension
+	 *            the file extension
 	 */
 	FileExtension(final String extension)
 	{

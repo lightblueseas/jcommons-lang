@@ -42,18 +42,6 @@ public class ThreadExtensionsTest extends BaseTestCase
 {
 
 	/**
-	 * Test method for {@link ThreadExtensions#resolveRunningThreads()}
-	 */
-	@Test
-	public final void testResolveRunningThreads()
-	{
-		Thread[] runningThreads = ThreadExtensions.resolveRunningThreads();
-		actual = 0 < runningThreads.length;
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
-	/**
 	 * Test method for {@link ThreadExtensions#newThreadData()}
 	 */
 	@Test
@@ -61,6 +49,18 @@ public class ThreadExtensionsTest extends BaseTestCase
 	{
 		List<ThreadDataBean> threadData = ThreadExtensions.newThreadData();
 		actual = 0 < threadData.size();
+		expected = true;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ThreadExtensions#resolveRunningThreads()}
+	 */
+	@Test
+	public final void testResolveRunningThreads()
+	{
+		Thread[] runningThreads = ThreadExtensions.resolveRunningThreads();
+		actual = 0 < runningThreads.length;
 		expected = true;
 		assertEquals(expected, actual);
 	}

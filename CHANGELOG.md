@@ -1,6 +1,17 @@
 ## Change log
 ----------------------
 
+Version 4.34
+-------------
+
+CHANGED:
+
+- unit tests extended for improve code coverage
+- removed deprecated enum de.alpharogroup.file.checksum.Algorithm
+- removed deprecated enum de.alpharogroup.exception.ExceptionType
+- tagged several close methods as deprecated in class StreamExtensions since jdk7 the new feature try-with-resources statement
+- update of silly-collections version to 4.29
+
 Version 4.33
 -------------
 

@@ -37,7 +37,7 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.evaluate.object.ToStringEvaluator;
 import de.alpharogroup.lang.ClassExtensions;
 
@@ -47,52 +47,6 @@ import de.alpharogroup.lang.ClassExtensions;
 public class MultiplyExtensionsFileFilterTest
 {
 
-
-	/**
-	 * Test method for {@link MultiplyExtensionsFileFilter} constructors
-	 */
-	@Test
-	public final void testConstructors()
-	{
-		boolean acceptDir;
-		String filesuffix;
-		FileFilter fileFilter;
-		Collection<String> fileExtensions;
-
-		acceptDir = false;
-		filesuffix = ".properties";
-		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
-
-		fileFilter = new MultiplyExtensionsFileFilter(acceptDir,
-			fileExtensions.toArray(new String[fileExtensions.size()]));
-		assertNotNull(fileFilter);
-
-		fileFilter = new MultiplyExtensionsFileFilter(fileExtensions);
-		assertNotNull(fileFilter);
-
-		fileFilter = new MultiplyExtensionsFileFilter(
-			fileExtensions.toArray(new String[fileExtensions.size()]));
-		assertNotNull(fileFilter);
-	}
-
-	/**
-	 * Test method for {@link MultiplyExtensionsFileFilter} constructors with null values
-	 */
-	@Test(expectedExceptions=IllegalArgumentException.class)
-	public final void testConstructorsWithNullValues()
-	{
-		Collection<String> fileExtensions = null;
-		new MultiplyExtensionsFileFilter(fileExtensions);
-	}
-	
-	/**
-	 * Test method for {@link MultiplyExtensionsFileFilter} constructors with empty list
-	 */
-	@Test(expectedExceptions=IllegalArgumentException.class)
-	public final void testConstructorsWithEmptyList()
-	{
-		new MultiplyExtensionsFileFilter(ListExtensions.newArrayList());
-	}
 
 	/**
 	 * Test method for {@link MultiplyExtensionsFileFilter#accept(File)}
@@ -117,7 +71,7 @@ public class MultiplyExtensionsFileFilterTest
 		Collection<String> fileExtensions;
 
 		filesuffix = ".properties";
-		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
+		fileExtensions = ListFactory.newArrayList(filesuffix, ".txt");
 		acceptDir = false;
 		fileFilter = new MultiplyExtensionsFileFilter(fileExtensions, acceptDir);
 		assertNotNull(fileFilter);
@@ -139,7 +93,7 @@ public class MultiplyExtensionsFileFilterTest
 
 		actual = fileFilter.accept(dir);
 		expected = true;
-		assertEquals(expected, actual);		
+		assertEquals(expected, actual);
 
 		file = new File(".", "TestFind.class");
 		FileUtils.writeStringToFile(file, "", Charset.defaultCharset());
@@ -158,6 +112,52 @@ public class MultiplyExtensionsFileFilterTest
 	}
 
 	/**
+	 * Test method for {@link MultiplyExtensionsFileFilter} constructors
+	 */
+	@Test
+	public final void testConstructors()
+	{
+		boolean acceptDir;
+		String filesuffix;
+		FileFilter fileFilter;
+		Collection<String> fileExtensions;
+
+		acceptDir = false;
+		filesuffix = ".properties";
+		fileExtensions = ListFactory.newArrayList(filesuffix, ".txt");
+
+		fileFilter = new MultiplyExtensionsFileFilter(acceptDir,
+			fileExtensions.toArray(new String[fileExtensions.size()]));
+		assertNotNull(fileFilter);
+
+		fileFilter = new MultiplyExtensionsFileFilter(fileExtensions);
+		assertNotNull(fileFilter);
+
+		fileFilter = new MultiplyExtensionsFileFilter(
+			fileExtensions.toArray(new String[fileExtensions.size()]));
+		assertNotNull(fileFilter);
+	}
+
+	/**
+	 * Test method for {@link MultiplyExtensionsFileFilter} constructors with empty list
+	 */
+	@Test(expectedExceptions = IllegalArgumentException.class)
+	public final void testConstructorsWithEmptyList()
+	{
+		new MultiplyExtensionsFileFilter(ListFactory.newArrayList());
+	}
+
+	/**
+	 * Test method for {@link MultiplyExtensionsFileFilter} constructors with null values
+	 */
+	@Test(expectedExceptions = IllegalArgumentException.class)
+	public final void testConstructorsWithNullValues()
+	{
+		Collection<String> fileExtensions = null;
+		new MultiplyExtensionsFileFilter(fileExtensions);
+	}
+
+	/**
 	 * Test method for {@link MultiplyExtensionsFileFilter#toString()}
 	 */
 	@Test
@@ -173,7 +173,7 @@ public class MultiplyExtensionsFileFilterTest
 		Collection<String> fileExtensions;
 
 		filesuffix = ".properties";
-		fileExtensions = ListExtensions.newArrayList(filesuffix, ".txt");
+		fileExtensions = ListFactory.newArrayList(filesuffix, ".txt");
 		actual = ToStringEvaluator
 			.evaluateConsistency(new MultiplyExtensionsFileFilter(fileExtensions, acceptDir));
 		expected = true;

@@ -55,7 +55,7 @@ public class AnnotationModelTest
 		model = AnnotationModel.builder().build();
 		assertNotNull(model);
 	}
-	
+
 	/**
 	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()}
 	 * and {@link AnnotationModel#toString()}

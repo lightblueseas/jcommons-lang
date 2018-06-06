@@ -57,13 +57,12 @@ public class ConnectionsExtensionsTest
 		String dbuser;
 		String dbpasswort;
 		Connection connection;
-		
+
 		path = "file:~/";
 		databaseName = "resourcebundles";
 		dbuser = "sa";
 		dbpasswort = "";
-		connection = ConnectionsExtensions.getH2Connection(path, databaseName, dbuser,
-			dbpasswort);
+		connection = ConnectionsExtensions.getH2Connection(path, databaseName, dbuser, dbpasswort);
 		assertNotNull(connection);
 	}
 

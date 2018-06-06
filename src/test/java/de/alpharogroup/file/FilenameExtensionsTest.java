@@ -63,6 +63,7 @@ public class FilenameExtensionsTest
 		actual = FilenameExtensions.getFilenamePrefix(file);
 		assertTrue(actual.endsWith(expected));
 	}
+
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenamePrefix(File)}.
 	 * 
@@ -81,7 +82,7 @@ public class FilenameExtensionsTest
 
 		File dir = file.getParentFile();
 		expected = null;
-		
+
 		expected = "de/alpharogroup/lang";
 		actual = FilenameExtensions.getFilenamePrefix(dir);
 		assertTrue(actual.endsWith(expected));
@@ -128,10 +129,31 @@ public class FilenameExtensionsTest
 		expected = null;
 		actual = FilenameExtensions.getFilenameSuffix(dir);
 		assertEquals(expected, actual);
-		
+
 		file = new File(dir, "noextensionfile");
 		expected = null;
 		actual = FilenameExtensions.getFilenameSuffix(file);
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}
+	 *
+	 * @throws URISyntaxException
+	 *             occurs by creation of the file with an uri.
+	 */
+	@Test
+	public void testGetFilenameWithoutExtensionFile() throws URISyntaxException
+	{
+		String expected;
+		String actual;
+		actual = null;
+		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
+
+		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
+
+		expected = "resources";
+		actual = FilenameExtensions.getFilenameWithoutExtension(file);
 		assertEquals(expected, actual);
 	}
 
@@ -164,30 +186,9 @@ public class FilenameExtensionsTest
 	{
 		String expected;
 		String actual;
-		final String fileName ="de/alpharogroup/lang/resources";
+		final String fileName = "de/alpharogroup/lang/resources";
 		actual = FilenameExtensions.getFilenameWithoutExtension(fileName);
 		expected = fileName;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}
-	 *
-	 * @throws URISyntaxException
-	 *             occurs by creation of the file with an uri.
-	 */
-	@Test
-	public void testGetFilenameWithoutExtensionFile() throws URISyntaxException
-	{
-		String expected;
-		String actual;
-		actual = null;
-		final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
-
-		final File file = ClassExtensions.getResourceAsFile(propertiesFilename);
-
-		expected = "resources";
-		actual = FilenameExtensions.getFilenameWithoutExtension(file);
 		assertEquals(expected, actual);
 	}
 

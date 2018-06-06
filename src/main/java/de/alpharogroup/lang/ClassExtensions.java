@@ -374,9 +374,12 @@ public final class ClassExtensions
 	 * @return the directories from resources
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static List<File> getDirectoriesFromResources(String path, final boolean isPackage)
-		throws IOException
+		throws IOException, URISyntaxException
 	{
 		if (isPackage)
 		{
@@ -630,6 +633,7 @@ public final class ClassExtensions
 	 * @param name
 	 *            The name from the file.
 	 * @return The file or null if the file does not exists.
+	 * 
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -647,7 +651,15 @@ public final class ClassExtensions
 		}
 		else
 		{
-			file = new File(url.toURI());
+			if (url.getProtocol().equals("jar"))
+			{
+				throw new URISyntaxException(url.toString(),
+					"Resource is in a jar file. Use instead the method ClassExtensions#getResourceAsStream(String). Given resource is");
+			}
+			if (url.getProtocol().equals("file"))
+			{
+				file = new File(url.toURI());
+			}
 		}
 		return file;
 	}
@@ -660,6 +672,7 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The Object.
 	 * @return The file or null if the file does not exists.
+	 * 
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -678,7 +691,15 @@ public final class ClassExtensions
 		}
 		else
 		{
-			file = new File(url.toURI());
+			if (url.getProtocol().equals("jar"))
+			{
+				throw new URISyntaxException(url.toString(),
+					"Resource is in a jar file. Use instead the method ClassExtensions#getResourceAsStream(String, Object). Given resource is");
+			}
+			if (url.getProtocol().equals("file"))
+			{
+				file = new File(url.toURI());
+			}
 
 		}
 		return file;
@@ -947,7 +968,7 @@ public final class ClassExtensions
 	 *            the package path
 	 * @return the list
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	public static Set<Class<?>> scanClassesFromPackage(final File directory,
 		final String packagePath) throws ClassNotFoundException

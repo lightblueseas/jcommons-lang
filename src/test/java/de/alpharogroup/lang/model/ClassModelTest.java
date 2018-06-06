@@ -38,7 +38,7 @@ import javax.lang.model.element.Modifier;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.collections.list.ListExtensions;
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
@@ -57,23 +57,24 @@ public class ClassModelTest
 	{
 		ClassModel classModel = new ClassModel();
 		assertNotNull(classModel);
-		
+
 		ElementKind kind = ElementKind.CLASS;
 
 		/** The package name. */
 		String packageName = "de.alpharogroup.lang.model";
 
 		/** The imports. */
-		List<String> imports = ListExtensions.newArrayList("import static org.testng.Assert.assertNotNull;", "import java.util.Map;");
+		List<String> imports = ListFactory.newArrayList(
+			"import static org.testng.Assert.assertNotNull;", "import java.util.Map;");
 
 		/** The class annotations. */
-		List<ClassModel> classAnnotations = ListExtensions.newArrayList();
+		List<ClassModel> classAnnotations = ListFactory.newArrayList();
 
 		/** The modifiers. */
-		List<Modifier> modifiers = ListExtensions.newArrayList();
+		List<Modifier> modifiers = ListFactory.newArrayList();
 
 		/** The generic types. */
-		List<String> genericTypes = ListExtensions.newArrayList();
+		List<String> genericTypes = ListFactory.newArrayList();
 
 		/** The class name. */
 		String className = "Foo";
@@ -82,17 +83,18 @@ public class ClassModelTest
 		String extendedClassName = "";
 
 		/** The interface implementations. */
-		List<String> interfaceImplementations = ListExtensions.newArrayList();
+		List<String> interfaceImplementations = ListFactory.newArrayList();
 
 		/** The methods. */
 		Map<String, MethodModel> methods = MapFactory.newHashMap();
-		
-		classModel = new ClassModel(kind, packageName, imports, classAnnotations, modifiers, genericTypes, className, extendedClassName, interfaceImplementations, methods);
+
+		classModel = new ClassModel(kind, packageName, imports, classAnnotations, modifiers,
+			genericTypes, className, extendedClassName, interfaceImplementations, methods);
 		assertNotNull(classModel);
 		classModel = ClassModel.builder().build();
 		assertNotNull(classModel);
 	}
-	
+
 	/**
 	 * Test method for {@link ClassModel#equals(Object)} , {@link ClassModel#hashCode()} and
 	 * {@link ClassModel#toString()}

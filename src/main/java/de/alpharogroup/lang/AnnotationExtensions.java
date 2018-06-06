@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,8 @@ import de.alpharogroup.file.filter.ClassFileFilter;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link AnnotationExtensions}.
+ * The class {@link AnnotationExtensions} provides methods for scan and resolve annotations in
+ * classes and interfaces.
  *
  * @author Asterios Raptis
  */
@@ -58,13 +60,16 @@ public final class AnnotationExtensions
 	 *            the annotation class
 	 * @return the all classes
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllAnnotatedClasses(final String packagePath,
 		final Class<? extends Annotation> annotationClass)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath,
 			true);
@@ -85,14 +90,19 @@ public final class AnnotationExtensions
 	 * @param annotationClasses
 	 *            the list with the annotation classes
 	 * @return the all classes
+	 * 
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
+	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllAnnotatedClassesFromSet(final String packagePath,
 		final Set<Class<? extends Annotation>> annotationClasses)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		final List<File> directories = ClassExtensions.getDirectoriesFromResources(packagePath,
 			true);
@@ -114,12 +124,15 @@ public final class AnnotationExtensions
 	 * @return the all classes
 	 *
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		return getAllAnnotatedClasses(packagePath, null);
 	}
@@ -133,13 +146,16 @@ public final class AnnotationExtensions
 	 *            the annotation classes
 	 * @return the all classes
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * 
+	 * @throws URISyntaxException
+	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
 	public static Set<Class<?>> getAllClasses(final String packagePath,
 		final Set<Class<? extends Annotation>> annotationClasses)
-		throws ClassNotFoundException, IOException
+		throws ClassNotFoundException, IOException, URISyntaxException
 	{
 		return getAllAnnotatedClassesFromSet(packagePath, annotationClasses);
 	}
@@ -323,7 +339,7 @@ public final class AnnotationExtensions
 	 *            the list with the annotation classes
 	 * @return the list
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	public static Set<Class<?>> scanForAnnotatedClassesFromSet(final File directory,
 		final String packagePath, final Set<Class<? extends Annotation>> annotationClasses)
@@ -336,7 +352,6 @@ public final class AnnotationExtensions
 		}
 		// define the include filefilter for class files...
 		final FileFilter includeFileFilter = new ClassFileFilter();
-
 		final File[] files = directory.listFiles(includeFileFilter);
 		for (final File file : files)
 		{
@@ -396,7 +411,7 @@ public final class AnnotationExtensions
 	 *            the package path
 	 * @return the list
 	 * @throws ClassNotFoundException
-	 *             the class not found exception
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	public static Set<Class<?>> scanForClasses(final File directory, final String packagePath)
 		throws ClassNotFoundException

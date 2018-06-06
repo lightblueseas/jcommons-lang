@@ -43,7 +43,8 @@ public class LinuxShellExecutorTest
 	/**
 	 * Test method for {@link LinuxShellExecutor#execute(boolean, String...)}
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
 	public void testExecute() throws IOException, InterruptedException
@@ -52,11 +53,12 @@ public class LinuxShellExecutorTest
 		actual = LinuxShellExecutor.execute(true, "ls -al");
 		assertNotNull(actual);
 	}
-	
+
 	/**
 	 * Test method for {@link LinuxShellExecutor#toString(java.io.InputStream)}
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
 	public void testToString() throws IOException

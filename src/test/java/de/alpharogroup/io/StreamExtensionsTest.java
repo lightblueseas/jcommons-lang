@@ -24,11 +24,13 @@
  */
 package de.alpharogroup.io;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -38,12 +40,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.date.CreateDateExtensions;
 import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.test.objects.Person;
@@ -51,11 +55,11 @@ import de.alpharogroup.test.objects.Person;
 /**
  * The unit test class for the class {@link StreamExtensions}.
  */
-public class StreamExtensionsTest
+public class StreamExtensionsTest extends BaseTestCase
 {
 	/** The file. */
 	final String propertiesFilename = "de/alpharogroup/lang/resources.properties";
-	boolean result;
+	// boolean actual;
 
 	/**
 	 * Sets up method will be invoked before every unit test method in this class.
@@ -68,12 +72,13 @@ public class StreamExtensionsTest
 	/**
 	 * Test close input stream.
 	 */
+	@SuppressWarnings("deprecation")
 	@Test(enabled = true)
 	public void testCloseInputStream()
 	{
 		final InputStream is = ClassExtensions.getResourceAsStream(propertiesFilename);
-		result = StreamExtensions.closeInputStream(is);
-		assertTrue("", result);
+		actual = StreamExtensions.closeInputStream(is);
+		assertTrue("", actual);
 	}
 
 	/**
@@ -85,13 +90,14 @@ public class StreamExtensionsTest
 	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
 	 *             converted to a URI.
 	 */
+	@SuppressWarnings("deprecation")
 	@Test(enabled = true)
 	public void testCloseOutputStream() throws IOException, URISyntaxException
 	{
 		final URL url = ClassExtensions.getResource(propertiesFilename);
 		final OutputStream os = StreamExtensions.getOutputStream(new File(url.toURI()));
-		this.result = StreamExtensions.closeOutputStream(os);
-		assertTrue("", this.result);
+		this.actual = StreamExtensions.closeOutputStream(os);
+		assertTrue("", this.actual);
 	}
 
 	/**
@@ -103,13 +109,14 @@ public class StreamExtensionsTest
 	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
 	 *             converted to a URI.
 	 */
+	@SuppressWarnings("deprecation")
 	@Test(enabled = true)
 	public void testCloseReader() throws IOException, URISyntaxException
 	{
 		final URL url = ClassExtensions.getResource(propertiesFilename);
 		final Reader reader = StreamExtensions.getReader(new File(url.toURI()));
-		this.result = StreamExtensions.closeReader(reader);
-		assertTrue("", this.result);
+		this.actual = StreamExtensions.closeReader(reader);
+		assertTrue("", this.actual);
 	}
 
 	/**
@@ -121,13 +128,14 @@ public class StreamExtensionsTest
 	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
 	 *             converted to a URI.
 	 */
+	@SuppressWarnings("deprecation")
 	@Test(enabled = true)
 	public void testCloseWriter() throws IOException, URISyntaxException
 	{
 		final URL url = ClassExtensions.getResource(propertiesFilename);
 		final Writer writer = StreamExtensions.getWriter(new File(url.toURI()));
-		this.result = StreamExtensions.closeWriter(writer);
-		assertTrue("", this.result);
+		this.actual = StreamExtensions.closeWriter(writer);
+		assertTrue("", this.actual);
 	}
 
 	/**
@@ -143,24 +151,17 @@ public class StreamExtensionsTest
 	public void testGetByteArrayInputStream() throws IOException, ClassNotFoundException
 	{
 		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
-		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+		final File writeInMe = new File(".", "testGetByteArrayInputStream.dat");
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
 			writeInMe);
-		assertTrue("", result);
+		assertTrue("", actual);
 		final InputStream is = writeInMe.toURI().toURL().openStream();
 		final byte[] ba = StreamExtensions.getByteArray(is);
 		assertTrue(ba.length > 0);
 		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;
 		assertEquals(birthdayFromLeonardo, readedObj);
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 	/**
@@ -176,10 +177,11 @@ public class StreamExtensionsTest
 		throws IOException, ClassNotFoundException
 	{
 		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
-		final File writeInMe = new File(".", "testWriteSerializedObjectToFile.dat");
-		result = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+		final File writeInMe = new File(".",
+			"testGetByteArrayInputStreamByteArrayOutputStream.dat");
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
 			writeInMe);
-		assertTrue("", result);
+		assertTrue("", actual);
 		final InputStream is = writeInMe.toURI().toURL().openStream();
 		final byte[] ba = StreamExtensions.getByteArray(is,
 			new ByteArrayOutputStream(is.available()));
@@ -187,14 +189,118 @@ public class StreamExtensionsTest
 		final Object obj = SerializedObjectExtensions.toObject(ba);
 		final Date readedObj = (Date)obj;
 		assertEquals(birthdayFromLeonardo, readedObj);
-		try
-		{
-			writeInMe.deleteOnExit();
-		}
-		catch (final Exception e)
-		{
-			// ignore...
-		}
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getInputStream(File)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testGetInputStreamFile() throws IOException
+	{
+		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
+		final File writeInMe = new File(".", "testGetInputStreamFile.dat");
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+			writeInMe);
+		assertTrue("", actual);
+		InputStream inputStream = StreamExtensions.getInputStream(writeInMe);
+		assertNotNull(inputStream);
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getInputStream(File, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testGetInputStreamFileBoolean() throws IOException
+	{
+		final File writeInMe = new File(".", "testGetInputStreamFileBoolean.dat");
+
+		InputStream inputStream = StreamExtensions.getInputStream(writeInMe, true);
+		assertNotNull(inputStream);
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+
+	/**
+	 * Test method for {@link StreamExtensions#getInputStream(File, boolean)} in case of the file
+	 * not exists and the flag createFile is false.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetInputStreamFileBooleanFalse() throws IOException
+	{
+		StreamExtensions.getInputStream(new File(".", "testGetInputStreamFileBooleanFalse.dat"),
+			false);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getOutputStream(File)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testGetOutputStreamFile() throws IOException
+	{
+		File fileout = new File(".", "testGetOutputStreamFile.out");
+		OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);
+		assertNotNull(outputStream);
+
+		FileUtils.deleteQuietly(fileout);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getOutputStream(File, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetOutputStreamFileBooleanFalse() throws IOException
+	{
+		StreamExtensions.getOutputStream(new File(".", "testGetOutputStreamFileBooleanFalse.dat"),
+			false);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getReader(File)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testGetReaderFile() throws IOException
+	{
+		File inputFile = new File(".", "testGetReaderFile.in");
+		Reader reader = StreamExtensions.getReader(inputFile, null, true);
+		assertNotNull(reader);
+
+		reader = StreamExtensions.getReader(inputFile, "UTF-8", true);
+		assertNotNull(reader);
+
+		FileUtils.deleteQuietly(inputFile);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getReader(File, String, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetReaderFileStringBooleanFalse() throws IOException
+	{
+		StreamExtensions.getReader(new File(".", "testGetReaderFileStringBooleanFalse.out"), null,
+			false);
 	}
 
 	/**
@@ -210,6 +316,42 @@ public class StreamExtensionsTest
 	}
 
 	/**
+	 * Test method for {@link StreamExtensions#getWriter(File)}.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException
+	 *             if this URL is not formatted strictly according to to RFC2396 and cannot be
+	 *             converted to a URI.
+	 */
+	@Test
+	public void testGetWriterFile() throws IOException, URISyntaxException
+	{
+		final URL url = ClassExtensions.getResource(propertiesFilename);
+		Writer writer = StreamExtensions.getWriter(new File(url.toURI()));
+		assertNotNull(writer);
+
+		File inputFile = new File(".", "testGetWriterFile.in");
+		writer = StreamExtensions.getWriter(inputFile, "UTF-8", true);
+		assertNotNull(writer);
+		FileUtils.deleteQuietly(inputFile);
+	}
+
+	/**
+	 * Test method for {@link StreamExtensions#getWriter(File, String, boolean)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test(expectedExceptions = FileNotFoundException.class)
+	public void testGetWriterFileStringBooleanFalse() throws IOException
+	{
+		StreamExtensions.getWriter(new File(".", "testGetWriterFileStringBooleanFalse.out"), null,
+			false);
+	}
+
+
+	/**
 	 * Test method for {@link StreamExtensions}
 	 */
 	@Test(expectedExceptions = { BeanTestException.class, ObjectCreationException.class })
@@ -217,6 +359,41 @@ public class StreamExtensionsTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(StreamExtensions.class);
+	}
+
+	/**
+	 * Test method for
+	 * {@link StreamExtensions#writeInputStreamToOutputStream(InputStream, OutputStream)}.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             is thrown when a class is not found in the classloader or no definition for the
+	 *             class with the specified name could be found.
+	 */
+	@Test
+	public void testWriteInputStreamToOutputStreamInputStreamOutputStream()
+		throws IOException, ClassNotFoundException
+	{
+		final Date birthdayFromLeonardo = CreateDateExtensions.newDate(2012, 4, 19);
+		final File writeInMe = new File(".",
+			"testWriteInputStreamToOutputStreamInputStreamOutputStream.in");
+		actual = SerializedObjectExtensions.writeSerializedObjectToFile(birthdayFromLeonardo,
+			writeInMe);
+		InputStream inputStream = StreamExtensions.getInputStream(writeInMe, true);
+
+		File fileout = new File(".",
+			"testWriteInputStreamToOutputStreamInputStreamOutputStream.out");
+		try (final OutputStream outputStream = StreamExtensions.getOutputStream(fileout, true);)
+		{
+			StreamExtensions.writeInputStreamToOutputStream(inputStream, outputStream);
+		}
+
+		final Object readedObjectFromFile = SerializedObjectExtensions
+			.readSerializedObjectFromFile(fileout);
+		assertEquals(readedObjectFromFile, birthdayFromLeonardo);
+		FileUtils.deleteQuietly(fileout);
+		FileUtils.deleteQuietly(writeInMe);
 	}
 
 }

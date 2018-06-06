@@ -53,7 +53,7 @@ public class StringOutputStreamTest
 	public void testToString() throws IOException
 	{
 		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
-		final File writeInMe = new File(".", "testWriteBirthdayToFile.log");
+		final File writeInMe = new File(".", "testToString.log");
 		FileUtils.writeStringToFile(writeInMe, expected, Charset.defaultCharset());
 		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
 		final StringOutputStream stringOutput = new StringOutputStream();
@@ -67,7 +67,89 @@ public class StringOutputStreamTest
 
 		final String actual = stringOutput.toString();
 		stringOutput.close();
-		assertTrue("", actual.startsWith(expected));
+		assertTrue(actual.startsWith(expected));
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+	/**
+	 * Test method for {@link StringOutputStream#write(byte[])}
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testWriteByteArray() throws IOException
+	{
+		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
+		final File writeInMe = new File(".", "testWriteByteArray.log");
+		FileUtils.writeStringToFile(writeInMe, expected, Charset.defaultCharset());
+		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
+		final StringOutputStream stringOutput = new StringOutputStream();
+
+		final byte[] buffer = new byte[8192];
+		while ((inputStream.read(buffer)) != -1)
+		{
+			stringOutput.write(buffer);
+		}
+
+		final String actual = stringOutput.toString();
+		stringOutput.close();
+		assertTrue(actual.startsWith(expected));
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+	/**
+	 * Test method for {@link StringOutputStream#write(int)}
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testWriteInt() throws IOException
+	{
+		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
+		final File writeInMe = new File(".", "testWriteInt.log");
+		FileUtils.writeStringToFile(writeInMe, expected, Charset.forName("UTF-8"));
+		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
+		final StringOutputStream stringOutput = new StringOutputStream();
+		stringOutput.setCharset(Charset.forName("UTF-8"));
+		int readLength;
+		while ((readLength = inputStream.read()) != -1)
+		{
+			stringOutput.write(readLength);
+		}
+
+		final String actual = stringOutput.toString();
+		stringOutput.close();
+		assertTrue(actual.startsWith(expected));
+		FileUtils.deleteQuietly(writeInMe);
+	}
+
+	/**
+	 * Test method for {@link StringOutputStream#write(byte[])}
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Test
+	public void testWriteString() throws IOException
+	{
+		final String expected = "Thu Apr 19 00:00:00 CEST 2012";
+		final File writeInMe = new File(".", "testWriteString.log");
+		FileUtils.writeStringToFile(writeInMe, expected, Charset.forName("UTF-8"));
+		final InputStream inputStream = writeInMe.toURI().toURL().openStream();
+		final StringOutputStream stringOutput = new StringOutputStream();
+		stringOutput.setCharset(Charset.forName("UTF-8"));
+
+		final byte[] buffer = new byte[8192];
+		while ((inputStream.read(buffer, 0, buffer.length)) != -1)
+		{
+			stringOutput.write(new String(buffer, Charset.forName("UTF-8")));
+		}
+
+		final String actual = stringOutput.toString();
+		stringOutput.close();
+		assertTrue(actual.startsWith(expected));
 		FileUtils.deleteQuietly(writeInMe);
 	}
 

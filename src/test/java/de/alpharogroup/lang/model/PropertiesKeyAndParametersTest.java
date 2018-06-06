@@ -35,10 +35,10 @@ import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.meanbean.factories.ObjectArrayFactory;
-import de.alpharogroup.collections.array.ArrayExtensions;
+import de.alpharogroup.collections.array.ArrayFactory;
 import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.meanbean.factories.ObjectArrayFactory;
 
 /**
  * The unit test class for the class {@link PropertiesKeyAndParameters}.
@@ -53,18 +53,18 @@ public class PropertiesKeyAndParametersTest
 	public final void testConstructors()
 	{
 		PropertiesKeyAndParameters model = new PropertiesKeyAndParameters();
-		assertNotNull(model);	
+		assertNotNull(model);
 		/** The key. */
 		String key = "";
 		/** The parameters. */
-		Object[] parameters = ArrayExtensions.newArray("foo", "bar");
-		
+		Object[] parameters = ArrayFactory.newArray("foo", "bar");
+
 		model = new PropertiesKeyAndParameters(key, parameters);
 		assertNotNull(model);
 		model = PropertiesKeyAndParameters.builder().build();
 		assertNotNull(model);
 	}
-	
+
 	/**
 	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} ,
 	 * {@link PropertiesKeyAndParameters#hashCode()} and

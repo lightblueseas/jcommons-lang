@@ -33,8 +33,8 @@ import java.net.URISyntaxException;
 
 import org.testng.annotations.Test;
 
-import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.evaluate.object.ToStringEvaluator;
+import de.alpharogroup.lang.ClassExtensions;
 
 /**
  * The unit test class for the class {@link SimpleFilenameFilter}.
@@ -90,19 +90,6 @@ public class SimpleFilenameFilterTest
 	}
 
 	/**
-	 * Test method for {@link SimpleFilenameFilter} with argument of filesuffix as null.
-	 */
-	@Test(expectedExceptions = IllegalArgumentException.class)
-	public final void testFileSuffixNull()
-	{
-		String filesuffix;
-		boolean acceptDir;
-		filesuffix = null;
-		acceptDir = false;
-		new SimpleFilenameFilter(filesuffix, acceptDir);
-	}
-
-	/**
 	 * Test method for {@link SimpleFilenameFilter} with argument of filesuffix as empty string.
 	 */
 	@Test(expectedExceptions = IllegalArgumentException.class)
@@ -111,6 +98,19 @@ public class SimpleFilenameFilterTest
 		String filesuffix;
 		boolean acceptDir;
 		filesuffix = "";
+		acceptDir = false;
+		new SimpleFilenameFilter(filesuffix, acceptDir);
+	}
+
+	/**
+	 * Test method for {@link SimpleFilenameFilter} with argument of filesuffix as null.
+	 */
+	@Test(expectedExceptions = IllegalArgumentException.class)
+	public final void testFileSuffixNull()
+	{
+		String filesuffix;
+		boolean acceptDir;
+		filesuffix = null;
 		acceptDir = false;
 		new SimpleFilenameFilter(filesuffix, acceptDir);
 	}

@@ -62,7 +62,7 @@ import de.alpharogroup.test.objects.annotations.foobar.SomeClass;
 import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
 
 /**
- * The unit test class for the class {@link de.alpharogroup.lang.AnnotationExtensions}.
+ * The unit test class for the class {@link AnnotationExtensions}.
  *
  * @author Asterios Raptis
  * @version 1.0

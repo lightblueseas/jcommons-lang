@@ -468,10 +468,21 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		Character expected;
 		Character actual;
-		String theUnicodeString = "\u03A9";
+		String theUnicodeString;
+		theUnicodeString = "\u03A9";
 		actual = StringExtensions.convertUnicodeStringToCharacter(theUnicodeString);
 		expected = Character.valueOf('\u03A9');
 		assertEquals(expected, actual);
+		
+		theUnicodeString = "\\u1F78";
+		actual = StringExtensions.convertUnicodeStringToCharacter(theUnicodeString);
+		expected = Character.valueOf('\u1F78');
+		assertEquals(expected, actual);
+		
+		theUnicodeString = "\\u03BC";
+		actual = StringExtensions.convertUnicodeStringToCharacter(theUnicodeString);
+		expected = Character.valueOf('\u03BC');
+		assertEquals(expected, actual);		
 	}
 
 	/**

@@ -24,7 +24,8 @@
  */
 package de.alpharogroup.io;
 
-import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.File;
@@ -86,13 +87,40 @@ public class SerializedObjectExtensionsTest extends BaseTestCase
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             is thrown when a class is not found in the classloader or no definition for the
+	 *             class with the specified name could be found.
 	 */
 	@Test
-	public void testToByteArray() throws IOException
+	public void testToByteArray() throws IOException, ClassNotFoundException
 	{
-		Person person = Person.builder().build();
-		byte[] byteArray = SerializedObjectExtensions.toByteArray(person);
+		Person expected;
+		Person actual;
+		expected = Person.builder().build();
+		byte[] byteArray = SerializedObjectExtensions.toByteArray(expected);
 		assertNotNull(byteArray);
+		actual = (Person)SerializedObjectExtensions.toObject(byteArray);
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link SerializedObjectExtensions#toObject(byte[])}
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             is thrown when a class is not found in the classloader or no definition for the
+	 *             class with the specified name could be found.
+	 */
+	@Test
+	public void testToObject() throws ClassNotFoundException, IOException
+	{
+		String expected;
+		String actual;
+		final byte[] byteArray = { -84, -19, 0, 5, 116, 0, 7, 70, 111, 111, 32, 98, 97, 114 };
+		expected = "Foo bar";
+		actual = (String)SerializedObjectExtensions.toObject(byteArray);
+		assertEquals(expected, actual);
 	}
 
 	/**

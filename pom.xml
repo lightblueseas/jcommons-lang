@@ -38,10 +38,6 @@
 		<joda-time.version>2.10</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
 		<cglib.version>3.2.6</cglib.version>
-		<!-- MEANBEAN version -->
-		<meanbean.version>2.0.3</meanbean.version>
-		<!-- MEANBEAN-FACTORIES version -->
-		<meanbean-factories.version>1.0.0</meanbean-factories.version>
 		<!-- DB DRIVER version -->
 		<h2.version>1.4.197</h2.version>
 	</properties>
@@ -144,18 +140,6 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jobject-evaluate</artifactId>
 				<version>${jobject-evaluate.version}</version>
-			</dependency>
-			<!-- MEANBEAN DEPENDENCY -->
-			<dependency>
-				<groupId>org.meanbean</groupId>
-				<artifactId>meanbean</artifactId>
-				<version>${meanbean.version}</version>
-			</dependency>
-			<!-- MEANBEAN-FACTORIES DEPENDENCY -->
-			<dependency>
-				<groupId>de.alpharogroup</groupId>
-				<artifactId>meanbean-factories</artifactId>
-				<version>${meanbean-factories.version}</version>
 			</dependency>
 			<!-- H2 DEPENDENCY -->
 			<dependency>

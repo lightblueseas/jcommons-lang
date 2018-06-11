@@ -62,7 +62,6 @@ Release version numbers will be incremented in the following format:
 
 For detailed information on versioning you can visit the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
 
-
 ## Want to Help and improve it? ###
 
 The source code for jcommons-lang are on GitHub. Please feel free to fork and send pull requests!

@@ -6,7 +6,7 @@ Version 4.35-SNAPSHOT
 
 CHANGED:
 
-- update of test-objects version to 4.28
+- update of dependency test-objects version to 4.28
 
 Version 4.34
 -------------
@@ -17,7 +17,7 @@ CHANGED:
 - removed deprecated enum de.alpharogroup.file.checksum.Algorithm
 - removed deprecated enum de.alpharogroup.exception.ExceptionType
 - tagged several close methods as deprecated in class StreamExtensions since jdk7 the new feature try-with-resources statement
-- update of silly-collections version to 4.29
+- update of dependency silly-collections version to 4.29
 
 Version 4.33
 -------------

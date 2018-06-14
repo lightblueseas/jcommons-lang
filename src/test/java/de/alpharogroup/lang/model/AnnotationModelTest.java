@@ -43,7 +43,7 @@ public class AnnotationModelTest
 {
 
 	/**
-	 * Test method for {@link AnnotationModel} constructors
+	 * Test method for {@link AnnotationModel} constructors and builders
 	 */
 	@Test
 	public final void testConstructors()

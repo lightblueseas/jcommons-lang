@@ -4,6 +4,10 @@
 Version 4.35-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of test-objects version to 4.28
+
 Version 4.34
 -------------
 

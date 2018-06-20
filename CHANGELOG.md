@@ -7,6 +7,7 @@ Version 4.35-SNAPSHOT
 CHANGED:
 
 - update of dependency test-objects version to 4.28
+- update of dependency silly-collections version to 4.30
 
 Version 4.34
 -------------

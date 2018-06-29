@@ -27,10 +27,10 @@ package de.alpharogroup.file.filter;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 import de.alpharogroup.collections.array.ArrayExtensions;
+import de.alpharogroup.collections.set.SetFactory;
 
 /**
  * The class {@link MultiplyExtensionsFileFilter} accepts File-objects that are directories or end
@@ -91,7 +91,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 				+ "Please set the argument fileExtensions appropriate.");
 		}
 		this.acceptDir = acceptDir;
-		this.fileExtensions = new HashSet<>(fileExtensions.size());
+		this.fileExtensions = SetFactory.newLinkedHashSet(fileExtensions.size());
 		for (final String extension : fileExtensions)
 		{
 			this.fileExtensions.add(extension.toLowerCase());

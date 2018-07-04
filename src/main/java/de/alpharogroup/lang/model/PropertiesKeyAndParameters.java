@@ -26,6 +26,7 @@ package de.alpharogroup.lang.model;
 
 import java.io.Serializable;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -33,6 +34,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 /**
  * Container for a properties key and possible parameters.
@@ -44,6 +46,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class PropertiesKeyAndParameters implements Serializable
 {
 
@@ -51,9 +54,9 @@ public class PropertiesKeyAndParameters implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	/** The key. */
-	private String key;
+	String key;
 
 	/** The parameters. */
-	private Object[] parameters;
+	Object[] parameters;
 
 }

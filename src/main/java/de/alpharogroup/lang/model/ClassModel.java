@@ -30,6 +30,7 @@ import java.util.Map;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -37,6 +38,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link ClassModel}.
@@ -48,38 +50,39 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ClassModel
 {
 
 	/** The kind. */
 	@Builder.Default
-	private ElementKind kind = ElementKind.CLASS;
+	ElementKind kind = ElementKind.CLASS;
 
 	/** The package name. */
-	private String packageName;
+	String packageName;
 
 	/** The imports. */
-	private List<String> imports;
+	List<String> imports;
 
 	/** The class annotations. */
-	private List<ClassModel> classAnnotations;
+	List<ClassModel> classAnnotations;
 
 	/** The modifiers. */
-	private List<Modifier> modifiers;
+	List<Modifier> modifiers;
 
 	/** The generic types. */
-	private List<String> genericTypes;
+	List<String> genericTypes;
 
 	/** The class name. */
-	private String className;
+	String className;
 
 	/** The extended class name. */
-	private String extendedClassName;
+	String extendedClassName;
 
 	/** The interface implementations. */
-	private List<String> interfaceImplementations;
+	List<String> interfaceImplementations;
 
 	/** The methods. */
-	private Map<String, MethodModel> methods;
+	Map<String, MethodModel> methods;
 
 }

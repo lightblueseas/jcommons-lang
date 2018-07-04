@@ -27,13 +27,9 @@ package de.alpharogroup.lang.model;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.SilentEqualsHashCodeAndToStringEvaluator;
 
 /**
@@ -54,33 +50,6 @@ public class AnnotationModelTest
 		assertNotNull(model);
 		model = AnnotationModel.builder().build();
 		assertNotNull(model);
-	}
-
-	/**
-	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()}
-	 * and {@link AnnotationModel#toString()}
-	 *
-	 * @throws NoSuchMethodException
-	 *             if an accessor method for this property cannot be found
-	 * @throws IllegalAccessException
-	 *             if the caller does not have access to the property accessor method
-	 * @throws InvocationTargetException
-	 *             if the property accessor method throws an exception
-	 * @throws InstantiationException
-	 *             if a new instance of the bean's class cannot be instantiated
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClass() throws NoSuchMethodException,
-		IllegalAccessException, InvocationTargetException, InstantiationException, IOException
-	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(AnnotationModel.class);
-		expected = true;
-		assertEquals(expected, actual);
 	}
 
 	/**

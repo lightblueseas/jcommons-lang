@@ -91,7 +91,7 @@ public class MultiplyExtensionsFileFilter implements FileFilter
 				+ "Please set the argument fileExtensions appropriate.");
 		}
 		this.acceptDir = acceptDir;
-		this.fileExtensions = SetFactory.newLinkedHashSet(fileExtensions.size());
+		this.fileExtensions = SetFactory.newLinkedHashSet();
 		for (final String extension : fileExtensions)
 		{
 			this.fileExtensions.add(extension.toLowerCase());

@@ -6,9 +6,13 @@ Version 4.35-SNAPSHOT
 
 CHANGED:
 
-- update of parent version to 3.12
+- update of parent version to 4
 - update of dependency test-objects version to 4.28
-- update of dependency silly-collections version to 4.31
+- update of dependency silly-collections version to 4.33
+- update of dependency vintage-time version to 4.12
+- update of jobject-extensions version to 1.12
+- update of commons-collections4 version to 4.2
+- update of cglib version to 3.2.7
 
 Version 4.34
 -------------

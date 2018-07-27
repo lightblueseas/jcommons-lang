@@ -33,7 +33,7 @@ import java.net.URISyntaxException;
 
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.ToStringEvaluator;
+import de.alpharogroup.evaluate.object.evaluators.ToStringEvaluator;
 import de.alpharogroup.lang.ClassExtensions;
 
 /**

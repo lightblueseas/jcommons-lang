@@ -43,11 +43,11 @@ import de.alpharogroup.collections.set.SetFactory;
 public class MultiplyExtensionsFileFilter implements FileFilter
 {
 
-	/** The file extensions. */
-	private Set<String> fileExtensions;
-
 	/** The accept dir. */
 	private boolean acceptDir;
+
+	/** The file extensions. */
+	private Set<String> fileExtensions;
 
 	/**
 	 * Instantiates a new {@link MultiplyExtensionsFileFilter}.

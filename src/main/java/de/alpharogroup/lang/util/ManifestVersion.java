@@ -107,17 +107,17 @@ public class ManifestVersion implements Serializable
 		return version;
 	}
 
-	/** The manifest. */
-	private Manifest manifest;
-
 	/** The last modified holds the {@code DateTime} when the last build was. */
 	private DateTime lastModified;
 
-	/** The version number. */
-	private String version;
+	/** The manifest. */
+	private Manifest manifest;
 
 	/** The title. */
 	private String title;
+
+	/** The version number. */
+	private String version;
 
 	/**
 	 * Gets the manifest attribute value from the given {@code Attributes.Name} object.

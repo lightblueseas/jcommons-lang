@@ -297,8 +297,7 @@ public class StringExtensionsTest extends BaseTestCase
 		final String isEmpty = "";
 		final String isNotNullOrEmpty = "foobar";
 
-		actual = 
-			StringExtensions.isNullOrEmpty(isNull);
+		actual = StringExtensions.isNullOrEmpty(isNull);
 		assertTrue("", actual);
 		actual = StringExtensions.isNullOrEmpty(isEmpty);
 		assertTrue("", actual);
@@ -467,7 +466,7 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		final String expected = "Leonidas";
 		final String withQuotes = "\"Leonidas\"";
-		final String compare =StringExtensions.removeQuotationMarks(withQuotes);
+		final String compare = StringExtensions.removeQuotationMarks(withQuotes);
 		actual = expected.equals(compare);
 		assertTrue("", actual);
 	}
@@ -546,7 +545,7 @@ public class StringExtensionsTest extends BaseTestCase
 	public void testSplitByLength()
 	{
 		final String input = "HickoryDickoryDockxxxmousexranxupxthexclockxThexcom.foo.barxstruckxonexThexxyxranxdownBlogBarFooEEE";
-		
+
 		final List<String> output = StringExtensions.splitByFixedLength(input, 7);
 
 		assertTrue(output.size() == 15);
@@ -621,7 +620,7 @@ public class StringExtensionsTest extends BaseTestCase
 		expected = "\\u00f6";
 		assertEquals(expected, actual);
 
-		actual =StringExtensions.toUnicodeChars(argument, false);
+		actual = StringExtensions.toUnicodeChars(argument, false);
 		expected = "\\u00F6";
 		assertEquals(expected, actual);
 
@@ -629,7 +628,7 @@ public class StringExtensionsTest extends BaseTestCase
 		actual = StringExtensions.toUnicodeChars(argument, false);
 		expected = "\\u00F6, \\u00DF \\u00E4";
 		assertEquals(expected, actual);
-		
+
 		argument = "τὸ μὲν οὖν κατὰ τὴν Ἀράτου τοῦ νεωτέρου στρατηγίαν ἔτος ἐτύγχανε διεληλυθὸς περὶ τὴν τῆς Πλειάδος";
 		actual = StringExtensions.toUnicodeChars(argument, false);
 		expected = "\\u03C4\\u1F78 \\u03BC\\u1F72\\u03BD \\u03BF\\u1F56\\u03BD"

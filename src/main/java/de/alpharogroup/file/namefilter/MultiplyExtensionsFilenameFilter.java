@@ -39,11 +39,11 @@ import java.util.Collection;
 public class MultiplyExtensionsFilenameFilter implements FilenameFilter
 {
 
-	/** The file extensions. */
-	private Collection<String> fileExtensions;
-
 	/** The accept dir. */
 	private boolean acceptDir;
+
+	/** The file extensions. */
+	private Collection<String> fileExtensions;
 
 	/**
 	 * Instantiates a new {@link MultiplyExtensionsFilenameFilter}.

@@ -32,10 +32,10 @@ import lombok.Getter;
 public enum CharacterEncoding
 {
 
-	/** The UTF-8 character encoding. */
-	UTF_8("UTF-8"),
 	/** The UTF-16 character encoding. */
-	UTF_16("UTF-16");
+	UTF_16("UTF-16"),
+	/** The UTF-8 character encoding. */
+	UTF_8("UTF-8");
 
 	/** The character encoding. */
 	@Getter

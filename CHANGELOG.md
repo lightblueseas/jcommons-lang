@@ -1,7 +1,7 @@
 ## Change log
 ----------------------
 
-Version 4.35-SNAPSHOT
+Version 4.35
 -------------
 
 ADDED:
@@ -10,7 +10,7 @@ ADDED:
 
 CHANGED:
 
-- update of parent version to 4
+- update of parent version to 4.1
 - update of dependency test-objects version to 4.28
 - update of dependency silly-collections version to 4.33
 - update of dependency vintage-time version to 4.12

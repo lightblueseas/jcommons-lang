@@ -94,7 +94,6 @@ public final class SerializedObjectExtensions
 				FileConstants.KILOBYTE);
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);)
 		{
-			byteArrayOutputStream.reset();
 			objectOutputStream.writeObject(object);
 			return byteArrayOutputStream.toByteArray();
 		}

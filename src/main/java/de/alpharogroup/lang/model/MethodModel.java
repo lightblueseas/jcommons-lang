@@ -30,6 +30,7 @@ import java.util.Map;
 
 import javax.lang.model.element.Modifier;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -37,6 +38,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link MethodModel}.
@@ -48,34 +50,35 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class MethodModel
 {
 
 	/** The method annotations. */
-	private List<AnnotationModel> methodAnnotations;
+	List<AnnotationModel> methodAnnotations;
 
 	/** The modifiers. */
 	List<Modifier> modifiers;
 
 	/** The generic types. */
-	private List<String> genericTypes;
+	List<String> genericTypes;
 
 	/** The return type. */
-	private String returnType;
+	String returnType;
 
 	/** The method name. */
-	private String methodName;
+	String methodName;
 
 	/** The parameters. */
-	private List<String> parameters;
+	List<String> parameters;
 
 	/** The parameter annotations. */
-	private Map<String, List<String>> parameterAnnotations;
+	Map<String, List<String>> parameterAnnotations;
 
 	/** The static flag. */
-	private boolean staticFlag;
+	boolean staticFlag;
 
 	/** The synchronized flag. */
-	private boolean synchronizedFlag;
+	boolean synchronizedFlag;
 
 }

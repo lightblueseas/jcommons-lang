@@ -51,11 +51,11 @@ public class ThreadDataBean
 			.threadGroup(thread.getThreadGroup().getName()).name(thread.getName()).build();
 	}
 
-	private Integer priority;
 	private boolean alive;
 	private boolean daemon;
 	private boolean interrupted;
-	private String threadGroup;
-
 	private String name;
+	private Integer priority;
+
+	private String threadGroup;
 }

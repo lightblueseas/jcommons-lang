@@ -38,6 +38,12 @@ public enum FileExtension
 	/** The file extension for class files. */
 	CLASS(".class"),
 
+	/** The file extension for decrypted files. */
+	DECRYPTED(".decrypted"),
+
+	/** The file extension for encrypted files. */
+	ENCRYPTED(".enc"),
+
 	/** The file extension for java files. */
 	JAVA(".java"),
 

@@ -1,6 +1,23 @@
 ## Change log
 ----------------------
 
+Version 4.35
+-------------
+
+ADDED:
+ 
+- new file extension for encrypted and decrypted files created
+
+CHANGED:
+
+- update of parent version to 4.1
+- update of dependency test-objects version to 4.28
+- update of dependency silly-collections version to 4.33
+- update of dependency vintage-time version to 4.12
+- update of jobject-extensions version to 1.12
+- update of commons-collections4 version to 4.2
+- update of cglib version to 3.2.7
+
 Version 4.34
 -------------
 
@@ -10,7 +27,7 @@ CHANGED:
 - removed deprecated enum de.alpharogroup.file.checksum.Algorithm
 - removed deprecated enum de.alpharogroup.exception.ExceptionType
 - tagged several close methods as deprecated in class StreamExtensions since jdk7 the new feature try-with-resources statement
-- update of silly-collections version to 4.29
+- update of dependency silly-collections version to 4.29
 
 Version 4.33
 -------------

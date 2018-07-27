@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
@@ -215,40 +214,6 @@ public final class StringExtensions
 		final char c = result.charAt(0);
 		return c;
 	}
-
-
-	/**
-	 * Decode hex.
-	 *
-	 * @param data
-	 *            the data
-	 * @return the byte[]
-	 * @throws DecoderException
-	 *             is thrown if an odd number or illegal of characters is supplied
-	 * @deprecated use instead {@code Hex#decodeHex(char[])} <br>
-	 *             <br>
-	 *             Note: will be removed in the next minor release.
-	 */
-	public static byte[] decodeHex(final char[] data) throws DecoderException
-	{
-		return org.apache.commons.codec.binary.Hex.decodeHex(data);
-	}
-
-	/**
-	 * Encode hex.
-	 *
-	 * @param data
-	 *            the data
-	 * @return the char[]
-	 * @deprecated use instead {@code Hex#encodeHex(byte[], boolean)} <br>
-	 *             <br>
-	 *             Note: will be removed in the next minor release.
-	 */
-	public static char[] encodeHex(final byte[] data)
-	{
-		return org.apache.commons.codec.binary.Hex.encodeHex(data, true);
-	}
-
 
 	/**
 	 * Sets the first character from the given string to lower case and returns it. Example:<br>

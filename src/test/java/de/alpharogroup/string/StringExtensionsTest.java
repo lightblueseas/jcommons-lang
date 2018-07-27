@@ -33,8 +33,6 @@ import static org.testng.AssertJUnit.assertTrue;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.StringUtils;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -43,7 +41,6 @@ import org.testng.annotations.Test;
 import de.alpharogroup.BaseTestCase;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.test.objects.Person;
-import lombok.experimental.ExtensionMethod;
 
 /**
  * The unit test class for the class StringExtensions.
@@ -51,7 +48,6 @@ import lombok.experimental.ExtensionMethod;
  * @version 1.0
  * @author Asterios Raptis
  */
-@ExtensionMethod(StringExtensions.class)
 public class StringExtensionsTest extends BaseTestCase
 {
 
@@ -137,42 +133,6 @@ public class StringExtensionsTest extends BaseTestCase
 		theUnicodeString = "\\u03BC";
 		actual = StringExtensions.convertUnicodeStringToCharacter(theUnicodeString);
 		expected = Character.valueOf('\u03BC');
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link StringExtensions#decodeHex(char[])}
-	 * 
-	 * @throws DecoderException
-	 *             is thrown if an odd number or illegal of characters is supplied
-	 */
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testDecodeHex() throws DecoderException
-	{
-		final String expected = "Secret message";
-		final char[] actualCharArray = StringExtensions
-			.encodeHex(StringUtils.getBytesUtf8(expected));
-		final byte[] decoded = StringExtensions.decodeHex(actualCharArray);
-		final String actual = new String(decoded);
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link StringExtensions#encodeHex(byte[])}
-	 * 
-	 * @throws DecoderException
-	 *             is thrown if an odd number or illegal of characters is supplied
-	 */
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testEncodeHex() throws DecoderException
-	{
-		final String expected = "Secret message";
-		final char[] actualCharArray = StringExtensions
-			.encodeHex(StringUtils.getBytesUtf8(expected));
-		final byte[] decoded = StringExtensions.decodeHex(actualCharArray);
-		final String actual = new String(decoded);
 		assertEquals(expected, actual);
 	}
 
@@ -337,11 +297,11 @@ public class StringExtensionsTest extends BaseTestCase
 		final String isEmpty = "";
 		final String isNotNullOrEmpty = "foobar";
 
-		actual = isNull.isNullOrEmpty();
+		actual = StringExtensions.isNullOrEmpty(isNull);
 		assertTrue("", actual);
-		actual = isEmpty.isNullOrEmpty();
+		actual = StringExtensions.isNullOrEmpty(isEmpty);
 		assertTrue("", actual);
-		actual = isNotNullOrEmpty.isNullOrEmpty();
+		actual = StringExtensions.isNullOrEmpty(isNotNullOrEmpty);
 		assertFalse("", actual);
 
 	}
@@ -357,22 +317,22 @@ public class StringExtensionsTest extends BaseTestCase
 		String argument;
 
 		argument = "5";
-		actual = argument.isNumber();
+		actual = StringExtensions.isNumber(argument);
 		expected = true;
 		assertEquals(actual, expected);
 
 		argument = "foo";
-		actual = argument.isNumber();
+		actual = StringExtensions.isNumber(argument);
 		expected = false;
 		assertEquals(actual, expected);
 
 		argument = "";
-		actual = argument.isNumber();
+		actual = StringExtensions.isNumber(argument);
 		expected = false;
 		assertEquals(actual, expected);
 
 		argument = null;
-		actual = argument.isNumber();
+		actual = StringExtensions.isNumber(argument);
 		expected = false;
 		assertEquals(actual, expected);
 	}
@@ -443,7 +403,7 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		final String expected = "\"Leonidas\"";
 		final String withoutQuotes = "Leonidas";
-		final String compare = withoutQuotes.addDoubleQuotationMarks();
+		final String compare = StringExtensions.addDoubleQuotationMarks(withoutQuotes);
 		actual = expected.equals(compare);
 		assertTrue("", actual);
 	}
@@ -506,7 +466,7 @@ public class StringExtensionsTest extends BaseTestCase
 	{
 		final String expected = "Leonidas";
 		final String withQuotes = "\"Leonidas\"";
-		final String compare = withQuotes.removeQuotationMarks();
+		final String compare = StringExtensions.removeQuotationMarks(withQuotes);
 		actual = expected.equals(compare);
 		assertTrue("", actual);
 	}
@@ -568,12 +528,12 @@ public class StringExtensionsTest extends BaseTestCase
 		String argument;
 
 		argument = "This is a test: Aha : and than foo bar:";
-		actual = argument.replaceLast(":", ";");
+		actual = StringExtensions.replaceLast(argument, ":", ";");
 		expected = "This is a test: Aha : and than foo bar;";
 		assertEquals(expected, actual);
 
 		argument = "This is a test: Aha : and than foo bar:";
-		actual = argument.replaceLast(",", ";");
+		actual = StringExtensions.replaceLast(argument, ",", ";");
 		expected = argument;
 		assertEquals(expected, actual);
 	}
@@ -585,7 +545,8 @@ public class StringExtensionsTest extends BaseTestCase
 	public void testSplitByLength()
 	{
 		final String input = "HickoryDickoryDockxxxmousexranxupxthexclockxThexcom.foo.barxstruckxonexThexxyxranxdownBlogBarFooEEE";
-		final List<String> output = input.splitByFixedLength(7);
+
+		final List<String> output = StringExtensions.splitByFixedLength(input, 7);
 
 		assertTrue(output.size() == 15);
 		assertEquals(output.get(1), "Dickory");
@@ -632,15 +593,15 @@ public class StringExtensionsTest extends BaseTestCase
 	public void testToUnicode()
 	{
 		String expected = "\\u00f6";
-		String actual = "ö".toUnicode(true);
+		String actual = StringExtensions.toUnicode("ö", true);
 		assertEquals(expected, actual);
 
 		expected = "\\u00F6";
-		actual = "ö".toUnicode(false);
+		actual = StringExtensions.toUnicode("ö", false);
 		assertEquals(expected, actual);
 
 		expected = "\\u00F6\\u002C\\u0020\\u00DF\\u0020\\u00E4";
-		actual = "ö, ß ä".toUnicode(false);
+		actual = StringExtensions.toUnicode("ö, ß ä", false);
 		assertEquals(expected, actual);
 	}
 
@@ -655,21 +616,21 @@ public class StringExtensionsTest extends BaseTestCase
 		String argument;
 
 		argument = "ö";
-		actual = argument.toUnicodeChars(true);
+		actual = StringExtensions.toUnicodeChars(argument, true);
 		expected = "\\u00f6";
 		assertEquals(expected, actual);
 
-		actual = argument.toUnicodeChars(false);
+		actual = StringExtensions.toUnicodeChars(argument, false);
 		expected = "\\u00F6";
 		assertEquals(expected, actual);
 
 		argument = "ö, ß ä";
-		actual = argument.toUnicodeChars(false);
+		actual = StringExtensions.toUnicodeChars(argument, false);
 		expected = "\\u00F6, \\u00DF \\u00E4";
 		assertEquals(expected, actual);
 
-		actual = "τὸ μὲν οὖν κατὰ τὴν Ἀράτου τοῦ νεωτέρου στρατηγίαν ἔτος ἐτύγχανε διεληλυθὸς περὶ τὴν τῆς Πλειάδος"
-			.toUnicodeChars(false);
+		argument = "τὸ μὲν οὖν κατὰ τὴν Ἀράτου τοῦ νεωτέρου στρατηγίαν ἔτος ἐτύγχανε διεληλυθὸς περὶ τὴν τῆς Πλειάδος";
+		actual = StringExtensions.toUnicodeChars(argument, false);
 		expected = "\\u03C4\\u1F78 \\u03BC\\u1F72\\u03BD \\u03BF\\u1F56\\u03BD"
 			+ " \\u03BA\\u03B1\\u03C4\\u1F70 \\u03C4\\u1F74\\u03BD "
 			+ "\\u1F08\\u03C1\\u03AC\\u03C4\\u03BF\\u03C5 \\u03C4\\u03BF\\u1FE6"
@@ -683,12 +644,12 @@ public class StringExtensionsTest extends BaseTestCase
 		assertEquals(expected, actual);
 
 		argument = "";
-		actual = argument.toUnicodeChars(true);
+		actual = StringExtensions.toUnicodeChars(argument, true);
 		expected = "";
 		assertEquals(expected, actual);
 
 		argument = null;
-		actual = argument.toUnicodeChars(true);
+		actual = StringExtensions.toUnicodeChars(argument, true);
 		expected = null;
 		assertEquals(expected, actual);
 	}

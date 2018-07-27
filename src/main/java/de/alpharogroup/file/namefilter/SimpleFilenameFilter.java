@@ -36,11 +36,11 @@ import java.io.FilenameFilter;
 public class SimpleFilenameFilter implements FilenameFilter
 {
 
-	/** The filesuffix. */
-	private String filesuffix;
-
 	/** The accept dir. */
 	private boolean acceptDir;
+
+	/** The filesuffix. */
+	private String filesuffix;
 
 	/**
 	 * Instantiates a new {@link SimpleFilenameFilter}.

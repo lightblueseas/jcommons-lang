@@ -38,7 +38,7 @@ import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListFactory;
-import de.alpharogroup.evaluate.object.ToStringEvaluator;
+import de.alpharogroup.evaluate.object.evaluators.ToStringEvaluator;
 import de.alpharogroup.lang.ClassExtensions;
 
 /**

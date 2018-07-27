@@ -4,6 +4,10 @@
 Version 4.35-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- new file extension for encrypted and decrypted files created
+
 CHANGED:
 
 - update of parent version to 4

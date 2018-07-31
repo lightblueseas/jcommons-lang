@@ -38,9 +38,13 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 
 Than you can add the dependency to your dependencies:
 
+	<properties>
+			...
 		<!-- JCOMMONS-LANG version -->
 		<jcommons-lang.version>4.35</jcommons-lang.version>
-
+			...
+	</properties>
+			...
 		<dependencies>
 			...
             <!-- JCOMMONS-LANG DEPENDENCY -->

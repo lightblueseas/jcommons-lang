@@ -113,6 +113,6 @@ or over flattr:
 |Many thanks to [Travis CI](https://travis-ci.org) for providing a free continuous integration service for open source projects.|
 |![sonatype repository](https://avatars1.githubusercontent.com/u/33330803?s=200&v=4)|
 |Many thanks to [sonatype repository](https://oss.sonatype.org) for providing a free maven repository service for open source projects.|
-|!![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg)|
+|![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg)|
 |Many thanks to [coveralls.io](https://coveralls.io) for providing a free code  coverage for open source projects.|
 

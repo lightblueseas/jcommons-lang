@@ -114,5 +114,8 @@ or over flattr:
 |![sonatype repository](https://avatars1.githubusercontent.com/u/33330803?s=200&v=4)|
 |Many thanks to [sonatype repository](https://oss.sonatype.org) for providing a free maven repository service for open source projects.|
 |![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg)|
-|Many thanks to [coveralls.io](https://coveralls.io) for providing a free code  coverage for open source projects.|
+|Many thanks to [coveralls.io](https://coveralls.io) for providing a free code coverage for open source projects.|
+
+|[![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jcommons-lang.svg)](http://www.javadoc.io/doc/de.alpharogroup/jcommons-lang)|
+|Many thanks to [javadoc.io](http://www.javadoc.io) for providing a free javadoc documentation for open source projects.|
 

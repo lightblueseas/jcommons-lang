@@ -111,4 +111,6 @@ or over flattr:
 |:-:|
 |![Travis CI](https://travis-ci.com/images/logos/TravisCI-Full-Color.png)|
 |Many thanks to [Travis CI](https://travis-ci.org) for providing a free continuous integration service for open source projects.|
+|![sonatype repository](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~jcommons-lang~~~)|
+|Many thanks to [sonatype repository](https://oss.sonatype.org) for providing a free maven repository service for open source projects.|
 

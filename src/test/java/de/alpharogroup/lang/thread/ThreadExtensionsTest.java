@@ -35,6 +35,16 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.BaseTestCase;
 
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+
 /**
  * The unit test class for the class {@link ThreadExtensions}.
  */
@@ -74,5 +84,33 @@ public class ThreadExtensionsTest extends BaseTestCase
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(ThreadExtensions.class);
 	}
+	
+	
+    /**
+     * Test method for {@link ThreadExtensions#runCallableWithCpuCores(Callable, int)}
+     */
+    @Test
+    public void testRunCallableWithCpuCores() throws ExecutionException, InterruptedException {
+
+        String actual;
+        String expected;
+
+        int cores = Runtime.getRuntime().availableProcessors();
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "linode.com");
+        map.put(2, "heroku.com");
+        map.put(3, "heroku.uk");
+        actual = ThreadExtensions.runCallableWithCpuCores(() ->
+                        //parallel task here, for example
+                        map.entrySet().stream()
+                                .parallel()
+                                .filter(x -> x.getValue().endsWith("com"))
+                                .map(x -> x.getValue())
+                                .collect(Collectors.joining()),
+                cores);
+
+        expected = "linode.comheroku.com";
+        assertEquals(actual, expected);
+    }
 
 }

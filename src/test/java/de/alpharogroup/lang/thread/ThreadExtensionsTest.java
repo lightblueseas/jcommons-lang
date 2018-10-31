@@ -111,6 +111,31 @@ public class ThreadExtensionsTest extends BaseTestCase
 
         expected = "linode.comheroku.com";
         assertEquals(actual, expected);
+    }    
+    
+    /**
+     * Test method for {@link ThreadExtensions#runAsyncSupplierWithCpuCores(Supplier, int)}
+     */
+    @Test
+    public void testRunAsyncSupplierWithCpuCores() throws ExecutionException, InterruptedException {
+
+        String actual;
+        String expected;
+
+        int cores = Runtime.getRuntime().availableProcessors();
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "linode.com");
+        map.put(2, "heroku.com");
+        map.put(3, "heroku.uk");
+        actual = ThreadExtensions.runAsyncSupplierWithCpuCores(() ->
+                        map.entrySet().parallelStream()
+                                .filter(x -> x.getValue().endsWith("com"))
+                                .map(x -> x.getValue()+"\n")
+                                .collect(Collectors.joining()),
+                cores);
+
+        expected = "linode.com\nheroku.com\n";
+        assertEquals(actual, expected);
     }
 
 }

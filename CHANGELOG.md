@@ -4,10 +4,16 @@
 Version 5-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- new dependency of model-core in version 1.6
+
 CHANGED:
 
 - update of parent version to 4.2
 - update of dependency silly-collections version to 4.35
+- update of dependency commons-lang3 version to 3.8.1
+- removed joda-time dependency
 
 Version 4.35
 -------------

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -33,14 +34,16 @@
 		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-collections4.version>4.2</commons-collections4.version>
-		<commons-lang3.version>3.7</commons-lang3.version>
+		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-codec.version>1.11</commons-codec.version>
-		<joda-time.version>2.10</joda-time.version>
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
 		<cglib.version>3.2.7</cglib.version>
 		<!-- DB DRIVER version -->
 		<h2.version>1.4.197</h2.version>
+		<!-- MODEL-DATA version -->
+		<model-data.version>1.6</model-data.version>
+		<model-core.version>${model-data.version}</model-core.version>
 	</properties>
 
 	<licenses>
@@ -95,12 +98,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>${joda-time.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>silly-collections</artifactId>
 				<version>${silly-collections.version}</version>
@@ -110,6 +107,12 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>vintage-time</artifactId>
 				<version>${vintage-time.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>model-core</artifactId>
+				<version>${model-core.version}</version>
 			</dependency>
 			<!-- TEST-OBJECTS DEPENDENCY -->
 			<dependency>
@@ -182,8 +185,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>model-core</artifactId>
 		</dependency>
 
 		<dependency>

@@ -42,42 +42,55 @@ import lombok.experimental.UtilityClass;
 public final class ThreadExtensions
 {
 
-    /**
-     * Creates a custom thread pool that are executed in parallel processes with the given number of the cpu cores
-     * @param task the {@link Callable} task to execute
-     * @param cpuCores the number of the cpu cores to run with
-     * @param <T> the generic type of the result
-     * @return the result of the given task
-     * @throws ExecutionException if the computation threw an
-     * exception
-     * @throws InterruptedException if the current thread is not a
-     * member of a ForkJoinPool and was interrupted while waiting
-     */
-    public static <T> T runCallableWithCpuCores(Callable<T> task, int cpuCores) throws ExecutionException, InterruptedException {
-        ForkJoinPool forkJoinPool = new ForkJoinPool(cpuCores);
-        return forkJoinPool.submit(task).get();
-    }
+	/**
+	 * Creates a custom thread pool that are executed in parallel processes with the given number of
+	 * the cpu cores
+	 * 
+	 * @param task
+	 *            the {@link Callable} task to execute
+	 * @param cpuCores
+	 *            the number of the cpu cores to run with
+	 * @param <T>
+	 *            the generic type of the result
+	 * @return the result of the given task
+	 * @throws ExecutionException
+	 *             if the computation threw an exception
+	 * @throws InterruptedException
+	 *             if the current thread is not a member of a ForkJoinPool and was interrupted while
+	 *             waiting
+	 */
+	public static <T> T runCallableWithCpuCores(Callable<T> task, int cpuCores)
+		throws ExecutionException, InterruptedException
+	{
+		ForkJoinPool forkJoinPool = new ForkJoinPool(cpuCores);
+		return forkJoinPool.submit(task).get();
+	}
 
-    /**
-     * Creates a custom thread pool that are executed in parallel processes with the will run with the given number of the cpu cores
-     * @param supplier the {@link Supplier} task to execute
-     * @param cpuCores the number of the cpu cores to run with
-     * @param <T> the generic type of the result
-     * @return the result of the given task
-     * @throws ExecutionException if the computation threw an
-     * exception
-     * @throws InterruptedException if the current thread is not a
-     * member of a ForkJoinPool and was interrupted while waiting
-     */
-    public static <T> T runAsyncSupplierWithCpuCores(Supplier<T> supplier, int cpuCores) throws ExecutionException, InterruptedException {
-        ForkJoinPool forkJoinPool = new ForkJoinPool(cpuCores);
-        CompletableFuture<T> future = CompletableFuture.supplyAsync(
-                supplier,
-                forkJoinPool
-        );
-        return future.get();
-    }
-	
+	/**
+	 * Creates a custom thread pool that are executed in parallel processes with the will run with
+	 * the given number of the cpu cores
+	 * 
+	 * @param supplier
+	 *            the {@link Supplier} task to execute
+	 * @param cpuCores
+	 *            the number of the cpu cores to run with
+	 * @param <T>
+	 *            the generic type of the result
+	 * @return the result of the given task
+	 * @throws ExecutionException
+	 *             if the computation threw an exception
+	 * @throws InterruptedException
+	 *             if the current thread is not a member of a ForkJoinPool and was interrupted while
+	 *             waiting
+	 */
+	public static <T> T runAsyncSupplierWithCpuCores(Supplier<T> supplier, int cpuCores)
+		throws ExecutionException, InterruptedException
+	{
+		ForkJoinPool forkJoinPool = new ForkJoinPool(cpuCores);
+		CompletableFuture<T> future = CompletableFuture.supplyAsync(supplier, forkJoinPool);
+		return future.get();
+	}
+
 	/**
 	 * Finds all threads the are currently running.
 	 *

@@ -54,26 +54,26 @@ import lombok.experimental.FieldDefaults;
 public class MethodModel
 {
 
-	/** The method annotations. */
-	List<AnnotationModel> methodAnnotations;
-
-	/** The modifiers. */
-	List<Modifier> modifiers;
-
 	/** The generic types. */
 	List<String> genericTypes;
 
-	/** The return type. */
-	String returnType;
+	/** The method annotations. */
+	List<AnnotationModel> methodAnnotations;
 
 	/** The method name. */
 	String methodName;
 
-	/** The parameters. */
-	List<String> parameters;
+	/** The modifiers. */
+	List<Modifier> modifiers;
 
 	/** The parameter annotations. */
 	Map<String, List<String>> parameterAnnotations;
+
+	/** The parameters. */
+	List<String> parameters;
+
+	/** The return type. */
+	String returnType;
 
 	/** The static flag. */
 	boolean staticFlag;

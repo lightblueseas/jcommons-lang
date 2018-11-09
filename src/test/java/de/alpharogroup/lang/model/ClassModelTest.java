@@ -88,8 +88,8 @@ public class ClassModelTest
 		/** The methods. */
 		Map<String, MethodModel> methods = MapFactory.newHashMap();
 
-		classModel = new ClassModel(kind, packageName, imports, classAnnotations, modifiers,
-			genericTypes, className, extendedClassName, interfaceImplementations, methods);
+		classModel = new ClassModel(classAnnotations, className, extendedClassName, genericTypes,
+			imports, interfaceImplementations, kind, methods, modifiers, packageName);
 		assertNotNull(classModel);
 		classModel = ClassModel.builder().build();
 		assertNotNull(classModel);

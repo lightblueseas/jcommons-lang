@@ -85,8 +85,8 @@ public class MethodModelTest
 		/** The synchronized flag. */
 		boolean synchronizedFlag = false;
 
-		model = new MethodModel(methodAnnotations, modifiers, genericTypes, returnType, methodName,
-			parameters, parameterAnnotations, staticFlag, synchronizedFlag);
+		model = new MethodModel(genericTypes, methodAnnotations, methodName, modifiers,
+			parameterAnnotations, parameters, returnType, staticFlag, synchronizedFlag);
 		assertNotNull(model);
 		model = MethodModel.builder().build();
 		assertNotNull(model);

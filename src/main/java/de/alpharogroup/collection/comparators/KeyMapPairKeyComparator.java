@@ -22,63 +22,34 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang.model;
+package de.alpharogroup.collection.comparators;
 
+import java.util.Comparator;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.lang.model.element.Modifier;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.FieldDefaults;
+import de.alpharogroup.collections.pairs.KeyMapPair;
 
 /**
- * The class {@link MethodModel}.
+ * The class {@link KeyMapPairKeyComparator} compares {@linkplain KeyMapPair} objects over the key
+ * where the key have to implements the {@linkplain Comparable} interface.
+ *
+ * @param <K>
+ *            The type of the key.
+ * @param <MK>
+ *            the generic type of the map key.
+ * @param <MV>
+ *            the generic type of the map value.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class MethodModel
+public class KeyMapPairKeyComparator<K extends Comparable<K>, MK, MV>
+	implements
+		Comparator<KeyMapPair<K, MK, MV>>
 {
 
-	/** The generic types. */
-	List<String> genericTypes;
-
-	/** The method annotations. */
-	List<AnnotationModel> methodAnnotations;
-
-	/** The method name. */
-	String methodName;
-
-	/** The modifiers. */
-	List<Modifier> modifiers;
-
-	/** The parameter annotations. */
-	Map<String, List<String>> parameterAnnotations;
-
-	/** The parameters. */
-	List<String> parameters;
-
-	/** The return type. */
-	String returnType;
-
-	/** The static flag. */
-	boolean staticFlag;
-
-	/** The synchronized flag. */
-	boolean synchronizedFlag;
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int compare(final KeyMapPair<K, MK, MV> o1, final KeyMapPair<K, MK, MV> o2)
+	{
+		return o1.getKey().compareTo(o2.getKey());
+	}
 }

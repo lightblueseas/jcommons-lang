@@ -26,7 +26,12 @@ package de.alpharogroup.lang.thread;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
@@ -63,6 +68,55 @@ public class ThreadExtensionsTest extends BaseTestCase
 		actual = 0 < runningThreads.length;
 		expected = true;
 		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link ThreadExtensions#runAsyncSupplierWithCpuCores(Supplier, int)}
+	 */
+	@Test
+	public void testRunAsyncSupplierWithCpuCores() throws ExecutionException, InterruptedException
+	{
+
+		String actual;
+		String expected;
+
+		int cores = Runtime.getRuntime().availableProcessors();
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "linode.com");
+		map.put(2, "heroku.com");
+		map.put(3, "heroku.uk");
+		actual = ThreadExtensions.runAsyncSupplierWithCpuCores(
+			() -> map.entrySet().parallelStream().filter(x -> x.getValue().endsWith("com"))
+				.map(x -> x.getValue() + "\n").collect(Collectors.joining()),
+			cores);
+
+		expected = "linode.com\nheroku.com\n";
+		assertEquals(actual, expected);
+	}
+
+
+	/**
+	 * Test method for {@link ThreadExtensions#runCallableWithCpuCores(Callable, int)}
+	 */
+	@Test
+	public void testRunCallableWithCpuCores() throws ExecutionException, InterruptedException
+	{
+
+		String actual;
+		String expected;
+
+		int cores = Runtime.getRuntime().availableProcessors();
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "linode.com");
+		map.put(2, "heroku.com");
+		map.put(3, "heroku.uk");
+		actual = ThreadExtensions.runCallableWithCpuCores(() ->
+		// parallel task here, for example
+		map.entrySet().stream().parallel().filter(x -> x.getValue().endsWith("com"))
+			.map(x -> x.getValue()).collect(Collectors.joining()), cores);
+
+		expected = "linode.comheroku.com";
+		assertEquals(actual, expected);
 	}
 
 	/**

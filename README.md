@@ -38,9 +38,13 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 
 Than you can add the dependency to your dependencies:
 
+	<properties>
+			...
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.35</jcommons-lang.version>
-
+		<jcommons-lang.version>5</jcommons-lang.version>
+			...
+	</properties>
+			...
 		<dependencies>
 			...
             <!-- JCOMMONS-LANG DEPENDENCY -->
@@ -90,11 +94,11 @@ If you like this project, please consider a donation through paypal: <a href="ht
 
 or over bitcoin or bitcoin-cash with:
 
-1Jzso5h7U82QCNmgxxSCya1yUK7UVcSXsW
+36JxRRDfRazLNqUV6NsywCw1q7TK38ukpC
 
 or over ether with:
 
-0xaB6EaE10F352268B0CA672Dd6e999C86344D49D8
+0x588Aa02De98B1Ef70afeDC3ec5290130a3E5e273
 
 or over flattr: 
 <a href="https://flattr.com/submit/auto?fid=r7vp62&url=https%3A%2F%2Fgithub.com%2Flightblueseas%2Fjcommons-lang" target="_blank">
@@ -107,4 +111,10 @@ or over flattr:
 |:-:|
 |![Travis CI](https://travis-ci.com/images/logos/TravisCI-Full-Color.png)|
 |Many thanks to [Travis CI](https://travis-ci.org) for providing a free continuous integration service for open source projects.|
+|![sonatype repository](https://avatars1.githubusercontent.com/u/33330803?s=200&v=4)|
+|Many thanks to [sonatype repository](https://oss.sonatype.org) for providing a free maven repository service for open source projects.|
+|![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg)|
+|Many thanks to [coveralls.io](https://coveralls.io) for providing a free code coverage for open source projects.|
+|![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jcommons-lang.svg)|
+|Many thanks to [javadoc.io](http://www.javadoc.io) for providing a free javadoc documentation for open source projects.|
 

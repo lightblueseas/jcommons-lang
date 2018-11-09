@@ -4,6 +4,11 @@
 Version 5-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of parent version to 4.2
+- update of dependency silly-collections version to 4.35
+
 Version 4.35
 -------------
 

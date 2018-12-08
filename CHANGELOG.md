@@ -4,6 +4,10 @@
 Version 5.1-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of parent version to 4.4
+
 Version 5
 -------------
 

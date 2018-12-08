@@ -105,6 +105,10 @@ or over flattr:
 <img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0">
 </a>
 
+## Similar projects
+
+ * [commons-lang](https://github.com/apache/commons-lang) Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy, or are considered to be so standard as to justify existence in java.lang
+
 ## Credits
 
 |Travis CI|

@@ -49,6 +49,7 @@ public class MathExtensionsTest extends BaseTestCase
 	 * @throws Exception
 	 *             the exception
 	 */
+	@Override
 	@BeforeMethod
 	protected void setUp() throws Exception
 	{
@@ -61,6 +62,7 @@ public class MathExtensionsTest extends BaseTestCase
 	 * @throws Exception
 	 *             the exception
 	 */
+	@Override
 	@AfterMethod
 	protected void tearDown() throws Exception
 	{

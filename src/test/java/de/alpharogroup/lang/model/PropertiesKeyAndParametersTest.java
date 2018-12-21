@@ -39,6 +39,7 @@ import de.alpharogroup.collections.array.ArrayFactory;
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.meanbean.factories.ObjectArrayFactory;
+import io.github.benas.randombeans.api.EnhancedRandom;
 
 /**
  * The unit test class for the class {@link PropertiesKeyAndParameters}.
@@ -90,8 +91,9 @@ public class PropertiesKeyAndParametersTest
 	{
 		boolean expected;
 		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(PropertiesKeyAndParameters.class);
+		actual = EqualsHashCodeAndToStringEvaluator.evaluateEqualsHashcodeAndToString(
+			PropertiesKeyAndParameters.class, clazz -> PropertiesKeyAndParameters.builder()
+				.key(EnhancedRandom.random(String.class)).build());
 		expected = true;
 		assertEquals(expected, actual);
 	}
@@ -106,8 +108,9 @@ public class PropertiesKeyAndParametersTest
 	{
 		boolean expected;
 		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(PropertiesKeyAndParameters.class);
+		actual = SilentEqualsHashCodeAndToStringEvaluator.evaluateEqualsHashcodeAndToStringQuietly(
+			PropertiesKeyAndParameters.class, clazz -> PropertiesKeyAndParameters.builder()
+				.key(EnhancedRandom.random(String.class)).build());
 		expected = true;
 		assertEquals(expected, actual);
 	}

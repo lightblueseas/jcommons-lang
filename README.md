@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=master)](https://travis-ci.org/lightblueseas/jcommons-lang)
+[![Build Status](https://travis-ci.org/lightblueseas/jcommons-lang.svg?branch=develop)](https://travis-ci.org/lightblueseas/jcommons-lang)
 [![Coverage Status](https://coveralls.io/repos/github/lightblueseas/jcommons-lang/badge.svg?branch=develop)](https://coveralls.io/github/lightblueseas/jcommons-lang?branch=develop)
 [![Open Issues](https://img.shields.io/github/issues/lightblueseas/jcommons-lang.svg?style=flat)](https://github.com/lightblueseas/jcommons-lang/issues)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang)

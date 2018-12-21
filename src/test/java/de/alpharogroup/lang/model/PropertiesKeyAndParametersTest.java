@@ -80,10 +80,13 @@ public class PropertiesKeyAndParametersTest
 	 *             if a new instance of the bean's class cannot be instantiated
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	@Test
-	public void testEqualsHashcodeAndToStringWithClass() throws NoSuchMethodException,
-		IllegalAccessException, InvocationTargetException, InstantiationException, IOException
+	public void testEqualsHashcodeAndToStringWithClass()
+		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+		InstantiationException, IOException, ClassNotFoundException
 	{
 		boolean expected;
 		boolean actual;

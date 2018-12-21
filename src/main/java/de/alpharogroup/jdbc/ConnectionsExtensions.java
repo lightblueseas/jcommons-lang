@@ -35,8 +35,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import lombok.experimental.UtilityClass;
 
 /**
@@ -48,9 +46,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class ConnectionsExtensions
 {
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ConnectionsExtensions.class.getName());
 
 	/** H2-database constants. */
 	/** Constant for the drivername from H2-database. */
@@ -222,7 +217,6 @@ public final class ConnectionsExtensions
 				if (!inst1.trim().equals(""))
 				{
 					st.executeUpdate(inst1);
-					logger.info(">>" + inst1);
 				}
 			}
 		}

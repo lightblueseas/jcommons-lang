@@ -62,7 +62,6 @@ import de.alpharogroup.test.objects.annotations.TestAnnotation;
 import de.alpharogroup.test.objects.annotations.interfaces.AnnotatedInterface;
 import de.alpharogroup.test.objects.enums.Brands;
 import de.alpharogroup.test.objects.generics.PersonDao;
-import lombok.extern.slf4j.Slf4j;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -70,7 +69,6 @@ import net.sf.cglib.proxy.MethodProxy;
 /**
  * The unit test class for the class {@link ClassExtensions}.
  */
-@Slf4j
 public class ClassExtensionsTest
 {
 
@@ -108,12 +106,11 @@ public class ClassExtensionsTest
 			this.original = original;
 		}
 
+		@Override
 		public Object invoke(Object proxy, Method method, Object[] args)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 		{
-			log.debug("intercept before execution...");
 			Object object = method.invoke(original, args);
-			log.debug("intercept before execution...");
 			return object;
 		}
 	}
@@ -130,12 +127,11 @@ public class ClassExtensionsTest
 			this.origin = origin;
 		}
 
+		@Override
 		public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy)
 			throws Throwable
 		{
-			log.debug("intercept before execution...");
 			Object object = method.invoke(origin, args);
-			log.debug("intercept after execution...");
 			return object;
 		}
 	}
@@ -469,7 +465,7 @@ public class ClassExtensionsTest
 		assertTrue(jdkProxyInterfaces.length == 1);
 
 		Bla bla = new Bla();
-		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
+		InvocationHandler invocationHandler = new InvocationHandlerHandler<>(bla);
 		Foo jdkProxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
 			new Class[] { Foo.class }, invocationHandler);
 		jdkProxyInterfaces = ClassExtensions.getJdkProxyInterfaces(jdkProxy.getClass());
@@ -592,7 +588,7 @@ public class ClassExtensionsTest
 
 	/**
 	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -610,7 +606,7 @@ public class ClassExtensionsTest
 	/**
 	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)} that throws an
 	 * URISyntaxException
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -625,7 +621,7 @@ public class ClassExtensionsTest
 	/**
 	 * Test method for {@link ClassExtensions#getResourceAsFile(String, Object)} that throws an
 	 * URISyntaxException
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -831,14 +827,14 @@ public class ClassExtensionsTest
 		boolean actual;
 		boolean expected;
 		PersonDao personDao = new PersonDao();
-		MethodInterceptor methodInterceptor = new MethodInterceptorHandler<PersonDao>(personDao);
+		MethodInterceptor methodInterceptor = new MethodInterceptorHandler<>(personDao);
 		PersonDao proxy = (PersonDao)Enhancer.create(PersonDao.class, methodInterceptor);
 		expected = false;
 		actual = ClassExtensions.isJdkProxy(proxy.getClass());
 		assertEquals(expected, actual);
 
 		Bla bla = new Bla();
-		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
+		InvocationHandler invocationHandler = new InvocationHandlerHandler<>(bla);
 		Foo jdkProxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
 			new Class[] { Foo.class }, invocationHandler);
 		expected = true;
@@ -856,14 +852,14 @@ public class ClassExtensionsTest
 		boolean expected;
 
 		PersonDao personDao = new PersonDao();
-		MethodInterceptor methodInterceptor = new MethodInterceptorHandler<PersonDao>(personDao);
+		MethodInterceptor methodInterceptor = new MethodInterceptorHandler<>(personDao);
 		PersonDao cglibProxy = (PersonDao)Enhancer.create(PersonDao.class, methodInterceptor);
 		expected = true;
 		actual = ClassExtensions.isProxy(cglibProxy.getClass());
 		assertEquals(expected, actual);
 
 		Bla bla = new Bla();
-		InvocationHandler invocationHandler = new InvocationHandlerHandler<Bla>(bla);
+		InvocationHandler invocationHandler = new InvocationHandlerHandler<>(bla);
 		Foo proxy = (Foo)Proxy.newProxyInstance(ClassExtensions.getClassLoader(),
 			new Class[] { Foo.class }, invocationHandler);
 		expected = true;

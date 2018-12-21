@@ -1,6 +1,21 @@
 ## Change log
 ----------------------
 
+Version 5.1
+-------------
+
+CHANGED:
+
+- update of parent version to 4.4
+- removed log dependencies
+- update of dependency silly-collections version to 5
+- update of dependency vintage-time version to 5.1
+- update of dependency test-objects version to 5
+- update of jobject-extensions version to 2.5
+- update of runtime-compiler version to 1.2
+- update of model-data version to 1.6.1
+- update of meanbean-factories version to 1.1.1
+
 Version 5
 -------------
 

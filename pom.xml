@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>4.2</version>
+		<version>4.4</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>5</version>
+	<version>5.1</version>
 
 	<name>${project.artifactId}</name>
 
@@ -23,12 +23,12 @@
 	<url>https://github.com/lightblueseas/${project.artifactId}</url>
 
 	<properties>
-		<silly-collections.version>4.35</silly-collections.version>
-		<vintage-time.version>4.12</vintage-time.version>
+		<silly-collections.version>5</silly-collections.version>
+		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
-		<test-objects.version>4.28</test-objects.version>
+		<test-objects.version>5</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.12</jobject-extensions.version>
+		<jobject-extensions.version>2.5</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
@@ -37,13 +37,15 @@
 		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-codec.version>1.11</commons-codec.version>
-		<runtime-compiler.version>1.1.0</runtime-compiler.version>
+		<runtime-compiler.version>1.2</runtime-compiler.version>
 		<cglib.version>3.2.7</cglib.version>
 		<!-- DB DRIVER version -->
 		<h2.version>1.4.197</h2.version>
 		<!-- MODEL-DATA version -->
-		<model-data.version>1.6</model-data.version>
+		<model-data.version>1.6.1</model-data.version>
 		<model-core.version>${model-data.version}</model-core.version>
+		<!-- MEANBEAN-FACTORIES version -->
+		<meanbean-factories.version>1.1.1</meanbean-factories.version>
 	</properties>
 
 	<licenses>

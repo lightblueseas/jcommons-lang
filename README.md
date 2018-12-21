@@ -41,7 +41,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>5</jcommons-lang.version>
+		<jcommons-lang.version>5.1</jcommons-lang.version>
 			...
 	</properties>
 			...
@@ -104,6 +104,10 @@ or over flattr:
 <a href="https://flattr.com/submit/auto?fid=r7vp62&url=https%3A%2F%2Fgithub.com%2Flightblueseas%2Fjcommons-lang" target="_blank">
 <img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0">
 </a>
+
+## Similar projects
+
+ * [commons-lang](https://github.com/apache/commons-lang) Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy, or are considered to be so standard as to justify existence in java.lang
 
 ## Credits
 

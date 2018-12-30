@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>4.4</version>
+		<version>4.5</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -44,8 +44,6 @@
 		<!-- MODEL-DATA version -->
 		<model-data.version>1.6.1</model-data.version>
 		<model-core.version>${model-data.version}</model-core.version>
-		<!-- MEANBEAN-FACTORIES version -->
-		<meanbean-factories.version>1.1.1</meanbean-factories.version>
 	</properties>
 
 	<licenses>

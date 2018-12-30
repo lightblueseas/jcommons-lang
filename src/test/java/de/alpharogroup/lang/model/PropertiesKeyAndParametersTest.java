@@ -37,8 +37,8 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.array.ArrayFactory;
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
 import de.alpharogroup.meanbean.factories.ObjectArrayFactory;
+import io.github.benas.randombeans.api.EnhancedRandom;
 
 /**
  * The unit test class for the class {@link PropertiesKeyAndParameters}.
@@ -91,23 +91,9 @@ public class PropertiesKeyAndParametersTest
 		boolean expected;
 		boolean actual;
 		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(PropertiesKeyAndParameters.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} ,
-	 * {@link PropertiesKeyAndParameters#hashCode()} and
-	 * {@link PropertiesKeyAndParameters#toString()}
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(PropertiesKeyAndParameters.class);
+			.evaluateEqualsHashcodeAndToString(PropertiesKeyAndParameters.class, clazz-> PropertiesKeyAndParameters.builder()
+				.key(EnhancedRandom.random(String.class))
+				.build());
 		expected = true;
 		assertEquals(expected, actual);
 	}

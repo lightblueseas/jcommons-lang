@@ -7,6 +7,7 @@ Version 5.2-SNAPSHOT
 CHANGED:
 
 - update of parent version to 4.5
+- update of model-data version to 1.6.2
 
 Version 5.1
 -------------

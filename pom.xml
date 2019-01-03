@@ -42,7 +42,7 @@
 		<!-- DB DRIVER version -->
 		<h2.version>1.4.197</h2.version>
 		<!-- MODEL-DATA version -->
-		<model-data.version>1.6.1</model-data.version>
+		<model-data.version>1.6.2</model-data.version>
 		<model-core.version>${model-data.version}</model-core.version>
 	</properties>
 

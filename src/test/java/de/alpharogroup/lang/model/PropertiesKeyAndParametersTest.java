@@ -90,10 +90,9 @@ public class PropertiesKeyAndParametersTest
 	{
 		boolean expected;
 		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(PropertiesKeyAndParameters.class, clazz-> PropertiesKeyAndParameters.builder()
-				.key(EnhancedRandom.random(String.class))
-				.build());
+		actual = EqualsHashCodeAndToStringEvaluator.evaluateEqualsHashcodeAndToString(
+			PropertiesKeyAndParameters.class, clazz -> PropertiesKeyAndParameters.builder()
+				.key(EnhancedRandom.random(String.class)).build());
 		expected = true;
 		assertEquals(expected, actual);
 	}

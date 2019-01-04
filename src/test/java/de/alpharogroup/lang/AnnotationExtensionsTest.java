@@ -152,7 +152,7 @@ public class AnnotationExtensionsTest
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
-	@Test(enabled = false)// TODO fix...
+	@Test(enabled = false) // TODO fix...
 	public void testGetAllAnnotatedClassesSet()
 		throws ClassNotFoundException, IOException, URISyntaxException
 	{
@@ -198,7 +198,7 @@ public class AnnotationExtensionsTest
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
-	@Test(enabled = false)// TODO fix...
+	@Test(enabled = false) // TODO fix...
 	public void testGetAllClassesStringSet()
 		throws ClassNotFoundException, IOException, URISyntaxException
 	{
@@ -349,7 +349,7 @@ public class AnnotationExtensionsTest
 	 * @throws ClassNotFoundException
 	 *             occurs if a given class cannot be located by the specified class loader
 	 */
-	@Test(enabled = false)// TODO fix...
+	@Test(enabled = false) // TODO fix...
 	public void testScanForClasses() throws URISyntaxException, ClassNotFoundException
 	{
 		File directory = ClassExtensions.getResourceAsFile("AnnotationExtensionsTest.class", this);

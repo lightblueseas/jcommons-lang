@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>4.1</version>
+		<version>4.5</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>4.35</version>
+	<version>5.1.1</version>
 
 	<name>${project.artifactId}</name>
 
@@ -19,28 +20,30 @@
 		Project that holds different usefull utility classes.
 	</description>
 
-	<url>https://github.com/lightblueseas/jcommons-lang</url>
+	<url>https://github.com/lightblueseas/${project.artifactId}</url>
 
 	<properties>
-		<silly-collections.version>4.33</silly-collections.version>
-		<vintage-time.version>4.12</vintage-time.version>
+		<silly-collections.version>5</silly-collections.version>
+		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
-		<test-objects.version>4.28</test-objects.version>
+		<test-objects.version>5</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>1.12</jobject-extensions.version>
+		<jobject-extensions.version>2.5</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-collections4.version>4.2</commons-collections4.version>
-		<commons-lang3.version>3.7</commons-lang3.version>
+		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-codec.version>1.11</commons-codec.version>
-		<joda-time.version>2.10</joda-time.version>
-		<runtime-compiler.version>1.1.0</runtime-compiler.version>
+		<runtime-compiler.version>1.2</runtime-compiler.version>
 		<cglib.version>3.2.7</cglib.version>
 		<!-- DB DRIVER version -->
 		<h2.version>1.4.197</h2.version>
+		<!-- MODEL-DATA version -->
+		<model-data.version>1.6.2</model-data.version>
+		<model-core.version>${model-data.version}</model-core.version>
 	</properties>
 
 	<licenses>
@@ -52,19 +55,19 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git:@github.com:lightblueseas/jcommons-lang.git</connection>
-		<developerConnection>scm:git:git@github.com:lightblueseas/jcommons-lang.git</developerConnection>
-		<url>git:@github.com:lightblueseas/jcommons-lang.git</url>
+		<connection>scm:git:git:@github.com:lightblueseas/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:git@github.com:lightblueseas/${project.artifactId}.git</developerConnection>
+		<url>git:@github.com:lightblueseas/${project.artifactId}.git</url>
 	</scm>
 
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/lightblueseas/jcommons-lang/issues</url>
+		<url>https://github.com/lightblueseas/${project.artifactId}/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>travis-ci</system>
-		<url>https://travis-ci.org/lightblueseas/jcommons-lang</url>
+		<url>https://travis-ci.org/lightblueseas/${project.artifactId}</url>
 	</ciManagement>
 
 	<dependencyManagement>
@@ -95,12 +98,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>${joda-time.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>silly-collections</artifactId>
 				<version>${silly-collections.version}</version>
@@ -110,6 +107,12 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>vintage-time</artifactId>
 				<version>${vintage-time.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>model-core</artifactId>
+				<version>${model-core.version}</version>
 			</dependency>
 			<!-- TEST-OBJECTS DEPENDENCY -->
 			<dependency>
@@ -182,8 +185,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>model-core</artifactId>
 		</dependency>
 
 		<dependency>

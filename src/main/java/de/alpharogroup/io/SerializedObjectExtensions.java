@@ -32,7 +32,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Logger;
 
 import de.alpharogroup.file.FileConstants;
 import lombok.experimental.UtilityClass;
@@ -46,10 +45,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class SerializedObjectExtensions
 {
-
-	/** The LOGGER. */
-	protected static final Logger LOGGER = Logger
-		.getLogger(SerializedObjectExtensions.class.getName());
 
 	/**
 	 * Reads the object from the given file.

@@ -85,8 +85,8 @@ public class MethodModelTest
 		/** The synchronized flag. */
 		boolean synchronizedFlag = false;
 
-		model = new MethodModel(methodAnnotations, modifiers, genericTypes, returnType, methodName,
-			parameters, parameterAnnotations, staticFlag, synchronizedFlag);
+		model = new MethodModel(genericTypes, methodAnnotations, methodName, modifiers,
+			parameterAnnotations, parameters, returnType, staticFlag, synchronizedFlag);
 		assertNotNull(model);
 		model = MethodModel.builder().build();
 		assertNotNull(model);
@@ -106,10 +106,13 @@ public class MethodModelTest
 	 *             if a new instance of the bean's class cannot be instantiated
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	@Test
-	public void testEqualsHashcodeAndToStringWithClass() throws NoSuchMethodException,
-		IllegalAccessException, InvocationTargetException, InstantiationException, IOException
+	public void testEqualsHashcodeAndToStringWithClass()
+		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+		InstantiationException, IOException, ClassNotFoundException
 	{
 		boolean expected;
 		boolean actual;

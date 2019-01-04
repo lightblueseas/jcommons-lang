@@ -29,10 +29,11 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
-
-import org.joda.time.DateTime;
 
 import de.alpharogroup.lang.ClassExtensions;
 import lombok.EqualsAndHashCode;
@@ -91,8 +92,8 @@ public class ManifestVersion implements Serializable
 			try
 			{
 				urlConnection = url.openConnection();
-
-				version.setLastModified(new DateTime(urlConnection.getLastModified()));
+				version.setLastModified(Instant.ofEpochMilli(urlConnection.getLastModified())
+					.atZone(ZoneId.systemDefault()).toLocalTime());
 				version.setManifest(new Manifest(urlConnection.getInputStream()));
 				version
 					.setTitle(version.getManifestAttribute(Attributes.Name.IMPLEMENTATION_TITLE));
@@ -108,7 +109,7 @@ public class ManifestVersion implements Serializable
 	}
 
 	/** The last modified holds the {@code DateTime} when the last build was. */
-	private DateTime lastModified;
+	private LocalTime lastModified;
 
 	/** The manifest. */
 	private Manifest manifest;

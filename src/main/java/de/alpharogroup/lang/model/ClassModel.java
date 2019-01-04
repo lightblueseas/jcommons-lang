@@ -54,24 +54,8 @@ import lombok.experimental.FieldDefaults;
 public class ClassModel
 {
 
-	/** The kind. */
-	@Builder.Default
-	ElementKind kind = ElementKind.CLASS;
-
-	/** The package name. */
-	String packageName;
-
-	/** The imports. */
-	List<String> imports;
-
 	/** The class annotations. */
 	List<ClassModel> classAnnotations;
-
-	/** The modifiers. */
-	List<Modifier> modifiers;
-
-	/** The generic types. */
-	List<String> genericTypes;
 
 	/** The class name. */
 	String className;
@@ -79,10 +63,26 @@ public class ClassModel
 	/** The extended class name. */
 	String extendedClassName;
 
+	/** The generic types. */
+	List<String> genericTypes;
+
+	/** The imports. */
+	List<String> imports;
+
 	/** The interface implementations. */
 	List<String> interfaceImplementations;
 
+	/** The kind. */
+	@Builder.Default
+	ElementKind kind = ElementKind.CLASS;
+
 	/** The methods. */
 	Map<String, MethodModel> methods;
+
+	/** The modifiers. */
+	List<Modifier> modifiers;
+
+	/** The package name. */
+	String packageName;
 
 }

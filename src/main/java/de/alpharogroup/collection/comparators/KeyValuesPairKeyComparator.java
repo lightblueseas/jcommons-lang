@@ -22,50 +22,32 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.lang;
+package de.alpharogroup.collection.comparators;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Comparator;
 
-import org.apache.commons.beanutils.BeanUtils;
-
-import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
-
+import de.alpharogroup.collections.pairs.KeyValuesPair;
 
 /**
- * The class BeanExtensions provides methods for populating JavaBeans properties. Uses internally
- * the commons-beanutils classes.
+ * The class {@link KeyValuesPairKeyComparator} compares {@linkplain KeyValuesPair} objects over the
+ * key where the key have to implements the {@linkplain Comparable} interface.
+ *
+ * @param <K>
+ *            The generic type of the key
+ * @param <V>
+ *            The generic type of the value
  */
-@UtilityClass
-@Slf4j
-public final class BeanExtensions
+public class KeyValuesPairKeyComparator<K extends Comparable<K>, V>
+	implements
+		Comparator<KeyValuesPair<K, V>>
 {
 
 	/**
-	 * <p>
-	 * Set the specified property value, performing type conversions as required to conform to the
-	 * type of the destination property quietly.
-	 * </p>
-	 *
-	 * @param bean
-	 *            Bean on which setting is to be performed
-	 * @param name
-	 *            Property name (can be nested/indexed/mapped/combo)
-	 * @param value
-	 *            Value to be set
-	 *
-	 * @see BeanUtils#setProperty
+	 * {@inheritDoc}
 	 */
-	public static void setPropertyQuietly(final Object bean, final String name, final Object value)
+	@Override
+	public int compare(final KeyValuesPair<K, V> o1, final KeyValuesPair<K, V> o2)
 	{
-		try
-		{
-			BeanUtils.setProperty(bean, name, value);
-		}
-		catch (IllegalAccessException | InvocationTargetException e)
-		{
-			log.error("Bean failed to set property.", e);
-		}
+		return o1.getKey().compareTo(o2.getKey());
 	}
-
 }

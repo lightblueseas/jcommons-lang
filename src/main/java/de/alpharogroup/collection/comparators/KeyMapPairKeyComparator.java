@@ -22,51 +22,34 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.log;
+package de.alpharogroup.collection.comparators;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import java.util.Comparator;
 
-import lombok.experimental.UtilityClass;
+import de.alpharogroup.collections.pairs.KeyMapPair;
 
 /**
- * The class {@link LoggerExtensions} provides extensions for logger appenders.
+ * The class {@link KeyMapPairKeyComparator} compares {@linkplain KeyMapPair} objects over the key
+ * where the key have to implements the {@linkplain Comparable} interface.
+ *
+ * @param <K>
+ *            The type of the key.
+ * @param <MK>
+ *            the generic type of the map key.
+ * @param <MV>
+ *            the generic type of the map value.
  */
-@UtilityClass
-public final class LoggerExtensions
+public class KeyMapPairKeyComparator<K extends Comparable<K>, MK, MV>
+	implements
+		Comparator<KeyMapPair<K, MK, MV>>
 {
 
 	/**
-	 * Adds the file appender to the given logger.
-	 *
-	 * @param logger
-	 *            the logger
-	 * @param fileAppender
-	 *            the file appender
+	 * {@inheritDoc}
 	 */
-	public static void addFileAppender(final Logger logger, final FileAppender fileAppender)
+	@Override
+	public int compare(final KeyMapPair<K, MK, MV> o1, final KeyMapPair<K, MK, MV> o2)
 	{
-		logger.addAppender(fileAppender);
-	}
-
-	/**
-	 * New file appender.
-	 *
-	 * @param logFilePath
-	 *            the log file path
-	 * @return the file appender
-	 */
-	public static FileAppender newFileAppender(final String logFilePath)
-	{
-		final FileAppender appender = new FileAppender();
-		appender.setName("MyFileAppender");
-		appender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-		appender.setFile(logFilePath);
-		appender.setAppend(true);
-		appender.setThreshold(Level.DEBUG);
-		appender.activateOptions();
-		return appender;
+		return o1.getKey().compareTo(o2.getKey());
 	}
 }

@@ -30,13 +30,15 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link ConfigurationExtensions}.
+ * The class {@link ConfigurationExtensions} provides methods for get configuration issues.
  */
 @UtilityClass
 public final class ConfigurationExtensions
 {
 
 	public static final String USER_HOME_PROPERTY_KEY = "user.home";
+
+	public static final String JAVA_IO_TPMDIR_PROPERTY_KEY = "java.io.tmpdir";
 
 	/**
 	 * Gets the user application configuration file path.

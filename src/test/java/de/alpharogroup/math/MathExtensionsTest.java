@@ -69,6 +69,129 @@ public class MathExtensionsTest extends BaseTestCase
 	}
 
 	/**
+	 * Test method for {@link MathExtensions#getNumberOfDigits(int)}.
+	 */
+	@Test
+	public void testGetNumberOfDigits()
+	{
+		int actual;
+		int expected;
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(1);
+		expected = 1;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-1);
+		expected = 1;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(10);
+		expected = 2;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-10);
+		expected = 2;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(100);
+		expected = 3;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-100);
+		expected = 3;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(1000);
+		expected = 4;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-1000);
+		expected = 4;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(10000);
+		expected = 5;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-10000);
+		expected = 5;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(100000);
+		expected = 6;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-100000);
+		expected = 6;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(1000000);
+		expected = 7;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-1000000);
+		expected = 7;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(10000000);
+		expected = 8;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-10000000);
+		expected = 8;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(100000000);
+		expected = 9;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-100000000);
+		expected = 9;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(1000000000);
+		expected = 10;
+		assertEquals(actual, expected);
+
+		// new scenario...
+		actual = MathExtensions.getNumberOfDigits(-1000000000);
+		expected = 10;
+		assertEquals(actual, expected);
+
+		// new scenario with Integer.MAX_VALUE
+		actual = MathExtensions.getNumberOfDigits(2147483647);
+		expected = 10;
+		assertEquals(actual, expected);
+
+		// new scenario with Integer.MIN_VALUE
+		actual = MathExtensions.getNumberOfDigits(-2147483648);
+		expected = 10;
+		assertEquals(actual, expected);
+
+
+
+	}
+
+	/**
 	 * Test method for {@link MathExtensions#getPrimeNumbers(int)}.
 	 */
 	@Test

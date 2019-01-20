@@ -31,10 +31,30 @@ import lombok.experimental.UtilityClass;
  *
  * @version 1.0
  * @author Asterios Raptis
+ * @deprecated use instead the same name class from project silly-math
+ * <br>
+ * Note: will be removed in next minor release.
  */
+@Deprecated
 @UtilityClass
 public final class MathExtensions
 {
+
+	/**
+	 * Gets the number of digits from the given <code>int</code> number.
+	 *
+	 * @param number the number
+	 * @return the number of digits
+	 */
+	public static int getNumberOfDigits(final int number) {
+		int digits;
+		if(isPositive(number)) {
+			digits = (int) (Math.log10(number) + 1);
+		} else {
+			digits = String.valueOf(number).length()-1;
+		}
+		return digits;
+	}
 
 	/**
 	 * Gets the prime numbers for the given quantity.

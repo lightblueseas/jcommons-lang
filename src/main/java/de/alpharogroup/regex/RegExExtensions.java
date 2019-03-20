@@ -113,7 +113,6 @@ public final class RegExExtensions
      * @return true if the given text is matching otherwise false
      */
     public static boolean isMatching(String regexPattern, String text) {
-        Matcher matcher = Pattern.compile(regexPattern).matcher(text);
         return 0 < countMatches(regexPattern, text);
     }
 

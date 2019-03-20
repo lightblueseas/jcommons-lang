@@ -24,6 +24,9 @@
  */
 package de.alpharogroup.regex;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.UtilityClass;
 
@@ -102,4 +105,32 @@ public final class RegExExtensions
 		return newQuery;
 	}
 
+    /**
+     * Checks if the given regular expression pattern is matching with the given text.
+     *
+     * @param regexPattern the regular expression pattern
+     * @param text         the text to check if it matches
+     * @return true if the given text is matching otherwise false
+     */
+    public static boolean isMatching(String regexPattern, String text) {
+        Matcher matcher = Pattern.compile(regexPattern).matcher(text);
+        return 0 < countMatches(regexPattern, text);
+    }
+
+    /**
+     * Count how many times the given text is matching and returns the result.
+     *
+     * @param regexPattern the regular expression pattern
+     * @param text         the text to check if it matches
+     * @return the count of how many times the given text is matching
+     */
+    public static int countMatches(String regexPattern, String text) {
+        Matcher matcher = Pattern.compile(regexPattern).matcher(text);
+        int matches = 0;
+        while (matcher.find()) {
+            matches++;
+        }
+        return matches;
+    }
+	
 }

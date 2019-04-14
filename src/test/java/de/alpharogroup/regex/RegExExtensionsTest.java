@@ -39,6 +39,20 @@ import de.alpharogroup.string.StringExtensions;
 public class RegExExtensionsTest extends BaseTestCase
 {
 
+    /**
+     * Test method for {@link RegExExtensions#isMatching(String, String)}
+     */
+    @Test
+    public void testIsMatching() {
+        String regexPattern = "(\\s|00|01|02|03|^$)";
+        assertTrue(RegExExtensions.isMatching(regexPattern, ""));
+        assertTrue(RegExExtensions.isMatching(regexPattern, " "));
+        assertTrue(RegExExtensions.isMatching(regexPattern, "  "));
+        assertTrue(RegExExtensions.isMatching(regexPattern, "00"));
+        assertTrue(RegExExtensions.isMatching(regexPattern, "01"));
+        assertTrue(RegExExtensions.isMatching(regexPattern, "02"));
+        assertTrue(RegExExtensions.isMatching(regexPattern, "03"));
+    }
 	/**
 	 * {@inheritDoc}
 	 */

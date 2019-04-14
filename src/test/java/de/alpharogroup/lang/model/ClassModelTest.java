@@ -41,7 +41,6 @@ import org.testng.annotations.Test;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
 
 /**
  * The unit test class for the class {@link ClassModel}.
@@ -121,21 +120,7 @@ public class ClassModelTest
 		boolean actual;
 		actual = EqualsHashCodeAndToStringEvaluator
 			.evaluateEqualsHashcodeAndToString(ClassModel.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
 
-	/**
-	 * Test method for {@link ClassModel#equals(Object)} , {@link ClassModel#hashCode()} and
-	 * {@link ClassModel#toString()}
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(ClassModel.class);
 		expected = true;
 		assertEquals(expected, actual);
 	}

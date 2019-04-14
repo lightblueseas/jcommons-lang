@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>4.7</version>
+		<version>4.8</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>5.1.1</version>
+	<version>5.2-SNAPSHOT</version>
 
 	<name>${project.artifactId}</name>
 
@@ -23,12 +23,12 @@
 	<url>https://github.com/lightblueseas/${project.artifactId}</url>
 
 	<properties>
-		<silly-collections.version>5</silly-collections.version>
+		<silly-collections.version>5.2</silly-collections.version>
 		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
 		<test-objects.version>5</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>2.5</jobject-extensions.version>
+		<jobject-extensions.version>2.6.4</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
 		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
@@ -40,7 +40,7 @@
 		<runtime-compiler.version>1.2</runtime-compiler.version>
 		<cglib.version>3.2.7</cglib.version>
 		<!-- DB DRIVER version -->
-		<h2.version>1.4.197</h2.version>
+		<h2.version>1.4.199</h2.version>
 		<!-- MODEL-DATA version -->
 		<model-data.version>1.6.2</model-data.version>
 		<model-core.version>${model-data.version}</model-core.version>

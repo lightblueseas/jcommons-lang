@@ -24,6 +24,8 @@
  */
 package de.alpharogroup.regex;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;

@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import lombok.SneakyThrows;
 
 /**
  * The unit test class for the class {@link FieldModel}.
@@ -95,13 +95,13 @@ public class FieldModelTest
 	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
 	 * {@link FieldModel#toString()}
 	 */
-	@Test
+	@Test	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;
 		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(FieldModel.class);
+		actual = EqualsHashCodeAndToStringEvaluator
+			.evaluateEqualsHashcodeAndToString(FieldModel.class);
 		expected = true;
 		assertEquals(expected, actual);
 	}

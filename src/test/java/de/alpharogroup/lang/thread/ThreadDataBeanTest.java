@@ -33,7 +33,7 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import lombok.SneakyThrows;
 
 /**
  * The unit test class for the class {@link ThreadDataBean}.
@@ -74,13 +74,13 @@ public class ThreadDataBeanTest
 	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()} and
 	 * {@link ThreadDataBean#toString()}
 	 */
-	@Test
+	@Test	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;
 		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(ThreadDataBean.class);
+		actual = EqualsHashCodeAndToStringEvaluator
+			.evaluateEqualsHashcodeAndToString(ThreadDataBean.class);
 		expected = true;
 		assertEquals(expected, actual);
 	}

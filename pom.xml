@@ -28,10 +28,12 @@
 		<!-- TEST-OBJECTS version -->
 		<test-objects.version>5</test-objects.version>
 		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>2.6.4</jobject-extensions.version>
+		<jobject-extensions.version>3</jobject-extensions.version>
 		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
-		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
-		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
+		<!-- JOBJ-DIFFER version -->
+		<jobj-differ.version>3</jobj-differ.version>
+		<!-- JOBJ-CONTRACT-VERIFIER version -->
+		<jobj-contract-verifier.version>3</jobj-contract-verifier.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-collections4.version>4.2</commons-collections4.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
@@ -133,17 +135,17 @@
 				<artifactId>jobject-core</artifactId>
 				<version>${jobject-core.version}</version>
 			</dependency>
-			<!-- JOBJECT-DIFF DEPENDENCIES -->
+			<!-- JOBJ-DIFFER DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jobject-diff</artifactId>
-				<version>${jobject-diff.version}</version>
+				<artifactId>jobj-differ</artifactId>
+				<version>${jobj-differ.version}</version>
 			</dependency>
-			<!-- JOBJECT-EVALUATE DEPENDENCY -->
+			<!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jobject-evaluate</artifactId>
-				<version>${jobject-evaluate.version}</version>
+				<artifactId>jobj-contract-verifier</artifactId>
+				<version>${jobj-contract-verifier.version}</version>
 			</dependency>
 			<!-- H2 DEPENDENCY -->
 			<dependency>
@@ -198,15 +200,15 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jobject-core</artifactId>
 		</dependency>
-		<!-- JOBJECT-DIFF DEPENDENCIES -->
+		<!-- JOBJ-DIFFER DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-diff</artifactId>
+			<artifactId>jobj-differ</artifactId>
 		</dependency>
-		<!-- JOBJECT-EVALUATE DEPENDENCY -->
+		<!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-evaluate</artifactId>
+			<artifactId>jobj-contract-verifier</artifactId>
 			<scope>test</scope>
 		</dependency>
 

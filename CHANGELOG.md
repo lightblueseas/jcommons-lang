@@ -8,7 +8,7 @@ CHANGED:
 
 - update of parent version to 4.8
 - update of model-data version to 1.6.2
-- update of jobject-core version to 3
+- replaced obsolet dependency jobject-core with new dependency jobj-core in version 3
 - replaced obsolet dependency jobject-diff with new dependency jobj-differ in version 3
 - replaced obsolet dependency jobject-evaluate with new dependency jobj-contract-verifier in version 3 
 

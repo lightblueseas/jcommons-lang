@@ -47,7 +47,7 @@ public class TxtFileFilterTest
 
 	/**
 	 * Test method for {@link TxtFileFilter#accept(File)}
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 * @throws IOException

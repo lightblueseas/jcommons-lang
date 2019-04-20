@@ -27,13 +27,12 @@
 		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
 		<test-objects.version>5</test-objects.version>
-		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>3</jobject-extensions.version>
-		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
 		<!-- JOBJ-DIFFER version -->
 		<jobj-differ.version>3</jobj-differ.version>
 		<!-- JOBJ-CONTRACT-VERIFIER version -->
 		<jobj-contract-verifier.version>3</jobj-contract-verifier.version>
+		<!-- JOBJ-CORE version -->
+		<jobj-core.version>3</jobj-core.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-collections4.version>4.2</commons-collections4.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
@@ -129,12 +128,6 @@
 				<version>${runtime-compiler.version}</version>
 			</dependency>
 			<!-- JOBJECT-EXTENSIONS DEPENDENCIES -->
-			<!-- JOBJECT-CORE DEPENDENCIES -->
-			<dependency>
-				<groupId>de.alpharogroup</groupId>
-				<artifactId>jobject-core</artifactId>
-				<version>${jobject-core.version}</version>
-			</dependency>
 			<!-- JOBJ-DIFFER DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
@@ -146,6 +139,12 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jobj-contract-verifier</artifactId>
 				<version>${jobj-contract-verifier.version}</version>
+			</dependency>
+			<!-- JOBJ-CORE DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jobj-core</artifactId>
+				<version>${jobj-core.version}</version>
 			</dependency>
 			<!-- H2 DEPENDENCY -->
 			<dependency>
@@ -195,10 +194,10 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
 		</dependency>
-		<!-- JOBJECT-CORE DEPENDENCIES -->
+		<!-- JOBJ-CORE DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-core</artifactId>
+			<artifactId>jobj-core</artifactId>
 		</dependency>
 		<!-- JOBJ-DIFFER DEPENDENCY -->
 		<dependency>

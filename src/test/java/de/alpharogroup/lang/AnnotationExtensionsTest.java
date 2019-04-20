@@ -348,9 +348,11 @@ public class AnnotationExtensionsTest
 	 *             occurs by creation of the file with an uri.
 	 * @throws ClassNotFoundException
 	 *             occurs if a given class cannot be located by the specified class loader
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test(enabled = false) // TODO fix...
-	public void testScanForClasses() throws URISyntaxException, ClassNotFoundException
+	public void testScanForClasses() throws URISyntaxException, ClassNotFoundException, IOException
 	{
 		File directory = ClassExtensions.getResourceAsFile("AnnotationExtensionsTest.class", this);
 		directory = directory.getParentFile();

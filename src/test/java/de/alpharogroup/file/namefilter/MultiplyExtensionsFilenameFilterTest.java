@@ -49,7 +49,7 @@ public class MultiplyExtensionsFilenameFilterTest
 
 	/**
 	 * Test method for {@link MultiplyExtensionsFilenameFilter#accept(File, String)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 * @throws IOException

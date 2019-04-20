@@ -38,13 +38,32 @@ public class BooleanExtensionsTest
 {
 
 	/**
-	 * Test method for {@link BooleanExtensions#trueOrFalse(Object, Object, boolean...)}
-	 *
-	 * @throws Exception
-	 *             the exception
+	 * Test method for {@link BooleanExtensions#toBoolean(Boolean)}
 	 */
 	@Test
-	public final void testTrueOrFalse() throws Exception
+	public final void testToBoolean() {
+
+		boolean expected;
+		boolean actual;
+
+		actual = BooleanExtensions.toBoolean(Boolean.TRUE);
+		expected = true;
+		assertEquals(expected, actual);
+
+		actual = BooleanExtensions.toBoolean(Boolean.FALSE);
+		expected = false;
+		assertEquals(expected, actual);
+
+		actual = BooleanExtensions.toBoolean(null);
+		expected = false;
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test method for {@link BooleanExtensions#trueOrFalse(Object, Object, boolean...)}
+	 */
+	@Test
+	public final void testTrueOrFalse()
 	{
 		String expected;
 		String actual;

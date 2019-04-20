@@ -50,12 +50,20 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ClassExtensions} provides extension methods for the class {@link Class}.
+ *
+ * @deprecated
  */
+@Deprecated
 @UtilityClass
 public final class ClassExtensions
 {
 
-	/** The Constant CGLIB_TAG contains the tag of a cglib class name. */
+	/**
+	 * The Constant CGLIB_TAG contains the tag of a cglib class name.
+	 *
+	 * @deprecated
+	 **/
+	@Deprecated
 	protected static final String CGLIB_TAG = "$$";
 
 
@@ -81,36 +89,38 @@ public final class ClassExtensions
 		return false;
 	}
 
-	/**
+	 /**
 	 * Look up the class in the "current" ClassLoader.
 	 *
 	 * @param className
-	 *            The class name to load
+	 * The class name to load
 	 * @return the class
 	 * @throws ClassNotFoundException
-	 *             is thrown if the Class was not found or could not be located.
+	 * is thrown if the Class was not found or could not be located.
+	 * @deprecated
 	 */
+	 @Deprecated
 	public static Class<?> forName(final String className) throws ClassNotFoundException
-	{
-		Class<?> clazz = null;
-		try
-		{
-			clazz = Class.forName(className);
-		}
-		catch (final Throwable throwable)
-		{
-			clazz = Class.forName(className, true, getClassLoader());
-			if (clazz == null)
-			{
-				clazz = Class.forName(className, false, getClassLoader());
-				if (clazz == null)
-				{
-					throw throwable;
-				}
-			}
-		}
-		return clazz;
-	}
+	 {
+	 Class<?> clazz = null;
+	 try
+	 {
+	 clazz = Class.forName(className);
+	 }
+	 catch (final Throwable throwable)
+	 {
+	 clazz = Class.forName(className, true, getClassLoader());
+	 if (clazz == null)
+	 {
+	 clazz = Class.forName(className, false, getClassLoader());
+	 if (clazz == null)
+	 {
+	 throw throwable;
+	 }
+	 }
+	 }
+	 return clazz;
+	 }
 
 	/**
 	 * Gets the parent base class from the given child class.
@@ -118,6 +128,7 @@ public final class ClassExtensions
 	 * @param childClass
 	 *            the child class
 	 * @return the parent base class from the given child class.
+	 * @deprecated
 	 */
 	public static Class<?> getBaseClass(final Class<?> childClass)
 	{
@@ -144,6 +155,7 @@ public final class ClassExtensions
 	 * @param elements
 	 *            the elements
 	 * @return the calling method name
+	 * @deprecated
 	 */
 	public static String getCallingMethodName(final StackTraceElement elements[])
 	{
@@ -163,6 +175,7 @@ public final class ClassExtensions
 	 *            the class
 	 * @return the real class if the given class is decorated with cglib proxy classes and if not
 	 *         the given class will be returned.
+	 * @deprecated
 	 */
 	public static Class<?> getCglibProxy(final Class<?> clazz)
 	{
@@ -176,6 +189,7 @@ public final class ClassExtensions
 
 	/**
 	 * Gets the {@link Class} of the given object.
+	 * @deprecated
 	 *
 	 * @param <T>
 	 *            the generic type
@@ -196,6 +210,7 @@ public final class ClassExtensions
 
 	/**
 	 * Gets the current class loader.
+	 * @deprecated
 	 *
 	 * @return 's the current class loader
 	 */
@@ -206,6 +221,7 @@ public final class ClassExtensions
 
 	/**
 	 * Gets the ClassLoader from the given object.
+	 * @deprecated
 	 *
 	 * @param obj
 	 *            The object.
@@ -247,6 +263,7 @@ public final class ClassExtensions
 
 	/**
 	 * Gets the classname from the given class.
+	 * @deprecated
 	 *
 	 * @param clazz
 	 *            The class.
@@ -264,6 +281,7 @@ public final class ClassExtensions
 	 * @param clazz
 	 *            The class.
 	 * @return The classname and concats the suffix ".class".
+	 * @deprecated
 	 */
 	public static String getClassnameWithSuffix(final Class<?> clazz)
 	{
@@ -279,6 +297,7 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The object.
 	 * @return The classname and concats the suffix ".class".
+	 * @deprecated
 	 */
 	public static String getClassnameWithSuffix(final Object obj)
 	{
@@ -291,6 +310,7 @@ public final class ClassExtensions
 	 * @param clazz
 	 *            The class.
 	 * @return the {@link ClassType} from the given class.
+	 * @deprecated
 	 */
 	public static ClassType getClassType(final Class<?> clazz)
 	{
@@ -347,6 +367,7 @@ public final class ClassExtensions
 	 * @param elements
 	 *            the elements
 	 * @return the current method name
+	 * @deprecated
 	 */
 	public static String getCurrentMethodName(final StackTraceElement elements[])
 	{
@@ -367,6 +388,7 @@ public final class ClassExtensions
 	/**
 	 * Gets the directories from the given path.
 	 *
+	 * @deprecated
 	 * @param path
 	 *            the path
 	 * @param isPackage
@@ -374,7 +396,7 @@ public final class ClassExtensions
 	 * @return the directories from resources
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
@@ -397,6 +419,7 @@ public final class ClassExtensions
 	/**
 	 * If the given class is in a JAR file than the jar path as String will be returned.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            The class.
 	 * @return the jar path as String if the given class is in a JAR file.
@@ -427,6 +450,7 @@ public final class ClassExtensions
 	/**
 	 * Gets the jdk proxy interfaces.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            the class
 	 * @return the jdk proxy interfaces
@@ -444,6 +468,7 @@ public final class ClassExtensions
 	/**
 	 * If the given class is in a JAR, WAR or EAR file than the manifest url as String is returned.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            The class.
 	 * @return the manifest url as String if the given class is in a JAR, WAR or EAR file.
@@ -470,6 +495,7 @@ public final class ClassExtensions
 	/**
 	 * Returns the name of the given class or null if the given class is null.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            The class.
 	 *
@@ -484,6 +510,7 @@ public final class ClassExtensions
 	 * Returns the name of the given class or null if the given class is null. If the given flag
 	 * 'simple' is true the simple name (without the package) will be returned.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            The class
 	 * @param simple
@@ -521,6 +548,7 @@ public final class ClassExtensions
 	 * @param clazz
 	 *            The class.
 	 * @return the path from the given class.
+	 * @deprecated
 	 */
 	public static String getPath(final Class<?> clazz)
 	{
@@ -538,6 +566,7 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The object.
 	 * @return The absolute path from the object.
+	 * @deprecated
 	 */
 	public static String getPathFromObject(final Object obj)
 	{
@@ -556,6 +585,7 @@ public final class ClassExtensions
 	 * @param clazz
 	 *            The class-object.
 	 * @return 's the url from the path.
+	 * @deprecated
 	 */
 	public static URL getResource(final Class<?> clazz)
 	{
@@ -576,6 +606,7 @@ public final class ClassExtensions
 	 * @param path
 	 *            The path.
 	 * @return 's the url from the path.
+	 * @deprecated
 	 */
 	public static URL getResource(final Class<?> clazz, final String path)
 	{
@@ -593,6 +624,7 @@ public final class ClassExtensions
 	 * @param name
 	 *            The name from the resource.
 	 * @return The resource or null if the resource does not exists.
+	 * @deprecated
 	 */
 	public static URL getResource(final String name)
 	{
@@ -615,6 +647,7 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The Object.
 	 * @return The resource or null if the resource does not exists.
+	 * @deprecated
 	 */
 	public static <T> URL getResource(final String name, final T obj)
 	{
@@ -633,9 +666,10 @@ public final class ClassExtensions
 	 * @param name
 	 *            The name from the file.
 	 * @return The file or null if the file does not exists.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
+	 * @deprecated
 	 */
 	public static File getResourceAsFile(final String name) throws URISyntaxException
 	{
@@ -672,9 +706,10 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The Object.
 	 * @return The file or null if the file does not exists.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
+	 * @deprecated
 	 */
 	public static File getResourceAsFile(final String name, final Object obj)
 		throws URISyntaxException
@@ -714,6 +749,7 @@ public final class ClassExtensions
 	 * @param uri
 	 *            The uri as String.
 	 * @return The InputStream from the uri.
+	 * @deprecated
 	 */
 	public static InputStream getResourceAsStream(final Class<?> clazz, final String uri)
 	{
@@ -731,6 +767,7 @@ public final class ClassExtensions
 	 * @param name
 	 *            The name from the resource.
 	 * @return The resource or null if the resource does not exists.
+	 * @deprecated
 	 */
 	public static InputStream getResourceAsStream(final String name)
 	{
@@ -747,6 +784,7 @@ public final class ClassExtensions
 	 * @param obj
 	 *            The Object.
 	 * @return The resource or null if the resource does not exists.
+	 * @deprecated
 	 */
 	public static InputStream getResourceAsStream(final String name, final Object obj)
 	{
@@ -767,6 +805,7 @@ public final class ClassExtensions
 	 * @return The resources.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @deprecated
 	 */
 	public static List<URL> getResources(final String path) throws IOException
 	{
@@ -782,6 +821,7 @@ public final class ClassExtensions
 	 *            The class.
 	 *
 	 * @return The simple name of the given class.
+	 * @deprecated
 	 */
 	public static String getSimpleName(final Class<?> clazz)
 	{
@@ -791,6 +831,7 @@ public final class ClassExtensions
 	/**
 	 * Gets the unwrapped proxy class.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            the class
 	 * @return the unwrapped proxy class or null if the given {@link Class} is null.
@@ -808,6 +849,7 @@ public final class ClassExtensions
 	/**
 	 * Returns the URL from the given class.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            The class.
 	 * @return the URL from the given class.
@@ -820,6 +862,7 @@ public final class ClassExtensions
 	/**
 	 * Checks if the given {@link Class} is cglib proxy class.
 	 *
+	 * @deprecated
 	 * @param <T>
 	 *            the generic type
 	 * @param clazz
@@ -836,6 +879,7 @@ public final class ClassExtensions
 	 *
 	 * @param clazz
 	 *            The class.
+	 * @deprecated
 	 * @return true, if the given class is assignable from {@link Collection} otherwise false.
 	 */
 	public static boolean isCollection(final Class<?> clazz)
@@ -852,6 +896,7 @@ public final class ClassExtensions
 	 * @param compare
 	 *            the compare
 	 * @return true, if compare is a derivate of source.
+	 * @deprecated
 	 */
 	public static boolean isDerivate(final ClassLoader source, ClassLoader compare)
 	{
@@ -885,6 +930,7 @@ public final class ClassExtensions
 	 *            the generic type
 	 * @param clazz
 	 *            the class to check
+	 * @deprecated
 	 * @return true, if the given {@link Class} is a JDK proxy class otherwise false.
 	 */
 	public static <T> boolean isJdkProxy(final Class<T> clazz)
@@ -895,6 +941,7 @@ public final class ClassExtensions
 	/**
 	 * Checks if the given class is assignable from {@link Map}.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            The class.
 	 * @return true, if the given class is assignable from {@link Map} otherwise false.
@@ -907,6 +954,7 @@ public final class ClassExtensions
 	/**
 	 * Checks if the given {@link Class} is a proxy class.
 	 *
+	 * @deprecated
 	 * @param <T>
 	 *            the generic type
 	 * @param clazz
@@ -1068,6 +1116,7 @@ public final class ClassExtensions
 	/**
 	 * Unwrap the given {@link Class} if it is wrapped from cglib or jdk proxies.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            the class
 	 * @return the unwrapped classes as an array

@@ -27,7 +27,7 @@ package de.alpharogroup.lang;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link BooleanExtensions}.
+ * The class {@link BooleanExtensions} provides utility methods for handling with boolean values
  */
 @UtilityClass
 public final class BooleanExtensions
@@ -67,6 +67,25 @@ public final class BooleanExtensions
 			return falseCase;
 		}
 		return trueCase;
+	}
+
+	/**
+	 * Converts the given {@link Boolean} to a primitive boolean value
+	 *
+	 * <pre>
+	 *   BooleanExtensions.toBoolean(Boolean.TRUE)  = true
+	 *   BooleanExtensions.toBoolean(Boolean.FALSE) = false
+	 *   BooleanExtensions.toBoolean(null)          = false
+	 * </pre>
+	 *
+	 * @param value
+	 *            the boolean value to convert
+	 * @return true if the given {@link Boolean} encapsulates the value 'true' otherwise false, that
+	 *         includes even if the given {@link Boolean} is null
+	 */
+	public static boolean toBoolean(final Boolean value)
+	{
+		return value != null && value.booleanValue();
 	}
 
 }

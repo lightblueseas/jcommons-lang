@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.alpharogroup.check.Check;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
@@ -48,7 +47,9 @@ import lombok.experimental.UtilityClass;
  * <br>
  * In the comments someone asked if we are allowed to use the source code from the article. The
  * answer of Ian Robertson is: Absolutely, you may use this code. "Consider it open sourced".
+	 * @deprecated
  */
+@Deprecated
 @UtilityClass
 public final class TypeArgumentsExtensions
 {
@@ -179,7 +180,6 @@ public final class TypeArgumentsExtensions
 	@SuppressWarnings("unchecked")
 	public static <T> List<Class<?>> getTypeArguments(final @NonNull Class<? extends T> childClass)
 	{
-		Check.get().notNull(childClass, "childClass");
 		Class<T> baseClass = (Class<T>)ClassExtensions.getBaseClass(childClass);
 		return getTypeArguments(baseClass, childClass);
 	}
@@ -199,7 +199,6 @@ public final class TypeArgumentsExtensions
 	public static <T> List<Class<?>> getTypeArguments(final @NonNull Class<T> baseClass,
 		final @NonNull Class<? extends T> childClass)
 	{
-		Check.get().notNull(baseClass, "baseClass").notNull(childClass, "childClass");
 		Class<T> realBaseClass = baseClass;
 		// handle interface case
 		if (realBaseClass.isInterface())

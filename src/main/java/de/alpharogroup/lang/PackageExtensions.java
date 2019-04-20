@@ -42,6 +42,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link PackageExtensions}.
+	 * @deprecated
  */
 @UtilityClass
 public final class PackageExtensions
@@ -52,6 +53,7 @@ public final class PackageExtensions
 	 *
 	 * @param clazz
 	 *            The class object.
+	 * @deprecated
 	 *
 	 * @return The package name from the given class object.
 	 */
@@ -72,6 +74,7 @@ public final class PackageExtensions
 	 * @param qualifiedClassName
 	 *            The fully qualified class name without the file extension. For instance:
 	 *            xy.ab.Test =&gt; xy.ab
+	 * @deprecated
 	 *
 	 * @return The package name from the given String.
 	 */
@@ -91,6 +94,7 @@ public final class PackageExtensions
 	 *
 	 * @param clazz
 	 *            The class object.
+	 * @deprecated
 	 *
 	 * @return The package name from the given class object.
 	 */
@@ -109,6 +113,7 @@ public final class PackageExtensions
 	 *
 	 * @param clazz
 	 *            The class object.
+	 * @deprecated
 	 *
 	 * @return The package path from the given class object.
 	 */
@@ -127,6 +132,7 @@ public final class PackageExtensions
 	 *
 	 * @param object
 	 *            The object.
+	 * @deprecated
 	 *
 	 * @return The package path from the given object.
 	 */
@@ -143,6 +149,7 @@ public final class PackageExtensions
 	 * Determines the package path from the given String object that is in the dot-format. For
 	 * instance: given package string=='org.foo.bar' will result to 'org/foo/bar'
 	 *
+	 * @deprecated
 	 * @param packagePathWithDots
 	 *            the package path with dots
 	 * @return The package path from the given String object
@@ -159,6 +166,7 @@ public final class PackageExtensions
 	 * For instance: given package string=='org.foo.bar' will result to 'org/foo/bar/' if flag is
 	 * true otherwise 'org/foo/bar'
 	 *
+	 * @deprecated
 	 * @param packagePathWithDots
 	 *            the package path with dots
 	 * @param withEndSlash
@@ -185,6 +193,7 @@ public final class PackageExtensions
 	/**
 	 * Determines the package path from the given object and adds a slash at the front.
 	 *
+	 * @deprecated
 	 * @param clazz
 	 *            the clazz
 	 * @return The package path from the given object with the added slash at the front.
@@ -202,6 +211,7 @@ public final class PackageExtensions
 	/**
 	 * Determines the package path from the given object and adds a slash at the front.
 	 *
+	 * @deprecated
 	 * @param object
 	 *            The object.
 	 *

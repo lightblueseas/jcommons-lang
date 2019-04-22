@@ -42,7 +42,9 @@ import lombok.experimental.UtilityClass;
  * H2 or postgresql databases.
  *
  * @author Asterios Raptis
+ * @deprecated
  */
+@Deprecated
 @UtilityClass
 public final class ConnectionsExtensions
 {

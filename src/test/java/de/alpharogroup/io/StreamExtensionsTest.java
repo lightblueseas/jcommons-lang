@@ -61,7 +61,7 @@ public class StreamExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test get byte array input stream.
-	 * 
+	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws ClassNotFoundException
@@ -87,7 +87,7 @@ public class StreamExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test get byte array input stream byte array output stream.
-	 * 
+	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws ClassNotFoundException
@@ -238,7 +238,7 @@ public class StreamExtensionsTest extends BaseTestCase
 
 	/**
 	 * Test method for {@link StreamExtensions#getWriter(File)}.
-	 * 
+	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws URISyntaxException

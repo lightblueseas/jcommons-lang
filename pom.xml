@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>4.5</version>
+		<version>4.8</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>5.1.1</version>
+	<version>5.2</version>
 
 	<name>${project.artifactId}</name>
 
@@ -23,15 +23,16 @@
 	<url>https://github.com/lightblueseas/${project.artifactId}</url>
 
 	<properties>
-		<silly-collections.version>5</silly-collections.version>
+		<silly-collections.version>5.2</silly-collections.version>
 		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
 		<test-objects.version>5</test-objects.version>
-		<!-- JOBJECT-EXTENSIONS version -->
-		<jobject-extensions.version>2.5</jobject-extensions.version>
-		<jobject-core.version>${jobject-extensions.version}</jobject-core.version>
-		<jobject-diff.version>${jobject-extensions.version}</jobject-diff.version>
-		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
+		<!-- JOBJ-DIFFER version -->
+		<jobj-differ.version>3</jobj-differ.version>
+		<!-- JOBJ-CONTRACT-VERIFIER version -->
+		<jobj-contract-verifier.version>3</jobj-contract-verifier.version>
+		<!-- JOBJ-CORE version -->
+		<jobj-core.version>3</jobj-core.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-collections4.version>4.2</commons-collections4.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
@@ -40,7 +41,7 @@
 		<runtime-compiler.version>1.2</runtime-compiler.version>
 		<cglib.version>3.2.7</cglib.version>
 		<!-- DB DRIVER version -->
-		<h2.version>1.4.197</h2.version>
+		<h2.version>1.4.199</h2.version>
 		<!-- MODEL-DATA version -->
 		<model-data.version>1.6.2</model-data.version>
 		<model-core.version>${model-data.version}</model-core.version>
@@ -127,23 +128,23 @@
 				<version>${runtime-compiler.version}</version>
 			</dependency>
 			<!-- JOBJECT-EXTENSIONS DEPENDENCIES -->
-			<!-- JOBJECT-CORE DEPENDENCIES -->
+			<!-- JOBJ-DIFFER DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jobject-core</artifactId>
-				<version>${jobject-core.version}</version>
+				<artifactId>jobj-differ</artifactId>
+				<version>${jobj-differ.version}</version>
 			</dependency>
-			<!-- JOBJECT-DIFF DEPENDENCIES -->
+			<!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jobject-diff</artifactId>
-				<version>${jobject-diff.version}</version>
+				<artifactId>jobj-contract-verifier</artifactId>
+				<version>${jobj-contract-verifier.version}</version>
 			</dependency>
-			<!-- JOBJECT-EVALUATE DEPENDENCY -->
+			<!-- JOBJ-CORE DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jobject-evaluate</artifactId>
-				<version>${jobject-evaluate.version}</version>
+				<artifactId>jobj-core</artifactId>
+				<version>${jobj-core.version}</version>
 			</dependency>
 			<!-- H2 DEPENDENCY -->
 			<dependency>
@@ -193,20 +194,20 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
 		</dependency>
-		<!-- JOBJECT-CORE DEPENDENCIES -->
+		<!-- JOBJ-CORE DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-core</artifactId>
+			<artifactId>jobj-core</artifactId>
 		</dependency>
-		<!-- JOBJECT-DIFF DEPENDENCIES -->
+		<!-- JOBJ-DIFFER DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-diff</artifactId>
+			<artifactId>jobj-differ</artifactId>
 		</dependency>
-		<!-- JOBJECT-EVALUATE DEPENDENCY -->
+		<!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-evaluate</artifactId>
+			<artifactId>jobj-contract-verifier</artifactId>
 			<scope>test</scope>
 		</dependency>
 

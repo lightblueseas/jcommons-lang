@@ -39,7 +39,10 @@ import de.alpharogroup.collections.set.SetFactory;
  *
  * @version 1.0
  * @author Asterios Raptis
+ *
+ * @deprecated use instead the same class in new project silly-io
  */
+@Deprecated
 public class MultiplyExtensionsFileFilter implements FileFilter
 {
 

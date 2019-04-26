@@ -63,7 +63,7 @@ public final class AnnotationExtensions
 	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
@@ -90,13 +90,13 @@ public final class AnnotationExtensions
 	 * @param annotationClasses
 	 *            the list with the annotation classes
 	 * @return the all classes
-	 * 
+	 *
 	 * @throws ClassNotFoundException
 	 *             occurs if a given class cannot be located by the specified class loader
-	 * 
+	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
@@ -127,7 +127,7 @@ public final class AnnotationExtensions
 	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */
@@ -149,7 +149,7 @@ public final class AnnotationExtensions
 	 *             occurs if a given class cannot be located by the specified class loader
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             is thrown if a string could not be parsed as a URI reference.
 	 */

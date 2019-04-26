@@ -41,7 +41,10 @@ import lombok.experimental.UtilityClass;
  * <br>
  * Note: As the {@link String} class is immutable not the given String is manipulated, a new
  * {@link String} object is created with the manipulation.
+ * 
+ * @deprecated use instead the same named class in new project silly-strings
  */
+@Deprecated
 @UtilityClass
 public final class StringExtensions
 {

@@ -35,7 +35,10 @@ import java.util.Collection;
  *
  * @version 1.0
  * @author Asterios Raptis
+ *
+ * @deprecated use instead the same class in new project silly-io
  */
+@Deprecated
 public class MultiplyExtensionsFilenameFilter implements FilenameFilter
 {
 

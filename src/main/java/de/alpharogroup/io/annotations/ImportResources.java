@@ -30,7 +30,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The annotation {@link ImportResources} contains an Array of {@link ImportResource} objects.
+ * The annotation {@link ImportResources} contains an Array of {@link ImportResource} objects
+ *
+ * @author Asterios Raptis
+ * @deprecated use instead the same class in new project silly-io
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

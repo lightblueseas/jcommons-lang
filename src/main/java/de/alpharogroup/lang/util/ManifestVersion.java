@@ -24,101 +24,38 @@
  */
 package de.alpharogroup.lang.util;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.time.Instant;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.LocalDateTime;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import de.alpharogroup.lang.ClassExtensions;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 /**
  * Simple bean to hold information about the version of a Manifest. Can be used for JAR, EAR and WAR
  * manifest files.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ManifestVersion implements Serializable
 {
 
 	/** The serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Returns a ManifestVersion object by reading the manifest file from the JAR, WAR or EAR file
-	 * that contains the given class.
-	 *
-	 * @param clazz
-	 *            the clazz
-	 * @return the manifest version
-	 */
-	public static ManifestVersion get(final Class<?> clazz)
-	{
-		final String manifestUrl = ClassExtensions.getManifestUrl(clazz);
-		try
-		{
-			return of(manifestUrl != null ? new URL(manifestUrl) : null);
-		}
-		catch (final MalformedURLException ignore)
-		{
-			return of(null);
-		}
-	}
-
-	/**
-	 * Creates a new {@code ManifestVersion} object of the given url.
-	 *
-	 * @param url
-	 *            the url
-	 * @return the manifest version
-	 */
-	private static ManifestVersion of(final URL url)
-	{
-		final ManifestVersion version = new ManifestVersion();
-		if (url != null)
-		{
-			URLConnection urlConnection = null;
-			try
-			{
-				urlConnection = url.openConnection();
-				version.setLastModified(Instant.ofEpochMilli(urlConnection.getLastModified())
-					.atZone(ZoneId.systemDefault()).toLocalTime());
-				version.setManifest(new Manifest(urlConnection.getInputStream()));
-				version
-					.setTitle(version.getManifestAttribute(Attributes.Name.IMPLEMENTATION_TITLE));
-				version.setVersion(
-					version.getManifestAttribute(Attributes.Name.IMPLEMENTATION_VERSION));
-			}
-			catch (final IOException e)
-			{
-				throw new RuntimeException("Error while try to load manifest file from " + url, e);
-			}
-		}
-		return version;
-	}
-
-	/** The last modified holds the {@code DateTime} when the last build was. */
-	private LocalTime lastModified;
+	/** The last modified holds the {@code LocalDateTime} when the last build was. */
+	LocalDateTime lastModified;
 
 	/** The manifest. */
-	private Manifest manifest;
+	Manifest manifest;
 
 	/** The title. */
-	private String title;
+	String title;
 
 	/** The version number. */
-	private String version;
+	String version;
 
 	/**
 	 * Gets the manifest attribute value from the given {@code Attributes.Name} object.

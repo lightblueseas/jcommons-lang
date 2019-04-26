@@ -45,7 +45,7 @@ public class FilenameExtensionsTest
 
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenamePrefix(File)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -66,7 +66,7 @@ public class FilenameExtensionsTest
 
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenamePrefix(File)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -90,7 +90,7 @@ public class FilenameExtensionsTest
 
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenameSuffix(File)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -111,7 +111,7 @@ public class FilenameExtensionsTest
 
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenameSuffix(File)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */
@@ -159,7 +159,7 @@ public class FilenameExtensionsTest
 
 	/**
 	 * Test method for {@link FilenameExtensions#getFilenameWithoutExtension(File)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */

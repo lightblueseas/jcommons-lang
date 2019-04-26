@@ -42,7 +42,9 @@ import lombok.experimental.UtilityClass;
  * H2 or postgresql databases.
  *
  * @author Asterios Raptis
+ * @deprecated use instead the same class in new project silly-jdbc
  */
+@Deprecated
 @UtilityClass
 public final class ConnectionsExtensions
 {

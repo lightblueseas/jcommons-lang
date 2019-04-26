@@ -28,6 +28,8 @@ import lombok.Getter;
 
 /**
  * The enum {@link FileExtension} for file extensions.
+ *
+ * @deprecated use instead the same class in new project silly-io
  */
 public enum FileExtension
 {

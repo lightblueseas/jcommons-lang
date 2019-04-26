@@ -35,7 +35,10 @@ import lombok.experimental.UtilityClass;
  *
  * @author Asterios Raptis
  * @version 1.0
+ * @deprecated use instead the ThrowableExtensions class from project throw-able <br>
+ *             Note: will be removed in next minor release.
  */
+@Deprecated
 @UtilityClass
 public final class ExceptionExtensions
 {

@@ -30,14 +30,17 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link FilenameExtensions}.
+ *
+ * @deprecated use instead the same class in new project silly-io
  */
+@Deprecated
 @UtilityClass
 public final class FilenameExtensions
 {
 
 	/**
 	 * Gets the filename with the absolute path prefix.
-	 * 
+	 *
 	 * @param file
 	 *            the file.
 	 * @return the filename prefix.
@@ -60,7 +63,7 @@ public final class FilenameExtensions
 
 	/**
 	 * Gets the filename suffix or null if no suffix exists or the given file object is a directory.
-	 * 
+	 *
 	 * @param file
 	 *            the file.
 	 * @return 's the filename suffix or null if no suffix exists or the given file object is a

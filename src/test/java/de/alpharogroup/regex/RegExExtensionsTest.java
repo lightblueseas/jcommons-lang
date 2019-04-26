@@ -24,6 +24,8 @@
  */
 package de.alpharogroup.regex;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -55,6 +57,22 @@ public class RegExExtensionsTest extends BaseTestCase
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();
+	}
+
+	/**
+	 * Test method for {@link RegExExtensions#isMatching(String, String)}
+	 */
+	@Test
+	public void testIsMatching()
+	{
+		String regexPattern = "(\\s|00|01|02|03|^$)";
+		assertTrue(RegExExtensions.isMatching(regexPattern, ""));
+		assertTrue(RegExExtensions.isMatching(regexPattern, " "));
+		assertTrue(RegExExtensions.isMatching(regexPattern, "  "));
+		assertTrue(RegExExtensions.isMatching(regexPattern, "00"));
+		assertTrue(RegExExtensions.isMatching(regexPattern, "01"));
+		assertTrue(RegExExtensions.isMatching(regexPattern, "02"));
+		assertTrue(RegExExtensions.isMatching(regexPattern, "03"));
 	}
 
 	/**

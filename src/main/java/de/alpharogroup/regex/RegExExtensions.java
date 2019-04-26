@@ -24,15 +24,20 @@
  */
 package de.alpharogroup.regex;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.UtilityClass;
 
 /**
  * Utility class for the use with regular expressions.
- * 
+ *
  * @version 1.0
  * @author Asterios Raptis
+ * @deprecated use instead the same named class in new project silly-strings
  */
+@Deprecated
 @UtilityClass
 public final class RegExExtensions
 {
@@ -73,7 +78,7 @@ public final class RegExExtensions
 	/**
 	 * Replaces the normal wildcards in the given String with the corresponding regular expression
 	 * wildcards.
-	 * 
+	 *
 	 * @param queryString
 	 *            The String to format.
 	 * @return Returns the formatted String as a regular expression for search.
@@ -90,7 +95,7 @@ public final class RegExExtensions
 	/**
 	 * Replaces the query with the wildcards asterisk "*" and interrogation mark "?" with the
 	 * corresponding wildcard from SQL.
-	 * 
+	 *
 	 * @param query
 	 *            The String to replace the wildcards.
 	 * @return The String with the new wildcards from SQL "%" and "_".
@@ -100,6 +105,40 @@ public final class RegExExtensions
 
 		final String newQuery = query.replace('*', '%').replace('?', '_');
 		return newQuery;
+	}
+
+	/**
+	 * Checks if the given regular expression pattern is matching with the given text.
+	 *
+	 * @param regexPattern
+	 *            the regular expression pattern
+	 * @param text
+	 *            the text to check if it matches
+	 * @return true if the given text is matching otherwise false
+	 */
+	public static boolean isMatching(String regexPattern, String text)
+	{
+		return 0 < countMatches(regexPattern, text);
+	}
+
+	/**
+	 * Count how many times the given text is matching and returns the result.
+	 *
+	 * @param regexPattern
+	 *            the regular expression pattern
+	 * @param text
+	 *            the text to check if it matches
+	 * @return the count of how many times the given text is matching
+	 */
+	public static int countMatches(String regexPattern, String text)
+	{
+		Matcher matcher = Pattern.compile(regexPattern).matcher(text);
+		int matches = 0;
+		while (matcher.find())
+		{
+			matches++;
+		}
+		return matches;
 	}
 
 }

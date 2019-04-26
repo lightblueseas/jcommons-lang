@@ -27,7 +27,9 @@ package de.alpharogroup.string;
 import lombok.Getter;
 
 /**
- * The enum {@link CharacterEncoding}.
+ * The enum {@link CharacterEncoding}
+ * 
+ * @deprecated use instead <code>java.nio.charset.StandardCharsets</code>
  */
 public enum CharacterEncoding
 {

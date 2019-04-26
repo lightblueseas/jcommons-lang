@@ -44,7 +44,7 @@ public class SimpleFilenameFilterTest
 
 	/**
 	 * Test method for {@link SimpleFilenameFilter#accept(File, String)}.
-	 * 
+	 *
 	 * @throws URISyntaxException
 	 *             occurs by creation of the file with an uri.
 	 */

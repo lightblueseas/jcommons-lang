@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import lombok.SneakyThrows;
 
 /**
  * The unit test class for the class {@link ThreadFieldDataBean}.
@@ -95,12 +95,13 @@ public class ThreadFieldDataBeanTest
 	 * {@link ThreadFieldDataBean#hashCode()} and {@link ThreadFieldDataBean#toString()}
 	 */
 	@Test
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;
 		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(ThreadFieldDataBean.class);
+		actual = EqualsHashCodeAndToStringEvaluator
+			.evaluateEqualsHashcodeAndToString(ThreadFieldDataBean.class);
 		expected = true;
 		assertEquals(expected, actual);
 	}

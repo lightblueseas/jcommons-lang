@@ -30,13 +30,15 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 /**
- * The class {@link ConfigurationExtensions}.
+ * The class {@link ConfigurationExtensions} provides methods for get configuration issues.
  */
 @UtilityClass
 public final class ConfigurationExtensions
 {
 
 	public static final String USER_HOME_PROPERTY_KEY = "user.home";
+
+	public static final String JAVA_IO_TPMDIR_PROPERTY_KEY = "java.io.tmpdir";
 
 	/**
 	 * Gets the user application configuration file path.
@@ -52,6 +54,23 @@ public final class ConfigurationExtensions
 	{
 		return System.getProperty(USER_HOME_PROPERTY_KEY) + File.separator + applicationName
 			+ File.separator + configFileName;
+	}
+
+	/**
+	 * Gets the specific temporary directory path for from the given arguments. It is indeded for
+	 * any application temporary files
+	 *
+	 * @param applicationName
+	 *            the application name
+	 * @param fileName
+	 *            the file name
+	 * @return the specific temporary directory path from the given arguments
+	 */
+	public static String getTemporaryApplicationConfigurationFilePath(
+		@NonNull final String applicationName, @NonNull final String fileName)
+	{
+		return System.getProperty(JAVA_IO_TPMDIR_PROPERTY_KEY) + File.separator + applicationName
+			+ File.separator + fileName;
 	}
 
 }

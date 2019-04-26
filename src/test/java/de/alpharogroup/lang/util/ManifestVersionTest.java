@@ -27,12 +27,16 @@ package de.alpharogroup.lang.util;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
+import java.util.Optional;
 import java.util.jar.Attributes;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.api.ContractViolation;
+import de.alpharogroup.evaluate.object.checkers.EqualsHashCodeAndToStringCheck;
+import de.alpharogroup.lang.thread.ThreadDataBean;
+import lombok.SneakyThrows;
 
 /**
  * The unit test class for the class {@link ManifestVersion}.
@@ -44,14 +48,17 @@ public class ManifestVersionTest
 	 * Test method for {@link ManifestVersion#equals(Object)} , {@link ManifestVersion#hashCode()}
 	 * and {@link ManifestVersion#toString()}
 	 */
-	@Test(enabled = false) // TODO fix and enable again...
+	@Test(enabled = true)
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(ManifestVersion.class);
-		expected = true;
+		Optional<ContractViolation> expected;
+		Optional<ContractViolation> actual;
+		actual = EqualsHashCodeAndToStringCheck.equalsHashcodeAndToString(
+			ManifestVersionFactory.get(Object.class),
+			ManifestVersionFactory.get(ThreadDataBean.class),
+			ManifestVersionFactory.get(Object.class), ManifestVersionFactory.get(Object.class));
+		expected = Optional.empty();
 		assertEquals(expected, actual);
 	}
 
@@ -61,7 +68,7 @@ public class ManifestVersionTest
 	@Test
 	public void testGet()
 	{
-		final ManifestVersion manifestVersion = ManifestVersion.get(Object.class);
+		final ManifestVersion manifestVersion = ManifestVersionFactory.get(Object.class);
 		assertNotNull(manifestVersion);
 		manifestVersion.setManifest(null);
 		String manifestAttribute = manifestVersion.getManifestAttribute(new Attributes.Name("foo"));

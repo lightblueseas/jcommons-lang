@@ -36,8 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import de.alpharogroup.file.FilenameExtensions;
-import de.alpharogroup.file.filter.ClassFileFilter;
+import de.alpharogroup.io.file.FilenameExtensions;
+import de.alpharogroup.io.file.filter.ClassFileFilter;
 import lombok.experimental.UtilityClass;
 
 /**

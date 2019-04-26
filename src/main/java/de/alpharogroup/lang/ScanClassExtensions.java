@@ -32,9 +32,9 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import de.alpharogroup.file.FileExtension;
-import de.alpharogroup.file.FilenameExtensions;
-import de.alpharogroup.file.filter.ClassFileFilter;
+import de.alpharogroup.io.file.FileExtension;
+import de.alpharogroup.io.file.FilenameExtensions;
+import de.alpharogroup.io.file.filter.ClassFileFilter;
 import de.alpharogroup.string.StringExtensions;
 import lombok.experimental.UtilityClass;
 

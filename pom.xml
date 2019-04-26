@@ -33,6 +33,10 @@
 		<jobj-contract-verifier.version>3</jobj-contract-verifier.version>
 		<!-- JOBJ-CORE version -->
 		<jobj-core.version>3</jobj-core.version>
+		<!-- SILLY-STRINGS version -->
+		<silly-strings.version>5.2</silly-strings.version>
+		<!-- SILLY-IO version -->
+		<silly-io.version>1.1</silly-io.version>
 		<!-- EXTERNAL LIBRARIES versions -->
 		<commons-collections4.version>4.2</commons-collections4.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
@@ -74,6 +78,18 @@
 	<dependencyManagement>
 
 		<dependencies>
+			<!-- SILLY-IO DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>silly-io</artifactId>
+				<version>${silly-io.version}</version>
+			</dependency>
+			<!-- SILLY-STRINGS DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>silly-strings</artifactId>
+				<version>${silly-strings.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -164,6 +180,16 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- SILLY-IO DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>silly-io</artifactId>
+		</dependency>
+		<!-- SILLY-STRINGS DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>silly-strings</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>

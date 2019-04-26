@@ -26,7 +26,10 @@ package de.alpharogroup.file;
 
 /**
  * The interface {@link FileSuffix} contains some file suffixes of class names.
+ *
+ * @deprecated will be removed in the next minor version
  */
+@Deprecated
 public interface FileSuffix
 {
 

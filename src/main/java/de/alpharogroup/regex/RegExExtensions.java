@@ -32,10 +32,12 @@ import lombok.experimental.UtilityClass;
 
 /**
  * Utility class for the use with regular expressions.
- * 
+ *
  * @version 1.0
  * @author Asterios Raptis
+ * @deprecated use instead the same named class in new project silly-strings
  */
+@Deprecated
 @UtilityClass
 public final class RegExExtensions
 {
@@ -76,7 +78,7 @@ public final class RegExExtensions
 	/**
 	 * Replaces the normal wildcards in the given String with the corresponding regular expression
 	 * wildcards.
-	 * 
+	 *
 	 * @param queryString
 	 *            The String to format.
 	 * @return Returns the formatted String as a regular expression for search.
@@ -93,7 +95,7 @@ public final class RegExExtensions
 	/**
 	 * Replaces the query with the wildcards asterisk "*" and interrogation mark "?" with the
 	 * corresponding wildcard from SQL.
-	 * 
+	 *
 	 * @param query
 	 *            The String to replace the wildcards.
 	 * @return The String with the new wildcards from SQL "%" and "_".
@@ -131,5 +133,5 @@ public final class RegExExtensions
         }
         return matches;
     }
-	
+
 }

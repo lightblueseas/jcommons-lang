@@ -35,7 +35,10 @@ import de.alpharogroup.file.FileExtension;
  *
  * @version 1.0
  * @author Asterios Raptis
+ *
+ * @deprecated use instead the same class in new project silly-io
  */
+@Deprecated
 public class ClassFileFilter implements FileFilter
 {
 

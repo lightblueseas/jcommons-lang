@@ -32,7 +32,10 @@ import java.io.FilenameFilter;
  *
  * @author Asterios Raptis
  * @version 1.0
+ *
+ * @deprecated use instead the same class in new project silly-io
  */
+@Deprecated
 public class SimpleFilenameFilter implements FilenameFilter
 {
 

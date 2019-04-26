@@ -33,8 +33,12 @@ import java.nio.charset.Charset;
 import lombok.Setter;
 
 /**
- * The class {@link StringOutputStream}.
+ * The class {@link StringOutputStream}
+ *
+ * @author Asterios Raptis
+ * @deprecated use instead the same class in new project silly-strings
  */
+@Deprecated
 public class StringOutputStream extends OutputStream implements Serializable
 {
 

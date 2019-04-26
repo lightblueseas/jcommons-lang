@@ -34,6 +34,7 @@ import lombok.experimental.FieldDefaults;
  */
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public final class CustomizableEnum<E extends Enum<E>, T>
 {
 

@@ -25,21 +25,14 @@
 package de.alpharogroup.enums;
 
 import de.alpharogroup.check.Check;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link CustomizableEnum} can decorate an enum with a new value that may be extended in
  * a future release.
  */
-@Getter
-@Builder
-@EqualsAndHashCode
-@ToString
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public final class CustomizableEnum<E extends Enum<E>, T>
 {

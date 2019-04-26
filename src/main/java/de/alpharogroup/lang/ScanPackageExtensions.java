@@ -42,8 +42,10 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ScanPackageExtensions}.
-	 * @deprecated
+ * 
+ * @deprecated
  */
+@Deprecated
 @UtilityClass
 public final class ScanPackageExtensions
 {

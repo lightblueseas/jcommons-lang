@@ -52,7 +52,8 @@ public class ScanPackageExtensionsTest
 	@Test(enabled = false)
 	public void testScanNames() throws Exception
 	{
-		Set<String> list = ScanPackageExtensions.scanClassNames("de.alpharogroup.lang", false, true);
+		Set<String> list = ScanPackageExtensions.scanClassNames("de.alpharogroup.lang", false,
+			true);
 		assertTrue("Result should contain classes from same package.",
 			list.contains("de.alpharogroup.lang.PackageExtensionsTest"));
 		assertFalse("Result should not contain classes from subpackages.",
@@ -70,7 +71,8 @@ public class ScanPackageExtensionsTest
 		assertFalse("Result should not contain classes from subpackages.", list
 			.contains("org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter"));
 
-		list = ScanPackageExtensions.scanClassNames("org.apache.commons.beanutils.locale", true, true);
+		list = ScanPackageExtensions.scanClassNames("org.apache.commons.beanutils.locale", true,
+			true);
 		assertTrue("Result should contain classes from same package.",
 			list.contains("org.apache.commons.beanutils.locale.BaseLocaleConverter"));
 		assertTrue("Result should contain classes from subpackages.", list
@@ -94,7 +96,8 @@ public class ScanPackageExtensionsTest
 		assertFalse("Result should not contain classes from subpackages.",
 			list.contains("BigDecimalLocaleConverter"));
 
-		list = ScanPackageExtensions.scanClassNames("org.apache.commons.beanutils.locale", true, false);
+		list = ScanPackageExtensions.scanClassNames("org.apache.commons.beanutils.locale", true,
+			false);
 		assertTrue("Result should contain classes from same package.",
 			list.contains("BaseLocaleConverter"));
 		assertTrue("Result should contain classes from subpackages.",

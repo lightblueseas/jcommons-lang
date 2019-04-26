@@ -183,7 +183,8 @@ public class ScanClassExtensionsTest
 		boolean actual = ScanClassExtensions.equalsByClassName(innerClass1.getClass(),
 			innerClass2.getClass());
 		assertTrue(actual);
-		actual = ScanClassExtensions.equalsByClassName(outerClass.getClass(), innerClass2.getClass());
+		actual = ScanClassExtensions.equalsByClassName(outerClass.getClass(),
+			innerClass2.getClass());
 		assertFalse(actual);
 	}
 
@@ -226,7 +227,8 @@ public class ScanClassExtensionsTest
 	@Test(enabled = true)
 	public void testScanClassesFromPackage() throws Exception, IOException
 	{
-		final List<File> directories = ClassExtensions.getDirectoriesFromResources("de.alpharogroup.lang", true);
+		final List<File> directories = ClassExtensions
+			.getDirectoriesFromResources("de.alpharogroup.lang", true);
 		final Set<Class<?>> foundClasses = ScanClassExtensions
 			.scanClassesFromPackage(directories.get(0), "de.alpharogroup.lang");
 		assertTrue(foundClasses.contains(ScanClassExtensionsTest.class));

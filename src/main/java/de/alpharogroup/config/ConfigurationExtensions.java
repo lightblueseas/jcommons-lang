@@ -50,14 +50,15 @@ public final class ConfigurationExtensions
 	 * @return the user application configuration file path
 	 */
 	public static String getUserApplicationConfigurationFilePath(
-			@NonNull final String applicationName, @NonNull final String configFileName)
+		@NonNull final String applicationName, @NonNull final String configFileName)
 	{
 		return System.getProperty(USER_HOME_PROPERTY_KEY) + File.separator + applicationName
-				+ File.separator + configFileName;
+			+ File.separator + configFileName;
 	}
 
 	/**
-	 * Gets the specific temporary directory path for from the given arguments. It is indeded for any application temporary files
+	 * Gets the specific temporary directory path for from the given arguments. It is indeded for
+	 * any application temporary files
 	 *
 	 * @param applicationName
 	 *            the application name
@@ -66,10 +67,10 @@ public final class ConfigurationExtensions
 	 * @return the specific temporary directory path from the given arguments
 	 */
 	public static String getTemporaryApplicationConfigurationFilePath(
-			@NonNull final String applicationName, @NonNull final String fileName)
+		@NonNull final String applicationName, @NonNull final String fileName)
 	{
 		return System.getProperty(JAVA_IO_TPMDIR_PROPERTY_KEY) + File.separator + applicationName
-				+ File.separator + fileName;
+			+ File.separator + fileName;
 	}
 
 }

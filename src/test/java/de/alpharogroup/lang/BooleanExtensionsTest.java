@@ -41,7 +41,8 @@ public class BooleanExtensionsTest
 	 * Test method for {@link BooleanExtensions#toBoolean(Boolean)}
 	 */
 	@Test
-	public final void testToBoolean() {
+	public final void testToBoolean()
+	{
 
 		boolean expected;
 		boolean actual;

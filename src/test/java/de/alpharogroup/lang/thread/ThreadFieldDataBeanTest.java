@@ -94,7 +94,8 @@ public class ThreadFieldDataBeanTest
 	 * Test method for {@link ThreadFieldDataBean#equals(Object)} ,
 	 * {@link ThreadFieldDataBean#hashCode()} and {@link ThreadFieldDataBean#toString()}
 	 */
-	@Test	@SneakyThrows
+	@Test
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;

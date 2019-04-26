@@ -95,7 +95,8 @@ public class FieldModelTest
 	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
 	 * {@link FieldModel#toString()}
 	 */
-	@Test	@SneakyThrows
+	@Test
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;

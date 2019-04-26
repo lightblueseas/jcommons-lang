@@ -25,7 +25,9 @@
 package de.alpharogroup.enums;
 
 import de.alpharogroup.check.Check;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 /**

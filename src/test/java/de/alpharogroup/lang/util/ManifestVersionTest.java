@@ -54,11 +54,10 @@ public class ManifestVersionTest
 	{
 		Optional<ContractViolation> expected;
 		Optional<ContractViolation> actual;
-		actual = EqualsHashCodeAndToStringCheck
-			.equalsHashcodeAndToString(ManifestVersionFactory.get(Object.class),
-				ManifestVersionFactory.get(ThreadDataBean.class),
-				ManifestVersionFactory.get(Object.class),
-				ManifestVersionFactory.get(Object.class));
+		actual = EqualsHashCodeAndToStringCheck.equalsHashcodeAndToString(
+			ManifestVersionFactory.get(Object.class),
+			ManifestVersionFactory.get(ThreadDataBean.class),
+			ManifestVersionFactory.get(Object.class), ManifestVersionFactory.get(Object.class));
 		expected = Optional.empty();
 		assertEquals(expected, actual);
 	}

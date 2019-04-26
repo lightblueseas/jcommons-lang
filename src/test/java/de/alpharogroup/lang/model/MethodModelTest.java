@@ -126,7 +126,8 @@ public class MethodModelTest
 	 * Test method for {@link MethodModel#equals(Object)} , {@link MethodModel#hashCode()} and
 	 * {@link MethodModel#toString()}
 	 */
-	@Test	@SneakyThrows
+	@Test
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;

@@ -1,6 +1,14 @@
 ## Change log
 ----------------------
 
+Version 5.2.1
+-------------
+
+CHANGED:
+
+- update of jobj-contract-verifier version to 3.1
+- update of jobj-differ version to 3.1
+
 Version 5.2
 -------------
 

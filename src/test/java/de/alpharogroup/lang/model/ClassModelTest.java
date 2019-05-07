@@ -25,7 +25,6 @@
 package de.alpharogroup.lang.model;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +39,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link ClassModel}.
@@ -95,6 +94,16 @@ public class ClassModelTest
 	}
 
 	/**
+	 * Test method for {@link ClassModel}
+	 */
+	@Test
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(ClassModel.class);
+	}
+
+	/**
 	 * Test method for {@link ClassModel#equals(Object)} , {@link ClassModel#hashCode()} and
 	 * {@link ClassModel#toString()}
 	 *
@@ -112,27 +121,9 @@ public class ClassModelTest
 	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	@Test
-	public void testEqualsHashcodeAndToStringWithClass()
-		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-		InstantiationException, IOException, ClassNotFoundException
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(ClassModel.class);
-
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link ClassModel}
-	 */
-	@Test
-	public void testWithBeanTester()
-	{
-		final BeanTester beanTester = new BeanTester();
-		beanTester.testBean(ClassModel.class);
+		ContractVerifier.of(ClassModel.class).verify();
 	}
 
 }

@@ -146,9 +146,6 @@ public class ScanClassExtensionsTest
 		}
 	}
 
-	/** The result. */
-	private boolean result;
-
 	/**
 	 * Sets up method will be invoked before every unit test method
 	 *

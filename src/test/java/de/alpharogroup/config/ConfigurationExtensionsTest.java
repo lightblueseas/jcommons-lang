@@ -40,7 +40,21 @@ public class ConfigurationExtensionsTest
 {
 
 	/**
-	 * Test get user application configuration file path.
+	 * Test method for {@link ConfigurationExtensions#getTemporaryApplicationConfigurationFilePath(String, String)}
+	 */
+	@Test
+	public void testGetTemporaryApplicationConfigurationFilePath(){
+
+		String actual;
+		String expected;
+		actual = ConfigurationExtensions.getTemporaryApplicationConfigurationFilePath("foo", ".config");
+		expected = System.getProperty(ConfigurationExtensions.JAVA_IO_TPMDIR_PROPERTY_KEY)
+				+ File.separator + "foo" + File.separator + ".config";
+		assertEquals(actual, expected);
+	}
+
+	/**
+	 * Test method for {@link ConfigurationExtensions#getUserApplicationConfigurationFilePath(String, String)}
 	 */
 	@Test
 	public void testGetUserApplicationConfigurationFilePath()

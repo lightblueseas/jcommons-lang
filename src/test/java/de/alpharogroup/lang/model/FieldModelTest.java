@@ -38,6 +38,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import lombok.SneakyThrows;
 
 /**
@@ -64,36 +65,6 @@ public class FieldModelTest
 	/**
 	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
 	 * {@link FieldModel#toString()}
-	 *
-	 * @throws NoSuchMethodException
-	 *             if an accessor method for this property cannot be found
-	 * @throws IllegalAccessException
-	 *             if the caller does not have access to the property accessor method
-	 * @throws InvocationTargetException
-	 *             if the property accessor method throws an exception
-	 * @throws InstantiationException
-	 *             if a new instance of the bean's class cannot be instantiated
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
-	 * @throws ClassNotFoundException
-	 *             occurs if a given class cannot be located by the specified class loader
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClass()
-		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-		InstantiationException, IOException, ClassNotFoundException
-	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(FieldModel.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
-	 * {@link FieldModel#toString()}
 	 */
 	@Test
 	@SneakyThrows
@@ -115,6 +86,29 @@ public class FieldModelTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(FieldModel.class);
+	}
+
+	/**
+	 * Test method for {@link FieldModel#equals(Object)} , {@link FieldModel#hashCode()} and
+	 * {@link FieldModel#toString()}
+	 *
+	 * @throws NoSuchMethodException
+	 *             if an accessor method for this property cannot be found
+	 * @throws IllegalAccessException
+	 *             if the caller does not have access to the property accessor method
+	 * @throws InvocationTargetException
+	 *             if the property accessor method throws an exception
+	 * @throws InstantiationException
+	 *             if a new instance of the bean's class cannot be instantiated
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(FieldModel.class).verify();
 	}
 
 }

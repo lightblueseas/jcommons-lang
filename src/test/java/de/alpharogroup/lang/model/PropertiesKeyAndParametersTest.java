@@ -82,11 +82,14 @@ public class PropertiesKeyAndParametersTest
 	 *             Signals that an I/O exception has occurred
 	 * @throws ClassNotFoundException
 	 *             occurs if a given class cannot be located by the specified class loader
+	 * @throws NoSuchFieldException
+	 *             is thrown if no such field exists
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testEqualsHashcodeAndToStringWithClass()
 		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-		InstantiationException, IOException, ClassNotFoundException
+		InstantiationException, IOException, ClassNotFoundException, NoSuchFieldException
 	{
 		boolean expected;
 		boolean actual;

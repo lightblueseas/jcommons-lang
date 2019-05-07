@@ -33,6 +33,7 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import lombok.SneakyThrows;
 
 /**
@@ -40,6 +41,33 @@ import lombok.SneakyThrows;
  */
 public class ThreadDataBeanTest
 {
+
+	/**
+	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()} and
+	 * {@link ThreadDataBean#toString()}
+	 */
+	@Test
+	@SneakyThrows
+	public void testEqualsHashcodeAndToStringWithClassSilently()
+	{
+		boolean expected;
+		boolean actual;
+		actual = EqualsHashCodeAndToStringEvaluator
+			.evaluateEqualsHashcodeAndToString(ThreadDataBean.class);
+		expected = true;
+		assertEquals(expected, actual);
+	}
+
+
+	/**
+	 * Test method for {@link ThreadDataBean}
+	 */
+	@Test
+	public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(ThreadDataBean.class);
+	}
 
 	/**
 	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()} and
@@ -58,41 +86,8 @@ public class ThreadDataBeanTest
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void testEqualsHashcodeAndToStringWithClass()
-		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-		InstantiationException, IOException, ClassNotFoundException
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(ThreadDataBean.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link ThreadDataBean#equals(Object)} , {@link ThreadDataBean#hashCode()} and
-	 * {@link ThreadDataBean#toString()}
-	 */
-	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(ThreadDataBean.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
-	/**
-	 * Test method for {@link ThreadDataBean}
-	 */
-	@Test
-	public void testWithBeanTester()
-	{
-		final BeanTester beanTester = new BeanTester();
-		beanTester.testBean(ThreadDataBean.class);
+		ContractVerifier.of(ThreadDataBean.class).verify();
 	}
 }

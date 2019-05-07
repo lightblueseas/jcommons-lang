@@ -8,6 +8,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jcommons-lang)
 [![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jcommons-lang.svg)](http://www.javadoc.io/doc/de.alpharogroup/jcommons-lang)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
+[![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
 
 </div>
 
@@ -16,14 +17,35 @@ The feature extension methods can be provided over the lombok library.
 
 ## Key features:
 
-- Very small size (<87Kb)
-- Extension methods for java core class Class
-- Extension methods for java class Class, File for checksum, namefilter and filename filter
+- Very small size (<54Kb)
+- Extension methods for scan java class Class
 - Id generators
 - Annotations for import resources like css, js etc.
-- Extension methods for jdbc and db connections
-- Extension methods for Loggers, regex, shell
-- Extension methods for java class Math and String
+- Extension methods for shell
+
+## Note
+
+No animals were harmed in the making of this library.
+
+# Donations
+
+This project is kept as an open source product and relies on contributions to remain being developed. 
+If you like this project, please consider a donation through paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B37J9DZF6G9ZC" target="_blank">
+<img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal this" title="PayPal – The safer, easier way to pay online!" border="0" />
+</a>
+
+or over bitcoin or bitcoin-cash with:
+
+36JxRRDfRazLNqUV6NsywCw1q7TK38ukpC
+
+or over ether with:
+
+0x588Aa02De98B1Ef70afeDC3ec5290130a3E5e273
+
+or over flattr: 
+<a href="https://flattr.com/submit/auto?fid=r7vp62&url=https%3A%2F%2Fgithub.com%2Flightblueseas%2Fjcommons-lang" target="_blank">
+<img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0">
+</a>
 
 ## License
 
@@ -41,7 +63,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>5.2</jcommons-lang.version>
+		<jcommons-lang.version>5.2.1</jcommons-lang.version>
 			...
 	</properties>
 			...
@@ -80,30 +102,6 @@ Don't forget to add new units tests on your changes.
 
 Do not hesitate to contact the jcommons-lang developers with your questions, concerns, comments, bug reports, or feature requests.
 - Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/lightblueseas/jcommons-lang/issues).
-
-## Note
-
-No animals were harmed in the making of this library.
-
-# Donations
-
-This project is kept as an open source product and relies on contributions to remain being developed. 
-If you like this project, please consider a donation through paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B37J9DZF6G9ZC" target="_blank">
-<img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal this" title="PayPal – The safer, easier way to pay online!" border="0" />
-</a>
-
-or over bitcoin or bitcoin-cash with:
-
-36JxRRDfRazLNqUV6NsywCw1q7TK38ukpC
-
-or over ether with:
-
-0x588Aa02De98B1Ef70afeDC3ec5290130a3E5e273
-
-or over flattr: 
-<a href="https://flattr.com/submit/auto?fid=r7vp62&url=https%3A%2F%2Fgithub.com%2Flightblueseas%2Fjcommons-lang" target="_blank">
-<img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0">
-</a>
 
 ## Similar projects
 

@@ -12,7 +12,7 @@
 	</parent>
 
 	<artifactId>jcommons-lang</artifactId>
-	<version>5.2.1</version>
+	<version>5.2.2</version>
 
 	<name>${project.artifactId}</name>
 
@@ -23,10 +23,10 @@
 	<url>https://github.com/lightblueseas/${project.artifactId}</url>
 
 	<properties>
-		<silly-collections.version>5.2</silly-collections.version>
+		<silly-collections.version>5.2.1</silly-collections.version>
 		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
-		<test-objects.version>5</test-objects.version>
+		<test-objects.version>5.0.1</test-objects.version>
 		<!-- JOBJ-DIFFER version -->
 		<jobj-differ.version>3.1</jobj-differ.version>
 		<!-- JOBJ-CONTRACT-VERIFIER version -->
@@ -38,17 +38,13 @@
 		<!-- SILLY-IO version -->
 		<silly-io.version>1.1</silly-io.version>
 		<!-- EXTERNAL LIBRARIES versions -->
-		<commons-collections4.version>4.2</commons-collections4.version>
-		<commons-lang3.version>3.8.1</commons-lang3.version>
+		<commons-collections4.version>4.3</commons-collections4.version>	
+		<!-- COMMONS-LANG3 version -->
+		<commons-lang3.version>3.9</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-codec.version>1.11</commons-codec.version>
 		<runtime-compiler.version>1.2</runtime-compiler.version>
 		<cglib.version>3.2.7</cglib.version>
-		<!-- DB DRIVER version -->
-		<h2.version>1.4.199</h2.version>
-		<!-- MODEL-DATA version -->
-		<model-data.version>1.6.2</model-data.version>
-		<model-core.version>${model-data.version}</model-core.version>
 	</properties>
 
 	<licenses>
@@ -126,11 +122,6 @@
 				<version>${vintage-time.version}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>de.alpharogroup</groupId>
-				<artifactId>model-core</artifactId>
-				<version>${model-core.version}</version>
-			</dependency>
 			<!-- TEST-OBJECTS DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
@@ -161,12 +152,6 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jobj-core</artifactId>
 				<version>${jobj-core.version}</version>
-			</dependency>
-			<!-- H2 DEPENDENCY -->
-			<dependency>
-				<groupId>com.h2database</groupId>
-				<artifactId>h2</artifactId>
-				<version>${h2.version}</version>
 			</dependency>
 			<!-- CGLIB DEPENDENCY -->
 			<dependency>
@@ -209,11 +194,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>model-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -264,12 +244,6 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>meanbean-factories</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- H2 DEPENDENCIES -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- CGLIB DEPENDENCY -->

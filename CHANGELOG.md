@@ -1,8 +1,18 @@
 ## Change log
 ----------------------
 
-Version 5.3-SNAPSHOT
+Version 5.2.2
 -------------
+
+CHANGED:
+
+- update of commons-collections4 version to 4.3
+- update of dependency commons-lang3 version to 3.9
+- update of dependency silly-collections version to 5.2.1
+- update of dependency test-objects version to 5.0.1
+- removed unused h2 dependency 
+- moved comparators to silly-beans project
+- removed unused model-core dependency 
 
 Version 5.2.1
 -------------

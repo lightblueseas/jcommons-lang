@@ -25,10 +25,6 @@
 package de.alpharogroup.lang.model;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
@@ -36,9 +32,8 @@ import org.meanbean.test.ConfigurationBuilder;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.array.ArrayFactory;
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import de.alpharogroup.meanbean.factories.ObjectArrayFactory;
-import io.github.benas.randombeans.api.EnhancedRandom;
 
 /**
  * The unit test class for the class {@link PropertiesKeyAndParameters}.
@@ -69,35 +64,11 @@ public class PropertiesKeyAndParametersTest
 	 * Test method for {@link PropertiesKeyAndParameters#equals(Object)} ,
 	 * {@link PropertiesKeyAndParameters#hashCode()} and
 	 * {@link PropertiesKeyAndParameters#toString()}
-	 *
-	 * @throws NoSuchMethodException
-	 *             if an accessor method for this property cannot be found
-	 * @throws IllegalAccessException
-	 *             if the caller does not have access to the property accessor method
-	 * @throws InvocationTargetException
-	 *             if the property accessor method throws an exception
-	 * @throws InstantiationException
-	 *             if a new instance of the bean's class cannot be instantiated
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
-	 * @throws ClassNotFoundException
-	 *             occurs if a given class cannot be located by the specified class loader
-	 * @throws NoSuchFieldException
-	 *             is thrown if no such field exists
 	 */
-	@SuppressWarnings("deprecation")
 	@Test
-	public void testEqualsHashcodeAndToStringWithClass()
-		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-		InstantiationException, IOException, ClassNotFoundException, NoSuchFieldException
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator.evaluateEqualsHashcodeAndToString(
-			PropertiesKeyAndParameters.class, clazz -> PropertiesKeyAndParameters.builder()
-				.key(EnhancedRandom.random(String.class)).build());
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(PropertiesKeyAndParameters.class).verify();
 	}
 
 	/**

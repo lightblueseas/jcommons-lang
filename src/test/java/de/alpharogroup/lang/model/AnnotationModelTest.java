@@ -25,13 +25,11 @@
 package de.alpharogroup.lang.model;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import lombok.SneakyThrows;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link AnnotationModel}.
@@ -54,19 +52,13 @@ public class AnnotationModelTest
 	}
 
 	/**
-	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()}
-	 * and {@link AnnotationModel#toString()}
+	 * Test method for {@link AnnotationModel#equals(Object)} , {@link AnnotationModel#hashCode()} and
+	 * {@link AnnotationModel#toString()}
 	 */
 	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToString(AnnotationModel.class);
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(AnnotationModel.class).verify();
 	}
 
 	/**

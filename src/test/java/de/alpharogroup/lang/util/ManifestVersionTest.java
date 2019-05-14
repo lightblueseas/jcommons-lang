@@ -35,6 +35,7 @@ import org.testng.annotations.Test;
 
 import de.alpharogroup.evaluate.object.api.ContractViolation;
 import de.alpharogroup.evaluate.object.checkers.EqualsHashCodeAndToStringCheck;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import de.alpharogroup.lang.thread.ThreadDataBean;
 import lombok.SneakyThrows;
 
@@ -62,6 +63,13 @@ public class ManifestVersionTest
 		assertEquals(expected, actual);
 	}
 
+	@Test(enabled = true)
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(ManifestVersion.class)
+			.withFactoryFunction(clzz -> ManifestVersion.builder().build()).verify();
+	}
+
 	/**
 	 * Test method for {@link ManifestVersion#get(Class)}
 	 */
@@ -78,7 +86,7 @@ public class ManifestVersionTest
 	/**
 	 * Test method for {@link ManifestVersion}
 	 */
-	@Test(enabled = false) // TODO fix and enable again...
+	@Test(enabled = true) // TODO fix and enable again...
 	public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();

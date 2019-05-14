@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>4.8</version>
+		<version>5</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -26,15 +26,15 @@
 		<silly-collections.version>5.2.1</silly-collections.version>
 		<vintage-time.version>5.1</vintage-time.version>
 		<!-- TEST-OBJECTS version -->
-		<test-objects.version>5.0.1</test-objects.version>
+		<test-objects.version>5.2</test-objects.version>
 		<!-- JOBJ-DIFFER version -->
 		<jobj-differ.version>3.1</jobj-differ.version>
 		<!-- JOBJ-CONTRACT-VERIFIER version -->
-		<jobj-contract-verifier.version>3.1</jobj-contract-verifier.version>
+		<jobj-contract-verifier.version>3.2</jobj-contract-verifier.version>
 		<!-- JOBJ-CORE version -->
-		<jobj-core.version>3.1</jobj-core.version>
+		<jobj-core.version>3.2.1</jobj-core.version>
 		<!-- SILLY-STRINGS version -->
-		<silly-strings.version>5.2</silly-strings.version>
+		<silly-strings.version>5.3.1</silly-strings.version>
 		<!-- SILLY-IO version -->
 		<silly-io.version>1.1</silly-io.version>
 		<!-- EXTERNAL LIBRARIES versions -->
@@ -42,9 +42,9 @@
 		<!-- COMMONS-LANG3 version -->
 		<commons-lang3.version>3.9</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
-		<commons-codec.version>1.11</commons-codec.version>
+		<commons-codec.version>1.12</commons-codec.version>
 		<runtime-compiler.version>1.2</runtime-compiler.version>
-		<cglib.version>3.2.7</cglib.version>
+		<cglib.version>3.2.12</cglib.version>
 	</properties>
 
 	<licenses>
@@ -134,7 +134,6 @@
 				<artifactId>runtime-compiler</artifactId>
 				<version>${runtime-compiler.version}</version>
 			</dependency>
-			<!-- JOBJECT-EXTENSIONS DEPENDENCIES -->
 			<!-- JOBJ-DIFFER DEPENDENCY -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
@@ -210,6 +209,7 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jobj-differ</artifactId>
 		</dependency>
+		<!-- TEST-SCOPE DEPENDENCIES -->
 		<!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>

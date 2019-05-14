@@ -4,6 +4,16 @@
 Version 5.3-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of parent version to 5
+- update of jobj-contract-verifier version to 3.2
+- update of dependency test-objects version to 5.2
+- update of jobj-core version to 3.1
+- update of dependency silly-strings version to 5.3.1
+- update of dependency commons-codec version to 1.12
+- update of dependency cglib version to 3.2.12
+
 Version 5.2.2
 -------------
 

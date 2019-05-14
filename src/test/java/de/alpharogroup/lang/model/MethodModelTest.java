@@ -27,8 +27,6 @@ package de.alpharogroup.lang.model;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -122,19 +120,6 @@ public class MethodModelTest
 	/**
 	 * Test method for {@link MethodModel#equals(Object)} , {@link MethodModel#hashCode()} and
 	 * {@link MethodModel#toString()}
-	 *
-	 * @throws NoSuchMethodException
-	 *             if an accessor method for this property cannot be found
-	 * @throws IllegalAccessException
-	 *             if the caller does not have access to the property accessor method
-	 * @throws InvocationTargetException
-	 *             if the property accessor method throws an exception
-	 * @throws InstantiationException
-	 *             if a new instance of the bean's class cannot be instantiated
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred
-	 * @throws ClassNotFoundException
-	 *             occurs if a given class cannot be located by the specified class loader
 	 */
 	@Test
 	public void verifyEqualsHashcodeAndToStringContracts()

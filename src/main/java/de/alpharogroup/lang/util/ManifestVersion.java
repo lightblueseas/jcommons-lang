@@ -30,14 +30,26 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 /**
  * Simple bean to hold information about the version of a Manifest. Can be used for JAR, EAR and WAR
  * manifest files.
  */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ManifestVersion implements Serializable
 {

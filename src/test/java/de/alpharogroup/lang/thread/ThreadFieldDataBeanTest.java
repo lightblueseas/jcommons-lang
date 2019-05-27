@@ -24,7 +24,7 @@
  */
 package de.alpharogroup.lang.thread;
 
-import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertNotNull;
 
 import java.util.Map;
 

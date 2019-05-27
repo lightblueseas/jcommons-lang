@@ -24,7 +24,7 @@
  */
 package de.alpharogroup.lang.model;
 
-import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertNotNull;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -63,7 +63,7 @@ public class ClassModelTest
 
 		/** The imports. */
 		List<String> imports = ListFactory.newArrayList(
-			"import static org.testng.Assert.assertNotNull;", "import java.util.Map;");
+			"import static org.testng.AssertJUnit.assertNotNull;", "import java.util.Map;");
 
 		/** The class annotations. */
 		List<ClassModel> classAnnotations = ListFactory.newArrayList();

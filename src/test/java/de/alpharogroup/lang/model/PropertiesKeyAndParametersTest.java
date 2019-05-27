@@ -24,7 +24,7 @@
  */
 package de.alpharogroup.lang.model;
 
-import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertNotNull;
 
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;

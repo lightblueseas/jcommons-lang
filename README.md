@@ -15,6 +15,8 @@
 The jcommons-lang project provides several extension methods for java core classes like Class and other extension for Annotations. 
 The feature extension methods can be provided over the lombok library. 
 
+If you like this project put a ⭐ and donate
+
 ## Key features:
 
 - Very small size (<54Kb)

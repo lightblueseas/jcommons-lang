@@ -42,6 +42,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ScanPackageExtensions}
+ * @deprecated moved to silly-io repository
  */
 @UtilityClass
 public final class ScanPackageExtensions

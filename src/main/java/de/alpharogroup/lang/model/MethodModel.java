@@ -42,6 +42,7 @@ import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link MethodModel}.
+ * @deprecated moved to jobj-core repository
  */
 @Getter
 @Setter

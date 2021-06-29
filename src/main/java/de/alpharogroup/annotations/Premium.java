@@ -29,8 +29,8 @@ import java.lang.annotation.Documented;
 /**
  * The annotation {@link Premium} can tag a class or field that can be used only with a premium
  * permission or version.
+ * @deprecated moved to silly-beans repository
  */
 @Documented
 public @interface Premium {
-
 }

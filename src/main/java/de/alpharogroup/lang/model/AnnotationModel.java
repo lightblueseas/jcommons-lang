@@ -33,6 +33,7 @@ import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link AnnotationModel}.
+ * @deprecated moved to jobj-core repository
  */
 @Data
 @NoArgsConstructor

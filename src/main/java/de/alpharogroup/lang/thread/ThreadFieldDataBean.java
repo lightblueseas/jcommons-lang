@@ -36,6 +36,7 @@ import lombok.ToString;
 
 /**
  * The class {@link ThreadFieldDataBean}.
+ * @deprecated moved to jobj-core repository
  */
 @Getter
 @Setter

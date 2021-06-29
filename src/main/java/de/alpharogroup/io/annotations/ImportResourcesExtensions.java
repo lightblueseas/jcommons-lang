@@ -39,6 +39,7 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link ImportResourcesExtensions} contains extension methods for {@link ImportResource}
  * objects.
+ * @deprecated moved to silly-io repository
  */
 @UtilityClass
 public final class ImportResourcesExtensions

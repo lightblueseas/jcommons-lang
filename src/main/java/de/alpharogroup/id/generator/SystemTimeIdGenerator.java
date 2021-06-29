@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The class {@link SystemTimeIdGenerator}.
+ * @deprecated moved to ent-core repository
  */
 public class SystemTimeIdGenerator implements IdGenerator
 {

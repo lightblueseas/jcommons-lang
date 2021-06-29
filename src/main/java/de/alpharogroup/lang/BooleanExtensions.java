@@ -28,6 +28,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link BooleanExtensions} provides utility methods for handling with boolean values
+ * @deprecated moved to silly-math repository
  */
 @UtilityClass
 public final class BooleanExtensions

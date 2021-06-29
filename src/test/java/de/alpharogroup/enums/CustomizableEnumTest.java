@@ -46,7 +46,7 @@ public class CustomizableEnumTest
 {
 
 	/**
-	 * Test method for {@link CustomizableEnum)}.
+	 * Test method for {@link CustomizableEnum )}.
 	 */
 	@Test
 	public void testCustomizableEnum()
@@ -62,7 +62,7 @@ public class CustomizableEnumTest
 	}
 
 	/**
-	 * Test method for {@link CustomizableEnum)}.
+	 * Test method for {@link CustomizableEnum )}.
 	 */
 	@Test
 	public void testCustomizableEnumNewValue()
@@ -78,7 +78,7 @@ public class CustomizableEnumTest
 	}
 
 	/**
-	 * Test method for {@link CustomizableEnum)}.
+	 * Test method for {@link CustomizableEnum )}.
 	 */
 	@Test
 	public void testCustomizableEnumNewValueWithEnumValue()
@@ -96,7 +96,7 @@ public class CustomizableEnumTest
 	}
 
 	/**
-	 * Test method for {@link CustomizableEnum)}.
+	 * Test method for {@link CustomizableEnum )}.
 	 */
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void testCustomizableEnumNullCheck()

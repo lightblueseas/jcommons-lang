@@ -28,6 +28,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * Utility class for getting the Memory status.
+ * @deprecated moved to jobj-core repository
  *
  * @version 1.0
  * @author Asterios Raptis

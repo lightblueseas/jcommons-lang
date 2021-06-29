@@ -71,7 +71,7 @@ public class ManifestVersionTest
 	}
 
 	/**
-	 * Test method for {@link ManifestVersion#get(Class)}
+	 * Test method for {@link ManifestVersion#getManifestAttribute(Attributes.Name)} 
 	 */
 	@Test
 	public void testGet()

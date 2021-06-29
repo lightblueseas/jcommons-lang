@@ -37,6 +37,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ThreadExtensions}.
+ * @deprecated moved to jobj-core repository
  */
 @UtilityClass
 public final class ThreadExtensions

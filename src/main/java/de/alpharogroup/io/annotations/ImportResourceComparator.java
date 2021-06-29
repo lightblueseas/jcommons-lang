@@ -32,6 +32,7 @@ import de.alpharogroup.comparators.ComparatorExtensions;
 /**
  * The class {@link ImportResourceComparator} compares two given {@link ImportResource} objects
  * based on the index.
+ * @deprecated moved to silly-io repository
  */
 public class ImportResourceComparator implements Comparator<ImportResource>, Serializable
 {

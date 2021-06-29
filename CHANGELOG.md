@@ -6,6 +6,7 @@ Version 5.3-SNAPSHOT
 
 CHANGED:
 
+- tagged all classes as deprecated and add a note where there moved
 - update of parent version to 5
 - update of jobj-contract-verifier version to 3.2
 - update of dependency test-objects version to 5.2

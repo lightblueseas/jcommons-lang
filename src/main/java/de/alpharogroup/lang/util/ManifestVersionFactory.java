@@ -40,6 +40,7 @@ import lombok.experimental.UtilityClass;
 /**
  * Simple bean to hold information about the version of a Manifest. Can be used for JAR, EAR and WAR
  * manifest files.
+ * @deprecated moved to jobj-core repository
  */
 @UtilityClass
 public class ManifestVersionFactory

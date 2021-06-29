@@ -31,6 +31,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * The class {@link ThreadDataBean} holds data from a Thread.
+ * @deprecated moved to jobj-core repository
  */
 @Data
 @NoArgsConstructor

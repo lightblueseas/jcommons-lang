@@ -41,6 +41,7 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link ScanClassExtensions} provides extension methods for the scan {@link Class}
  * objects
+ * @deprecated moved to silly-io repository
  */
 @UtilityClass
 public final class ScanClassExtensions

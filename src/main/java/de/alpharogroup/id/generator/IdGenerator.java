@@ -26,6 +26,7 @@ package de.alpharogroup.id.generator;
 
 /**
  * The Interface IdGenerator.
+ * @deprecated moved to ent-core repository
  */
 public interface IdGenerator
 {

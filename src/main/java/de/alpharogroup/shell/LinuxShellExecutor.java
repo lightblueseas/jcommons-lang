@@ -36,6 +36,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class LinuxShellExecutor.
+ * @deprecated moved to silly-io repository
  */
 @UtilityClass
 public final class LinuxShellExecutor

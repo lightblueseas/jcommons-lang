@@ -43,6 +43,7 @@ import lombok.experimental.UtilityClass;
 /**
  * The class {@link AnnotationExtensions} provides methods for scan and resolve annotations in
  * classes and interfaces.
+ * @deprecated moved to silly-io repository
  *
  * @author Asterios Raptis
  */

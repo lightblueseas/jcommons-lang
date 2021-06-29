@@ -31,6 +31,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link ConfigurationExtensions} provides methods for get configuration issues.
+ * @deprecated use instead SystemFileExtensions from file-worker repository
  */
 @UtilityClass
 public final class ConfigurationExtensions

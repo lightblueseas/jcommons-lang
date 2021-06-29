@@ -38,6 +38,7 @@ import lombok.experimental.FieldDefaults;
 
 /**
  * Container for a properties key and possible parameters.
+ * @deprecated moved to jobj-core repository
  */
 @Getter
 @Setter

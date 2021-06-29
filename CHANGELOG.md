@@ -11,6 +11,7 @@ CHANGED:
 - update of jobj-contract-verifier version to 3.2
 - update of dependency test-objects version to 5.2
 - update of jobj-core version to 3.1
+- update of dependency commons-io version to 2.10.0
 - update of dependency silly-strings version to 5.3.1
 - update of dependency commons-codec version to 1.12
 - update of dependency cglib version to 3.2.12
